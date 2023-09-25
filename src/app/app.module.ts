@@ -18,12 +18,14 @@ import { PasswordModule } from 'primeng/password';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToolbarModule } from 'primeng/toolbar';
 import { SidebarModule } from 'primeng/sidebar';
+import { FrankensteinComponent } from './components/frankenstein/frankenstein.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    FrankensteinComponent
   ],
   imports: [
     BrowserAnimationsModule,
