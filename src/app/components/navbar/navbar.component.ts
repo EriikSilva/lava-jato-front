@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoginService } from '../login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,11 +9,14 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  constructor(private loginService:LoginService, private router:Router){}
+
   isVisible: boolean = false
 
 
   logout(){
-    console.log('deslogou')
+    this.loginService.removeToken();
+    this.router.navigate(['/login'])
   }
 
 }

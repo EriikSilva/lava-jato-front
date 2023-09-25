@@ -15,7 +15,6 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent {
   messages: Message[] = [];
-  token: string = '';
 
   constructor(
     private router: Router,
@@ -48,7 +47,9 @@ export class LoginComponent {
 
     this.loginService.userLogin(bodyLogin).subscribe({
       next: (res: any) => {
-        this.token = res.data.token;
+        const token = res.data.token;
+        this.loginService.setToken(token)
+        if(token)
         this.router.navigate(['/dashboard']);
       },
       error: (res: any) => {

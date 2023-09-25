@@ -1,3 +1,4 @@
-<app-navbar></app-navbar>
-
+<ng-container>
+    <app-navbar *ngIf="hasToken()"></app-navbar>
+</ng-container>
 <router-outlet></router-outlet>
