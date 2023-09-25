@@ -9,6 +9,7 @@
       <div style="margin-top: 20vh">
         <p-tabView>
           <p-tabPanel header="Login">
+            <form [formGroup]="userFormLogin">
             <div class="flex align-items-center m-2">
               <div style="margin-top: 30px">
                 <label for="emailInput">Email:</label>
@@ -16,6 +17,7 @@
                   [style]="{ width: '100%' }"
                   type="text"
                   pInputText
+                  formControlName="email"
                   id="emailInput"
                 />
                 <p-divider></p-divider>
@@ -25,12 +27,14 @@
                   [inputStyle]="{ width: '100%' }"
                   [toggleMask]="true"
                   id="passwordInput"
+                  formControlName="senha"
                   [feedback]="false"
                 />
                 <p-divider></p-divider>
-                <p-button label="Login" (onClick)="doLogin"></p-button>
+                <p-button label="Login" (onClick)="doLogin()"></p-button>
               </div>
             </div>
+            </form>
           </p-tabPanel>
           <p-tabPanel header="Registrar Funcionário">
             <form [formGroup]="userFormRegister">
