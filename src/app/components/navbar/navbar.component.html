@@ -1,9 +1,9 @@
-<p-toolbar>
+<p-toolbar>   
     <div class="p-toolbar-group-start">
+        <p-button type="button" class="mr-2" (click)="isVisible = true" icon="pi pi-arrow-right"></p-button>
         <a [routerLink]="['/dashboard']">
             <img src="../../../assets/logo.png" class="logo-img">
         </a>
-
         <!-- <p-button label="New" icon="pi pi-plus" class="mr-2"></p-button> -->
         <!-- <p-button label="Upload" icon="pi pi-upload" styleClass="p-button-success"></p-button>
         <i class="p-toolbar-separator pi pi-bars mr-2" style="vertical-align: middle"></i> -->
@@ -12,3 +12,23 @@
         <p-button icon="pi pi-times" styleClass="p-button-danger" (onClick)="logout()"></p-button>
     </div> -->
 </p-toolbar>
+
+<!-- SIDEBAR -->
+<p-sidebar [(visible)]="isVisible" position="left">
+    <h3>Menu Lateral</h3>
+
+    <div class="mt-3">
+        <p-button [style]="{ width: '100%', 'margin-bottom': '1rem' }" label="Serviços"></p-button>
+        <p-button [style]="{ width: '100%', 'margin-bottom': '1rem' }" label="Clientes"></p-button>
+        <p-button [style]="{ width: '100%', 'margin-bottom': '1rem' }" label="Teste"></p-button>
+      </div>
+
+
+        <!-- <div class="card mt-3">
+            <div class="flex flex-column card-container green-container">
+                <div class="flex align-items-center justify-content-center font-bold text-white border-round m-2"><p-button label="Submit"></p-button></div>
+                <div class="flex align-items-center justify-content-center font-bold text-white border-round m-2"><p-button label="Submit"></p-button></div>
+                <div class="flex align-items-center justify-content-center font-bold text-white border-round m-2"><p-button label="Submit"></p-button></div>
+            </div>
+        </div> -->
+</p-sidebar>

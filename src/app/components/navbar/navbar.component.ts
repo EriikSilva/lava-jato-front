@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  isVisible: boolean = false
+
 
   logout(){
     console.log('deslogou')

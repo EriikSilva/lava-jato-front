@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+
+  sidebarVisible1:boolean = false
+
 }
