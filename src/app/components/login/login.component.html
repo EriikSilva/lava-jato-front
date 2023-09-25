@@ -16,7 +16,6 @@
                   [style]="{ width: '100%' }"
                   type="text"
                   pInputText
-                  formControlName="email"
                   id="emailInput"
                 />
                 <p-divider></p-divider>
@@ -25,16 +24,16 @@
                   [style]="{ width: '100%' }"
                   [inputStyle]="{ width: '100%' }"
                   [toggleMask]="true"
-                  formControlName="password"
                   id="passwordInput"
                   [feedback]="false"
                 />
                 <p-divider></p-divider>
-                <p-button label="Login" (onClick)="doLogin()"></p-button>
+                <p-button label="Login" (onClick)="doLogin"></p-button>
               </div>
             </div>
           </p-tabPanel>
           <p-tabPanel header="Registrar Funcionário">
+            <form [formGroup]="userFormRegister">
             <div style="margin-top: 30px">
               <label for="nameInput">Nome:</label>
               <input
@@ -43,7 +42,7 @@
                 pInputText
                 id="nameInput"
                 aria-describedby="username-help"
-                formControlName="name"
+                formControlName="nm_usuario"
               />
               <p-divider></p-divider>
               <label for="emailInput">Email:</label>
@@ -62,17 +61,22 @@
                 [inputStyle]="{ width: '100%' }"
                 [toggleMask]="true"
                 id="passwordInput"
-                formControlName="password"
+                formControlName="senha"
                 [feedback]="false"
               />
-
               <p-divider></p-divider>
-              <p-button label="Salvar"></p-button>
+              <p-button label="Registrar" (onClick)="registerUser()"></p-button>
             </div>
+            </form>
           </p-tabPanel>
           <p-tabPanel header="Versão"> </p-tabPanel>
         </p-tabView>
       </div>
     </div>
   </div>
+</div>
+
+
+<div class="card">
+  <p-toast></p-toast>
 </div>
