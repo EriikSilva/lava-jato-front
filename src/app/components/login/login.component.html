@@ -10,32 +10,32 @@
         <p-tabView>
           <p-tabPanel header="Login">
             <div class="flex align-items-center m-2">
-                <div style="margin-top: 30px;">
-                  <label for="emailInput">Email:</label>
-                  <input
-                    [style]="{ width: '100%' }"
-                    type="text"
-                    pInputText
-                    formControlName="email"
-                    id="emailInput"
-                  />
-                  <p-divider></p-divider>
-                  <label for="passwordInput">Senha:</label>
-                  <p-password
-                    [style]="{ width: '100%' }"
-                    [inputStyle]="{ width: '100%' }"
-                    [toggleMask]="true"
-                    formControlName="password"
-                    id="passwordInput"
-                    [feedback]="false"
-                  />
-                  <p-divider></p-divider>
-                  <p-button label="Login"></p-button>
-                </div>
+              <div style="margin-top: 30px">
+                <label for="emailInput">Email:</label>
+                <input
+                  [style]="{ width: '100%' }"
+                  type="text"
+                  pInputText
+                  formControlName="email"
+                  id="emailInput"
+                />
+                <p-divider></p-divider>
+                <label for="passwordInput">Senha:</label>
+                <p-password
+                  [style]="{ width: '100%' }"
+                  [inputStyle]="{ width: '100%' }"
+                  [toggleMask]="true"
+                  formControlName="password"
+                  id="passwordInput"
+                  [feedback]="false"
+                />
+                <p-divider></p-divider>
+                <p-button label="Login"></p-button>
+              </div>
             </div>
           </p-tabPanel>
           <p-tabPanel header="Registrar Funcionário">
-            <div style="margin-top: 30px;">
+            <div style="margin-top: 30px">
               <label for="nameInput">Nome:</label>
               <input
                 [style]="{ width: '100%' }"
@@ -70,9 +70,7 @@
               <p-button label="Salvar"></p-button>
             </div>
           </p-tabPanel>
-          <p-tabPanel header="TEste">
-
-          </p-tabPanel>
+          <p-tabPanel header="TEste"> </p-tabPanel>
         </p-tabView>
       </div>
     </div>
