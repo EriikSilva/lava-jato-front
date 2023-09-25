@@ -1,39 +1,69 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserRegisterDTO } from './DTO/userDTO';
+import { UserLoginDTO, UserRegisterDTO } from './DTO/userDTO';
 import { RegistroService } from './registro.service';
 import { Message } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class LoginComponent {
   messages: Message[] = [];
+  token: string = '';
 
   constructor(
     private router: Router,
     private registroService: RegistroService,
-    private messageService:MessageService
+    private loginService: LoginService,
+    private messageService: MessageService
   ) {}
 
   userFormRegister = new FormGroup({
-    nm_usuario: new FormControl(''),
+    nm_usuario: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
+    senha: new FormControl('', Validators.required),
+  });
+
+  userFormLogin = new FormGroup({
     email: new FormControl(''),
     senha: new FormControl(''),
   });
 
   doLogin() {
-    this.router.navigate(['/dashboard']);
+    const formValue = this.userFormLogin.value;
+
+    const email = formValue.email || '';
+    const senha = formValue.senha || '';
+
+    const bodyLogin: UserLoginDTO = {
+      email,
+      senha,
+    };
+
+    this.loginService.userLogin(bodyLogin).subscribe({
+      next: (res: any) => {
+        this.token = res.data.token;
+        this.router.navigate(['/dashboard']);
+      },
+      error: (res: any) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: res.error.data.error,
+        });
+      },
+    });
   }
   registerUser() {
     if (this.userFormRegister.invalid) {
       this.messages = [
-        { severity: 'warn', summary: 'Preencha os campos obrigatórios'},
+        { severity: 'warn', summary: 'Preencha os campos obrigatórios' },
       ];
       return;
     }
@@ -44,22 +74,25 @@ export class LoginComponent {
     const email = formValue.email || '';
     const senha = formValue.senha || '';
 
-    const bodyLogin: UserRegisterDTO = {
+    const bodyRegistro: UserRegisterDTO = {
       nm_usuario,
       email,
       senha,
     };
 
-    this.registroService.registerUserService(bodyLogin)
-    .subscribe({
+    this.registroService.registerUserService(bodyRegistro).subscribe({
       next: (res: any) => {
         this.messages = [
           { severity: 'success', summary: 'Successo', detail: res.message },
         ];
         this.userFormRegister.reset();
       },
-      error: (error: any) => {
-        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.data.message });
+      error: (res: any) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: res.error.data.message,
+        });
       },
     });
   }
