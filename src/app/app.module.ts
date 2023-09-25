@@ -19,13 +19,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToolbarModule } from 'primeng/toolbar';
 import { SidebarModule } from 'primeng/sidebar';
 import { FrankensteinComponent } from './components/frankenstein/frankenstein.component';
+import { ServicosComponent } from './components/servicos/servicos.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
     NavbarComponent,
-    FrankensteinComponent
+    FrankensteinComponent,
+    ServicosComponent
   ],
   imports: [
     BrowserAnimationsModule,
