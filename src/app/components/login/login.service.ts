@@ -18,15 +18,15 @@ export class LoginService {
 
   setToken(token:string){
     this.token = token
-    localStorage.setItem('jwt', token)
+    localStorage.setItem('Authorization', token)
   }
 
   getToken(){
-    return localStorage.getItem('jwt')
+    return localStorage.getItem('Authorization')
   }
   
   removeToken(){
-    return localStorage.removeItem('jwt')
+    return localStorage.removeItem('Authorization')
   }
 
 
