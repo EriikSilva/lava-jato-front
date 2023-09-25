@@ -10,11 +10,25 @@ import { HttpClient } from '@angular/common/http';
 export class LoginService {
 
   private token: string = ''
+  private user:string = ''
   baseUrl = environment.apiUrl
 
   private readonly apiUrl = environment.apiUrl
 
   constructor(private http:HttpClient) { }
+
+  setUser(user:string){
+    this.user = user
+    localStorage.setItem('nm_usuario', user)
+  }
+
+  getUser(){
+    return localStorage.getItem('nm_usuario')
+  }
+
+  removeUser(){
+    return localStorage.removeItem('nm_usuario')
+  }
 
   setToken(token:string){
     this.token = token

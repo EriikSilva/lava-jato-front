@@ -48,7 +48,9 @@ export class LoginComponent {
     this.loginService.userLogin(bodyLogin).subscribe({
       next: (res: any) => {
         const token = res.data.token;
+        const user = res.data.user;
         this.loginService.setToken(token)
+        this.loginService.setUser(user)
         if(token)
         this.router.navigate(['/dashboard']);
       },
