@@ -20,6 +20,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { SidebarModule } from 'primeng/sidebar';
 import { FrankensteinComponent } from './components/frankenstein/frankenstein.component';
 import { ServicosComponent } from './components/servicos/servicos.component';
+import { ClientesComponent } from './components/clientes/clientes.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { ServicosComponent } from './components/servicos/servicos.component';
     DashboardComponent,
     NavbarComponent,
     FrankensteinComponent,
-    ServicosComponent
+    ServicosComponent,
+    ClientesComponent
   ],
   imports: [
     BrowserAnimationsModule,
