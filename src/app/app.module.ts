@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 //PRIMENG
 import { DividerModule } from 'primeng/divider';
 import { TabViewModule } from 'primeng/tabview';
@@ -23,6 +26,7 @@ import { SidebarModule } from 'primeng/sidebar';
     NavbarComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     DividerModule,
