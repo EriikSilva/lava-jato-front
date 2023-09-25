@@ -12,11 +12,15 @@ import { TabViewModule } from 'primeng/tabview';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ToolbarModule } from 'primeng/toolbar';
+import { SidebarModule } from 'primeng/sidebar';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,9 @@ import { PasswordModule } from 'primeng/password';
     TabViewModule,
     ButtonModule,
     PasswordModule,
-    InputTextModule
+    InputTextModule,
+    ToolbarModule,
+    SidebarModule
     
   ],
   providers: [],
