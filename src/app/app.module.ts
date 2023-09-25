@@ -10,6 +10,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DividerModule } from 'primeng/divider';
 import { TabViewModule } from 'primeng/tabview';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PasswordModule } from 'primeng/password';
     DividerModule,
     TabViewModule,
     ButtonModule,
-    PasswordModule
+    PasswordModule,
+    InputTextModule
     
   ],
   providers: [],
