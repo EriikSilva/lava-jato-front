@@ -2,7 +2,8 @@
   <div class="flex card-container yellow-container">
     <img
       src="../../../assets/Gray Simple Car Wash Facebook Post.png"
-      style="height: 100vh; width: 55%"
+      style="height: 100vh; width: 55%; border-radius: 0 40px 40px 0;"
+      class="animationSlide"
     />
 
     <div class="flex-grow-1 flex justify-content-center border-round">
@@ -11,7 +12,7 @@
           <p-tabPanel header="Login">
             <form [formGroup]="userFormLogin">
             <div class="flex align-items-center m-2">
-              <div style="margin-top: 30px">
+              <div style="margin-top: 30px;margin-left: 50px;">
                 <label for="emailInput">Email:</label>
                 <input
                   [style]="{ width: '100%' }"
@@ -31,14 +32,17 @@
                   [feedback]="false"
                 />
                 <p-divider></p-divider>
-                <p-button label="Login" (onClick)="doLogin()"></p-button>
+                <p-button 
+                label="Login"
+                [style]="{ width: '100%' }"
+                (onClick)="doLogin()"></p-button>
               </div>
             </div>
             </form>
           </p-tabPanel>
           <p-tabPanel header="Registrar Funcionário">
             <form [formGroup]="userFormRegister">
-            <div style="margin-top: 30px">
+            <div style="margin-top: 30px; margin-left: 50px;">
               <label for="nameInput">Nome:</label>
               <input
                 [style]="{ width: '100%' }"
@@ -69,7 +73,10 @@
                 [feedback]="false"
               />
               <p-divider></p-divider>
-              <p-button label="Registrar" (onClick)="registerUser()"></p-button>
+              <p-button 
+              label="Registrar"
+              [style]="{ width: '100%' }"
+              (onClick)="registerUser()"></p-button>
             </div>
             </form>
           </p-tabPanel>

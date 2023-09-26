@@ -1,0 +1,16 @@
+.animationSlide{
+    animation-duration: 3s;
+    animation-name: slidein;
+}
+
+@keyframes slidein {
+    from {
+      margin-right: 55%;
+      width: 35%;
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 55%;
+    }
+  }
