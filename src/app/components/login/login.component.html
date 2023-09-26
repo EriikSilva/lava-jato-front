@@ -2,85 +2,138 @@
   <div class="flex card-container yellow-container">
     <img
       src="../../../assets/Gray Simple Car Wash Facebook Post.png"
-      style="height: 100vh; width: 55%; border-radius: 0 40px 40px 0;"
-      class="animationSlide"
+      class="animationSlide img_ident"
     />
 
     <div class="flex-grow-1 flex justify-content-center border-round">
       <div style="margin-top: 20vh">
         <p-tabView>
+          <!-- LOGIN -->
           <p-tabPanel header="Login">
             <form [formGroup]="userFormLogin">
-            <div class="flex align-items-center m-2">
-              <div style="margin-top: 30px;margin-left: 20px;">
-                <label for="emailInput">Email:</label>
-                <input
-                  [style]="{ width: '100%' }"
-                  type="text"
-                  pInputText
-                  formControlName="email"
-                  id="emailInput"
-                />
-                <p-divider></p-divider>
-                <label for="passwordInput">Senha:</label>
-                <p-password
-                  [style]="{ width: '100%' }"
-                  [inputStyle]="{ width: '100%' }"
-                  [toggleMask]="true"
-                  id="passwordInput"
-                  formControlName="senha"
-                  [feedback]="false"
-                />
-                <p-divider></p-divider>
-                <p-button 
-                label="Login"
-                [style]="{ width: '100%' }"
-                (onClick)="doLogin()"></p-button>
+              <div class="flex align-items-center m-2">
+                <div class="card_setup">
+                  <!-- USERNAME -->
+                  <span class="p-float-label">
+                    <input
+                    [style]="{ width: '100%' }"
+                    type="text"
+                    pInputText
+                    formControlName="email"
+                    id="emailInput"
+                  />
+                    <label htmlFor="emailInput">Email: </label>
+                  </span>
+  
+                  <p-divider></p-divider>
+                  
+                  <!-- SENHA -->
+                  <span class="p-float-label">
+                    <p-password
+                    [style]="{ width: '100%' }"
+                    [inputStyle]="{ width: '100%' }"
+                    [toggleMask]="true"
+                    id="passwordInput"
+                    formControlName="senha"
+                    [feedback]="false"
+                  />
+                    <label htmlFor="passwordInput">Senha: </label>
+                  </span>
+                  <p-divider></p-divider>
+                  <p-button
+                    label="Login"
+                    [style]="{ width: '100%' }"
+                    (onClick)="doLogin()"
+                  ></p-button>
+                </div>
               </div>
-            </div>
             </form>
           </p-tabPanel>
+          <!-- REGISTRAR USUÁRIO -->
           <p-tabPanel header="Registrar Funcionário">
             <form [formGroup]="userFormRegister">
-            <div style="margin-top: 30px; margin-left: 20px;">
-              <label for="nameInput">Nome:</label>
-              <input
-                [style]="{ width: '100%' }"
-                type="text"
-                pInputText
-                id="nameInput"
-                aria-describedby="username-help"
-                formControlName="nm_usuario"
-              />
-              <p-divider></p-divider>
-              <label for="emailInput">Email:</label>
-              <input
-                [style]="{ width: '100%' }"
-                type="text"
-                pInputText
-                id="emailInput"
-                aria-describedby="email-help"
-                formControlName="email"
-              />
-              <p-divider></p-divider>
-              <label for="passwordInput">Senha:</label>
-              <p-password
-                [style]="{ width: '100%' }"
-                [inputStyle]="{ width: '100%' }"
-                [toggleMask]="true"
-                id="passwordInput"
-                formControlName="senha"
-                [feedback]="false"
-              />
-              <p-divider></p-divider>
-              <p-button 
-              label="Registrar"
-              [style]="{ width: '100%' }"
-              (onClick)="registerUser()"></p-button>
-            </div>
+              <div class="card_setup">
+                <span class="p-float-label">
+                  <input
+                    [style]="{ width: '100%' }"
+                    type="text"
+                    pInputText
+                    id="nameInput"
+                    aria-describedby="username-help"
+                    formControlName="nm_usuario"
+                  />
+                  <label htmlFor="nameInput">Nome Completo</label>
+                </span>
+                <div
+                  class="mt-1"
+                  *ngIf="
+                    userFormRegister.get('nm_usuario')?.value == '' &&
+                    userFormRegister.get('nm_usuario')!.touched
+                  "
+                >
+                  <span class="p-error">Nome é Obrigatório.</span>
+                </div>
+                <p-divider></p-divider>
+                <span class="p-float-label">
+                  <input
+                    [style]="{ width: '100%' }"
+                    pInputText
+                    id="username"
+                    id="emailInput"
+                    aria-describedby="email-help"
+                    formControlName="email"
+                  />
+                  <label htmlFor="emailInput">Email</label>
+                </span>
+                <div
+                  class="mt-1"
+                  *ngIf="
+                    userFormRegister.get('email')?.value == '' &&
+                    userFormRegister.get('email')!.touched
+                  "
+                >
+                  <span class="p-error">Email é Obrigatório.</span>
+                </div>
+                <div
+                  class="mt-1"
+                  *ngIf="userFormRegister.get('email')?.errors?.['email']"
+                  class="p-error"
+                >
+                  <span>Insira um email válido</span>
+                </div>
+                <p-divider></p-divider>
+                <span class="p-float-label">
+                  <p-password
+                    [style]="{ width: '100%' }"
+                    [inputStyle]="{ width: '100%' }"
+                    [toggleMask]="true"
+                    id="passwordInput"
+                    formControlName="senha"
+                    [feedback]="false"
+                  />
+                  <label htmlFor="passwordInput">Senha</label>
+                </span>
+                <div
+                  class="mt-1"
+                  *ngIf="
+                    userFormRegister.get('senha')?.invalid &&
+                    (userFormRegister.get('senha')?.dirty ||
+                      userFormRegister.get('senha')?.touched)
+                  "
+                >
+                  <span class="p-error">Senha é Obrigatória.</span>
+                </div>
+
+                <p-divider></p-divider>
+                <p-button
+                  label="Registrar"
+                  [style]="{ width: '100%' }"
+                  (onClick)="registerUser()"
+                ></p-button>
+              </div>
             </form>
           </p-tabPanel>
-          <p-tabPanel header="Versão"> 
+          <p-tabPanel header="Versão">
             <h1>Versão 1.0</h1>
             <h3>Todos os direitos reservados</h3>
           </p-tabPanel>
@@ -90,7 +143,7 @@
   </div>
 </div>
 
-
+<!-- TOAST -->
 <div class="card">
   <p-toast></p-toast>
 </div>

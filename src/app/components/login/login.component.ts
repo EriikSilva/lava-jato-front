@@ -25,7 +25,7 @@ export class LoginComponent {
 
   userFormRegister = new FormGroup({
     nm_usuario: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', Validators.required),
   });
 
@@ -47,8 +47,8 @@ export class LoginComponent {
 
     this.loginService.userLogin(bodyLogin).subscribe({
       next: (res: any) => {
-        const token = res.data.token;
-        const user = res.data.user;
+        const { token, user } = res.data;
+        
         this.loginService.setToken(token)
         this.loginService.setUser(user)
         if(token)
