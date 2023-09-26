@@ -72,13 +72,11 @@ export class ClientesComponent implements OnInit{
     this.clientsService.postClients(bodyRegistro)
     .subscribe({
       next: (res:any) => {
-        console.log(res.data.data.message)
         this.messageService.add({
           severity: 'success',
           summary: 'Sucesso ao cadastrar',
-          detail: res.data.data.message,
+          detail: res.data.message,
         });
-        this.hideDialog();
         this.getClients();
       },
        error: (res:any) => {
@@ -97,11 +95,24 @@ export class ClientesComponent implements OnInit{
     console.log('asçkdjaslkdj')
   }
 
-  deleteClient(cliente:any){
-    console.log('aksdjklasjd')
+  deleteClient(cliente:{cd_cliente:number}){
+    const { cd_cliente } = cliente
+    this.clientsService.deleteClient({cd_cliente})
+    .subscribe({
+      next: (res:any) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: res.message,
+        });
+        this.getClients();
+
+      }, error: (res:any) => {
+        console.log(res)
+      }
+    })
+
   }
-
-
 
   /*******************DIALOG********************/
   openNew() {
