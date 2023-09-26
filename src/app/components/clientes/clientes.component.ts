@@ -2,21 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { ClientesService } from './clientes.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientRegisterDTO } from './DTO/clientesDTO';
-
+import { MessageService } from 'primeng/api';
+import { Message } from 'primeng/api';
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
-  styleUrls: ['./clientes.component.scss']
+  styleUrls: ['./clientes.component.scss'],
+  providers: [MessageService]
 })
 export class ClientesComponent implements OnInit{
 
   clients: any[] = []
   clonedProducts: any
+  messages: Message[] = [];
 
 
   clientDialog: boolean = false;
 
-  constructor(private clientsService:ClientesService){}
+  constructor(private clientsService:ClientesService,  private messageService: MessageService){}
 
   ngOnInit(): void {
       this.getClients();
@@ -25,7 +28,7 @@ export class ClientesComponent implements OnInit{
   clientRegisterForm = new FormGroup({
     nm_cliente: new FormControl('', Validators.required),
     cpf_cnpj:   new FormControl('', Validators.required),
-    cep:        new FormControl('', Validators.required),
+    cep:        new FormControl('', [Validators.required, Validators.maxLength(9)]),
     bairro:     new FormControl('', Validators.required),
     nr_casa:    new FormControl('', Validators.required)
   })
@@ -44,7 +47,12 @@ export class ClientesComponent implements OnInit{
     })
   }
 
-  saveClient(){
+  saveClient(){ 
+    if(this.clientRegisterForm.invalid){
+      console.log('form invalido')
+      return
+    }
+
     const formValue = this.clientRegisterForm.value
 
     const nm_cliente = formValue.nm_cliente || "";
@@ -64,10 +72,22 @@ export class ClientesComponent implements OnInit{
     this.clientsService.postClients(bodyRegistro)
     .subscribe({
       next: (res:any) => {
-        console.log(res)
+        console.log(res.data.data.message)
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso ao cadastrar',
+          detail: res.data.data.message,
+        });
+        this.hideDialog();
+        this.getClients();
       },
        error: (res:any) => {
-        console.log('res', res)
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro ao cadastrar',
+          detail: res.error.data.message,
+        });
+
       }
     })
   }
