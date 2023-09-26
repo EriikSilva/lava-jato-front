@@ -17,12 +17,11 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // Adicione o cabeçalho de autorização (token JWT) à requisição
-    const token = this.loginService.getToken(); // Substitua pelo seu token
+    const token = this.loginService.getToken();
     if (token) {
       request = request.clone({
         setHeaders: {
-          Authorization: `${token}`,
+          Authorization: token,
         },
       });
     }
