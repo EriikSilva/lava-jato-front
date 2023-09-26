@@ -1,1 +1,123 @@
-<p>clientes works!</p>
+<div class="ml-2 mt-2">
+    <h1>Clientes: </h1>
+</div>
+<!-- <p-table [value]="clients" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Nome</th>
+            <th>CPF ou CNPJ</th>
+            <th>STATUS</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-client>
+        <tr>
+            <td>{{ client.nm_cliente }}</td>
+            <td>{{ client.cpf_cnpj }}</td>
+            <td>{{ client.status }}</td>
+        </tr>
+    </ng-template>
+</p-table> -->
+
+
+
+<!-- <div class="card">
+    <p-table
+        [value]="clients"
+        [paginator]="true"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[10, 25, 50]"
+    >
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:25%">Nome</th>
+                <th style="width:25%">CPF</th>
+                <th style="width:25%">Status</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-client>
+            <tr>
+                <td>{{ client.nm_cliente }}</td>
+                <td>{{ client.cpf_cnpj }}</td>
+                <td>{{ client.status }}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-table>
+</div> -->
+
+
+
+<div class="mt-5 ml-5">
+    <button 
+    pButton 
+    pRipple 
+    label="Novo" 
+    icon="pi pi-plus" 
+    class="p-button-success mr-2" 
+    (click)="openNew()"></button>
+</div>
+
+<!-- <p-toast></p-toast> -->
+
+<!-- 
+<div class="container_middle">
+    <p-toolbar styleClass="mb-4 mt-5 gap-2">
+        <ng-template pTemplate="left">
+        
+            <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
+        </ng-template>
+    </p-toolbar>
+</div> -->
+
+
+
+<!-- DIALOG -->
+<p-dialog [(visible)]="clientDialog" [style]="{ width: '450px' }" header="Novo Cliente" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="nome">Nome:</label>
+            <input type="text" pInputText id="nome" required autofocus />
+
+            <label for="cpf_cnpj" class="mt-3">CPF ou CNPJ:</label>
+            <input type="text" pInputText id="cpf_cnpj" required autofocus />
+
+            <label for="cep" class="mt-3">CEP:</label>
+            <input type="text" pInputText id="cep" required autofocus />
+
+            <label for="bairro" class="mt-3">Bairro:</label>
+            <input type="text" pInputText id="bairro" required autofocus />
+
+            <label for="nr_casa" class="mt-3">Nrº da casa</label>
+            <input type="text" pInputText id="nr_casa" required autofocus />
+        </div>
+    </ng-template>
+
+
+    <ng-template pTemplate="footer">
+        <button 
+        pButton 
+        pRipple 
+        label="Cancel" 
+        icon="pi pi-times" 
+        class="p-button-text" 
+        (click)="hideDialog()"></button>
+
+        <button 
+        pButton 
+        pRipple 
+        label="Save" 
+        icon="pi pi-check" 
+        class="p-button-text" 
+        (click)="saveClient()"></button>
+    </ng-template>
+
+</p-dialog>
+

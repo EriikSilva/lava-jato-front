@@ -8,6 +8,11 @@ import { ClientesService } from './clientes.service';
 })
 export class ClientesComponent implements OnInit{
 
+  clients: any[] = []
+  clonedProducts: any
+
+
+  clientDialog: boolean = false;
 
   constructor(private clientsService:ClientesService){}
 
@@ -19,12 +24,26 @@ export class ClientesComponent implements OnInit{
     this.clientsService.getClients()
     .subscribe({
       next: (res:any) => {
-        console.log('res', res)
+        const { data } = res.data
+        console.log('data', data)
+        this.clients = data
       }, error(res:any){
         console.log(res.error.message)
       } 
     })
+  }
 
+  // DIALOG
+  openNew() {
+    this.clientDialog = true;
+  }
+
+  hideDialog(){
+    this.clientDialog = false;
+  }
+
+  saveClient(){
+    console.log('aslçkdjasldkj')
   }
 
 }

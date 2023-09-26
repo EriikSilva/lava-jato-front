@@ -28,6 +28,8 @@ import { SidebarModule } from 'primeng/sidebar';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/AuthInterceptor';
@@ -57,7 +59,9 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
     SidebarModule,
     MessageModule,
     MessagesModule,
-    ToastModule
+    ToastModule,
+    TableModule,
+    DialogModule
     
   ],
   providers: [
