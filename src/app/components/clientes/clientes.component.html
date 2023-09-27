@@ -42,6 +42,9 @@
     <!-- HEADER -->
     <ng-template pTemplate="header">
       <tr>
+        <th >
+
+        </th>
         <th pSortableColumn="nm_cliente" style="min-width: 15rem">
           Nome <p-sortIcon field="nm_cliente"></p-sortIcon>
         </th>
@@ -58,8 +61,12 @@
       </tr>
     </ng-template>
     <!-- CONTENT -->
-    <ng-template pTemplate="body" let-client>
+    <ng-template pTemplate="body" let-client let-rowIndex="rowIndex" let-expanded="expanded">
       <tr>
+        <td>
+          <button 
+          type="button" pButton pRipple [pRowToggler]="client.veiculos_clientes" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+        </td>
         <td>{{ client.nm_cliente | capitalCase }}</td>
         <td>{{ formatCpfCnpj(client.cpf_cnpj) }}</td>
         <td>{{ client.bairro | capitalCase}}</td>
