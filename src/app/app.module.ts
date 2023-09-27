@@ -37,6 +37,7 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { SlideMenuModule } from 'primeng/slidemenu';
 import { InputMaskModule } from 'primeng/inputmask';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -75,6 +76,7 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
     DialogModule,
     SlideMenuModule,
     InputMaskModule,
+    ConfirmPopupModule
   ],
   providers: [
     {
