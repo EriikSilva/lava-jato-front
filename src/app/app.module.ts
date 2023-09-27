@@ -68,7 +68,7 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
     ToastModule,
     TableModule,
     DialogModule,
-    SlideMenuModule
+    SlideMenuModule,
     
   ],
   providers: [
