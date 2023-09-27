@@ -14,6 +14,6 @@ export class RegistroService {
   constructor(private http:HttpClient) { }
 
   registerUserService(user:UserRegisterDTO): Observable<UserRegisterDTO>{
-    return this.http.post<UserRegisterDTO>(this.apiUrl + "/usuario", user)
+    return this.http.post<UserRegisterDTO>(`${this.apiUrl}/usuario`, user)
   }
 }

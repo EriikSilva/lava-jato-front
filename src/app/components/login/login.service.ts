@@ -45,7 +45,7 @@ export class LoginService {
 
 
   userLogin(user:UserLoginDTO):Observable<UserLoginDTO>{
-    return this.http.post<UserLoginDTO>(this.apiUrl + "/login", user)
+    return this.http.post<UserLoginDTO>(`${this.apiUrl}/login`, user)
   }
 
 
