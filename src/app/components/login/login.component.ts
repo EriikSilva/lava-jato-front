@@ -65,9 +65,11 @@ export class LoginComponent {
   }
   registerUser() {
     if (this.userFormRegister.invalid) {
-      this.messages = [
-        { severity: 'warn', summary: 'Preencha os campos obrigatórios' },
-      ];
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Validação',
+        detail: "Preencha os Campos Obrigatórios",
+      });
       return;
     }
 
@@ -85,9 +87,11 @@ export class LoginComponent {
 
     this.registroService.registerUserService(bodyRegistro).subscribe({
       next: (res: any) => {
-        this.messages = [
-          { severity: 'success', summary: 'Successo', detail: res.message },
-        ];
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: res.data.message,
+        })
         this.userFormRegister.reset();
       },
       error: (res: any) => {
