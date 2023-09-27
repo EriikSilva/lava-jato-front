@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //UTILS
 import { CapitalCasePipe } from './utils/CapitalCase';
 import { CpfCnpjMaskDirective } from './utils/Cpf_Cnpj_Validations'
+import { NumericInputDirective } from './utils/OnlyNumbersInput'; 
 
 //PRIMENG
 import { DividerModule } from 'primeng/divider';
@@ -51,6 +52,7 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
     ClientesComponent,
     CapitalCasePipe,
     CpfCnpjMaskDirective,
+    NumericInputDirective
   ],
   imports: [
     BrowserAnimationsModule,
