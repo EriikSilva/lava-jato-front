@@ -62,14 +62,10 @@ export class ClientesComponent implements OnInit{
     if(formValue.cep?.length == 8){
         this.cepService.getEnderecoByCep(formValue.cep)
         .subscribe((data) => {
-          console.log(data.bairro)
-          console.log(formValue.bairro)
           this.clientRegisterForm.get('bairro')?.setValue(data.bairro)
           formValue.bairro = data.bairro || '';
         });
       }
-   
- 
   }
 
   saveClient(){ 
