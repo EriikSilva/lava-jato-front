@@ -56,9 +56,9 @@
     <ng-template pTemplate="body" let-client>
       <tr>
         <td>{{ client.nm_cliente }}</td>
-        <td>{{ client.cpf_cnpj }}</td>
+        <td>{{ formatCpfCnpj(client.cpf_cnpj) }}</td>
         <td>{{ client.bairro }}</td>
-        <td>{{ client.status }}</td>
+        <td>{{ client.status == "A" ? "ATIVO" : "Inativo" }}</td>
         <td>
           <button
             pButton
@@ -108,7 +108,7 @@
           type="text"
           cpf-cnpj-mask 
           pInputText
-          maxlength="22"
+          maxlength="18"
           formControlName="cpf_cnpj"
           id="cpf_cnpj"
           required
@@ -118,7 +118,7 @@
         <input
           type="text"
           pInputText
-          maxlength="9"
+          maxlength="8"
           formControlName="cep"
           id="cep"
           required

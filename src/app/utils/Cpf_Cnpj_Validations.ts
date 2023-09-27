@@ -1,7 +1,11 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root',
+})
 @Directive({
-  selector: '[cpf-cnpj-mask]'
+  selector: '[cpf-cnpj-mask]',
 })
 export class CpfCnpjMaskDirective {
   constructor(private el: ElementRef) {}
@@ -13,8 +17,7 @@ export class CpfCnpjMaskDirective {
 
     if (inputValue.length <= 11) {
       mask = '000.000.000-00'; // Máscara para CPF
-    } 
-    else {
+    } else {
       mask = '00.000.000/0000-00'; // Máscara para CNPJ
     }
 
@@ -35,6 +38,27 @@ export class CpfCnpjMaskDirective {
 }
 
 //REMOVE . / -
-export function removerCaracteresCPF_CNPJ(texto:string) {
-    return texto.replace(/[./-]/g, '');
+export function removerCaracteresCPF_CNPJ(texto: string) {
+  return texto.replace(/[./-]/g, '');
+}
+
+export class MaskUtils {
+  formatCpfCnpj(value: string): string {
+    if (!value) return '';
+
+    value = value.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+    if (value.length === 11) {
+      // Formata como CPF
+      return value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    } else if (value.length === 14) {
+      // Formata como CNPJ
+      return value.replace(
+        /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
+        '$1.$2.$3/$4-$5'
+      );
+    } else {
+      return value; // Retorna valor não formatado se não for CPF nem CNPJ
+    }
+  }
 }
