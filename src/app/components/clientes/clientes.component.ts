@@ -2,95 +2,100 @@ import { Component, OnInit } from '@angular/core';
 import { ClientesService } from './clientes.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientRegisterDTO } from './DTO/clientesDTO';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { Message } from 'primeng/api';
-import { removerCaracteresCPF_CNPJ, MaskUtils } from '../../utils/Cpf_Cnpj_Validations'
+import {
+  removerCaracteresCPF_CNPJ,
+  MaskUtils,
+} from '../../utils/Cpf_Cnpj_Validations';
 import { CepService } from 'src/app/services/cep.service';
 
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.scss'],
-  providers: [MessageService, MaskUtils]
+  providers: [MessageService, MaskUtils, ConfirmationService],
 })
-export class ClientesComponent implements OnInit{
-
-  clients: any[] = []
-  clonedProducts: any
+export class ClientesComponent implements OnInit {
+  clients: any[] = [];
+  clonedProducts: any;
   messages: Message[] = [];
 
   clientDialog: boolean = false;
 
   constructor(
-    private clientsService: ClientesService,
-    private messageService: MessageService,
-    private maskUtils:      MaskUtils,
-    private cepService:     CepService
-    ){}
+    private clientsService:      ClientesService,
+    private messageService:      MessageService,
+    private maskUtils:           MaskUtils,
+    private cepService:          CepService,
+    private confirmationService: ConfirmationService
+  ) {}
 
   ngOnInit(): void {
-      this.getClients();
+    this.getClients();
   }
 
   clientRegisterForm = new FormGroup({
-    nm_cliente: new FormControl('', Validators.required),
-    cpf_cnpj:   new FormControl('', Validators.required),
-    cep:        new FormControl('', [Validators.required, Validators.maxLength(8)]),
-    bairro:     new FormControl('', Validators.required),
-    nr_casa:    new FormControl('', Validators.required)
-  })
+    nm_cliente:        new FormControl('', Validators.required),
+    cpf_cnpj:          new FormControl('', Validators.required),
+    cep:               new FormControl('', [Validators.required, Validators.maxLength(8)]),
+    bairro:            new FormControl('', Validators.required),
+    nr_casa:           new FormControl('', Validators.required),
+  });
 
- /**********************REQUESTS GET, POST, EDIT, DELETE ***************************/
-  getClients(){
-    this.clientsService.getClients()
-    .subscribe({
-      next: (res:any) => {
-        const { data } = res.data
-        console.log('data', data)
-        this.clients = data
-      }, error(res:any){
-        console.log(res.error.message)
-      } 
-    })
+  /**********************REQUESTS GET, POST, EDIT, DELETE ***************************/
+  getClients() {
+    this.clientsService.getClients().subscribe({
+      next: (res: any) => {
+        const { data } = res.data;
+        console.log('data', data);
+        this.clients = data;
+      },
+      error(res: any) {
+        console.log(res.error.message);
+      },
+    });
   }
 
-  saveClient(){ 
-    const formValue = this.clientRegisterForm.value
-    
-    if(this.clientRegisterForm.invalid){
-      if((formValue.cpf_cnpj?.length !== 14 && formValue.cpf_cnpj?.length !== 18)){
+  saveClient() {
+    const formValue = this.clientRegisterForm.value;
+
+    if (this.clientRegisterForm.invalid) {
+      if (
+        formValue.cpf_cnpj?.length !== 14 &&
+        formValue.cpf_cnpj?.length !== 18
+      ) {
         return this.messageService.add({
           severity: 'warn',
           summary: 'Validação',
-          detail: "Campo CPF/CNPJ Inválido",
+          detail: 'Campo CPF/CNPJ Inválido',
         });
-      } 
+      }
 
       return this.messageService.add({
         severity: 'warn',
         summary: 'Validação',
-        detail: "Preencha os Campos Obrigatórios",
+        detail: 'Preencha os Campos Obrigatórios',
       });
     }
 
-    const nm_cliente        = formValue.nm_cliente || "";
-    const cpf_cnpj          = formValue.cpf_cnpj || "";
+    const nm_cliente        = formValue.nm_cliente || '';
+    const cpf_cnpj          = formValue.cpf_cnpj || '';
     const cpf_cnpjFormatado = removerCaracteresCPF_CNPJ(cpf_cnpj);
-    const cep               = formValue.cep || "";
-    const bairro            = formValue.bairro || "";
-    const nr_casa           = formValue.nr_casa || "";
+    const cep               = formValue.cep || '';
+    const bairro            = formValue.bairro || '';
+    const nr_casa           = formValue.nr_casa || '';
 
     const bodyRegistro: ClientRegisterDTO = {
       nm_cliente,
-      cpf_cnpj:cpf_cnpjFormatado,
+      cpf_cnpj: cpf_cnpjFormatado,
       cep,
       bairro,
-      nr_casa
-    }
-    
-    this.clientsService.postClients(bodyRegistro)
-    .subscribe({
-      next: (res:any) => {
+      nr_casa,
+    };
+
+    this.clientsService.postClients(bodyRegistro).subscribe({
+      next: (res: any) => {
         this.messageService.add({
           severity: 'success',
           summary: 'Sucesso ao cadastrar',
@@ -100,39 +105,35 @@ export class ClientesComponent implements OnInit{
         this.hideDialog();
         this.getClients();
       },
-       error: (res:any) => {
+      error: (res: any) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Erro ao cadastrar',
           detail: res.error.data.message,
         });
-
-      }
-    })
+      },
+    });
   }
 
-
-  editClient(cliente:any){
-    console.log('asçkdjaslkdj')
+  editClient(cliente: any) {
+    console.log('asçkdjaslkdj');
   }
 
-  deleteClient(cliente:{ cd_cliente:number }){
-    const { cd_cliente } = cliente
-    this.clientsService.deleteClient({cd_cliente})
-    .subscribe({
-      next: (res:any) => {
+  deleteClient(cliente: { cd_cliente: number }) {
+    const { cd_cliente } = cliente;
+    this.clientsService.deleteClient({ cd_cliente }).subscribe({
+      next: (res: any) => {
         this.messageService.add({
           severity: 'success',
           summary: 'Sucesso',
           detail: res.message,
         });
         this.getClients();
-
-      }, error: (res:any) => {
-        console.log(res)
-      }
-    })
-
+      },
+      error: (res: any) => {
+        console.log(res);
+      },
+    });
   }
 
   /*******************DIALOG********************/
@@ -140,24 +141,37 @@ export class ClientesComponent implements OnInit{
     this.clientDialog = true;
   }
 
-  hideDialog(){
+  hideDialog() {
     this.clientDialog = false;
   }
 
   //UTILS
+
+  confirmDelete(event: Event, cliente: any) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Deseja Excluir Cliente?',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        this.deleteClient(cliente);
+      },
+    });
+  }
+
   formatCpfCnpj(value: string): string {
     return this.maskUtils.formatCpfCnpj(value);
   }
 
   getBairroByCpf() {
-    const formValue = this.clientRegisterForm.value
+    const formValue = this.clientRegisterForm.value;
 
-    if(formValue.cep?.length == 8){
-        this.cepService.getEnderecoByCep(formValue.cep)
-        .subscribe((data) => {
-          this.clientRegisterForm.get('bairro')?.setValue(data.bairro)
-          formValue.bairro = data.bairro || '';
-        });
-      }
+    if (formValue.cep?.length == 8) {
+      this.cepService.getEnderecoByCep(formValue.cep).subscribe((data) => {
+        this.clientRegisterForm.get('bairro')?.setValue(data.bairro);
+        formValue.bairro = data.bairro || '';
+      });
+    }
   }
 }
