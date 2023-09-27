@@ -47,9 +47,7 @@
         <th pSortableColumn="status" style="min-width: 10rem">
           Status <p-sortIcon field="status"></p-sortIcon>
         </th>
-        <th style="min-width: 10rem">
-          Ações
-        </th>
+        <th style="min-width: 10rem">Ações</th>
       </tr>
     </ng-template>
     <!-- CONTENT -->
@@ -106,7 +104,7 @@
         <label for="cpf_cnpj">CPF ou CNPJ:</label>
         <input
           type="text"
-          cpf-cnpj-mask 
+          cpf-cnpj-mask
           pInputText
           maxlength="18"
           formControlName="cpf_cnpj"
@@ -118,6 +116,7 @@
         <input
           type="text"
           pInputText
+          (blur)="getBairroByCpf()"
           maxlength="8"
           formControlName="cep"
           id="cep"
@@ -135,7 +134,7 @@
           required
           autofocus
         />
-        
+
         <label for="nr_casa">Nrº da casa</label>
         <input
           type="text"
@@ -170,7 +169,6 @@
     ></button>
   </ng-template>
 </p-dialog>
-
 
 <!-- TOAST -->
 <div class="card">

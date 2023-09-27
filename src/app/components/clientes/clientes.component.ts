@@ -5,6 +5,7 @@ import { ClientRegisterDTO } from './DTO/clientesDTO';
 import { MessageService } from 'primeng/api';
 import { Message } from 'primeng/api';
 import { removerCaracteresCPF_CNPJ, MaskUtils } from '../../utils/Cpf_Cnpj_Validations'
+import { CepService } from 'src/app/services/cep.service';
 
 @Component({
   selector: 'app-clientes',
@@ -23,7 +24,8 @@ export class ClientesComponent implements OnInit{
   constructor(
     private clientsService:ClientesService,
     private messageService: MessageService,
-    private maskUtils: MaskUtils
+    private maskUtils: MaskUtils,
+    private cepService: CepService
     ){}
 
   ngOnInit(): void {
@@ -54,6 +56,22 @@ export class ClientesComponent implements OnInit{
     //UTILS
   }
 
+  getBairroByCpf() {
+    const formValue = this.clientRegisterForm.value
+
+    if(formValue.cep?.length == 8){
+        this.cepService.getEnderecoByCep(formValue.cep)
+        .subscribe((data) => {
+          console.log(data.bairro)
+          console.log(formValue.bairro)
+          this.clientRegisterForm.get('bairro')?.setValue(data.bairro)
+          formValue.bairro = data.bairro || '';
+        });
+      }
+   
+ 
+  }
+
   saveClient(){ 
     const formValue = this.clientRegisterForm.value
     
@@ -72,6 +90,9 @@ export class ClientesComponent implements OnInit{
         detail: "Preencha os Campos Obrigatórios",
       });
     }
+
+ 
+
 
     const nm_cliente        = formValue.nm_cliente || "";
     const cpf_cnpj          = formValue.cpf_cnpj || "";
