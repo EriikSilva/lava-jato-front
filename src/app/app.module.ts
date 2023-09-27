@@ -18,7 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //UTILS
 import { CapitalCasePipe } from './utils/CapitalCase';
-
+import { CpfCnpjMaskDirective } from './utils/Cpf_Cnpj_Mask'
 
 //PRIMENG
 import { DividerModule } from 'primeng/divider';
@@ -35,6 +35,8 @@ import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { SlideMenuModule } from 'primeng/slidemenu';
+import { InputMaskModule } from 'primeng/inputmask';
+
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/AuthInterceptor';
@@ -47,7 +49,8 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
     FrankensteinComponent,
     ServicosComponent,
     ClientesComponent,
-    CapitalCasePipe
+    CapitalCasePipe,
+    CpfCnpjMaskDirective,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -69,7 +72,7 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
     TableModule,
     DialogModule,
     SlideMenuModule,
-    
+    InputMaskModule,
   ],
   providers: [
     {

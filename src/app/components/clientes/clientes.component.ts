@@ -4,6 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientRegisterDTO } from './DTO/clientesDTO';
 import { MessageService } from 'primeng/api';
 import { Message } from 'primeng/api';
+import { removerCaracteresCPF_CNPJ } from '../../utils/Cpf_Cnpj_Mask'
+
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
@@ -15,7 +17,6 @@ export class ClientesComponent implements OnInit{
   clients: any[] = []
   clonedProducts: any
   messages: Message[] = [];
-
 
   clientDialog: boolean = false;
 
@@ -57,13 +58,14 @@ export class ClientesComponent implements OnInit{
 
     const nm_cliente = formValue.nm_cliente || "";
     const cpf_cnpj   = formValue.cpf_cnpj || "";
+    const cpf_cnpjFormatado = removerCaracteresCPF_CNPJ(cpf_cnpj);
     const cep        = formValue.cep || "";
     const bairro     = formValue.bairro || "";
     const nr_casa    = formValue.nr_casa || "";
 
     const bodyRegistro:ClientRegisterDTO = {
       nm_cliente,
-      cpf_cnpj,
+      cpf_cnpj:cpf_cnpjFormatado,
       cep,
       bairro,
       nr_casa
@@ -95,7 +97,7 @@ export class ClientesComponent implements OnInit{
     console.log('asçkdjaslkdj')
   }
 
-  deleteClient(cliente:{cd_cliente:number}){
+  deleteClient(cliente:{ cd_cliente:number }){
     const { cd_cliente } = cliente
     this.clientsService.deleteClient({cd_cliente})
     .subscribe({
@@ -122,9 +124,4 @@ export class ClientesComponent implements OnInit{
   hideDialog(){
     this.clientDialog = false;
   }
-
- 
-
-
-
 }
