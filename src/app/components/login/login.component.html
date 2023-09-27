@@ -36,6 +36,7 @@
                     id="passwordInput"
                     formControlName="senha"
                     [feedback]="false"
+                    (keyup.enter)="doLogin()" 
                   />
                     <label htmlFor="passwordInput">Senha: </label>
                   </span>
