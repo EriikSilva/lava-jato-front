@@ -15,13 +15,13 @@
     #dt
     #textInput
     [value]="clients"
-    [rows]="10"
+    [rows]="8"
     [paginator]="true"
     [globalFilterFields]="['nm_cliente', 'cpf_cnpj']"
     [tableStyle]="{ 'min-width': '75rem' }"
     [rowHover]="true"
     dataKey="id"
-    currentPageReportTemplate="Itens {first} de {last} de {totalRecords}"
+    currentPageReportTemplate="Mostrando do {first} ao {last} de {totalRecords} Itens"
     [showCurrentPageReport]="true"
   >
     <ng-template pTemplate="caption">
@@ -32,8 +32,10 @@
           <input 
           pInputText 
           type="text" 
+          pTooltip="Nome ou CPF" 
+          tooltipPosition="top"
           (input)="applyFilterGlobal($event, 'contains')"
-          placeholder="Procurar... " />
+          placeholder="Procurar... "/>
         </span>
       </div>
     </ng-template>
@@ -67,7 +69,7 @@
             pButton
             pRipple
             icon="pi pi-pencil"
-            class="p-button-rounded p-button-success mr-2"
+            class="p-button-rounded p-button-warning mr-2"
             (click)="editClient(client)"
           ></button>
 
@@ -75,7 +77,7 @@
             pButton
             pRipple
             icon="pi pi-trash"
-            class="p-button-rounded p-button-warning"
+            class="p-button-rounded p-button-danger"
             (click)="confirmDelete($event, client)"
           ></button>
         </td>
