@@ -13,14 +13,15 @@
 <div style="width: 75%; margin-left: 10%">
   <p-table
     #dt
+    #textInput
     [value]="clients"
     [rows]="10"
     [paginator]="true"
-    [globalFilterFields]="['status']"
+    [globalFilterFields]="['nm_cliente', 'cpf_cnpj']"
     [tableStyle]="{ 'min-width': '75rem' }"
     [rowHover]="true"
     dataKey="id"
-    currentPageReportTemplate="Itens {first} de {last} de {totalRecords} = totalExemplo"
+    currentPageReportTemplate="Itens {first} de {last} de {totalRecords}"
     [showCurrentPageReport]="true"
   >
     <ng-template pTemplate="caption">
@@ -28,7 +29,11 @@
         <h5 class="m-0">Clientes</h5>
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
-          <input pInputText type="text" placeholder="Procurar..." />
+          <input 
+          pInputText 
+          type="text" 
+          (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Procurar... " />
         </span>
       </div>
     </ng-template>

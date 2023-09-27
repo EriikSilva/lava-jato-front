@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClientesService } from './clientes.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientRegisterDTO } from './DTO/clientesDTO';
@@ -9,6 +9,7 @@ import {
   MaskUtils,
 } from '../../utils/Cpf_Cnpj_Validations';
 import { CepService } from 'src/app/services/cep.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-clientes',
@@ -17,6 +18,9 @@ import { CepService } from 'src/app/services/cep.service';
   providers: [MessageService, MaskUtils, ConfirmationService],
 })
 export class ClientesComponent implements OnInit {
+
+  @ViewChild('dt') dt: Table | undefined;
+
   clients: any[] = [];
   clonedProducts: any;
   messages: Message[] = [];
@@ -173,5 +177,8 @@ export class ClientesComponent implements OnInit {
         formValue.bairro = data.bairro || '';
       });
     }
+  }
+  applyFilterGlobal($event: any, stringVal: any) {
+    this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 }
