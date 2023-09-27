@@ -22,10 +22,10 @@ export class ClientesComponent implements OnInit{
   clientDialog: boolean = false;
 
   constructor(
-    private clientsService:ClientesService,
+    private clientsService: ClientesService,
     private messageService: MessageService,
-    private maskUtils: MaskUtils,
-    private cepService: CepService
+    private maskUtils:      MaskUtils,
+    private cepService:     CepService
     ){}
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class ClientesComponent implements OnInit{
   clientRegisterForm = new FormGroup({
     nm_cliente: new FormControl('', Validators.required),
     cpf_cnpj:   new FormControl('', Validators.required),
-    cep:        new FormControl('', [Validators.required, Validators.maxLength(9)]),
+    cep:        new FormControl('', [Validators.required, Validators.maxLength(8)]),
     bairro:     new FormControl('', Validators.required),
     nr_casa:    new FormControl('', Validators.required)
   })
@@ -52,20 +52,6 @@ export class ClientesComponent implements OnInit{
         console.log(res.error.message)
       } 
     })
-
-    //UTILS
-  }
-
-  getBairroByCpf() {
-    const formValue = this.clientRegisterForm.value
-
-    if(formValue.cep?.length == 8){
-        this.cepService.getEnderecoByCep(formValue.cep)
-        .subscribe((data) => {
-          this.clientRegisterForm.get('bairro')?.setValue(data.bairro)
-          formValue.bairro = data.bairro || '';
-        });
-      }
   }
 
   saveClient(){ 
@@ -86,9 +72,6 @@ export class ClientesComponent implements OnInit{
         detail: "Preencha os Campos Obrigatórios",
       });
     }
-
- 
-
 
     const nm_cliente        = formValue.nm_cliente || "";
     const cpf_cnpj          = formValue.cpf_cnpj || "";
@@ -113,6 +96,7 @@ export class ClientesComponent implements OnInit{
           summary: 'Sucesso ao cadastrar',
           detail: res.data.message,
         });
+        this.clientRegisterForm.reset();
         this.hideDialog();
         this.getClients();
       },
@@ -163,5 +147,17 @@ export class ClientesComponent implements OnInit{
   //UTILS
   formatCpfCnpj(value: string): string {
     return this.maskUtils.formatCpfCnpj(value);
+  }
+
+  getBairroByCpf() {
+    const formValue = this.clientRegisterForm.value
+
+    if(formValue.cep?.length == 8){
+        this.cepService.getEnderecoByCep(formValue.cep)
+        .subscribe((data) => {
+          this.clientRegisterForm.get('bairro')?.setValue(data.bairro)
+          formValue.bairro = data.bairro || '';
+        });
+      }
   }
 }
