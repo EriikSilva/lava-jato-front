@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
 import { Router } from '@angular/router';
 
@@ -7,11 +7,37 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+
+  items: any;
+  nm_usuario:any
+
 
   constructor(private loginService:LoginService, private router:Router){}
 
   isVisible: boolean = false
+
+  ngOnInit(): void {
+
+    this.nm_usuario = localStorage.getItem("nm_usuario")
+
+    this.items = [
+      {
+        label:'Perfil',
+        icon:'pi pi-user',
+        routerLink: ['/perfil']
+      },
+      {
+        label:'Sair',
+        icon:'pi pi-fw pi-power-off',
+        command: () => {
+          this.logout()
+        }
+
+     },
+
+    ]
+  }
 
 
   logout(){

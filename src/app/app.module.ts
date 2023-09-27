@@ -16,6 +16,10 @@ import { ClientesComponent } from './components/clientes/clientes.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//UTILS
+import { CapitalCasePipe } from './utils/CapitalCase';
+
+
 //PRIMENG
 import { DividerModule } from 'primeng/divider';
 import { TabViewModule } from 'primeng/tabview';
@@ -30,6 +34,7 @@ import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import { SlideMenuModule } from 'primeng/slidemenu';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/AuthInterceptor';
@@ -41,7 +46,8 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
     NavbarComponent,
     FrankensteinComponent,
     ServicosComponent,
-    ClientesComponent
+    ClientesComponent,
+    CapitalCasePipe
   ],
   imports: [
     BrowserAnimationsModule,
@@ -61,7 +67,8 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
     MessagesModule,
     ToastModule,
     TableModule,
-    DialogModule
+    DialogModule,
+    SlideMenuModule
     
   ],
   providers: [

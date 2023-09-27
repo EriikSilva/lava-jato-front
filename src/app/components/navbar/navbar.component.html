@@ -7,15 +7,33 @@
       icon="pi pi-align-justify "
     ></p-button>
     <a [routerLink]="['/dashboard']">
-      <img src="../../../assets/logo.png" class="logo-img" />
+      <!-- <img src="../../../assets/logo.png" class="logo-img" />
+       -->
+       LOGO AQUI
     </a>
-    <!-- <p-button label="New" icon="pi pi-plus" class="mr-2"></p-button> -->
-    <!-- <p-button label="Upload" icon="pi pi-upload" styleClass="p-button-success"></p-button>
-        <i class="p-toolbar-separator pi pi-bars mr-2" style="vertical-align: middle"></i> -->
   </div>
   <div class="p-toolbar-group-end">
-        <p-button icon="pi pi-times" styleClass="p-button-danger" (onClick)="logout()"></p-button>
+    <div class="mr-3">
+      <h3>Bem Vindo: {{ nm_usuario | capitalCase}}</h3>
     </div>
+
+    <div class="mr-3">
+      <button
+      #btn
+      type="button"
+      pButton
+      icon="pi pi-user"
+      (click)="menu.toggle($event)"
+    ></button>
+    <p-slideMenu
+      #menu
+      [model]="items"
+      [popup]="true"
+      [viewportHeight]="145"
+      [style]="{ 'min-width': '175px' }"
+    ></p-slideMenu>
+    </div>
+  </div>
 </p-toolbar>
 
 <!-- SIDEBAR -->
