@@ -53,9 +53,9 @@
     <!-- CONTENT -->
     <ng-template pTemplate="body" let-client>
       <tr>
-        <td>{{ client.nm_cliente }}</td>
+        <td>{{ client.nm_cliente | capitalCase }}</td>
         <td>{{ formatCpfCnpj(client.cpf_cnpj) }}</td>
-        <td>{{ client.bairro }}</td>
+        <td>{{ client.bairro | capitalCase}}</td>
         <td>{{ client.status == "A" ? "ATIVO" : "Inativo" }}</td>
         <td>
           <button
