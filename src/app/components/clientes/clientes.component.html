@@ -29,22 +29,21 @@
         <h5 class="m-0">Clientes</h5>
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
-          <input 
-          pInputText 
-          type="text" 
-          pTooltip="Nome ou CPF" 
-          tooltipPosition="top"
-          (input)="applyFilterGlobal($event, 'contains')"
-          placeholder="Procurar... "/>
+          <input
+            pInputText
+            type="text"
+            pTooltip="Nome ou CPF"
+            tooltipPosition="top"
+            (input)="applyFilterGlobal($event, 'contains')"
+            placeholder="Procurar... "
+          />
         </span>
       </div>
     </ng-template>
     <!-- HEADER -->
     <ng-template pTemplate="header">
       <tr>
-        <th >
-
-        </th>
+        <th></th>
         <th pSortableColumn="nm_cliente" style="min-width: 15rem">
           Nome <p-sortIcon field="nm_cliente"></p-sortIcon>
         </th>
@@ -61,15 +60,26 @@
       </tr>
     </ng-template>
     <!-- CONTENT -->
-    <ng-template pTemplate="body" let-client let-rowIndex="rowIndex" let-expanded="expanded">
+    <ng-template
+      pTemplate="body"
+      let-client
+      let-rowIndex="rowIndex"
+      let-expanded="expanded"
+    >
       <tr>
         <td>
-          <button 
-          type="button" pButton pRipple [pRowToggler]="client.veiculos_clientes" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+          <button
+            type="button"
+            pButton
+            pRipple
+            [pRowToggler]="client.veiculos_clientes"
+            class="p-button-text p-button-rounded p-button-plain"
+            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+          ></button>
         </td>
         <td>{{ client.nm_cliente | capitalCase }}</td>
         <td>{{ formatCpfCnpj(client.cpf_cnpj) }}</td>
-        <td>{{ client.bairro | capitalCase}}</td>
+        <td>{{ client.bairro | capitalCase }}</td>
         <td>{{ client.status == "A" ? "ATIVO" : "Inativo" }}</td>
         <td>
           <button
@@ -101,8 +111,8 @@
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
-    <div class="field">
-      <form [formGroup]="clientRegisterForm">
+    <form [formGroup]="clientRegisterForm">
+      <div class="field">
         <label for="nome">Nome:</label>
         <input
           type="text"
@@ -113,7 +123,8 @@
           required
           autofocus
         />
-
+      </div>
+      <div class="field">
         <label for="cpf_cnpj">CPF ou CNPJ:</label>
         <input
           type="text"
@@ -125,6 +136,8 @@
           required
           autofocus
         />
+      </div>
+      <div class="field">
         <label for="cep">CEP:</label>
         <input
           type="text"
@@ -136,7 +149,8 @@
           required
           autofocus
         />
-
+      </div>
+      <div class="field">
         <label for="bairro">Bairro:</label>
         <input
           type="text"
@@ -147,7 +161,8 @@
           required
           autofocus
         />
-
+      </div>
+      <div class="field">
         <label for="nr_casa">Nrº da casa</label>
         <input
           type="text"
@@ -159,8 +174,8 @@
           required
           autofocus
         />
-      </form>
-    </div>
+      </div>
+    </form>
   </ng-template>
 
   <ng-template pTemplate="footer">
@@ -183,10 +198,6 @@
     ></button>
   </ng-template>
 </p-dialog>
-
-
-
-
 
 <!-- TOAST -->
 <div class="card">
