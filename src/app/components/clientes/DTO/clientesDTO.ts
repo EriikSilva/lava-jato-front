@@ -6,6 +6,16 @@ export interface ClientRegisterDTO {
     nr_casa:    string;
 }
 
+export interface ClientEditDTO {
+    cd_cliente: number;
+    status:     string;
+    nm_cliente: string;
+    cpf_cnpj:   string;
+    cep:        string;
+    bairro:     string;
+    nr_casa:    string;
+}
+
 export interface ClienteDeleteDTO{
     cd_cliente: number;
 }

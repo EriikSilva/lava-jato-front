@@ -87,7 +87,7 @@
             pRipple
             icon="pi pi-pencil"
             class="p-button-rounded p-button-warning mr-2"
-            (click)="editClient(client)"
+            (click)="editClientModal(client)"
           ></button>
 
           <button
@@ -106,7 +106,7 @@
 <p-dialog
   [(visible)]="clientDialog"
   [style]="{ width: '450px' }"
-  header="Novo Cliente"
+  [header]="saveMode ? 'Novo Cliente' : (editMode ? 'Editar Cliente' : '')"
   [modal]="true"
   styleClass="p-fluid"
 >
@@ -142,6 +142,7 @@
         <input
           type="text"
           pInputText
+          pKeyFilter="int"
           (blur)="getBairroByCpf()"
           maxlength="8"
           formControlName="cep"
@@ -167,13 +168,23 @@
         <input
           type="text"
           pInputText
-          appNumericInput
+          pKeyFilter="int"
           maxlength="6"
           formControlName="nr_casa"
           id="nr_casa"
           required
           autofocus
         />
+      </div>
+      <div *ngIf="editMode" class="field">
+        <label for="status">Status do Cliente</label>
+        <p-toggleButton 
+        id="status"
+        formControlName="status"
+        onLabel="Inativar" 
+        offLabel="Ativo"
+        >
+        ></p-toggleButton>
       </div>
     </form>
   </ng-template>
@@ -189,12 +200,23 @@
     ></button>
 
     <button
+      *ngIf="saveMode"
       pButton
       pRipple
       label="Salvar"
       icon="pi pi-check"
       class="p-button-text"
       (click)="saveClient()"
+    ></button>
+
+    <button
+      *ngIf="editMode"
+      pButton
+      pRipple
+      label="Editar"
+      icon="pi pi-pencil"
+      class="p-button-text"
+      (click)="editClient()"
     ></button>
   </ng-template>
 </p-dialog>
