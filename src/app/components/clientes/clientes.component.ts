@@ -156,7 +156,7 @@ export class ClientesComponent implements OnInit {
     const bodyEdit: ClientEditDTO = {
       nm_cliente,
       cd_cliente:this.cd_cliente,
-      status: status == true ? "N" : "A",
+      status: status == true ? "I" : "A",
       cpf_cnpj: cpf_cnpjFormatado,
       cep,
       bairro,
@@ -224,6 +224,9 @@ export class ClientesComponent implements OnInit {
     this.clientRegisterForm.get('cep')?.setValue(cliente.cep);
     this.clientRegisterForm.get('bairro')?.setValue(cliente.bairro);
     this.clientRegisterForm.get('nr_casa')?.setValue(cliente.nr_casa); 
+    const statusControl = this.clientRegisterForm.get('status');
+
+    statusControl?.setValue(cliente.status === 'I' ? true : false);
   }
 
   //UTILS

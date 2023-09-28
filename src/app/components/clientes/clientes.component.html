@@ -80,7 +80,7 @@
         <td>{{ client.nm_cliente | capitalCase }}</td>
         <td>{{ formatCpfCnpj(client.cpf_cnpj) }}</td>
         <td>{{ client.bairro | capitalCase }}</td>
-        <td>{{ client.status == "A" ? "ATIVO" : "Inativo" }}</td>
+        <td>{{ client.status == "A" ? "ATIVO" : "INATIVO" }}</td>
         <td>
           <button
             pButton
@@ -176,12 +176,14 @@
           autofocus
         />
       </div>
-      <div *ngIf="editMode" class="field">
+      <div *ngIf="editMode" class="field"       
+      pTooltip="Clique para mudar o status"
+      tooltipPosition="top">
         <label for="status">Status do Cliente</label>
         <p-toggleButton 
         id="status"
         formControlName="status"
-        onLabel="Inativar" 
+        onLabel="Inativo" 
         offLabel="Ativo"
         >
         ></p-toggleButton>
