@@ -39,6 +39,8 @@ import { SlideMenuModule } from 'primeng/slidemenu';
 import { InputMaskModule } from 'primeng/inputmask';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TooltipModule } from 'primeng/tooltip';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -78,7 +80,9 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
     SlideMenuModule,
     InputMaskModule,
     ConfirmPopupModule,
-    TooltipModule
+    TooltipModule,
+    ToggleButtonModule,
+    KeyFilterModule
   ],
   providers: [
     {
