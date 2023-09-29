@@ -10,6 +10,8 @@ import {
 } from '../../utils/Cpf_Cnpj_Validations';
 import { CepService } from 'src/app/services/cep.service';
 import { Table } from 'primeng/table';
+import { CarrosService } from './carros.service';
+import { postCarClientDTO } from './DTO/carrosDTO';
 
 @Component({
   selector: 'app-clientes',
@@ -21,23 +23,27 @@ export class ClientesComponent implements OnInit {
 
   @ViewChild('dt') dt: Table | undefined;
 
-  position: string = 'center';
-  clients: ClienteGetDTO[] = [];
-  cd_cliente: number = 0;
-  messages: Message[] = [];
+  position:         string = 'center';
+  clients:          ClienteGetDTO[] = [];
+  carsType:         any;
+  cd_cliente:       number = 0;
+  messages:         Message[] = [];
   clientsVehicles?: Array<VeiculosCliente> | any
-  editMode: boolean = false;
-  saveMode: boolean = false
 
-  clientDialog: boolean    = false;
+
+  editMode:        boolean = false;
+  saveMode:        boolean = false
+  clientDialog:    boolean = false;
   carClientDialog: boolean = false;
+  newCarDialog:    boolean = false
 
   constructor(
     private clientsService:      ClientesService,
     private messageService:      MessageService,
     private maskUtils:           MaskUtils,
     private cepService:          CepService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private carrosService:       CarrosService
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +58,13 @@ export class ClientesComponent implements OnInit {
     nr_casa:           new FormControl('', Validators.required),
     status:            new FormControl(false)
   });
+
+  newClientCarForm = new FormGroup({
+    placa:           new FormControl('', Validators.required),
+    modelo:          new FormControl('', Validators.required),
+    cd_tipo_veiculo: new FormControl('', Validators.required)
+  })
+
 
   /**********************REQUESTS GET, POST, EDIT, DELETE ***************************/
   getClients() {
@@ -172,6 +185,39 @@ export class ClientesComponent implements OnInit {
     });
   }
 
+
+  /*******************CAR REQUESTS**************************/
+
+  saveNewClientCar(){
+    const formValue = this.newClientCarForm.value;
+
+    const modelo = formValue.modelo || "";
+    const placa  = formValue.placa  || "";
+    const cd_tipo_veiculo = formValue.cd_tipo_veiculo || ""
+
+    const toStringify = JSON.stringify(cd_tipo_veiculo)
+    const toJson = JSON.parse(toStringify)
+    const cd_tipo_veiculo_p = toJson.cd_tipo_veiculo
+  
+    const bodyNewCar: postCarClientDTO  = {
+      modelo,
+      placa,
+      cd_tipo_veiculo: cd_tipo_veiculo_p,
+      cd_cliente: this.cd_cliente
+    }
+
+    this.carrosService.postClientCar(bodyNewCar)
+    .subscribe({
+      next:(res:any) => {
+        console.log(res.data.message)
+      }, error: (res:any) => {
+        console.log(res.error.data.message)
+      }
+    })
+
+  }
+
+
   /*******************DIALOG********************/
   openNew() {
     this.clientRegisterForm.reset();
@@ -199,11 +245,30 @@ export class ClientesComponent implements OnInit {
     statusControl?.setValue(cliente.status === 'I' ? true : false);
   }
 
-  carClientModal(position: string, { veiculos_clientes } : { veiculos_clientes: VeiculosCliente[] }){
+  carClientModal(position: string, cliente:ClienteGetDTO){
+    const { veiculos_clientes, cd_cliente } = cliente
+
     this.position = position;
     this.carClientDialog = true
     this.clientsVehicles = veiculos_clientes
+    this.cd_cliente = cd_cliente
   }
+
+  openDialogNewCar(){
+    this.newCarDialog = true;
+
+    this.carrosService.getTypeCar()
+    .subscribe({
+      next:(res:any) =>{
+        this.carsType = res.data.data
+        console.log('res',res.data.data)
+      }, error:(error) => {
+        console.log('error', error)
+      }
+    })
+
+  }
+
 
   //UTILS
 

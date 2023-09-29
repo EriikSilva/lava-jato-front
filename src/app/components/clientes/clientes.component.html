@@ -95,6 +95,79 @@
     </ng-template>
   </p-table>
 </div>
+<!-- DIALOGS -->
+<p-dialog 
+header="Crie um Novo Carro" 
+[(visible)]="newCarDialog" 
+styleClass="p-fluid"
+>
+<ng-template pTemplate="content">
+  <form [formGroup]="newClientCarForm">
+    <div class="field">
+      <label for="descricao">Descrição:</label>
+      <span class="danger"> * </span>
+      <p-dropdown 
+      id="descricao"
+      [options]="carsType" 
+      formControlName="cd_tipo_veiculo" 
+      optionLabel="descricao"></p-dropdown>
+    </div>
+  
+    <div class="field">
+      <label for="modelo">Modelo:</label>
+      <span class="danger"> * </span>
+      <input
+        type="text"
+        pInputText
+        maxlength="30"
+        formControlName="modelo"
+        id="modelo"
+        required
+        autofocus
+      />
+    </div>
+  
+    <div class="field">
+      <label for="placa">Placa:</label>
+      <span class="danger"> * </span>
+      <input
+        type="text"
+        pInputText
+        maxlength="15"
+        formControlName="placa"
+        id="placa"
+        required
+        autofocus
+      />
+    </div>
+  </form>
+</ng-template>
+
+<ng-template pTemplate="footer">
+  <button
+    pButton
+    pRipple
+    label="Cancelar"
+    icon="pi pi-times"
+    class="p-button-text"
+    (click)="hideDialog()"
+  ></button>
+
+    <button
+    pButton
+    pRipple
+    label="Salvar"
+    icon="pi pi-check"
+    class="p-button-text"
+    (click)="saveNewClientCar()"
+  ></button>
+</ng-template>
+
+</p-dialog>
+
+
+
+
 <p-dialog
   header="Carros"
   [(visible)]="carClientDialog"
@@ -111,6 +184,14 @@
     [tableStyle]="{ width: '100%' }"
   >
     <ng-template pTemplate="header">
+      <button
+      pButton
+      pRipple
+      label="Novo"
+      icon="pi pi-plus"
+      class="p-button-success mr-2 mb-2"
+      (click)="openDialogNewCar()"
+      ></button> 
       <tr>
         <th style="width: 50%">Carro</th>
         <th style="width: 50%">Placa</th>
@@ -127,7 +208,10 @@
         <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="vehicle.modelo" />
+              <input 
+              pInputText 
+              type="text"
+              [(ngModel)]="vehicle.modelo" />
             </ng-template>
             <ng-template pTemplate="output">
               {{ vehicle.modelo }}
