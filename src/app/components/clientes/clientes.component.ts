@@ -234,7 +234,7 @@ export class ClientesComponent implements OnInit {
   confirmDelete(event: Event, cliente: any) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
-      message: 'Deseja Excluir Cliente?',
+      message: 'Deseja Excluir Este Cliente?',
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Sim',
       rejectLabel: 'Não',
