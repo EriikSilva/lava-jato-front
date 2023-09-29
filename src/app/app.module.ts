@@ -45,6 +45,8 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/AuthInterceptor';
+import { EditSaveClienteDialogComponent } from './components/clientes/dialogs/edit-save-cliente.dialog/edit-save-cliente.dialog.component';
+import { CarClienteDialogComponent } from './components/clientes/dialogs/car-cliente.dialog/car-cliente.dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +58,9 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
     ClientesComponent,
     CapitalCasePipe,
     CpfCnpjMaskDirective,
-    NumericInputDirective
+    NumericInputDirective,
+    EditSaveClienteDialogComponent,
+    CarClienteDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
