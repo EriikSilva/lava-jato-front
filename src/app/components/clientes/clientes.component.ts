@@ -209,9 +209,20 @@ export class ClientesComponent implements OnInit {
     this.carrosService.postClientCar(bodyNewCar)
     .subscribe({
       next:(res:any) => {
-        console.log(res.data.message)
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso ao cadastrar',
+          detail: res.data.message,
+        });
+        this.newClientCarForm.reset();
+        this.getClients();
+        this.hideNewCarDialog();
       }, error: (res:any) => {
-        console.log(res.error.data.message)
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro ao cadastrar',
+          detail: res.error.data.message,
+        });
       }
     })
 
@@ -229,6 +240,10 @@ export class ClientesComponent implements OnInit {
   hideDialog() {
     this.clientDialog = false;
   }
+  hideNewCarDialog(){
+    this.newCarDialog = false
+  }
+
 
   editClientModal(cliente: ClientEditDTO) {
     this.cd_cliente    = cliente.cd_cliente
@@ -248,10 +263,10 @@ export class ClientesComponent implements OnInit {
   carClientModal(position: string, cliente:ClienteGetDTO){
     const { veiculos_clientes, cd_cliente } = cliente
 
-    this.position = position;
+    this.position        = position;
     this.carClientDialog = true
     this.clientsVehicles = veiculos_clientes
-    this.cd_cliente = cd_cliente
+    this.cd_cliente      = cd_cliente
   }
 
   openDialogNewCar(){
