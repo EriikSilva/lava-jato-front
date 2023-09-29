@@ -4,3 +4,7 @@ export interface postCarClientDTO {
     modelo:          string;
     cd_tipo_veiculo: string;
 }
+
+export interface deleteClientCarDTO{
+    cd_veiculo: number
+}

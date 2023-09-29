@@ -180,7 +180,11 @@ export class ClientesComponent implements OnInit {
         this.getClients();
       },
       error: (res: any) => {
-        console.log(res);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro ao deletar',
+          detail: res.error.data.error,
+        });
       },
     });
   }
