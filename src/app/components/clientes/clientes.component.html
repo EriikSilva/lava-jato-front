@@ -60,12 +60,8 @@
       </tr>
     </ng-template>
     <!-- CONTENT -->
-    <ng-template
-      pTemplate="body"
-      let-client
-      let-expanded="expanded"
-    >
-      <tr> 
+    <ng-template pTemplate="body" let-client let-expanded="expanded">
+      <tr>
         <!-- <td>
           <button 
           type="button" 
@@ -81,13 +77,13 @@
         <td>{{ client.status == "A" ? "ATIVO" : "INATIVO" }}</td>
         <td>
           <button
-          pButton
-          pRipple
-          icon="pi pi-car"
-          class="p-button-rounded p-button-primary mr-2"
-          (click)="carClientModal(client)"
+            pButton
+            pRipple
+            icon="pi pi-car"
+            class="p-button-rounded p-button-primary mr-2"
+            (click)="carClientModal('bottom', client)"
           ></button>
-          
+
           <button
             pButton
             pRipple
@@ -102,7 +98,7 @@
             icon="pi pi-trash"
             class="p-button-rounded p-button-danger mr-2"
             (click)="confirmDelete($event, client)"
-          ></button>     
+          ></button>
         </td>
       </tr>
     </ng-template>
@@ -124,11 +120,105 @@
   </p>
 </p-dialog> -->
 
+<p-dialog
+  header="Carros"
+  [(visible)]="carClientDialog"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  [position]="position"
+>
+  <p-table
+    [value]="clientsVehicles"
+    dataKey="id"
+    editMode="row"
+    [tableStyle]="{ width: '100%' }"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 50%">Carro</th>
+        <th style="width: 50%">Placa</th>
+        <th style="width: 50%">Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-vehicle
+      let-editing="editing"
+      let-ri="rowIndex"
+    >
+      <tr [pEditableRow]="vehicle">
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="vehicle.modelo" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ vehicle.modelo }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                type="text"
+                [(ngModel)]="vehicle.placa"
+                required
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ vehicle.placa }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button
+              *ngIf="!editing"
+              pButton
+              pRipple
+              type="button"
+              pInitEditableRow
+              icon="pi pi-pencil"
+              (click)="onRowEditInit(vehicle)"
+              class="p-button-rounded p-button-text"
+            ></button>
+
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              pSaveEditableRow
+              icon="pi pi-check"
+              (click)="onRowEditSave(vehicle)"
+              class="p-button-rounded p-button-text p-button-success mr-2"
+            ></button>
+
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              pCancelEditableRow
+              icon="pi pi-times"
+              (click)="onRowEditCancel(vehicle, ri)"
+              class="p-button-rounded p-button-text p-button-danger"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-dialog>
 
 <p-dialog
   [(visible)]="clientDialog"
   [style]="{ width: '450px' }"
-  [header]="saveMode ? 'Novo Cliente' : (editMode ? 'Editar Cliente' : '')"
+  [header]="saveMode ? 'Novo Cliente' : editMode ? 'Editar Cliente' : ''"
   [modal]="true"
   styleClass="p-fluid"
 >
@@ -203,17 +293,21 @@
           autofocus
         />
       </div>
-      <div *ngIf="editMode" class="field"       
-      pTooltip="Clique para mudar o status"
-      tooltipPosition="top">
+      <div
+        *ngIf="editMode"
+        class="field"
+        pTooltip="Clique para mudar o status"
+        tooltipPosition="top"
+      >
         <label for="status">Status do Cliente</label>
-        <p-toggleButton 
-        id="status"
-        formControlName="status"
-        onLabel="Inativo" 
-        offLabel="Ativo"
+        <p-toggleButton
+          id="status"
+          formControlName="status"
+          onLabel="Inativo"
+          offLabel="Ativo"
         >
-        ></p-toggleButton>
+          ></p-toggleButton
+        >
       </div>
     </form>
   </ng-template>

@@ -21,11 +21,11 @@ export class ClientesComponent implements OnInit {
 
   @ViewChild('dt') dt: Table | undefined;
 
-  clients: any[] = [];
+  position: string = 'center';
+  clients: ClienteGetDTO[] = [];
   cd_cliente: number = 0;
-  clonedProducts: any;
   messages: Message[] = [];
-  veiculos_clientes?: Array<VeiculosCliente>
+  clientsVehicles?: Array<VeiculosCliente> | any
   editMode: boolean = false;
   saveMode: boolean = false
 
@@ -184,7 +184,7 @@ export class ClientesComponent implements OnInit {
     this.clientDialog = false;
   }
 
-  editClientModal(cliente: any) {
+  editClientModal(cliente: ClientEditDTO) {
     this.cd_cliente    = cliente.cd_cliente
     this.editMode      = true;
     this.saveMode      = false
@@ -199,11 +199,28 @@ export class ClientesComponent implements OnInit {
     statusControl?.setValue(cliente.status === 'I' ? true : false);
   }
 
-  carClientModal({ veiculos_clientes } : { veiculos_clientes: VeiculosCliente[] }){
-    this.veiculos_clientes = veiculos_clientes
+  carClientModal(position: string, { veiculos_clientes } : { veiculos_clientes: VeiculosCliente[] }){
+    this.position = position;
+    this.carClientDialog = true
+    this.clientsVehicles = veiculos_clientes
   }
 
   //UTILS
+
+  onRowEditInit(veiculos_clientes: VeiculosCliente) {
+    this.clientsVehicles[veiculos_clientes.modelo as string] = { ...veiculos_clientes };
+  }
+
+  onRowEditSave(veiculos_clientes: VeiculosCliente) {
+    
+  }
+
+  onRowEditCancel(veiculos_clientes: VeiculosCliente, index: number) {
+    // this.veiculos_clientes[index] = this.veiculos_clientes[veiculos_clientes.placa as string];
+    // delete this.clonedProducts[product.id as string];
+    console.log('veiculos_clientes',veiculos_clientes)
+  }
+
 
   private validateAndShowMessage(formValue: any) {
     if (this.clientRegisterForm.invalid) {
