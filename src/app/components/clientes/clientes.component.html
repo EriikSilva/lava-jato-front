@@ -62,15 +62,6 @@
     <!-- CONTENT -->
     <ng-template pTemplate="body" let-client let-expanded="expanded">
       <tr>
-        <!-- <td>
-          <button 
-          type="button" 
-          pButton 
-          pRipple 
-          [pRowToggler]="client" 
-          class="p-button-text p-button-rounded p-button-plain" 
-          [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-        </td> -->
         <td>{{ client.nm_cliente | capitalCase }}</td>
         <td>{{ formatCpfCnpj(client.cpf_cnpj) }}</td>
         <td>{{ client.bairro | capitalCase }}</td>
@@ -81,7 +72,7 @@
             pRipple
             icon="pi pi-car"
             class="p-button-rounded p-button-primary mr-2"
-            (click)="carClientModal('bottom', client)"
+            (click)="carClientModal('center', client)"
           ></button>
 
           <button
@@ -102,24 +93,8 @@
         </td>
       </tr>
     </ng-template>
-    <!-- <ng-template pTemplate="rowexpansion" let-cliente>
-      <tr>
-        <td>
-          TESTE
-        </td>
-      </tr>
-  </ng-template> -->
   </p-table>
 </div>
-<!-- DIALOG -->
-<!-- 
-<p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
-  <p class="m-0">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
-</p-dialog> -->
-
 <p-dialog
   header="Carros"
   [(visible)]="carClientDialog"
