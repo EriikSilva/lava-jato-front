@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClientesService } from './clientes.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ClientEditDTO, ClientRegisterDTO } from './DTO/clientesDTO';
+import { ClientEditDTO, ClientRegisterDTO, ClienteGetDTO, VeiculosCliente } from './DTO/clientesDTO';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Message } from 'primeng/api';
 import {
@@ -25,10 +25,12 @@ export class ClientesComponent implements OnInit {
   cd_cliente: number = 0;
   clonedProducts: any;
   messages: Message[] = [];
+  veiculos_clientes?: Array<VeiculosCliente>
   editMode: boolean = false;
   saveMode: boolean = false
 
-  clientDialog: boolean = false;
+  clientDialog: boolean    = false;
+  carClientDialog: boolean = false;
 
   constructor(
     private clientsService:      ClientesService,
@@ -197,6 +199,10 @@ export class ClientesComponent implements OnInit {
     statusControl?.setValue(cliente.status === 'I' ? true : false);
   }
 
+  carClientModal({ veiculos_clientes } : { veiculos_clientes: VeiculosCliente[] }){
+    this.veiculos_clientes = veiculos_clientes
+  }
+
   //UTILS
 
   private validateAndShowMessage(formValue: any) {
@@ -223,7 +229,7 @@ export class ClientesComponent implements OnInit {
   }
   
 
-  confirmDelete(event: Event, cliente: any) {
+  confirmDelete(event: Event, cliente: ClienteGetDTO) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Deseja Excluir Este Cliente?',

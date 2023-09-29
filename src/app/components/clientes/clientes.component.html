@@ -4,7 +4,7 @@
     pRipple
     label="Novo"
     icon="pi pi-plus"
-    class="p-button-success mr-2"
+    class="p-button-success mr-2 mb-2"
     (click)="openNew()"
   ></button>
 </div>
@@ -43,7 +43,7 @@
     <!-- HEADER -->
     <ng-template pTemplate="header">
       <tr>
-        <th></th>
+        <!-- <th></th> -->
         <th pSortableColumn="nm_cliente" style="min-width: 15rem">
           Nome <p-sortIcon field="nm_cliente"></p-sortIcon>
         </th>
@@ -63,25 +63,31 @@
     <ng-template
       pTemplate="body"
       let-client
-      let-rowIndex="rowIndex"
       let-expanded="expanded"
     >
-      <tr>
-        <td>
-          <button
-            type="button"
-            pButton
-            pRipple
-            [pRowToggler]="client.veiculos_clientes"
-            class="p-button-text p-button-rounded p-button-plain"
-            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
-          ></button>
-        </td>
+      <tr> 
+        <!-- <td>
+          <button 
+          type="button" 
+          pButton 
+          pRipple 
+          [pRowToggler]="client" 
+          class="p-button-text p-button-rounded p-button-plain" 
+          [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+        </td> -->
         <td>{{ client.nm_cliente | capitalCase }}</td>
         <td>{{ formatCpfCnpj(client.cpf_cnpj) }}</td>
         <td>{{ client.bairro | capitalCase }}</td>
         <td>{{ client.status == "A" ? "ATIVO" : "INATIVO" }}</td>
         <td>
+          <button
+          pButton
+          pRipple
+          icon="pi pi-car"
+          class="p-button-rounded p-button-info mr-2"
+          (click)="carClientModal(client)"
+          ></button>
+          
           <button
             pButton
             pRipple
@@ -94,12 +100,19 @@
             pButton
             pRipple
             icon="pi pi-trash"
-            class="p-button-rounded p-button-danger"
+            class="p-button-rounded p-button-danger mr-2"
             (click)="confirmDelete($event, client)"
-          ></button>
+          ></button>     
         </td>
       </tr>
     </ng-template>
+    <!-- <ng-template pTemplate="rowexpansion" let-cliente>
+      <tr>
+        <td>
+          TESTE
+        </td>
+      </tr>
+  </ng-template> -->
   </p-table>
 </div>
 <!-- DIALOG -->
