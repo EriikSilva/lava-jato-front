@@ -43,7 +43,7 @@ export class ClientesComponent implements OnInit {
   }
 
   clientRegisterForm = new FormGroup({
-    nm_cliente:        new FormControl('', Validators.required),
+    nm_cliente:        new FormControl('', Validators.required,),
     cpf_cnpj:          new FormControl('', Validators.required),
     cep:               new FormControl('', [Validators.required, Validators.maxLength(8)]),
     bairro:            new FormControl('', Validators.required),
@@ -67,122 +67,90 @@ export class ClientesComponent implements OnInit {
 
   saveClient() {
     const formValue = this.clientRegisterForm.value;
+    const isValid   = this.validateAndShowMessage(formValue);
 
-    if (this.clientRegisterForm.invalid) {
-      if (
-        formValue.cpf_cnpj?.length !== 14 &&
-        formValue.cpf_cnpj?.length !== 18
-      ) {
-        return this.messageService.add({
-          severity: 'warn',
-          summary: 'Validação',
-          detail: 'Campo CPF/CNPJ Inválido',
-        });
-      }
-
-      return this.messageService.add({
-        severity: 'warn',
-        summary: 'Validação',
-        detail: 'Preencha os Campos Obrigatórios',
+    if(isValid){
+      const nm_cliente        = formValue.nm_cliente || '';
+      const cpf_cnpj          = formValue.cpf_cnpj || '';
+      const cpf_cnpjFormatado = removerCaracteresCPF_CNPJ(cpf_cnpj);
+      const cep               = formValue.cep || '';
+      const bairro            = formValue.bairro || '';
+      const nr_casa           = formValue.nr_casa || '';
+  
+      const bodyRegistro: ClientRegisterDTO = {
+        nm_cliente,
+        cpf_cnpj: cpf_cnpjFormatado,
+        cep,
+        bairro,
+        nr_casa,
+      };
+  
+      this.clientsService.postClients(bodyRegistro).subscribe({
+        next: (res: any) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Sucesso ao cadastrar',
+            detail: res.data.message,
+          });
+          this.clientRegisterForm.reset();
+          this.hideDialog();
+          this.getClients();
+        },
+        error: (res: any) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro ao cadastrar',
+            detail: res.error.data.message,
+          });
+        },
       });
     }
-
-    const nm_cliente        = formValue.nm_cliente || '';
-    const cpf_cnpj          = formValue.cpf_cnpj || '';
-    const cpf_cnpjFormatado = removerCaracteresCPF_CNPJ(cpf_cnpj);
-    const cep               = formValue.cep || '';
-    const bairro            = formValue.bairro || '';
-    const nr_casa           = formValue.nr_casa || '';
-
-    const bodyRegistro: ClientRegisterDTO = {
-      nm_cliente,
-      cpf_cnpj: cpf_cnpjFormatado,
-      cep,
-      bairro,
-      nr_casa,
-    };
-
-    this.clientsService.postClients(bodyRegistro).subscribe({
-      next: (res: any) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Sucesso ao cadastrar',
-          detail: res.data.message,
-        });
-        this.clientRegisterForm.reset();
-        this.hideDialog();
-        this.getClients();
-      },
-      error: (res: any) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Erro ao cadastrar',
-          detail: res.error.data.message,
-        });
-      },
-    });
   }
 
   editClient(){
     const formValue = this.clientRegisterForm.value;
+    const isValid   = this.validateAndShowMessage(formValue);
 
-    if (this.clientRegisterForm.invalid) {
-      if (
-        formValue.cpf_cnpj?.length !== 14 &&
-        formValue.cpf_cnpj?.length !== 18
-      ) {
-        return this.messageService.add({
-          severity: 'warn',
-          summary: 'Validação',
-          detail: 'Campo CPF/CNPJ Inválido',
-        });
-      }
-
-      return this.messageService.add({
-        severity: 'warn',
-        summary: 'Validação',
-        detail: 'Preencha os Campos Obrigatórios',
+    if(isValid){
+      const nm_cliente        = formValue.nm_cliente || '';
+      const cpf_cnpj          = formValue.cpf_cnpj || '';
+      const cpf_cnpjFormatado = removerCaracteresCPF_CNPJ(cpf_cnpj);
+      const cep               = formValue.cep || '';
+      const bairro            = formValue.bairro || '';
+      const nr_casa           = formValue.nr_casa || '';
+      const status            = formValue.status || '';
+  
+      const bodyEdit: ClientEditDTO = {
+        nm_cliente,
+        cd_cliente:this.cd_cliente,
+        status: status == true ? "I" : "A",
+        cpf_cnpj: cpf_cnpjFormatado,
+        cep,
+        bairro,
+        nr_casa,
+      };
+  
+     this.clientsService.editClient(bodyEdit).subscribe({
+        next: (res: any) => {
+          console.log('res', res)
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Edição',
+            detail: 'Sucesso ao Editar',
+          });
+          this.clientRegisterForm.reset();
+          this.hideDialog();
+          this.getClients();
+        },
+        error: (res: any) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro ao cadastrar',
+            detail: res.error.data.message,
+          });
+        },
       });
     }
-
-    const nm_cliente        = formValue.nm_cliente || '';
-    const cpf_cnpj          = formValue.cpf_cnpj || '';
-    const cpf_cnpjFormatado = removerCaracteresCPF_CNPJ(cpf_cnpj);
-    const cep               = formValue.cep || '';
-    const bairro            = formValue.bairro || '';
-    const nr_casa           = formValue.nr_casa || '';
-    const status            = formValue.status || '';
-
-    const bodyEdit: ClientEditDTO = {
-      nm_cliente,
-      cd_cliente:this.cd_cliente,
-      status: status == true ? "I" : "A",
-      cpf_cnpj: cpf_cnpjFormatado,
-      cep,
-      bairro,
-      nr_casa,
-    };
-
-   this.clientsService.editClient(bodyEdit).subscribe({
-      next: (res: any) => {
-        console.log('res', res)
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Edição',
-          detail: 'Sucesso ao Editar',
-        });
-        this.clientRegisterForm.reset();
-        this.hideDialog();
-        this.getClients();
-      },
-      error: (res: any) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Erro ao cadastrar',
-          detail: res.error.data.message,
-        });
-      },
-    });
   }
 
   deleteClient(cliente: { cd_cliente: number }) {
@@ -230,6 +198,30 @@ export class ClientesComponent implements OnInit {
   }
 
   //UTILS
+
+  private validateAndShowMessage(formValue: any) {
+    if (this.clientRegisterForm.invalid) {
+      if (
+        formValue.cpf_cnpj?.length !== 14 &&
+        formValue.cpf_cnpj?.length !== 18
+      ) {
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Validação',
+          detail: 'Campo CPF/CNPJ Inválido',
+        });
+      } else {
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Validação',
+          detail: 'Preencha os Campos Obrigatórios',
+        });
+      }
+      return false; 
+    }
+    return true;
+  }
+  
 
   confirmDelete(event: Event, cliente: any) {
     this.confirmationService.confirm({

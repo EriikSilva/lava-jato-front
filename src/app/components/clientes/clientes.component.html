@@ -114,6 +114,7 @@
     <form [formGroup]="clientRegisterForm">
       <div class="field">
         <label for="nome">Nome:</label>
+        <span class="danger"> * </span>
         <input
           type="text"
           pInputText
@@ -126,6 +127,7 @@
       </div>
       <div class="field">
         <label for="cpf_cnpj">CPF ou CNPJ:</label>
+        <span class="danger"> * </span>
         <input
           type="text"
           cpf-cnpj-mask
@@ -139,6 +141,7 @@
       </div>
       <div class="field">
         <label for="cep">CEP:</label>
+        <span class="danger"> * </span>
         <input
           type="text"
           pInputText
@@ -153,6 +156,7 @@
       </div>
       <div class="field">
         <label for="bairro">Bairro:</label>
+        <span class="danger"> * </span>
         <input
           type="text"
           pInputText
@@ -165,6 +169,7 @@
       </div>
       <div class="field">
         <label for="nr_casa">Nrº da casa</label>
+        <span class="danger"> * </span>
         <input
           type="text"
           pInputText
