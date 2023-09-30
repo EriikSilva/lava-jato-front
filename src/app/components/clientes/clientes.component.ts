@@ -145,7 +145,8 @@ export class ClientesComponent implements OnInit {
         nr_casa,
       };
   
-     this.clientsService.editClient(bodyEdit).subscribe({
+     this.clientsService.editClient(bodyEdit)
+     .subscribe({
         next: (res: any) => {
           console.log('res', res)
           this.messageService.add({
@@ -180,10 +181,11 @@ export class ClientesComponent implements OnInit {
         this.getClients();
       },
       error: (res: any) => {
+        const { error } = res
         this.messageService.add({
           severity: 'error',
           summary: 'Erro ao deletar',
-          detail: res.error.data.error,
+          detail: error.error,
         });
       },
     });
