@@ -8,3 +8,8 @@ export interface postCarClientDTO {
 export interface deleteClientCarDTO{
     cd_veiculo: number
 }
+
+export interface GetTypeCarDTO {
+    cd_tipo_veiculo: number;
+    descricao:       string;
+}
