@@ -11,7 +11,7 @@ import {
 import { CepService } from 'src/app/services/cep.service';
 import { Table } from 'primeng/table';
 import { CarrosService } from './carros.service';
-import { postCarClientDTO } from './DTO/carrosDTO';
+import { GetTypeCarDTO, postCarClientDTO } from './DTO/carrosDTO';
 
 @Component({
   selector: 'app-clientes',
@@ -70,8 +70,7 @@ export class ClientesComponent implements OnInit {
   getClients() {
     this.clientsService.getClients().subscribe({
       next: (res: any) => {
-        const { data } = res.data;
-        console.log('data', data);
+        const { data } = res;
         this.clients = data;
       },
       error(res: any) {
@@ -215,10 +214,11 @@ export class ClientesComponent implements OnInit {
     this.carrosService.postClientCar(bodyNewCar)
     .subscribe({
       next:(res:any) => {
+        const { message } = res
         this.messageService.add({
           severity: 'success',
           summary: 'Sucesso ao cadastrar',
-          detail: res.data.message,
+          detail: message,
         });
         this.newClientCarForm.reset();
         this.getClients();
@@ -227,7 +227,7 @@ export class ClientesComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Erro ao cadastrar',
-          detail: res.error.data.message,
+          detail: res.error.error,
         });
       }
     })
@@ -280,9 +280,9 @@ export class ClientesComponent implements OnInit {
 
     this.carrosService.getTypeCar()
     .subscribe({
-      next:(res:any) =>{
-        this.carsType = res.data.data
-        console.log('res',res.data.data)
+      next:(res: { data: GetTypeCarDTO}) =>{
+        const { data } = res
+        this.carsType = data
       }, error:(error) => {
         console.log('error', error)
       }
