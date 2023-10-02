@@ -5,10 +5,9 @@ import { ClientEditDTO, ClienteGetDTO, VeiculosCliente } from './DTO/clientesDTO
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Message } from 'primeng/api';
 import { MaskUtils } from '../../utils/Cpf_Cnpj_Validations';
-import { CepService } from 'src/app/services/cep.service';
 import { Table } from 'primeng/table';
 import { CarrosService } from './carros.service';
-import { GetTypeCarDTO, postCarClientDTO } from './DTO/carrosDTO';
+import { postCarClientDTO } from './DTO/carrosDTO';
 import { SaveEditClientComponent } from './dialogs/save-edit-client/save-edit-client.component';
 import { CarDetailsComponent } from './dialogs/car-details/car-details.component';
 
@@ -42,7 +41,6 @@ export class ClientesComponent implements OnInit {
     private clientsService:      ClientesService,
     private messageService:      MessageService,
     private maskUtils:           MaskUtils,
-    private cepService:          CepService,
     private confirmationService: ConfirmationService,
     private carrosService:       CarrosService
   ) {}
@@ -166,20 +164,6 @@ export class ClientesComponent implements OnInit {
     this.CarDetailsComponent?.carClientModal(position, cliente)
   }
 
-  // openDialogNewCar(){
-  //   this.newCarDialog = true;
-
-  //   this.carrosService.getTypeCar()
-  //   .subscribe({
-  //     next:(res: { data: GetTypeCarDTO}) =>{
-  //       const { data } = res
-  //       this.carsType = data
-  //     }, error:(error) => {
-  //       console.log('error', error)
-  //     }
-  //   })
-
-  // }
 
 
   //UTILS
