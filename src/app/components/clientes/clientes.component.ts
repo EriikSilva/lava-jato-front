@@ -41,8 +41,7 @@ export class ClientesComponent implements OnInit {
     private clientsService:      ClientesService,
     private messageService:      MessageService,
     private maskUtils:           MaskUtils,
-    private confirmationService: ConfirmationService,
-    private carrosService:       CarrosService
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -92,51 +91,6 @@ export class ClientesComponent implements OnInit {
     });
   }
 
-
-  /*******************CAR REQUESTS**************************/
-
-  saveNewClientCar(){
-    const formValue = this.newClientCarForm.value;
-
-    const modelo = formValue.modelo || "";
-    const placa  = formValue.placa  || "";
-    const cd_tipo_veiculo = formValue.cd_tipo_veiculo || ""
-
-    const toStringify = JSON.stringify(cd_tipo_veiculo)
-    const toJson = JSON.parse(toStringify)
-    const cd_tipo_veiculo_p = toJson.cd_tipo_veiculo
-  
-    const bodyNewCar: postCarClientDTO  = {
-      modelo,
-      placa,
-      cd_tipo_veiculo: cd_tipo_veiculo_p,
-      cd_cliente: this.cd_cliente
-    }
-
-    this.carrosService.postClientCar(bodyNewCar)
-    .subscribe({
-      next:(res:any) => {
-        const { message } = res
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Sucesso ao cadastrar',
-          detail: message,
-        });
-        this.newClientCarForm.reset();
-        this.getClients();
-        this.hideNewCarDialog();
-      }, error: (res:any) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Erro ao cadastrar',
-          detail: res.error.error,
-        });
-      }
-    })
-
-  }
-
-
   /*******************DIALOG********************/
   openNew() {
     this.SaveEditClientComponent?.resetarFormulario();
@@ -165,11 +119,7 @@ export class ClientesComponent implements OnInit {
   }
 
 
-
-  //UTILS
-
-
-  confirmDelete(event: Event, cliente: ClienteGetDTO) {
+ confirmDelete(event: Event, cliente: ClienteGetDTO) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Deseja Excluir Este Cliente?',
