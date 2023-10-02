@@ -51,6 +51,7 @@ export class LoginComponent  implements OnInit{
 
     this.loginService.userLogin(bodyLogin).subscribe({
       next: (res: any) => {
+        console.log('res', res)
         const { token, user } = res;
         
         this.loginService.setToken(token)
@@ -92,10 +93,11 @@ export class LoginComponent  implements OnInit{
 
     this.registroService.registerUserService(bodyRegistro).subscribe({
       next: (res: any) => {
+        const { message } = res
         this.messageService.add({
           severity: 'success',
           summary: 'Sucesso',
-          detail: res.data.message,
+          detail: message,
         })
         this.userFormRegister.reset();
       },
