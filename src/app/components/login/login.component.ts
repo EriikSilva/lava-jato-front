@@ -51,7 +51,6 @@ export class LoginComponent  implements OnInit{
 
     this.loginService.userLogin(bodyLogin).subscribe({
       next: (res: any) => {
-        console.log('res', res)
         const { token, user } = res;
         
         this.loginService.setToken(token)
