@@ -21,9 +21,8 @@
       label="Novo"
       icon="pi pi-plus"
       class="p-button-success mr-2 mb-2"
-      
+      (click)="openDialogNewCar()"
       ></button> 
-      <!-- (click)="openDialogNewCar()" -->
       <tr>
         <th style="width: 50%">Carro</th>
         <th style="width: 50%">Placa</th>
@@ -105,3 +104,11 @@
     </ng-template>
   </p-table>
 </p-dialog>
+
+<app-new-car
+[newCarDialog]="newCarDialog"
+(dialogClosed)="onDialogClosed()"
+[cd_cliente]="cd_cliente"
+[carsType]="carsType"
+>
+</app-new-car>
