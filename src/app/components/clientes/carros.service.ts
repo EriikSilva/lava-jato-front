@@ -29,6 +29,12 @@ export class CarrosService {
     return this.http.delete(`${this.apiUrl}/veiculo/cliente`, cd_tipo_veiculo_p)
   }
 
+
+  getCarByClient(cd_cliente:any):Observable<any>{
+    return this.http.get(`${this.apiUrl}/veiculo/cliente/${cd_cliente}`)
+  }
+
+
   getTypeCar():Observable<any>{
     return this.http.get(`${this.apiUrl}/veiculo/tipo`)
   }

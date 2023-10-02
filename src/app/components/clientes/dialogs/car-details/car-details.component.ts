@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ClienteGetDTO, VeiculosCliente } from '../../DTO/clientesDTO';
 import { CarrosService } from '../../carros.service';
 import { GetTypeCarDTO } from '../../DTO/carrosDTO';
@@ -8,7 +8,7 @@ import { GetTypeCarDTO } from '../../DTO/carrosDTO';
   templateUrl: './car-details.component.html',
   styleUrls: ['./car-details.component.scss'],
 })
-export class CarDetailsComponent {
+export class CarDetailsComponent implements OnInit{
 
   constructor(private carrosService:CarrosService){}
 
@@ -23,13 +23,29 @@ export class CarDetailsComponent {
   clientsVehicles?: Array<VeiculosCliente> | any;
   newCarDialog: boolean = false;
 
-  carClientModal(position: string, cliente: ClienteGetDTO) {
-    const { veiculos_clientes, cd_cliente } = cliente;
+  ngOnInit(): void {
+    this.getCarByClient(this.cd_cliente);
+  }
 
-    this.cd_cliente     = cd_cliente
+  carClientModal(position: string, cliente: ClienteGetDTO) {
+    const { cd_cliente } = cliente;
+
+    this.cd_cliente      = cd_cliente
     this.position        = position;
     this.carClientDialog = true;
-    this.clientsVehicles = veiculos_clientes;
+    this.getCarByClient(cd_cliente)
+  }
+
+  getCarByClient(cd_cliente:any){
+    this.carrosService.getCarByClient(cd_cliente)
+    .subscribe({
+      next:(res:any) => {
+        const { data } = res
+        this.clientsVehicles = data
+      }, error(res: any) {
+        console.log(res)
+      },
+    })
   }
 
   openDialogNewCar() {
