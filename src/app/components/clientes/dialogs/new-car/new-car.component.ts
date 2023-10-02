@@ -22,6 +22,7 @@ export class NewCarComponent {
     @Input() cd_cliente: any;
 
     @Output() dialogClosed = new EventEmitter<void>();
+    @Output() getCarByClient = new EventEmitter<void>();
     
 
     newCarForm = new FormGroup({
@@ -48,7 +49,6 @@ export class NewCarComponent {
         cd_cliente: this.cd_cliente
       }
       
-      // return console.log('bodyNewCar', bodyNewCar)
       this.carrosService.postClientCar(bodyNewCar)
       .subscribe({
         next:(res:any) => {
@@ -59,8 +59,7 @@ export class NewCarComponent {
             detail: message,
           });
           this.newCarForm.reset();
-          
-          // this.getClients.emit();
+          this.getCarByClient.emit();
           this.closeDialog();
         }, error: (res:any) => {
           this.messageService.add({
@@ -72,7 +71,6 @@ export class NewCarComponent {
       })
   
     }
-
 
     closeDialog() {
       this.newCarDialog = false

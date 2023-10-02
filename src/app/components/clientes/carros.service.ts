@@ -14,10 +14,6 @@ export class CarrosService {
 
   constructor(private http:HttpClient) { }
 
-  // postCar(veiculos_clientes: VeiculosCliente):Observable<VeiculosCliente>{
-  //   return this.http.post<VeiculosCliente>(`${this.apiUrl}/veiculo/cliente`, veiculos_clientes);
-  // }
-
   postClientCar(body:postCarClientDTO):Observable<postCarClientDTO>{
     return this.http.post<postCarClientDTO>(`${this.apiUrl}/veiculo/cliente`, body)
   } 
@@ -29,11 +25,9 @@ export class CarrosService {
     return this.http.delete(`${this.apiUrl}/veiculo/cliente`, cd_tipo_veiculo_p)
   }
 
-
-  getCarByClient(cd_cliente:any):Observable<any>{
+  getCarByClient(cd_cliente:string):Observable<any>{
     return this.http.get(`${this.apiUrl}/veiculo/cliente/${cd_cliente}`)
   }
-
 
   getTypeCar():Observable<any>{
     return this.http.get(`${this.apiUrl}/veiculo/tipo`)
