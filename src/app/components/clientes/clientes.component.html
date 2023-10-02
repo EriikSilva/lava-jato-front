@@ -162,7 +162,6 @@ styleClass="p-fluid"
     (click)="saveNewClientCar()"
   ></button>
 </ng-template>
-
 </p-dialog>
 
 
@@ -277,13 +276,13 @@ styleClass="p-fluid"
 
 <!-- DIALOG DE EDITAR E CRIAR CLIENTE -->
 <app-save-edit-client
+#SaveEditClientComponent
 [cd_cliente]="cd_cliente"
 [clientDialog]="clientDialog"
 (dialogClosed)="onDialogClosed()"
 [saveMode]="saveMode"
 [editMode]="editMode"
 (getClients)="getClients()"
-#SaveEditClientComponent
 ></app-save-edit-client>
 
 <!-- TOAST -->
