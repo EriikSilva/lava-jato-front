@@ -20,7 +20,7 @@ export class SaveEditClientComponent {
   @Input() editMode: boolean     = false;
 
   @Output() dialogClosed = new EventEmitter<void>();
-  @Output() eventoFilho  = new EventEmitter<any>();
+  @Output() getClients  = new EventEmitter<any>();
 
   constructor(
     private cepService:    CepService,
@@ -60,14 +60,16 @@ export class SaveEditClientComponent {
       this.clientsService.postClients(bodyRegistro)
       .subscribe({
         next: (res: any) => {
+          const { message } = res
+
           this.messageService.add({
             severity: 'success',
             summary: 'Sucesso ao cadastrar',
-            detail: res.data.message,
+            detail: message,
           });
           this.clientRegisterForm.reset();
           this.hideDialog();
-          this.eventoFilho.emit();
+          this.getClients.emit();
         },
         error: (res: any) => {
           this.messageService.add({
@@ -114,7 +116,7 @@ export class SaveEditClientComponent {
           });
           this.clientRegisterForm.reset();
           this.hideDialog();
-          // this.getClients();
+          this.getClients.emit();
         },
         error: (res: any) => {
           this.messageService.add({
@@ -126,8 +128,6 @@ export class SaveEditClientComponent {
       });
     }
   }
-
-
 
   getBairroByCpf() {
     const formValue = this.clientRegisterForm.value;
@@ -184,5 +184,9 @@ export class SaveEditClientComponent {
     const statusControl = this.clientRegisterForm.get('status');
 
     statusControl?.setValue(cliente.status === 'I' ? true : false);
+  }
+
+  resetarFormulario(){
+    this.clientRegisterForm.reset();
   }
 }

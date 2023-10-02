@@ -1,17 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClientesService } from './clientes.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ClientEditDTO, ClientRegisterDTO, ClienteGetDTO, VeiculosCliente } from './DTO/clientesDTO';
+import { ClientEditDTO, ClienteGetDTO, VeiculosCliente } from './DTO/clientesDTO';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Message } from 'primeng/api';
-import {
-  removerCaracteresCPF_CNPJ,
-  MaskUtils,
-} from '../../utils/Cpf_Cnpj_Validations';
+import { MaskUtils } from '../../utils/Cpf_Cnpj_Validations';
 import { CepService } from 'src/app/services/cep.service';
 import { Table } from 'primeng/table';
 import { CarrosService } from './carros.service';
 import { GetTypeCarDTO, postCarClientDTO } from './DTO/carrosDTO';
+import { SaveEditClientComponent } from './dialogs/save-edit-client/save-edit-client.component';
 
 @Component({
   selector: 'app-clientes',
@@ -22,6 +20,7 @@ import { GetTypeCarDTO, postCarClientDTO } from './DTO/carrosDTO';
 export class ClientesComponent implements OnInit {
   
   @ViewChild('dt') dt: Table | undefined;
+  @ViewChild('SaveEditClientComponent') SaveEditClientComponent: SaveEditClientComponent | undefined;
 
   position:         string = 'center';
   clients:          ClienteGetDTO[] = [];
@@ -149,7 +148,7 @@ export class ClientesComponent implements OnInit {
 
   /*******************DIALOG********************/
   openNew() {
-    this.clientRegisterForm.reset();
+    this.SaveEditClientComponent?.resetarFormulario();
     this.saveMode     = true
     this.editMode     = false
     this.clientDialog = true;
@@ -161,18 +160,7 @@ export class ClientesComponent implements OnInit {
 
 
   editClientModal(cliente: ClientEditDTO) {
-    this.cd_cliente    = cliente.cd_cliente
-    this.editMode      = true;
-    this.saveMode      = false
-    this.clientDialog  = true;
-    this.clientRegisterForm.get('nm_cliente')?.setValue(cliente.nm_cliente);
-    this.clientRegisterForm.get('cpf_cnpj')?.setValue(cliente.cpf_cnpj);
-    this.clientRegisterForm.get('cep')?.setValue(cliente.cep);
-    this.clientRegisterForm.get('bairro')?.setValue(cliente.bairro);
-    this.clientRegisterForm.get('nr_casa')?.setValue(cliente.nr_casa); 
-    const statusControl = this.clientRegisterForm.get('status');
-
-    statusControl?.setValue(cliente.status === 'I' ? true : false);
+    this.SaveEditClientComponent?.editClientModal(cliente)
   }
 
   carClientModal(position: string, cliente:ClienteGetDTO){
