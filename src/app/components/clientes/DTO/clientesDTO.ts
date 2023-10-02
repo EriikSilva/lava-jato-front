@@ -4,6 +4,8 @@ export interface ClientRegisterDTO {
     cep:        string;
     bairro:     string;
     nr_casa:    string;
+    telefone1:  string;
+    telefone2:  string;
 }
 
 export interface ClientEditDTO {

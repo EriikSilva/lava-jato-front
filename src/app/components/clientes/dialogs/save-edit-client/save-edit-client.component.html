@@ -36,6 +36,31 @@
         />
       </div>
       <div class="field">
+        <label for="telefone1">Telefone: </label>
+        <span class="danger"> * </span>
+        <input
+          pInputText
+          pKeyFilter="int"
+          maxlength="15"
+          formControlName="telefone1"
+          id="telefone1"
+          required
+          autofocus
+        />
+      </div>
+
+      <div class="field">
+        <label for="telefone2">Telefone 2: </label>
+        <input
+          pInputText
+          pKeyFilter="int"
+          maxlength="15"
+          formControlName="telefone2"
+          id="telefone2"
+          autofocus
+        />
+      </div>
+      <div class="field">
         <label for="cep">CEP:</label>
         <span class="danger"> * </span>
         <input

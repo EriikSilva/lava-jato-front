@@ -35,6 +35,8 @@ export class SaveEditClientComponent {
     cep:               new FormControl('', [Validators.required, Validators.maxLength(8)]),
     bairro:            new FormControl('', Validators.required),
     nr_casa:           new FormControl('', Validators.required),
+    telefone1:         new FormControl(undefined, Validators.required),
+    telefone2:          new FormControl(undefined, Validators.required),
     status:            new FormControl(false)
   });
 
@@ -49,6 +51,8 @@ export class SaveEditClientComponent {
       const cep               = formValue.cep || '';
       const bairro            = formValue.bairro || '';
       const nr_casa           = formValue.nr_casa || '';
+      const telefone1         = formValue.telefone1 || "";
+      const telefone2         = formValue.telefone2 || "";
   
       const bodyRegistro: ClientRegisterDTO = {
         nm_cliente,
@@ -56,6 +60,8 @@ export class SaveEditClientComponent {
         cep,
         bairro,
         nr_casa,
+        telefone1,
+        telefone2
       };
   
       this.clientsService.postClients(bodyRegistro)
