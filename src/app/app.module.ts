@@ -48,6 +48,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/AuthInterceptor';
 import { SaveEditClientComponent } from './components/clientes/dialogs/save-edit-client/save-edit-client.component';
 import { NewCarComponent } from './components/clientes/dialogs/new-car/new-car.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { NewCarComponent } from './components/clientes/dialogs/new-car/new-car.c
     NumericInputDirective,
     SaveEditClientComponent,
     NewCarComponent,
+    PerfilComponent,
   ],
   imports: [
     BrowserAnimationsModule,
