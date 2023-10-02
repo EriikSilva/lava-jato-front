@@ -277,12 +277,12 @@ styleClass="p-fluid"
 <!-- DIALOG DE EDITAR E CRIAR CLIENTE -->
 <app-save-edit-client
 #SaveEditClientComponent
+(getClients)="getClients()"
+(dialogClosed)="onDialogClosed()"
 [cd_cliente]="cd_cliente"
 [clientDialog]="clientDialog"
-(dialogClosed)="onDialogClosed()"
 [saveMode]="saveMode"
 [editMode]="editMode"
-(getClients)="getClients()"
 ></app-save-edit-client>
 
 <!-- TOAST -->
