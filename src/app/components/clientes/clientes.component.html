@@ -274,140 +274,16 @@ styleClass="p-fluid"
   </p-table>
 </p-dialog>
 
+
+<!-- DIALOG DE EDITAR E CRIAR CLIENTE -->
 <app-save-edit-client
 [cd_cliente]="cd_cliente"
 [clientDialog]="clientDialog"
 (dialogClosed)="onDialogClosed()"
+[saveMode]="saveMode"
+[editMode]="editMode"
+(eventoFilho)="getClients()"
 ></app-save-edit-client>
-
-<!-- <p-dialog
-  [(visible)]="clientDialog"
-  [style]="{ width: '450px' }"
-  [header]="saveMode ? 'Novo Cliente' : editMode ? 'Editar Cliente' : ''"
-  [modal]="true"
-  styleClass="p-fluid"
->
-  <ng-template pTemplate="content">
-    <form [formGroup]="clientRegisterForm">
-      <div class="field">
-        <label for="nome">Nome:</label>
-        <span class="danger"> * </span>
-        <input
-          type="text"
-          pInputText
-          maxlength="50"
-          formControlName="nm_cliente"
-          id="nome"
-          required
-          autofocus
-        />
-      </div>
-      <div class="field">
-        <label for="cpf_cnpj">CPF ou CNPJ:</label>
-        <span class="danger"> * </span>
-        <input
-          type="text"
-          cpf-cnpj-mask
-          pInputText
-          maxlength="18"
-          formControlName="cpf_cnpj"
-          id="cpf_cnpj"
-          required
-          autofocus
-        />
-      </div>
-      <div class="field">
-        <label for="cep">CEP:</label>
-        <span class="danger"> * </span>
-        <input
-          type="text"
-          pInputText
-          pKeyFilter="int"
-          (blur)="getBairroByCpf()"
-          maxlength="8"
-          formControlName="cep"
-          id="cep"
-          required
-          autofocus
-        />
-      </div>
-      <div class="field">
-        <label for="bairro">Bairro:</label>
-        <span class="danger"> * </span>
-        <input
-          type="text"
-          pInputText
-          maxlength="70"
-          formControlName="bairro"
-          id="bairro"
-          required
-          autofocus
-        />
-      </div>
-      <div class="field">
-        <label for="nr_casa">Nrº da casa</label>
-        <span class="danger"> * </span>
-        <input
-          type="text"
-          pInputText
-          pKeyFilter="int"
-          maxlength="6"
-          formControlName="nr_casa"
-          id="nr_casa"
-          required
-          autofocus
-        />
-      </div>
-      <div
-        *ngIf="editMode"
-        class="field"
-        pTooltip="Clique para mudar o status"
-        tooltipPosition="top"
-      >
-        <label for="status">Status do Cliente</label>
-        <p-toggleButton
-          id="status"
-          formControlName="status"
-          onLabel="Inativo"
-          offLabel="Ativo"
-        >
-          ></p-toggleButton
-        >
-      </div>
-    </form>
-  </ng-template>
-
-  <ng-template pTemplate="footer">
-    <button
-      pButton
-      pRipple
-      label="Cancelar"
-      icon="pi pi-times"
-      class="p-button-text"
-      (click)="hideDialog()"
-    ></button>
-
-    <button
-      *ngIf="saveMode"
-      pButton
-      pRipple
-      label="Salvar"
-      icon="pi pi-check"
-      class="p-button-text"
-      (click)="saveClient()"
-    ></button>
-
-    <button
-      *ngIf="editMode"
-      pButton
-      pRipple
-      label="Editar"
-      icon="pi pi-pencil"
-      class="p-button-text"
-      (click)="editClient()"
-    ></button>
-  </ng-template>
-</p-dialog> -->
 
 <!-- TOAST -->
 <div class="card">

@@ -20,7 +20,7 @@ import { GetTypeCarDTO, postCarClientDTO } from './DTO/carrosDTO';
   providers: [MessageService, MaskUtils, ConfirmationService],
 })
 export class ClientesComponent implements OnInit {
-
+  
   @ViewChild('dt') dt: Table | undefined;
 
   position:         string = 'center';
@@ -68,7 +68,8 @@ export class ClientesComponent implements OnInit {
 
   /**********************REQUESTS GET, POST, EDIT, DELETE ***************************/
   getClients() {
-    this.clientsService.getClients().subscribe({
+    this.clientsService.getClients()
+    .subscribe({
       next: (res: any) => {
         const { data } = res;
         this.clients = data;
@@ -77,95 +78,6 @@ export class ClientesComponent implements OnInit {
         console.log(res.error.message);
       },
     });
-  }
-
-  saveClient() {
-    const formValue = this.clientRegisterForm.value;
-    const isValid   = this.validateAndShowMessage(formValue);
-
-    if(isValid){
-      const nm_cliente        = formValue.nm_cliente || '';
-      const cpf_cnpj          = formValue.cpf_cnpj || '';
-      const cpf_cnpjFormatado = removerCaracteresCPF_CNPJ(cpf_cnpj);
-      const cep               = formValue.cep || '';
-      const bairro            = formValue.bairro || '';
-      const nr_casa           = formValue.nr_casa || '';
-  
-      const bodyRegistro: ClientRegisterDTO = {
-        nm_cliente,
-        cpf_cnpj: cpf_cnpjFormatado,
-        cep,
-        bairro,
-        nr_casa,
-      };
-  
-      this.clientsService.postClients(bodyRegistro).subscribe({
-        next: (res: any) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Sucesso ao cadastrar',
-            detail: res.data.message,
-          });
-          this.clientRegisterForm.reset();
-          this.hideDialog();
-          this.getClients();
-        },
-        error: (res: any) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Erro ao cadastrar',
-            detail: res.error.data.message,
-          });
-        },
-      });
-    }
-  }
-
-  editClient(){
-    const formValue = this.clientRegisterForm.value;
-    const isValid   = this.validateAndShowMessage(formValue);
-
-    if(isValid){
-      const nm_cliente        = formValue.nm_cliente || '';
-      const cpf_cnpj          = formValue.cpf_cnpj || '';
-      const cpf_cnpjFormatado = removerCaracteresCPF_CNPJ(cpf_cnpj);
-      const cep               = formValue.cep || '';
-      const bairro            = formValue.bairro || '';
-      const nr_casa           = formValue.nr_casa || '';
-      const status            = formValue.status || '';
-  
-      const bodyEdit: ClientEditDTO = {
-        nm_cliente,
-        cd_cliente:this.cd_cliente,
-        status: status == true ? "I" : "A",
-        cpf_cnpj: cpf_cnpjFormatado,
-        cep,
-        bairro,
-        nr_casa,
-      };
-  
-     this.clientsService.editClient(bodyEdit)
-     .subscribe({
-        next: (res: any) => {
-          console.log('res', res)
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Edição',
-            detail: 'Sucesso ao Editar',
-          });
-          this.clientRegisterForm.reset();
-          this.hideDialog();
-          this.getClients();
-        },
-        error: (res: any) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Erro ao cadastrar',
-            detail: res.error.data.message,
-          });
-        },
-      });
-    }
   }
 
   deleteClient(cliente: { cd_cliente: number }) {
@@ -238,14 +150,11 @@ export class ClientesComponent implements OnInit {
   /*******************DIALOG********************/
   openNew() {
     this.clientRegisterForm.reset();
-    this.saveMode = true
-    this.editMode = false
+    this.saveMode     = true
+    this.editMode     = false
     this.clientDialog = true;
   }
 
-  hideDialog() {
-    this.clientDialog = false;
-  }
   hideNewCarDialog(){
     this.newCarDialog = false
   }
@@ -306,31 +215,6 @@ export class ClientesComponent implements OnInit {
     // delete this.clonedProducts[product.id as string];
     console.log('veiculos_clientes',veiculos_clientes)
   }
-
-
-  private validateAndShowMessage(formValue: any) {
-    if (this.clientRegisterForm.invalid) {
-      if (
-        formValue.cpf_cnpj?.length !== 14 &&
-        formValue.cpf_cnpj?.length !== 18
-      ) {
-        this.messageService.add({
-          severity: 'warn',
-          summary: 'Validação',
-          detail: 'Campo CPF/CNPJ Inválido',
-        });
-      } else {
-        this.messageService.add({
-          severity: 'warn',
-          summary: 'Validação',
-          detail: 'Preencha os Campos Obrigatórios',
-        });
-      }
-      return false; 
-    }
-    return true;
-  }
-  
 
   confirmDelete(event: Event, cliente: ClienteGetDTO) {
     this.confirmationService.confirm({

@@ -16,7 +16,11 @@ export class SaveEditClientComponent {
 
   @Input() cd_cliente: any;
   @Input() clientDialog: boolean = false;
+  @Input() saveMode: boolean     = false;
+  @Input() editMode: boolean     = false;
+
   @Output() dialogClosed = new EventEmitter<void>();
+  @Output() eventoFilho  = new EventEmitter<any>();
 
   constructor(
     private cepService:    CepService,
@@ -24,12 +28,7 @@ export class SaveEditClientComponent {
     private messageService:MessageService,
     ){}
 
-  // clientDialog:    boolean = false;
-  editMode:        boolean = false;
-  saveMode:        boolean = false
-
-
-  clientRegisterForm = new FormGroup({
+    clientRegisterForm = new FormGroup({
     nm_cliente:        new FormControl('', Validators.required,),
     cpf_cnpj:          new FormControl('', Validators.required),
     cep:               new FormControl('', [Validators.required, Validators.maxLength(8)]),
@@ -58,7 +57,8 @@ export class SaveEditClientComponent {
         nr_casa,
       };
   
-      this.clientsService.postClients(bodyRegistro).subscribe({
+      this.clientsService.postClients(bodyRegistro)
+      .subscribe({
         next: (res: any) => {
           this.messageService.add({
             severity: 'success',
@@ -67,7 +67,7 @@ export class SaveEditClientComponent {
           });
           this.clientRegisterForm.reset();
           this.hideDialog();
-          // this.getClients();
+          this.eventoFilho.emit();
         },
         error: (res: any) => {
           this.messageService.add({
@@ -165,10 +165,24 @@ export class SaveEditClientComponent {
 
   hideDialog() {
     this.clientDialog = false;
-    // this.dialogClosed.emit();
   }
 
   closeDialog() {
     this.dialogClosed.emit();
+  }
+
+  editClientModal(cliente: ClientEditDTO) {
+    this.cd_cliente    = cliente.cd_cliente
+    this.editMode      = true;
+    this.saveMode      = false
+    this.clientDialog  = true;
+    this.clientRegisterForm.get('nm_cliente')?.setValue(cliente.nm_cliente);
+    this.clientRegisterForm.get('cpf_cnpj')?.setValue(cliente.cpf_cnpj);
+    this.clientRegisterForm.get('cep')?.setValue(cliente.cep);
+    this.clientRegisterForm.get('bairro')?.setValue(cliente.bairro);
+    this.clientRegisterForm.get('nr_casa')?.setValue(cliente.nr_casa); 
+    const statusControl = this.clientRegisterForm.get('status');
+
+    statusControl?.setValue(cliente.status === 'I' ? true : false);
   }
 }
