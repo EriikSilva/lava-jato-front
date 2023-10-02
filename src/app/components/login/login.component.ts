@@ -47,7 +47,7 @@ export class LoginComponent {
 
     this.loginService.userLogin(bodyLogin).subscribe({
       next: (res: any) => {
-        const { token, user } = res.data;
+        const { token, user } = res;
         
         this.loginService.setToken(token)
         this.loginService.setUser(user)
