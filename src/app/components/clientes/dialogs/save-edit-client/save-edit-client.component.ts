@@ -16,11 +16,11 @@ export class SaveEditClientComponent {
 
   @Input() cd_cliente: any;
   @Input() clientDialog: boolean = false;
-  @Input() saveMode: boolean     = false;
-  @Input() editMode: boolean     = false;
+  @Input() saveMode:     boolean = false;
+  @Input() editMode:     boolean = false;
 
   @Output() dialogClosed = new EventEmitter<void>();
-  @Output() getClients  = new EventEmitter<any>();
+  @Output() getClients   = new EventEmitter<any>();
 
   constructor(
     private cepService:    CepService,
