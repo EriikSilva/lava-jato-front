@@ -12,8 +12,6 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { FrankensteinComponent } from './components/frankenstein/frankenstein.component';
 import { ServicosComponent } from './components/servicos/servicos.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
-import { EditSaveClienteDialogComponent } from './components/clientes/dialogs/edit-save-cliente.dialog/edit-save-cliente.dialog.component';
-import { CarClienteDialogComponent } from './components/clientes/dialogs/car-cliente.dialog/car-cliente.dialog.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -61,8 +59,6 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
     CapitalCasePipe,
     CpfCnpjMaskDirective,
     NumericInputDirective,
-    EditSaveClienteDialogComponent,
-    CarClienteDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
