@@ -26,6 +26,7 @@ export class SaveEditClientComponent {
     private cepService:    CepService,
     private clientsService:ClientesService,
     private messageService:MessageService,
+    private maskUtils:MaskUtils
     ){}
 
     clientRegisterForm = new FormGroup({
@@ -72,10 +73,11 @@ export class SaveEditClientComponent {
           this.getClients.emit();
         },
         error: (res: any) => {
+          const { error } = res.error
           this.messageService.add({
             severity: 'error',
             summary: 'Erro ao cadastrar',
-            detail: res.error.data.message,
+            detail: error,
           });
         },
       });
@@ -119,10 +121,11 @@ export class SaveEditClientComponent {
           this.getClients.emit();
         },
         error: (res: any) => {
+          const { error } = res.error
           this.messageService.add({
             severity: 'error',
             summary: 'Erro ao cadastrar',
-            detail: res.error.data.message,
+            detail: error,
           });
         },
       });
@@ -141,24 +144,23 @@ export class SaveEditClientComponent {
   }
 
   private validateAndShowMessage(formValue: any) {
+    if (
+      formValue.cpf_cnpj?.length !== 14 &&
+      formValue.cpf_cnpj?.length !== 18 
+    ) {
+      return this.messageService.add({
+        severity: 'warn',
+        summary: 'Validação',
+        detail: 'Campo CPF/CNPJ Inválido',
+      });
+    } 
+
     if (this.clientRegisterForm.invalid) {
-      if (
-        formValue.cpf_cnpj?.length !== 14 &&
-        formValue.cpf_cnpj?.length !== 18
-      ) {
-        this.messageService.add({
-          severity: 'warn',
-          summary: 'Validação',
-          detail: 'Campo CPF/CNPJ Inválido',
-        });
-      } else {
-        this.messageService.add({
+      return this.messageService.add({
           severity: 'warn',
           summary: 'Validação',
           detail: 'Preencha os Campos Obrigatórios',
         });
-      }
-      return false; 
     }
     return true;
   }
@@ -174,7 +176,7 @@ export class SaveEditClientComponent {
   editClientModal(cliente: ClientEditDTO) {
     this.cd_cliente    = cliente.cd_cliente
     this.clientRegisterForm.get('nm_cliente')?.setValue(cliente.nm_cliente);
-    this.clientRegisterForm.get('cpf_cnpj')?.setValue(cliente.cpf_cnpj);
+    this.clientRegisterForm.get('cpf_cnpj')?.setValue(this.formatCpfCnpj(cliente.cpf_cnpj));
     this.clientRegisterForm.get('cep')?.setValue(cliente.cep);
     this.clientRegisterForm.get('bairro')?.setValue(cliente.bairro);
     this.clientRegisterForm.get('nr_casa')?.setValue(cliente.nr_casa); 
@@ -185,5 +187,9 @@ export class SaveEditClientComponent {
 
   resetarFormulario(){
     this.clientRegisterForm.reset();
+  }
+
+  formatCpfCnpj(value: string): string {
+    return this.maskUtils.formatCpfCnpj(value);
   }
 }
