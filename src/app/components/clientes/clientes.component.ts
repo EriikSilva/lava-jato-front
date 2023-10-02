@@ -362,4 +362,8 @@ export class ClientesComponent implements OnInit {
   applyFilterGlobal($event: any, stringVal: any) {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
+
+  onDialogClosed() {
+    this.clientDialog = false;
+  }
 }

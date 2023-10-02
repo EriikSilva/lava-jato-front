@@ -274,7 +274,13 @@ styleClass="p-fluid"
   </p-table>
 </p-dialog>
 
-<p-dialog
+<app-save-edit-client
+[cd_cliente]="cd_cliente"
+[clientDialog]="clientDialog"
+(dialogClosed)="onDialogClosed()"
+></app-save-edit-client>
+
+<!-- <p-dialog
   [(visible)]="clientDialog"
   [style]="{ width: '450px' }"
   [header]="saveMode ? 'Novo Cliente' : editMode ? 'Editar Cliente' : ''"
@@ -401,7 +407,7 @@ styleClass="p-fluid"
       (click)="editClient()"
     ></button>
   </ng-template>
-</p-dialog>
+</p-dialog> -->
 
 <!-- TOAST -->
 <div class="card">

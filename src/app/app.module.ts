@@ -46,6 +46,8 @@ import { DropdownModule } from 'primeng/dropdown';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/AuthInterceptor';
+import { SaveEditClientComponent } from './components/clientes/dialogs/save-edit-client/save-edit-client.component';
+import { TesteComponent } from './components/clientes/dialogs/teste/teste.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,8 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
     CapitalCasePipe,
     CpfCnpjMaskDirective,
     NumericInputDirective,
+    SaveEditClientComponent,
+    TesteComponent,
   ],
   imports: [
     BrowserAnimationsModule,
