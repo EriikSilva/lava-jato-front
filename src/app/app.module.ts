@@ -42,6 +42,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { DropdownModule } from 'primeng/dropdown';
+import { CardModule } from 'primeng/card';
+import { SkeletonModule } from 'primeng/skeleton';
 
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -93,7 +95,9 @@ import { CarDetailsComponent } from './components/clientes/dialogs/car-details/c
     TooltipModule,
     ToggleButtonModule,
     KeyFilterModule,
-    DropdownModule
+    DropdownModule,
+    CardModule,
+    SkeletonModule
   ],
   providers: [
     {
