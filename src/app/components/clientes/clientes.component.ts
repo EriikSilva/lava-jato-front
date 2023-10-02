@@ -166,20 +166,20 @@ export class ClientesComponent implements OnInit {
     this.CarDetailsComponent?.carClientModal(position, cliente)
   }
 
-  openDialogNewCar(){
-    this.newCarDialog = true;
+  // openDialogNewCar(){
+  //   this.newCarDialog = true;
 
-    this.carrosService.getTypeCar()
-    .subscribe({
-      next:(res: { data: GetTypeCarDTO}) =>{
-        const { data } = res
-        this.carsType = data
-      }, error:(error) => {
-        console.log('error', error)
-      }
-    })
+  //   this.carrosService.getTypeCar()
+  //   .subscribe({
+  //     next:(res: { data: GetTypeCarDTO}) =>{
+  //       const { data } = res
+  //       this.carsType = data
+  //     }, error:(error) => {
+  //       console.log('error', error)
+  //     }
+  //   })
 
-  }
+  // }
 
 
   //UTILS
