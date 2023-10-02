@@ -26,7 +26,7 @@ export class SaveEditClientComponent {
     private cepService:    CepService,
     private clientsService:ClientesService,
     private messageService:MessageService,
-    private maskUtils:MaskUtils
+    private maskUtils:     MaskUtils
     ){}
 
     clientRegisterForm = new FormGroup({
