@@ -161,10 +161,6 @@ export class ClientesComponent implements OnInit {
 
   carClientModal(position: string, cliente:ClienteGetDTO){
     const { cd_cliente } = cliente
-
-    // this.position        = position;
-    // this.carClientDialog = true
-    // this.clientsVehicles = veiculos_clientes
     this.cd_cliente      =  cd_cliente
 
     this.CarDetailsComponent?.carClientModal(position, cliente)
@@ -188,19 +184,6 @@ export class ClientesComponent implements OnInit {
 
   //UTILS
 
-  // onRowEditInit(veiculos_clientes: VeiculosCliente) {
-  //   this.clientsVehicles[veiculos_clientes.modelo as string] = { ...veiculos_clientes };
-  // }
-
-  // onRowEditSave(veiculos_clientes: VeiculosCliente) {
-    
-  // }
-
-  // onRowEditCancel(veiculos_clientes: VeiculosCliente, index: number) {
-  //   // this.veiculos_clientes[index] = this.veiculos_clientes[veiculos_clientes.placa as string];
-  //   // delete this.clonedProducts[product.id as string];
-  //   console.log('veiculos_clientes',veiculos_clientes)
-  // }
 
   confirmDelete(event: Event, cliente: ClienteGetDTO) {
     this.confirmationService.confirm({

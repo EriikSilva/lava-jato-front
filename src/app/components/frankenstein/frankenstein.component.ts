@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class FrankensteinComponent {
 
+
+  abrirDialog: boolean = false
+
+
+  openDialog(){
+    this.abrirDialog = true
+  }
+
+
 }
