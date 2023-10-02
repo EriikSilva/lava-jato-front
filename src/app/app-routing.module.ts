@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ServicosComponent } from './components/servicos/servicos.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { AuthGuard } from './components/guard/auth.guard';
+import { FrankensteinComponent } from './components/frankenstein/frankenstein.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: 'clientes',
     component: ClientesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'frankenstein',
+    component: FrankensteinComponent,
     canActivate: [AuthGuard]
   }
 ];
