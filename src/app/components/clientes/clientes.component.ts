@@ -160,6 +160,9 @@ export class ClientesComponent implements OnInit {
 
 
   editClientModal(cliente: ClientEditDTO) {
+    this.editMode      = true;
+    this.saveMode      = false
+    this.clientDialog  = true;
     this.SaveEditClientComponent?.editClientModal(cliente)
   }
 

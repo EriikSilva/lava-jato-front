@@ -173,9 +173,6 @@ export class SaveEditClientComponent {
 
   editClientModal(cliente: ClientEditDTO) {
     this.cd_cliente    = cliente.cd_cliente
-    this.editMode      = true;
-    this.saveMode      = false
-    this.clientDialog  = true;
     this.clientRegisterForm.get('nm_cliente')?.setValue(cliente.nm_cliente);
     this.clientRegisterForm.get('cpf_cnpj')?.setValue(cliente.cpf_cnpj);
     this.clientRegisterForm.get('cep')?.setValue(cliente.cep);
