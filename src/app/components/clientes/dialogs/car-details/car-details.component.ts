@@ -2,19 +2,24 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ClienteGetDTO, VeiculosCliente } from '../../DTO/clientesDTO';
 import { CarrosService } from '../../carros.service';
 import { GetTypeCarDTO } from '../../DTO/carrosDTO';
-
+import { ConfirmationService, Message, MessageService } from 'primeng/api';
 @Component({
   selector: 'app-car-details',
   templateUrl: './car-details.component.html',
   styleUrls: ['./car-details.component.scss'],
+  providers: [MessageService]
 })
 export class CarDetailsComponent implements OnInit{
 
-  constructor(private carrosService:CarrosService){}
+  constructor(
+    private carrosService:CarrosService,
+    private confirmationService: ConfirmationService
+  ){}
 
   @Input() carClientDialog: boolean = false;
   @Input() position: string = 'center';
   @Input() cd_cliente: any;
+  messages:         Message[] = [];
   carsType:any
 
   @Output() dialogClosed = new EventEmitter<void>();
@@ -60,6 +65,34 @@ export class CarDetailsComponent implements OnInit{
         console.log('error', error)
       }
     })
+  }
+
+
+  deleteCarClient(vehicle:any){
+    const { cd_veiculo } = vehicle
+    console.log('vehicle',vehicle)
+    this.carrosService.deleteClientCar(cd_veiculo)
+    .subscribe({
+      next: (res:any) => {
+        console.log('res', res)
+      }, error: (res:any) =>{
+        console.log('res', res)
+      }
+    })
+  }
+
+  confirmDelete(event: Event, vehicle:any) {
+    console.log('vehicle',vehicle)
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Deseja Excluir Este Carro?',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        this.deleteCarClient(vehicle);
+      },
+    });
   }
 
   onDialogClosed() {

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/app/environments/environment.development';
-import { VeiculosCliente } from './DTO/clientesDTO';
 import { Observable } from 'rxjs';
 import { deleteClientCarDTO, postCarClientDTO } from './DTO/carrosDTO';
 
@@ -31,5 +30,5 @@ export class CarrosService {
 
   getTypeCar():Observable<any>{
     return this.http.get(`${this.apiUrl}/veiculo/tipo`)
-  }
+  } 
 }
