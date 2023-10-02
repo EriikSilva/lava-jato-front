@@ -55,7 +55,7 @@ export class ClientesComponent implements OnInit {
   })
 
 
-  /**********************REQUESTS GET, POST, EDIT, DELETE ***************************/
+  /********************** REQUESTS ***************************/
   getClients() {
     this.clientsService.getClients()
     .subscribe({
@@ -91,6 +91,20 @@ export class ClientesComponent implements OnInit {
     });
   }
 
+  
+ confirmDelete(event: Event, cliente: ClienteGetDTO) {
+  this.confirmationService.confirm({
+    target: event.target as EventTarget,
+    message: 'Deseja Excluir Este Cliente?',
+    icon: 'pi pi-exclamation-triangle',
+    acceptLabel: 'Sim',
+    rejectLabel: 'Não',
+    accept: () => {
+      this.deleteClient(cliente);
+    },
+  });
+}
+
   /*******************DIALOG********************/
   openNew() {
     this.SaveEditClientComponent?.resetarFormulario();
@@ -98,11 +112,6 @@ export class ClientesComponent implements OnInit {
     this.editMode     = false
     this.clientDialog = true;
   }
-
-  hideNewCarDialog(){
-    this.newCarDialog = false
-  }
-
 
   editClientModal(cliente: ClientEditDTO) {
     this.editMode      = true;
@@ -118,24 +127,10 @@ export class ClientesComponent implements OnInit {
     this.CarDetailsComponent?.carClientModal(position, cliente)
   }
 
-
- confirmDelete(event: Event, cliente: ClienteGetDTO) {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      message: 'Deseja Excluir Este Cliente?',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Sim',
-      rejectLabel: 'Não',
-      accept: () => {
-        this.deleteClient(cliente);
-      },
-    });
-  }
-
   formatCpfCnpj(value: string): string {
     return this.maskUtils.formatCpfCnpj(value);
   }
-
+  
   applyFilterGlobal($event: any, stringVal: any) {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
