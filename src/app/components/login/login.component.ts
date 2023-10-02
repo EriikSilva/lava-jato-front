@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserLoginDTO, UserRegisterDTO } from './DTO/userDTO';
@@ -13,7 +13,7 @@ import { LoginService } from './login.service';
   styleUrls: ['./login.component.scss'],
   providers: [MessageService],
 })
-export class LoginComponent {
+export class LoginComponent  implements OnInit{
   messages: Message[] = [];
 
   constructor(
@@ -22,6 +22,10 @@ export class LoginComponent {
     private loginService: LoginService,
     private messageService: MessageService
   ) {}
+
+  ngOnInit(): void {
+    localStorage.removeItem("Authorization")
+  }
 
   userFormRegister = new FormGroup({
     nm_usuario: new FormControl('', Validators.required),
@@ -55,10 +59,11 @@ export class LoginComponent {
         this.router.navigate(['/dashboard']);
       },
       error: (res: any) => {
+        const { error } = res.error
         this.messageService.add({
           severity: 'error',
           summary: 'Erro',
-          detail: res.error.data.error,
+          detail: error,
         });
       },
     });
@@ -95,10 +100,11 @@ export class LoginComponent {
         this.userFormRegister.reset();
       },
       error: (res: any) => {
+        const { error } = res.error
         this.messageService.add({
           severity: 'error',
           summary: 'Erro',
-          detail: res.error.data.message,
+          detail: error,
         });
       },
     });
