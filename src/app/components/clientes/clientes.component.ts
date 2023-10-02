@@ -34,7 +34,7 @@ export class ClientesComponent implements OnInit {
   saveMode:        boolean = false
   clientDialog:    boolean = false;
   carClientDialog: boolean = false;
-  newCarDialog:    boolean = false
+  newCarDialog:    boolean = false;
 
   constructor(
     private clientsService:      ClientesService,
@@ -48,15 +48,6 @@ export class ClientesComponent implements OnInit {
   ngOnInit(): void {
     this.getClients();
   }
-
-  clientRegisterForm = new FormGroup({
-    nm_cliente:        new FormControl('', Validators.required,),
-    cpf_cnpj:          new FormControl('', Validators.required),
-    cep:               new FormControl('', [Validators.required, Validators.maxLength(8)]),
-    bairro:            new FormControl('', Validators.required),
-    nr_casa:           new FormControl('', Validators.required),
-    status:            new FormControl(false)
-  });
 
   newClientCarForm = new FormGroup({
     placa:           new FormControl('', Validators.required),
@@ -224,16 +215,6 @@ export class ClientesComponent implements OnInit {
     return this.maskUtils.formatCpfCnpj(value);
   }
 
-  getBairroByCpf() {
-    const formValue = this.clientRegisterForm.value;
-
-    if (formValue.cep?.length == 8) {
-      this.cepService.getEnderecoByCep(formValue.cep).subscribe((data) => {
-        this.clientRegisterForm.get('bairro')?.setValue(data.bairro);
-        formValue.bairro = data.bairro || '';
-      });
-    }
-  }
   applyFilterGlobal($event: any, stringVal: any) {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
