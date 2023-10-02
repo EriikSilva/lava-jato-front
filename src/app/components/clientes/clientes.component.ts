@@ -10,6 +10,7 @@ import { Table } from 'primeng/table';
 import { CarrosService } from './carros.service';
 import { GetTypeCarDTO, postCarClientDTO } from './DTO/carrosDTO';
 import { SaveEditClientComponent } from './dialogs/save-edit-client/save-edit-client.component';
+import { CarDetailsComponent } from './dialogs/car-details/car-details.component';
 
 @Component({
   selector: 'app-clientes',
@@ -21,6 +22,7 @@ export class ClientesComponent implements OnInit {
   
   @ViewChild('dt') dt: Table | undefined;
   @ViewChild('SaveEditClientComponent') SaveEditClientComponent: SaveEditClientComponent | undefined;
+  @ViewChild('CarDetailsComponent') CarDetailsComponent:CarDetailsComponent | undefined;
 
   position:         string = 'center';
   clients:          ClienteGetDTO[] = [];
@@ -158,12 +160,14 @@ export class ClientesComponent implements OnInit {
   }
 
   carClientModal(position: string, cliente:ClienteGetDTO){
-    const { veiculos_clientes, cd_cliente } = cliente
+    const { cd_cliente } = cliente
 
-    this.position        = position;
-    this.carClientDialog = true
-    this.clientsVehicles = veiculos_clientes
-    this.cd_cliente      = cd_cliente
+    // this.position        = position;
+    // this.carClientDialog = true
+    // this.clientsVehicles = veiculos_clientes
+    this.cd_cliente      =  cd_cliente
+
+    this.CarDetailsComponent?.carClientModal(position, cliente)
   }
 
   openDialogNewCar(){
@@ -184,19 +188,19 @@ export class ClientesComponent implements OnInit {
 
   //UTILS
 
-  onRowEditInit(veiculos_clientes: VeiculosCliente) {
-    this.clientsVehicles[veiculos_clientes.modelo as string] = { ...veiculos_clientes };
-  }
+  // onRowEditInit(veiculos_clientes: VeiculosCliente) {
+  //   this.clientsVehicles[veiculos_clientes.modelo as string] = { ...veiculos_clientes };
+  // }
 
-  onRowEditSave(veiculos_clientes: VeiculosCliente) {
+  // onRowEditSave(veiculos_clientes: VeiculosCliente) {
     
-  }
+  // }
 
-  onRowEditCancel(veiculos_clientes: VeiculosCliente, index: number) {
-    // this.veiculos_clientes[index] = this.veiculos_clientes[veiculos_clientes.placa as string];
-    // delete this.clonedProducts[product.id as string];
-    console.log('veiculos_clientes',veiculos_clientes)
-  }
+  // onRowEditCancel(veiculos_clientes: VeiculosCliente, index: number) {
+  //   // this.veiculos_clientes[index] = this.veiculos_clientes[veiculos_clientes.placa as string];
+  //   // delete this.clonedProducts[product.id as string];
+  //   console.log('veiculos_clientes',veiculos_clientes)
+  // }
 
   confirmDelete(event: Event, cliente: ClienteGetDTO) {
     this.confirmationService.confirm({
@@ -220,6 +224,7 @@ export class ClientesComponent implements OnInit {
   }
 
   onDialogClosed() {
-    this.clientDialog = false;
+    this.clientDialog    = false;
+    this.carClientDialog = false
   }
 }

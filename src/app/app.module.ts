@@ -49,6 +49,7 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
 import { SaveEditClientComponent } from './components/clientes/dialogs/save-edit-client/save-edit-client.component';
 import { NewCarComponent } from './components/clientes/dialogs/new-car/new-car.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { CarDetailsComponent } from './components/clientes/dialogs/car-details/car-details.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
     SaveEditClientComponent,
     NewCarComponent,
     PerfilComponent,
+    CarDetailsComponent,
   ],
   imports: [
     BrowserAnimationsModule,

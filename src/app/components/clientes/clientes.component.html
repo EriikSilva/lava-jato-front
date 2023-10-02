@@ -96,7 +96,7 @@
   </p-table>
 </div>
 <!-- DIALOGS -->
-<p-dialog 
+<!-- <p-dialog 
 header="Crie um Novo Carro" 
 [(visible)]="newCarDialog" 
 styleClass="p-fluid"
@@ -162,117 +162,7 @@ styleClass="p-fluid"
     (click)="saveNewClientCar()"
   ></button>
 </ng-template>
-</p-dialog>
-
-
-
-
-<p-dialog
-  header="Carros"
-  [(visible)]="carClientDialog"
-  [modal]="true"
-  [style]="{ width: '50vw' }"
-  [draggable]="false"
-  [resizable]="false"
-  [position]="position"
->
-  <p-table
-    [value]="clientsVehicles"
-    dataKey="id"
-    editMode="row"
-    [tableStyle]="{ width: '100%' }"
-  >
-    <ng-template pTemplate="header">
-      <button
-      pButton
-      pRipple
-      label="Novo"
-      icon="pi pi-plus"
-      class="p-button-success mr-2 mb-2"
-      (click)="openDialogNewCar()"
-      ></button> 
-      <tr>
-        <th style="width: 50%">Carro</th>
-        <th style="width: 50%">Placa</th>
-        <th style="width: 50%">Ações</th>
-      </tr>
-    </ng-template>
-    <ng-template
-      pTemplate="body"
-      let-vehicle
-      let-editing="editing"
-      let-ri="rowIndex"
-    >
-      <tr [pEditableRow]="vehicle">
-        <td>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input 
-              pInputText 
-              type="text"
-              [(ngModel)]="vehicle.modelo" />
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ vehicle.modelo }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input
-                pInputText
-                type="text"
-                [(ngModel)]="vehicle.placa"
-                required
-              />
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ vehicle.placa }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td>
-          <div class="flex align-items-center justify-content-center gap-2">
-            <button
-              *ngIf="!editing"
-              pButton
-              pRipple
-              type="button"
-              pInitEditableRow
-              icon="pi pi-pencil"
-              (click)="onRowEditInit(vehicle)"
-              class="p-button-rounded p-button-text"
-            ></button>
-
-            <button
-              *ngIf="editing"
-              pButton
-              pRipple
-              type="button"
-              pSaveEditableRow
-              icon="pi pi-check"
-              (click)="onRowEditSave(vehicle)"
-              class="p-button-rounded p-button-text p-button-success mr-2"
-            ></button>
-
-            <button
-              *ngIf="editing"
-              pButton
-              pRipple
-              type="button"
-              pCancelEditableRow
-              icon="pi pi-times"
-              (click)="onRowEditCancel(vehicle, ri)"
-              class="p-button-rounded p-button-text p-button-danger"
-            ></button>
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
-</p-dialog>
-
+</p-dialog> -->
 
 <!-- DIALOG DE EDITAR E CRIAR CLIENTE -->
 <app-save-edit-client
@@ -284,6 +174,13 @@ styleClass="p-fluid"
 [saveMode]="saveMode"
 [editMode]="editMode"
 ></app-save-edit-client>
+
+<app-car-details
+#CarDetailsComponent
+[carClientDialog]="carClientDialog"
+(dialogClosed)="onDialogClosed()"
+[position]="position"
+></app-car-details>
 
 <!-- TOAST -->
 <div class="card">
