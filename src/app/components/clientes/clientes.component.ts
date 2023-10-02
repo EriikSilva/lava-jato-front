@@ -6,8 +6,6 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 import { Message } from 'primeng/api';
 import { MaskUtils } from '../../utils/Cpf_Cnpj_Validations';
 import { Table } from 'primeng/table';
-import { CarrosService } from './carros.service';
-import { postCarClientDTO } from './DTO/carrosDTO';
 import { SaveEditClientComponent } from './dialogs/save-edit-client/save-edit-client.component';
 import { CarDetailsComponent } from './dialogs/car-details/car-details.component';
 
