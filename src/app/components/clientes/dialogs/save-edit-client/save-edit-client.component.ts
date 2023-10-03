@@ -4,7 +4,7 @@ import { CepService } from 'src/app/services/cep.service';
 import { ClientesService } from '../../clientes.service';
 import { ClientEditDTO, ClientRegisterDTO } from '../../DTO/clientesDTO';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { MaskUtils, removerCaracteresCPF_CNPJ } from 'src/app/utils/Cpf_Cnpj_Validations';
+import { MaskUtils, removerCaracteresCPF_CNPJ, removeCaracteresTelefone } from 'src/app/utils/Cpf_Cnpj_Validations';
 
 @Component({
   selector: 'app-save-edit-client',
@@ -53,6 +53,9 @@ export class SaveEditClientComponent {
       const nr_casa           = formValue.nr_casa || '';
       const telefone1         = formValue.telefone1 || "";
       const telefone2         = formValue.telefone2 || "";
+
+      const telefone1Formatado = removeCaracteresTelefone(telefone1)
+      const telefone2Formatado = removeCaracteresTelefone(telefone2)
   
       const bodyRegistro: ClientRegisterDTO = {
         nm_cliente,
@@ -60,10 +63,11 @@ export class SaveEditClientComponent {
         cep,
         bairro,
         nr_casa,
-        telefone1,
-        telefone2
-      };
-  
+        telefone1: telefone1Formatado,
+        telefone2: telefone2Formatado
+      }
+
+
       this.clientsService.postClients(bodyRegistro)
       .subscribe({
         next: (res: any) => {
@@ -105,6 +109,8 @@ export class SaveEditClientComponent {
       const telefone1         = formValue.telefone1 || '';
       const telefone2         = formValue.telefone2 || '';
 
+      const telefone1Formatado = removeCaracteresTelefone(telefone1)
+      const telefone2Formatado = removeCaracteresTelefone(telefone2)
   
       const bodyEdit: ClientEditDTO = {
         nm_cliente,
@@ -114,8 +120,8 @@ export class SaveEditClientComponent {
         cep,
         bairro,
         nr_casa,
-        telefone1,
-        telefone2
+        telefone1: telefone1Formatado,
+        telefone2: telefone2Formatado
       };
   
      this.clientsService.editClient(bodyEdit)

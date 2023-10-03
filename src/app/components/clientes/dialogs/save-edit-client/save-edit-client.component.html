@@ -36,7 +36,7 @@
         />
       </div>
       <div class="field">
-        <label for="telefone1">Telefone: </label>
+        <!-- <label for="telefone1">Telefone: </label>
         <span class="danger"> * </span>
         <input
           pInputText
@@ -46,19 +46,36 @@
           id="telefone1"
           required
           autofocus
-        />
+        /> -->
+        <label for="telefone1">Telefone: </label>
+        <span class="danger"> * </span>
+        <p-inputMask 
+        id="telefone1"
+        mask="(99) 99999-9999" 
+        placeholder="(99) 99999-9999"
+        formControlName="telefone1"
+        autofocus
+        ></p-inputMask>
+
       </div>
 
       <div class="field">
-        <label for="telefone2">Telefone 2: </label>
-        <input
+        <!-- <input
           pInputText
           pKeyFilter="int"
           maxlength="15"
           formControlName="telefone2"
           id="telefone2"
           autofocus
-        />
+        /> -->
+        <label for="telefone2">Telefone (Opcional): </label>
+        <p-inputMask 
+        id="telefone2"
+        mask="(99) 99999-9999" 
+        placeholder="(99) 99999-9999"
+        formControlName="telefone2"
+        autofocus
+        ></p-inputMask>
       </div>
       <div class="field">
         <label for="cep">CEP:</label>
