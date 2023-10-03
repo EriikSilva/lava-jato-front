@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClientesService } from './clientes.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ClientEditDTO, ClienteGetDTO, VeiculosCliente } from './DTO/clientesDTO';
+import { ClientEditDTO, ClienteDeleteDTO, ClienteGetDTO, VeiculosCliente } from './DTO/clientesDTO';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Message } from 'primeng/api';
 import { MaskUtils } from '../../utils/Cpf_Cnpj_Validations';
@@ -67,9 +67,9 @@ export class ClientesComponent implements OnInit {
     });
   }
 
-  deleteClient(cliente: { cd_cliente: number }) {
+  deleteClient(cliente:ClienteDeleteDTO) {
     const { cd_cliente } = cliente;
-    this.clientsService.deleteClient({ cd_cliente }).subscribe({
+    this.clientsService.deleteClient(cd_cliente as any).subscribe({
       next: (res: any) => {
         this.messageService.add({
           severity: 'success',
@@ -132,6 +132,11 @@ export class ClientesComponent implements OnInit {
   applyFilterGlobal($event: any, stringVal: any) {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
+
+  getStatusClass(status: string): string {
+    return status === 'A' ? 'ativo' : 'inativo';
+  }
+  
 
   onDialogClosed() {
     this.clientDialog    = false;

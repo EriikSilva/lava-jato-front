@@ -26,9 +26,6 @@ export class ClientesService {
   }
 
   deleteClient(cd_cliente:ClienteDeleteDTO):Observable<ClienteDeleteDTO>{
-    const cd_cliente_p = {
-      body: cd_cliente 
-    };
-    return this.http.delete<ClienteDeleteDTO>(`${this.apiUrl}/cliente`, cd_cliente_p)
+    return this.http.delete<ClienteDeleteDTO>(`${this.apiUrl}/cliente/${cd_cliente}`)
   }
 }
