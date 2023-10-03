@@ -34,7 +34,10 @@ export class NewCarComponent {
 
   saveNewClientCar() {
     const formValue = this.newCarForm.value;
+    const isValid   = this.validateAndShowMessage(formValue);
 
+    if(isValid){
+      
     const modelo          = formValue.modelo || '';
     const placa           = formValue.placa || '';
     const cd_tipo_veiculo = formValue.cd_tipo_veiculo || '';
@@ -71,6 +74,7 @@ export class NewCarComponent {
         });
       },
     });
+    }
   }
 
   editClientCarInputs(veiculos_clientes: editClientCarDTO) {
@@ -88,48 +92,70 @@ export class NewCarComponent {
 
   editCarClient(){
     const formValue = this.newCarForm.value;
-
-    const modelo          = formValue.modelo || '';
-    const placa           = formValue.placa || '';
-    const cd_tipo_veiculo = formValue.cd_tipo_veiculo || '';
-
-    const toStringify       = JSON.stringify(cd_tipo_veiculo);
-    const toJson            = JSON.parse(toStringify);
-    const cd_tipo_veiculo_p = toJson.cd_tipo_veiculo;
-
-
-
-    const bodyEditClientCar: editClientCarDTO = {
-      modelo,
-      placa,
-      cd_tipo_veiculo: cd_tipo_veiculo_p,
-      cd_cliente: this.cd_cliente,
-      cd_veiculo:this.cd_veiculo_p
-    };
-
-    this.carrosService.editClientCar(bodyEditClientCar)
-    .subscribe({
-      next:(res:any) => {
-        const { message } = res 
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Sucesso',
-          detail: message,
-        });
-        this.closeDialog();
-        this.newCarForm.reset();
-        this.getCarByClient.emit();
-      }, error:(res:any) => {
-        const { error } = res.error 
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Erro ao Deletar',
-          detail: error,
-        });
-      }
-    })
-
+    const isValid   = this.validateAndShowMessage(formValue);
+    if(isValid){
+      const modelo          = formValue.modelo || '';
+      const placa           = formValue.placa || '';
+      const cd_tipo_veiculo = formValue.cd_tipo_veiculo || '';
+  
+      const toStringify       = JSON.stringify(cd_tipo_veiculo);
+      const toJson            = JSON.parse(toStringify);
+      const cd_tipo_veiculo_p = toJson.cd_tipo_veiculo;
+  
+  
+  
+      const bodyEditClientCar: editClientCarDTO = {
+        modelo,
+        placa,
+        cd_tipo_veiculo: cd_tipo_veiculo_p,
+        cd_cliente: this.cd_cliente,
+        cd_veiculo:this.cd_veiculo_p
+      };
+  
+      this.carrosService.editClientCar(bodyEditClientCar)
+      .subscribe({
+        next:(res:any) => {
+          const { message } = res 
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Sucesso',
+            detail: message,
+          });
+          this.closeDialog();
+          this.newCarForm.reset();
+          this.getCarByClient.emit();
+        }, error:(res:any) => {
+          const { error } = res.error 
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro ao Deletar',
+            detail: error,
+          });
+        }
+      })
+    }
   }
+
+
+  private validateAndShowMessage(formValue: any) {
+    if(formValue.placa.length < 6){
+      return this.messageService.add({
+        severity: 'warn',
+        summary: 'Validação',
+        detail: 'Minimo 6 Caracteres Para Campo Placa',
+      });
+    }
+
+    if (this.newCarForm.invalid) {
+      return this.messageService.add({
+          severity: 'warn',
+          summary: 'Validação',
+          detail: 'Preencha os Campos Obrigatórios',
+        });
+    }
+    return true;
+  }
+
 
   closeDialog() {
     this.newCarDialog = false;
