@@ -23,6 +23,9 @@ export class CarDetailsComponent implements OnInit{
   @Input() cd_cliente: any;
   
   @Output() dialogClosed = new EventEmitter<void>();
+
+  clonedData: { [s: string]: any } = {};
+
   
   
   messages:Message[] = [];
@@ -116,10 +119,8 @@ export class CarDetailsComponent implements OnInit{
     this.newCarDialog = false;
   }
 
-  onRowEditInit(veiculos_clientes: VeiculosCliente) {
-    this.clientsVehicles[veiculos_clientes.modelo as string] = {
-      ...veiculos_clientes,
-    };
+  onRowEditInit(veiculos_clientes:any) {
+    this.clonedData[this.cd_cliente] = { ...veiculos_clientes  };
   }
 
   onRowEditSave(veiculos_clientes: editClientCarDTO) {
@@ -153,10 +154,9 @@ export class CarDetailsComponent implements OnInit{
     })
   }
 
-  onRowEditCancel(veiculos_clientes: VeiculosCliente, index: number) {
-    // this.veiculos_clientes[index] = this.veiculos_clientes[veiculos_clientes.placa as string];
-    // delete this.clonedProducts[product.id as string];
-    console.log('veiculos_clientes', veiculos_clientes);
+  onRowEditCancel(veiculos_clientes: any, index: number) {
+    this.clientsVehicles[index] = this.clonedData[veiculos_clientes.cd_cliente as string];
+    delete this.clonedData[veiculos_clientes.cd_cliente as string];
   }
 
 
