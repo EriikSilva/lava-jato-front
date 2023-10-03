@@ -35,8 +35,8 @@ export class SaveEditClientComponent {
     cep:               new FormControl('', [Validators.required, Validators.maxLength(8)]),
     bairro:            new FormControl('', Validators.required),
     nr_casa:           new FormControl('', Validators.required),
-    telefone1:         new FormControl(undefined, Validators.required),
-    telefone2:          new FormControl(undefined, Validators.required),
+    telefone1:         new FormControl('', [Validators.required, Validators.minLength(11)]),
+    telefone2:         new FormControl(''),
     status:            new FormControl(false)
   });
 
@@ -82,7 +82,7 @@ export class SaveEditClientComponent {
           const { error } = res.error
           this.messageService.add({
             severity: 'error',
-            summary: 'Erro ao cadastrar',
+            summary:  'Erro ao cadastrar',
             detail: error,
           });
         },
@@ -102,6 +102,9 @@ export class SaveEditClientComponent {
       const bairro            = formValue.bairro || '';
       const nr_casa           = formValue.nr_casa || '';
       const status            = formValue.status || '';
+      const telefone1         = formValue.telefone1 || '';
+      const telefone2         = formValue.telefone2 || '';
+
   
       const bodyEdit: ClientEditDTO = {
         nm_cliente,
@@ -111,6 +114,8 @@ export class SaveEditClientComponent {
         cep,
         bairro,
         nr_casa,
+        telefone1,
+        telefone2
       };
   
      this.clientsService.editClient(bodyEdit)
@@ -130,7 +135,7 @@ export class SaveEditClientComponent {
           const { error } = res.error
           this.messageService.add({
             severity: 'error',
-            summary: 'Erro ao cadastrar',
+            summary: 'Erro ao Editar',
             detail: error,
           });
         },
@@ -183,6 +188,8 @@ export class SaveEditClientComponent {
     this.clientRegisterForm.get('cep')?.setValue(cliente.cep);
     this.clientRegisterForm.get('bairro')?.setValue(cliente.bairro);
     this.clientRegisterForm.get('nr_casa')?.setValue(cliente.nr_casa); 
+    this.clientRegisterForm.get('telefone1')?.setValue(cliente.telefone1); 
+    this.clientRegisterForm.get('telefone2')?.setValue(cliente.telefone2); 
     const statusControl = this.clientRegisterForm.get('status');
 
     statusControl?.setValue(cliente.status === 'I' ? true : false);
