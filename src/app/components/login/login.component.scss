@@ -1,25 +1,36 @@
-.animationSlide{
-    animation-duration: 3s;
-    animation-name: slidein;
+.tab_formatation{
+  margin-top: 20vh;
+  width: 39vh;
 }
 
-.img_ident{
-  height: 100vh; width: 55%; border-radius: 0 40px 40px 0
+.animationSlide {
+  animation-duration: 3s;
+  animation-name: slidein;
 }
 
-.card_setup{
+.img_ident {
+  height: 100vh;
+  width: 55%;
+  border-radius: 0 40px 40px 0;
+}
+
+.card_setup {
   margin-top: 30px;
-  margin-left: 20px
+  margin-left: 20px;
 }
 
 @keyframes slidein {
-    from {
-      margin-right: 55%;
-      width: 35%;
-    }
-  
-    to {
-      margin-left: 0%;
-      width: 55%;
-    }
+  from {
+    margin-right: 55%;
+    width: 35%;
   }
+
+  to {
+    margin-left: 0%;
+    width: 55%;
+  }
+}
+
+.meu-tabview {
+  width: 500px; 
+}

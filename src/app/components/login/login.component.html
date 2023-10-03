@@ -6,10 +6,10 @@
     />
 
     <div class="flex-grow-1 flex justify-content-center border-round">
-      <div style="margin-top: 20vh">
+      <div class="tab_formatation">
         <p-tabView>
           <!-- LOGIN -->
-          <p-tabPanel header="Login">
+          <p-tabPanel header="Fazer Login">
             <form [formGroup]="userFormLogin">
               <div class="flex align-items-center m-2">
                 <div class="card_setup">
@@ -43,7 +43,7 @@
                   <p-divider></p-divider>
                   <p-button
                     label="Login"
-                    [style]="{ width: '100%' }"
+                    [style]="{ width: '100%', 'margin-top': '0.6rem'}"
                     (onClick)="doLogin()"
                   ></p-button>
                 </div>
