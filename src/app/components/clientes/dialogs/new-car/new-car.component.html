@@ -2,7 +2,7 @@
   [(visible)]="newCarDialog"
   (onHide)="closeDialog()"
   [style]="{ width: '450px' }"
-  [header]="'Adcionar Novo Carro'"
+  [header]="saveMode ? 'Novo Carro' : 'Editar Carro'"
   [modal]="true"
   styleClass="p-fluid"
 >
@@ -58,13 +58,24 @@
   ></button>
 
     <button
+    *ngIf="saveMode"
     pButton
     pRipple
     label="Salvar"
     icon="pi pi-check"
     class="p-button-text"
     (click)="saveNewClientCar()"
+    ></button>
+    <button
+    *ngIf="editMode"
+    pButton
+    pRipple
+    label="Editar"
+    icon="pi pi-pencil"
+    class="p-button-text"
+    (click)="editCarClient()"
   ></button>
+
 </ng-template>
 </p-dialog>
 

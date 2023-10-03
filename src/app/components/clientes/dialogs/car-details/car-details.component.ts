@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ClienteGetDTO, VeiculosCliente } from '../../DTO/clientesDTO';
 import { CarrosService } from '../../carros.service';
 import { GetTypeCarDTO, editClientCarDTO } from '../../DTO/carrosDTO';
 import { ConfirmationService, Message, MessageService } from 'primeng/api';
+import { NewCarComponent } from '../new-car/new-car.component';
 
 @Component({
   selector: 'app-car-details',
@@ -11,6 +12,8 @@ import { ConfirmationService, Message, MessageService } from 'primeng/api';
   providers: [MessageService]
 })
 export class CarDetailsComponent implements OnInit{
+
+  @ViewChild('NewCarComponent') NewCarComponent: NewCarComponent | undefined;
 
   constructor(
     private carrosService:CarrosService,
@@ -24,8 +27,9 @@ export class CarDetailsComponent implements OnInit{
   
   @Output() dialogClosed = new EventEmitter<void>();
 
-  clonedData: { [s: string]: any } = {};
 
+  editMode:boolean = false;
+  saveMode:boolean = false
   
   
   messages:Message[] = [];
@@ -63,9 +67,8 @@ export class CarDetailsComponent implements OnInit{
     })
   }
 
-  openDialogNewCar() {
-    this.newCarDialog = true;
 
+  getTipoCarros(){
     this.carrosService.getTypeCar()
     .subscribe({
       next:(res: { data: GetTypeCarDTO}) =>{
@@ -119,47 +122,26 @@ export class CarDetailsComponent implements OnInit{
     this.newCarDialog = false;
   }
 
-  onRowEditInit(veiculos_clientes:any) {
-    this.clonedData[this.cd_cliente] = { ...veiculos_clientes  };
-  }
-
   onRowEditSave(veiculos_clientes: editClientCarDTO) {
-    const { cd_cliente, placa, modelo, cd_tipo_veiculo, cd_veiculo} = veiculos_clientes
-    const bodyEditClientCar: editClientCarDTO = {
-      cd_cliente,
-      placa,
-      modelo,
-      cd_tipo_veiculo,
-      cd_veiculo
-    }
-    this.carrosService.editClientCar(bodyEditClientCar)
-    .subscribe({
-      next:(res:any) => {
-        const { message } = res 
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Sucesso',
-          detail: message,
-        });
-        this.getCarByClient(cd_cliente)
-
-      }, error:(res:any) => {
-        const { error } = res.error 
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Erro ao Deletar',
-          detail: error,
-        });
-      }
-    })
+  
   }
 
-  onRowEditCancel(veiculos_clientes: any, index: number) {
-    this.clientsVehicles[index] = this.clonedData[veiculos_clientes.cd_cliente as string];
-    delete this.clonedData[veiculos_clientes.cd_cliente as string];
+  openDialogNewCar() {
+    this.newCarDialog = true;
+    this.saveMode = true;
+    this.editMode = false
+    this.getTipoCarros();
+   
   }
 
 
+  editClientCarInputs(veiculos_clientes:editClientCarDTO){
+    this.editMode = true;
+    this.saveMode = false
+    this.newCarDialog  = true
+    this.NewCarComponent?.editClientCarInputs(veiculos_clientes)
+    this.getTipoCarros();
+  }
 
   closeDialog() {
     this.dialogClosed.emit();
