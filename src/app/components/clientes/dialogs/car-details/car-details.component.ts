@@ -3,6 +3,7 @@ import { ClienteGetDTO, VeiculosCliente } from '../../DTO/clientesDTO';
 import { CarrosService } from '../../carros.service';
 import { GetTypeCarDTO } from '../../DTO/carrosDTO';
 import { ConfirmationService, Message, MessageService } from 'primeng/api';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-car-details',
   templateUrl: './car-details.component.html',
@@ -20,14 +21,15 @@ export class CarDetailsComponent implements OnInit{
   @Input() carClientDialog: boolean = false;
   @Input() position: string = 'center';
   @Input() cd_cliente: any;
-  messages:         Message[] = [];
-  carsType:any
-
+  
   @Output() dialogClosed = new EventEmitter<void>();
-
-
+  
+  
+  messages:Message[] = [];
+  carsType:any
   clientsVehicles?: Array<VeiculosCliente> | any;
   newCarDialog: boolean = false;
+  showNoDataMessage = false;
 
   ngOnInit(): void {
     this.getCarByClient(this.cd_cliente);
@@ -48,6 +50,8 @@ export class CarDetailsComponent implements OnInit{
       next:(res:any) => {
         const { data } = res
         this.clientsVehicles = data
+        this.showNoDataMessage = this.clientsVehicles.length === 0;
+        console.log('this.clientsVehiclesaa', this.clientsVehicles.length == 0) // true
       }, error(res: any) {
         console.log(res)
       },
@@ -82,10 +86,11 @@ export class CarDetailsComponent implements OnInit{
         });
         this.getCarByClient(this.cd_cliente)
       }, error: (res:any) =>{
+        const { error } = res.error
         this.messageService.add({
           severity: 'error',
           summary: 'Erro ao Deletar',
-          detail: res.message,
+          detail: error,
         });
       }
     })
@@ -122,6 +127,8 @@ export class CarDetailsComponent implements OnInit{
     // delete this.clonedProducts[product.id as string];
     console.log('veiculos_clientes', veiculos_clientes);
   }
+
+
 
   closeDialog() {
     this.dialogClosed.emit();

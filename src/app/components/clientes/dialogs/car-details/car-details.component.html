@@ -8,21 +8,24 @@
   [resizable]="false"
   [position]="position"
 >
+  <button
+  pButton
+  pRipple
+  label="Novo"
+  icon="pi pi-plus"
+  class="p-button-success mr-2 mb-2"
+  (click)="openDialogNewCar()"
+  ></button>
+
   <p-table
     [value]="clientsVehicles"
+    *ngIf="!showNoDataMessage"
     dataKey="id"
     editMode="row"
     [tableStyle]="{ width: '100%' }"
   >
     <ng-template pTemplate="header">
-      <button
-      pButton
-      pRipple
-      label="Novo"
-      icon="pi pi-plus"
-      class="p-button-success mr-2 mb-2"
-      (click)="openDialogNewCar()"
-      ></button> 
+ 
       <tr>
         <th style="width: 50%">Carro</th>
         <th style="width: 50%">Placa</th>
@@ -112,6 +115,10 @@
       </tr>
     </ng-template>
   </p-table>
+  <!-- MSG CASO NAO TENHA NADA -->
+  <div *ngIf="showNoDataMessage">
+    NAO TEM NADA (MOCKANDO)
+  </div>
 </p-dialog>
 
 <app-new-car
