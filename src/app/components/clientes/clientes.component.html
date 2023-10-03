@@ -1,14 +1,3 @@
-<div class="mt-5 ml-5">
-  <button
-    pButton
-    pRipple
-    label="Novo"
-    icon="pi pi-plus"
-    class="p-button-success mr-2 mt-3 mb-5"
-    (click)="openNew()"
-  ></button>
-</div>
-
 <!-- TABLE -->
 <div class="table_formatation">
   <p-table
@@ -26,7 +15,7 @@
   >
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
-        <h5 class="m-0">Clientes</h5>
+        <h2 class="m-0">CLIENTES</h2>
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
           <input
@@ -38,6 +27,16 @@
             placeholder="Procurar... "
           />
         </span>
+        <div>
+          <button
+            pButton
+            pRipple
+            label="Novo"
+            icon="pi pi-plus"
+            class="p-button-success"
+            (click)="openNew()"
+          ></button>
+        </div>
       </div>
     </ng-template>
     <!-- HEADER -->
