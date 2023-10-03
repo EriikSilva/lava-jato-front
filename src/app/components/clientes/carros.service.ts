@@ -18,10 +18,7 @@ export class CarrosService {
   } 
 
   deleteClientCar(cd_tipo_veiculo: deleteClientCarDTO){
-    const cd_tipo_veiculo_p = {
-      body: cd_tipo_veiculo 
-    };
-    return this.http.delete(`${this.apiUrl}/veiculo/cliente`, cd_tipo_veiculo_p)
+    return this.http.delete(`${this.apiUrl}/veiculo/cliente/${cd_tipo_veiculo}`)
   }
 
   getCarByClient(cd_cliente:string):Observable<any>{

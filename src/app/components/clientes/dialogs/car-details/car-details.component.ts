@@ -13,7 +13,8 @@ export class CarDetailsComponent implements OnInit{
 
   constructor(
     private carrosService:CarrosService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private messageService:MessageService,
   ){}
 
   @Input() carClientDialog: boolean = false;
@@ -70,13 +71,22 @@ export class CarDetailsComponent implements OnInit{
 
   deleteCarClient(vehicle:any){
     const { cd_veiculo } = vehicle
-    console.log('vehicle',vehicle)
+
     this.carrosService.deleteClientCar(cd_veiculo)
     .subscribe({
       next: (res:any) => {
-        console.log('res', res)
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: res.message,
+        });
+        this.getCarByClient(this.cd_cliente)
       }, error: (res:any) =>{
-        console.log('res', res)
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro ao Deletar',
+          detail: res.message,
+        });
       }
     })
   }
