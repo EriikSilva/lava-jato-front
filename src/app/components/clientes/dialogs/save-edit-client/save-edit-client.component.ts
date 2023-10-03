@@ -75,7 +75,7 @@ export class SaveEditClientComponent {
             detail: message,
           });
           this.clientRegisterForm.reset();
-          this.hideDialog();
+          this.closeDialog();
           this.getClients.emit();
         },
         error: (res: any) => {
@@ -123,7 +123,7 @@ export class SaveEditClientComponent {
             detail: 'Sucesso ao Editar',
           });
           this.clientRegisterForm.reset();
-          this.hideDialog();
+          this.closeDialog();
           this.getClients.emit();
         },
         error: (res: any) => {
@@ -171,11 +171,8 @@ export class SaveEditClientComponent {
     return true;
   }
 
-  hideDialog() {
-    this.clientDialog = false;
-  }
-
   closeDialog() {
+    this.clientDialog = false;
     this.dialogClosed.emit();
   }
 
