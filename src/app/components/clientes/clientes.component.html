@@ -46,11 +46,14 @@
         <th pSortableColumn="nm_cliente" style="min-width: 15rem">
           Nome <p-sortIcon field="nm_cliente"></p-sortIcon>
         </th>
-        <th pSortableColumn="cpf_cnpj">
+        <th>
           CPF/CNPJ <p-sortIcon field="cpf_cnpj"></p-sortIcon>
         </th>
-        <th pSortableColumn="bairro">
-          Bairro <p-sortIcon field="bairro"></p-sortIcon>
+        <th>
+          Bairro
+        </th>
+        <th>
+          Telefone
         </th>
         <th pSortableColumn="status" style="min-width: 10rem">
           Status <p-sortIcon field="status"></p-sortIcon>
@@ -59,12 +62,18 @@
       </tr>
     </ng-template>
     <!-- CONTENT -->
+
     <ng-template pTemplate="body" let-client let-expanded="expanded">
       <tr>
         <td>{{ client.nm_cliente | capitalCase }}</td>
         <td>{{ formatCpfCnpj(client.cpf_cnpj) }}</td>
         <td>{{ client.bairro | capitalCase }}</td>
-        <td>{{ client.status == "A" ? "ATIVO" : "INATIVO" }}</td>
+        <td>
+          <a target="_blank" [href]="'https://api.whatsapp.com/send?phone=' + client.telefone1">
+            {{ client.telefone1 | telefoneFormat }}
+          </a>
+        </td>
+        <td [ngClass]="getStatusClass(client.status)" >{{ client.status == "A" ? "ATIVO" : "INATIVO" }}</td>
         <td>
           <button
             pButton
