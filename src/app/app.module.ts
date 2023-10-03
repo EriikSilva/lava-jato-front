@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CapitalCasePipe } from './utils/CapitalCase';
 import { CpfCnpjMaskDirective } from './utils/Cpf_Cnpj_Validations'
 import { NumericInputDirective } from './utils/OnlyNumbersInput'; 
+import { TelefoneFormatPipe } from './utils/TelefonePipe';
 
 //PRIMENG
 import { DividerModule } from 'primeng/divider';
@@ -65,6 +66,7 @@ import { CarDetailsComponent } from './components/clientes/dialogs/car-details/c
     CapitalCasePipe,
     CpfCnpjMaskDirective,
     NumericInputDirective,
+    TelefoneFormatPipe,
     SaveEditClientComponent,
     NewCarComponent,
     PerfilComponent,
