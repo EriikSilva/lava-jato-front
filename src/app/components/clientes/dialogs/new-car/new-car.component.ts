@@ -156,6 +156,10 @@ export class NewCarComponent {
     return true;
   }
 
+  resetarFormulario(){
+    this.newCarForm.reset();
+  }
+
 
   closeDialog() {
     this.newCarDialog = false;

@@ -82,7 +82,7 @@ export class CarDetailsComponent implements OnInit{
 
 
   deleteCarClient(vehicle:any){
-    const { cd_veiculo } = vehicle
+    const { cd_veiculo, cd_cliente } = vehicle
 
     this.carrosService.deleteClientCar(cd_veiculo)
     .subscribe({
@@ -92,7 +92,7 @@ export class CarDetailsComponent implements OnInit{
           summary: 'Sucesso',
           detail: res.message,
         });
-        this.getCarByClient(this.cd_cliente)
+        this.getCarByClient(cd_cliente)
       }, error: (res:any) =>{
         const { error } = res.error
         this.messageService.add({
@@ -105,7 +105,6 @@ export class CarDetailsComponent implements OnInit{
   }
 
   confirmDelete(event: Event, vehicle:any) {
-    console.log('vehicle',vehicle)
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Deseja Excluir Este Carro?',
@@ -118,20 +117,12 @@ export class CarDetailsComponent implements OnInit{
     });
   }
 
-  onDialogClosed() {
-    this.newCarDialog = false;
-  }
-
-  onRowEditSave(veiculos_clientes: editClientCarDTO) {
-  
-  }
-
   openDialogNewCar() {
+    this.NewCarComponent?.resetarFormulario();
     this.newCarDialog = true;
     this.saveMode = true;
     this.editMode = false
     this.getTipoCarros();
-   
   }
 
 
@@ -145,5 +136,10 @@ export class CarDetailsComponent implements OnInit{
 
   closeDialog() {
     this.dialogClosed.emit();
+  }
+
+  
+  onDialogClosed() {
+    this.newCarDialog = false;
   }
 }
