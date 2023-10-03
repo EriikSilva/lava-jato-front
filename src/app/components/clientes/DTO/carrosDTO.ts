@@ -10,7 +10,7 @@ export interface editClientCarDTO {
     cd_cliente:      number;
     placa:           string;
     modelo:          string;
-    cd_tipo_veiculo: number;
+    cd_tipo_veiculo: string;
     cd_veiculo:      number;
 }
 

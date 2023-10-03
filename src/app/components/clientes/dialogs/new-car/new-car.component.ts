@@ -73,18 +73,17 @@ export class NewCarComponent {
     });
   }
 
-  aa(){
-    console.log('aa')
-  }
-
   editClientCarInputs(veiculos_clientes: editClientCarDTO) {
-    console.log('aaa', veiculos_clientes)
-    const { placa, modelo, cd_veiculo} = veiculos_clientes;
-    this.cd_veiculo_p = cd_veiculo
-    console.log('veiculos_clientesssss', veiculos_clientes);
+    const { placa, modelo, cd_veiculo, cd_tipo_veiculo} = veiculos_clientes;
+  
+     this.cd_veiculo_p = cd_veiculo
 
     this.newCarForm.get('placa')?.setValue(placa);
     this.newCarForm.get('modelo')?.setValue(modelo);
+    /*************************O erik do futuro vai resolver**************************************/
+    // this.newCarForm.get('cd_tipo_veiculo')?.setValue(cd_tipo_veiculo)
+
+
   }
 
   editCarClient(){
@@ -117,8 +116,9 @@ export class NewCarComponent {
           summary: 'Sucesso',
           detail: message,
         });
-        // this.getCarByClient(cd_cliente)
-
+        this.closeDialog();
+        this.newCarForm.reset();
+        this.getCarByClient.emit();
       }, error:(res:any) => {
         const { error } = res.error 
         this.messageService.add({
@@ -130,8 +130,6 @@ export class NewCarComponent {
     })
 
   }
-
-
 
   closeDialog() {
     this.newCarDialog = false;
