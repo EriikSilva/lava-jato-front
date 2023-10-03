@@ -18,13 +18,16 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const token = this.loginService.getToken();
+    const nm_usuario = this.loginService.getUser() || ""
     if (token) {
       request = request.clone({
         setHeaders: {
           Authorization: token,
+          nm_usuario:nm_usuario
         },
       });
     }
     return next.handle(request);
   }
+
 }
