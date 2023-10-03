@@ -42,6 +42,12 @@ export function removerCaracteresCPF_CNPJ(texto: string) {
   return texto.replace(/[./-]/g, '');
 }
 
+export function removeCaracteresTelefone(texto:string) {
+  // Use uma expressão regular para substituir todos os caracteres não numéricos por uma string vazia
+  const numericString = texto.replace(/\D/g, '');
+  return numericString;
+}
+
 export class MaskUtils {
   formatCpfCnpj(value: string): string {
     if (!value) return '';
