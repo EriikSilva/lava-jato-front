@@ -69,8 +69,8 @@
         <td>{{ formatCpfCnpj(client.cpf_cnpj) }}</td>
         <td>{{ client.bairro | capitalCase }}</td>
         <td>
-          <a target="_blank" [href]="'https://api.whatsapp.com/send?phone=' + client.telefone1 + '&text=Olá, aqui é da lava jato do brennon junior base teste'">
-            {{ client.telefone1 | telefoneFormat }}
+          <i class="pi pi-whatsapp" style="font-size: 1rem"></i> <a target="_blank" [href]="'https://api.whatsapp.com/send?phone=' + client.telefone1 + '&text=Olá, aqui é da lava jato do brennon junior base teste'">
+          {{ client.telefone1 | telefoneFormat }}
           </a>
         </td>
         <td [ngClass]="getStatusClass(client.status)" >{{ client.status == "A" ? "ATIVO" : "INATIVO" }}</td>
