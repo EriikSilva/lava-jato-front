@@ -182,17 +182,19 @@ export class SaveEditClientComponent {
   }
 
   editClientModal(cliente: ClientEditDTO) {
-    this.cd_cliente    = cliente.cd_cliente
-    this.clientRegisterForm.get('nm_cliente')?.setValue(cliente.nm_cliente);
-    this.clientRegisterForm.get('cpf_cnpj')?.setValue(this.formatCpfCnpj(cliente.cpf_cnpj));
-    this.clientRegisterForm.get('cep')?.setValue(cliente.cep);
-    this.clientRegisterForm.get('bairro')?.setValue(cliente.bairro);
-    this.clientRegisterForm.get('nr_casa')?.setValue(cliente.nr_casa); 
-    this.clientRegisterForm.get('telefone1')?.setValue(cliente.telefone1); 
-    this.clientRegisterForm.get('telefone2')?.setValue(cliente.telefone2); 
+    const { cd_cliente, nm_cliente, cpf_cnpj, cep, bairro, nr_casa, telefone1, telefone2, status} = cliente
+
+    this.cd_cliente    = cd_cliente
+    this.clientRegisterForm.get('nm_cliente')?.setValue(nm_cliente);
+    this.clientRegisterForm.get('cpf_cnpj')?.setValue(this.formatCpfCnpj(cpf_cnpj));
+    this.clientRegisterForm.get('cep')?.setValue(cep);
+    this.clientRegisterForm.get('bairro')?.setValue(bairro);
+    this.clientRegisterForm.get('nr_casa')?.setValue(nr_casa); 
+    this.clientRegisterForm.get('telefone1')?.setValue(telefone1); 
+    this.clientRegisterForm.get('telefone2')?.setValue(telefone2); 
     const statusControl = this.clientRegisterForm.get('status');
 
-    statusControl?.setValue(cliente.status === 'I' ? true : false);
+    statusControl?.setValue(status === 'I' ? true : false);
   }
 
   resetarFormulario(){
