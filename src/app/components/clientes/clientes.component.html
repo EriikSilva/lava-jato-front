@@ -69,7 +69,7 @@
         <td>{{ formatCpfCnpj(client.cpf_cnpj) }}</td>
         <td>{{ client.bairro | capitalCase }}</td>
         <td>
-          <a target="_blank" [href]="'https://api.whatsapp.com/send?phone=' + client.telefone1">
+          <a target="_blank" [href]="'https://api.whatsapp.com/send?phone=' + client.telefone1 + '&text=Olá, aqui é da lava jato do brennon junior base teste'">
             {{ client.telefone1 | telefoneFormat }}
           </a>
         </td>
