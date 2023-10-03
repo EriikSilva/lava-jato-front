@@ -9,12 +9,12 @@
   [position]="position"
 >
   <button
-  pButton
-  pRipple
-  label="Novo"
-  icon="pi pi-plus"
-  class="p-button-success mr-2 mb-2"
-  (click)="openDialogNewCar()"
+    pButton
+    pRipple
+    label="Novo"
+    icon="pi pi-plus"
+    class="p-button-success mr-2 mb-2"
+    (click)="openDialogNewCar()"
   ></button>
 
   <p-table
@@ -23,13 +23,14 @@
     dataKey="id"
     editMode="row"
     [tableStyle]="{ width: '100%' }"
+    class="flex align-items-center justify-content-between"
   >
     <ng-template pTemplate="header">
- 
       <tr>
-        <th style="width: 50%">Carro</th>
-        <th style="width: 50%">Placa</th>
-        <th style="width: 50%">Ações</th>
+        <th style="width: 220px">Carro</th>
+        <th style="width: 220px">Placa</th>
+        <th style="width: 220px">Descrição</th>
+        <th style="width: 220px">Ações</th>
       </tr>
     </ng-template>
     <ng-template
@@ -42,10 +43,12 @@
         <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input 
-              pInputText 
-              type="text"
-              [(ngModel)]="vehicle.modelo" />
+              <input
+                pInputText
+                type="text"
+                style="width: 180px"
+                [(ngModel)]="vehicle.modelo"
+              />
             </ng-template>
             <ng-template pTemplate="output">
               {{ vehicle.modelo }}
@@ -58,6 +61,7 @@
               <input
                 pInputText
                 type="text"
+                style="width: 180px"
                 [(ngModel)]="vehicle.placa"
                 required
               />
@@ -68,68 +72,76 @@
           </p-cellEditor>
         </td>
         <td>
-          <button
-          pButton
-          pRipple
-          icon="pi pi-trash"
-          class="p-button-rounded p-button-danger mr-2"
-          (click)="confirmDelete($event, vehicle)"
-        ></button>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                type="text"
+                style="width: 180px"
+                [(ngModel)]="vehicle.tipo_veiculos.descricao"
+                required
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ vehicle.tipo_veiculos.descricao }}
+            </ng-template>
+          </p-cellEditor>
         </td>
-        <!-- <td>
-          <div class="flex align-items-center justify-content-center gap-2">
-            <button
-              *ngIf="!editing"
-              pButton
-              pRipple
-              type="button"
-              pInitEditableRow
-              icon="pi pi-pencil"
-              (click)="onRowEditInit(vehicle)"
-              class="p-button-rounded p-button-text"
-            ></button>
-
-            <button
-              *ngIf="editing"
-              pButton
-              pRipple
-              type="button"
-              pSaveEditableRow
-              icon="pi pi-check"
-              (click)="onRowEditSave(vehicle)"
-              class="p-button-rounded p-button-text p-button-success mr-2"
-            ></button>
-
-            <button
-              *ngIf="editing"
-              pButton
-              pRipple
-              type="button"
-              pCancelEditableRow
-              icon="pi pi-times"
-              (click)="onRowEditCancel(vehicle, ri)"
-              class="p-button-rounded p-button-text p-button-danger"
-            ></button>
-          </div>
-        </td> -->
+        <td>
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            type="button"
+            pInitEditableRow
+            icon="pi pi-pencil"
+            (click)="onRowEditInit(vehicle)"
+            class="p-button-rounded p-button-text"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pSaveEditableRow
+            icon="pi pi-check"
+            (click)="onRowEditSave(vehicle)"
+            class="p-button-rounded p-button-text p-button-success mr-2"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pCancelEditableRow
+            icon="pi pi-times"
+            (click)="onRowEditCancel(vehicle, ri)"
+            class="p-button-rounded p-button-text p-button-danger"
+          ></button>
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-text mr-2"
+            (click)="confirmDelete($event, vehicle)"
+          ></button>
+        </td>
       </tr>
     </ng-template>
   </p-table>
   <!-- MSG CASO NAO TENHA NADA -->
-  <div *ngIf="showNoDataMessage">
-    NAO TEM NADA (MOCKANDO)
-  </div>
+  <div *ngIf="showNoDataMessage">NAO TEM NADA (MOCKANDO)</div>
 </p-dialog>
 
 <app-new-car
-[newCarDialog]="newCarDialog"
-(dialogClosed)="onDialogClosed()"
-(getCarByClient)="getCarByClient(cd_cliente)"
-[cd_cliente]="cd_cliente"
-[carsType]="carsType"
+  [newCarDialog]="newCarDialog"
+  (dialogClosed)="onDialogClosed()"
+  (getCarByClient)="getCarByClient(cd_cliente)"
+  [cd_cliente]="cd_cliente"
+  [carsType]="carsType"
 >
 </app-new-car>
-
 
 <div class="card">
   <p-toast></p-toast>

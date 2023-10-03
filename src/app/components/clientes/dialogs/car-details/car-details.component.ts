@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ClienteGetDTO, VeiculosCliente } from '../../DTO/clientesDTO';
 import { CarrosService } from '../../carros.service';
-import { GetTypeCarDTO } from '../../DTO/carrosDTO';
+import { GetTypeCarDTO, editClientCarDTO } from '../../DTO/carrosDTO';
 import { ConfirmationService, Message, MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-car-details',
   templateUrl: './car-details.component.html',
@@ -122,7 +122,36 @@ export class CarDetailsComponent implements OnInit{
     };
   }
 
-  onRowEditSave(veiculos_clientes: VeiculosCliente) {}
+  onRowEditSave(veiculos_clientes: editClientCarDTO) {
+    const { cd_cliente, placa, modelo, cd_tipo_veiculo, cd_veiculo} = veiculos_clientes
+    const bodyEditClientCar: editClientCarDTO = {
+      cd_cliente,
+      placa,
+      modelo,
+      cd_tipo_veiculo,
+      cd_veiculo
+    }
+    this.carrosService.editClientCar(bodyEditClientCar)
+    .subscribe({
+      next:(res:any) => {
+        const { message } = res 
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: message,
+        });
+        this.getCarByClient(cd_cliente)
+
+      }, error:(res:any) => {
+        const { error } = res.error 
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro ao Deletar',
+          detail: error,
+        });
+      }
+    })
+  }
 
   onRowEditCancel(veiculos_clientes: VeiculosCliente, index: number) {
     // this.veiculos_clientes[index] = this.veiculos_clientes[veiculos_clientes.placa as string];

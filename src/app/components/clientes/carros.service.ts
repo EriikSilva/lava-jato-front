@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/app/environments/environment.development';
 import { Observable } from 'rxjs';
-import { deleteClientCarDTO, postCarClientDTO } from './DTO/carrosDTO';
+import { editClientCarDTO, deleteClientCarDTO, postCarClientDTO } from './DTO/carrosDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,10 @@ export class CarrosService {
   postClientCar(body:postCarClientDTO):Observable<postCarClientDTO>{
     return this.http.post<postCarClientDTO>(`${this.apiUrl}/veiculo/cliente`, body)
   } 
+
+  editClientCar(body:editClientCarDTO): Observable<editClientCarDTO>{
+    return this.http.put<editClientCarDTO>(`${this.apiUrl}/veiculo/cliente`, body)
+  }
 
   deleteClientCar(cd_tipo_veiculo: deleteClientCarDTO){
     return this.http.delete(`${this.apiUrl}/veiculo/cliente/${cd_tipo_veiculo}`)
