@@ -51,9 +51,11 @@ export class CarDetailsComponent implements OnInit{
         const { data } = res
         this.clientsVehicles = data
         this.showNoDataMessage = this.clientsVehicles.length === 0;
-        console.log('this.clientsVehiclesaa', this.clientsVehicles.length == 0) // true
-      }, error(res: any) {
-        console.log(res)
+      },
+      error: (res: any) => {
+        this.clientsVehicles = [];
+        this.showNoDataMessage = this.clientsVehicles.length === 0;
+        console.log('erro', res)
       },
     })
   }
