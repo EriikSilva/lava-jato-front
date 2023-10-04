@@ -43,6 +43,7 @@
                   <p-divider></p-divider>
                   <p-button
                     label="Login"
+                    [loading]="buttonLoading" 
                     [style]="{ width: '100%', 'margin-top': '0.6rem'}"
                     (onClick)="doLogin()"
                   ></p-button>
@@ -127,6 +128,7 @@
 
                 <p-divider></p-divider>
                 <p-button
+                  [loading]="buttonLoading" 
                   label="Registrar"
                   [style]="{ width: '100%' }"
                   (onClick)="registerUser()"
@@ -134,10 +136,6 @@
               </div>
             </form>
           </p-tabPanel>
-          <!-- <p-tabPanel header="Versão">
-            <h1>Versão 1.0</h1>
-            <h3>Todos os direitos reservados</h3>
-          </p-tabPanel> -->
         </p-tabView>
       </div>
     </div>

@@ -15,6 +15,7 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent  implements OnInit{
   messages: Message[] = [];
+  buttonLoading: boolean = false;
 
   constructor(
     private router: Router,
@@ -39,6 +40,8 @@ export class LoginComponent  implements OnInit{
   });
 
   doLogin() {
+    this.buttonLoading = true;
+
     const formValue = this.userFormLogin.value;
 
     const email = formValue.email || '';
@@ -52,6 +55,7 @@ export class LoginComponent  implements OnInit{
     this.loginService.userLogin(bodyLogin).subscribe({
       next: (res: any) => {
         const { token, user } = res;
+        this.buttonLoading = false
         
         this.loginService.setToken(token)
         this.loginService.setUser(user)
@@ -59,6 +63,7 @@ export class LoginComponent  implements OnInit{
         this.router.navigate(['/dashboard']);
       },
       error: (res: any) => {
+        this.buttonLoading = false
         const { error } = res.error
         this.messageService.add({
           severity: 'error',
@@ -69,7 +74,9 @@ export class LoginComponent  implements OnInit{
     });
   }
   registerUser() {
+    this.buttonLoading = true;
     if (this.userFormRegister.invalid) {
+      this.buttonLoading = false;
       this.messageService.add({
         severity: 'warn',
         summary: 'Validação',
@@ -98,10 +105,12 @@ export class LoginComponent  implements OnInit{
           summary: 'Sucesso',
           detail: message,
         })
+        this.buttonLoading = false;
         this.userFormRegister.reset();
       },
       error: (res: any) => {
         const { error } = res.error
+        this.buttonLoading = false;
         this.messageService.add({
           severity: 'error',
           summary: 'Erro',
