@@ -1,0 +1,22 @@
+.msg_not_found{
+   margin-left: 11rem;
+}
+
+.message {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    font-size: 24px;
+    margin-left: 12rem;
+    color: #ffffff;
+    animation: blink 1s infinite alternate;
+}
+
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

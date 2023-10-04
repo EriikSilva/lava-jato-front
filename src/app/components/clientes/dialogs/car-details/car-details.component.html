@@ -62,7 +62,13 @@
     </ng-template>
   </p-table>
   <!-- MSG CASO NAO TENHA NADA -->
-  <div *ngIf="showNoDataMessage">NAO TEM NADA (MOCKANDO)</div>
+  <div  *ngIf="showNoDataMessage">
+    <!-- <img class="msg_not_found" src="../../../../../assets/404_not_found.png"> 
+    <br> -->
+    <span class="message">
+       DADOS NÃO ENCONTRADOS 
+      </span>
+  </div>
 </p-dialog>
 
 <app-new-car
