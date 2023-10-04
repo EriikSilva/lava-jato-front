@@ -64,7 +64,7 @@ export class ClientesComponent implements OnInit {
         this.clients = data;
         setTimeout(() => {
           this.requisicaoCompleta = true
-        }, 500)
+        }, 200)
       },
       error(res: any) {
         console.log(res.error.message);
