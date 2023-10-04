@@ -65,18 +65,37 @@
 
     <ng-template pTemplate="body" let-client let-expanded="expanded">
       <tr>
-        <td>{{ client.nm_cliente | capitalCase }}</td>
-        <td>{{ formatCpfCnpj(client.cpf_cnpj) }}</td>
-        <td>{{ client.bairro | capitalCase }}</td>
         <td>
-          <i class="pi pi-whatsapp" style="font-size: 1rem"></i> 
-          <a target="_blank" [href]="'https://api.whatsapp.com/send?phone=' + client.telefone1 + '&text=Olá, aqui é da lava jato'">
-          {{ client.telefone1 | telefoneFormat }}
-          </a>
+          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+            {{ client.nm_cliente | capitalCase }}
+          </ng-container>
         </td>
-        <td [ngClass]="getStatusClass(client.status)" >{{ client.status == "A" ? "ATIVO" : "INATIVO" }}</td>
         <td>
-          <button
+          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+            {{ formatCpfCnpj(client.cpf_cnpj) }}
+          </ng-container>
+        </td>
+        <td>
+          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+            {{ client.bairro | capitalCase }}
+          </ng-container>
+        </td>
+        <td>
+          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+            <i class="pi pi-whatsapp" style="font-size: 1rem"></i> 
+            <a target="_blank" [href]="'https://api.whatsapp.com/send?phone=' + client.telefone1 + '&text=Olá, aqui é da lava jato'">
+            {{ client.telefone1 | telefoneFormat }}
+            </a>
+          </ng-container>
+        </td>
+        <td  [ngClass]="getStatusClass(client.status)">
+          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+            {{ client.status == "A" ? "ATIVO" : "INATIVO" }}
+          </ng-container>
+        </td>
+        <td>
+          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+            <button
             pButton
             pRipple
             icon="pi pi-car"
@@ -99,6 +118,11 @@
             class="p-button-rounded p-button-danger mr-2"
             (click)="confirmDelete($event, client)"
           ></button>
+          </ng-container>
+          <ng-template #skeleton>
+            <!-- Conteúdo de esqueleto para os botões -->
+            <p-skeleton></p-skeleton>
+          </ng-template>
         </td>
       </tr>
     </ng-template>

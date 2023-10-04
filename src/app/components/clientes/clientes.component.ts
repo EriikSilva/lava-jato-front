@@ -34,6 +34,7 @@ export class ClientesComponent implements OnInit {
   clientDialog:    boolean = false;
   carClientDialog: boolean = false;
   newCarDialog:    boolean = false;
+  requisicaoCompleta: boolean = false
 
   constructor(
     private clientsService:      ClientesService,
@@ -55,11 +56,15 @@ export class ClientesComponent implements OnInit {
 
   /********************** REQUESTS ***************************/
   getClients() {
+    this.requisicaoCompleta = false
     this.clientsService.getClients()
     .subscribe({
       next: (res: any) => {
         const { data } = res;
         this.clients = data;
+        setTimeout(() => {
+          this.requisicaoCompleta = true
+        }, 500)
       },
       error(res: any) {
         console.log(res.error.message);
