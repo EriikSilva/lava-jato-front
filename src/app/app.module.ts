@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //COMPONENTS
 import { FrankensteinComponent } from './components/frankenstein/frankenstein.component';
@@ -15,10 +17,8 @@ import { ClientesComponent } from './components/clientes/clientes.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { CarDetailsComponent } from './components/clientes/dialogs/car-details/car-details.component';
-
-
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SaveEditClientComponent } from './components/clientes/dialogs/save-edit-client/save-edit-client.component';
+import { NewCarComponent } from './components/clientes/dialogs/new-car/new-car.component';
 
 //UTILS
 import { CapitalCasePipe } from './utils/CapitalCase';
@@ -29,10 +29,7 @@ import { TelefoneFormatPipe } from './utils/TelefonePipe';
 //PRIMENG
 import { PrimengModule } from '../app/primeng/primeng.module'
 
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/AuthInterceptor';
-import { SaveEditClientComponent } from './components/clientes/dialogs/save-edit-client/save-edit-client.component';
-import { NewCarComponent } from './components/clientes/dialogs/new-car/new-car.component';
 
 @NgModule({
   declarations: [
