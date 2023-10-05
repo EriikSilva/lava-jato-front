@@ -127,7 +127,6 @@ export class SaveEditClientComponent {
      this.clientsService.editClient(bodyEdit)
      .subscribe({
         next: (res: any) => {
-          console.log('res', res)
           this.messageService.add({
             severity: 'success',
             summary: 'Edição',
