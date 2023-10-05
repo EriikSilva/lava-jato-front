@@ -22,3 +22,7 @@ export interface GetTypeCarDTO {
     cd_tipo_veiculo: number;
     descricao:       string;
 }
+
+export interface getCarByClientDTO{
+    cd_cliente:number
+}
