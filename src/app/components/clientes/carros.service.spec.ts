@@ -67,11 +67,6 @@ describe('CarrosService', () => {
     expect(spy).toHaveBeenCalledWith(`${apiUrl}/veiculo/tipo`);
   })
 
-
-
-
-
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]

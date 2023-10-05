@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { environment } from 'src/app/environments/environment.development';
 
-fdescribe('ClientesService', () => {
+describe('ClientesService', () => {
   let service: ClientesService;
   let http: HttpClient
 
