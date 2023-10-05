@@ -1,5 +1,6 @@
 <!-- TABLE -->
 <div class="table_formatation">
+  <p-card>
   <p-table
     #dt
     #textInput
@@ -42,7 +43,7 @@
     <ng-template pTemplate="header">
       <tr>
         <!-- <th></th> -->
-        <th pSortableColumn="nm_cliente" style="min-width: 15rem">
+        <th pSortableColumn="nm_cliente">
           Nome <p-sortIcon field="nm_cliente"></p-sortIcon>
         </th>
         <th>
@@ -126,6 +127,7 @@
       </tr>
     </ng-template>
   </p-table>
+</p-card>
 </div>
 
 <!-- DIALOG DE EDITAR E CRIAR CLIENTE -->
