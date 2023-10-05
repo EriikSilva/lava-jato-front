@@ -148,6 +148,7 @@
 
     <button
       *ngIf="saveMode"
+      [disabled]="!clientRegisterForm.valid"
       pButton
       pRipple
       label="Salvar"
@@ -158,6 +159,7 @@
 
     <button
       *ngIf="editMode"
+      [disabled]="!clientRegisterForm.valid"
       pButton
       pRipple
       label="Editar"

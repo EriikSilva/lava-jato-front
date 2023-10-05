@@ -60,6 +60,7 @@
 
     <button
     *ngIf="saveMode"
+    [disabled]="!newCarForm.valid"
     pButton
     pRipple
     label="Salvar"
@@ -69,6 +70,7 @@
     ></button>
     <button
     *ngIf="editMode"
+    [disabled]="!newCarForm.valid"
     pButton
     pRipple
     label="Editar"
