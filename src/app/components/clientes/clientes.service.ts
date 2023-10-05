@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/app/environments/environment.development';
-import { ClientRegisterDTO, ClienteDeleteDTO, ClienteEditDTO, ClienteGetDTO } from './DTO/clientesDTO';
+import { ClientEditDTO, ClientRegisterDTO, ClienteDeleteDTO, ClienteGetDTO } from './DTO/clientesDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +21,8 @@ export class ClientesService {
     return this.http.post<ClientRegisterDTO>(`${this.apiUrl}/cliente`, client)
   }
 
-  editClient(cliente:ClienteEditDTO):Observable<ClienteEditDTO>{
-    return this.http.put<ClienteEditDTO>(`${this.apiUrl}/cliente`, cliente)
+  editClient(cliente:ClientEditDTO):Observable<ClientEditDTO>{
+    return this.http.put<ClientEditDTO>(`${this.apiUrl}/cliente`, cliente)
   }
 
   deleteClient(cd_cliente:ClienteDeleteDTO):Observable<ClienteDeleteDTO>{
