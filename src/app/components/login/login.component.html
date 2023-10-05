@@ -54,6 +54,7 @@
           <!-- REGISTRAR USUÁRIO -->
           <p-tabPanel header="Registrar Funcionário">
             <form [formGroup]="userFormRegister">
+              <div class="flex align-items-center m-2">
               <div class="card_setup">
                 <span class="p-float-label">
                   <input
@@ -134,6 +135,7 @@
                   (onClick)="registerUser()"
                 ></p-button>
               </div>
+            </div>
             </form>
           </p-tabPanel>
         </p-tabView>
