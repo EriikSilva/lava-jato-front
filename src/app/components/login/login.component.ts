@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserLoginDTO, UserRegisterDTO } from './DTO/userDTO';
@@ -13,7 +13,7 @@ import { LoginService } from './login.service';
   styleUrls: ['./login.component.scss'],
   providers: [MessageService],
 })
-export class LoginComponent  implements OnInit{
+export class LoginComponent  implements OnInit, AfterViewInit{
   messages: Message[] = [];
   buttonLoading: boolean = false;
 
@@ -119,4 +119,9 @@ export class LoginComponent  implements OnInit{
       },
     });
   }
+
+  ngAfterViewInit(): void {
+      this.buttonLoading = false
+  }
+
 }
