@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ClientesService } from './clientes.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientEditDTO, ClienteDeleteDTO, ClienteGetDTO, VeiculosCliente } from './DTO/clientesDTO';
@@ -8,6 +8,7 @@ import { MaskUtils } from '../../utils/Cpf_Cnpj_Validations';
 import { Table } from 'primeng/table';
 import { SaveEditClientComponent } from './dialogs/save-edit-client/save-edit-client.component';
 import { CarDetailsComponent } from './dialogs/car-details/car-details.component';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-clientes',
@@ -15,11 +16,13 @@ import { CarDetailsComponent } from './dialogs/car-details/car-details.component
   styleUrls: ['./clientes.component.scss'],
   providers: [MessageService, MaskUtils, ConfirmationService],
 })
-export class ClientesComponent implements OnInit {
+export class ClientesComponent implements OnInit, OnDestroy {
   
   @ViewChild('dt') dt: Table | undefined;
   @ViewChild('SaveEditClientComponent') SaveEditClientComponent: SaveEditClientComponent | undefined;
   @ViewChild('CarDetailsComponent') CarDetailsComponent:CarDetailsComponent | undefined;
+
+  private destroy$: Subject<void> = new Subject<void>();
 
   position:         string = 'center';
   clients:          ClienteGetDTO[] = [];
@@ -58,6 +61,7 @@ export class ClientesComponent implements OnInit {
   getClients() {
     this.requisicaoCompleta = false
     this.clientsService.getClients()
+    .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: (res: any) => {
         const { data } = res;
@@ -146,5 +150,10 @@ export class ClientesComponent implements OnInit {
   onDialogClosed() {
     this.clientDialog    = false;
     this.carClientDialog = false
+  }
+  
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
