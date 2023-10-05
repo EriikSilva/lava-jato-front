@@ -23,15 +23,7 @@ export interface ClientEditDTO {
 export interface ClienteDeleteDTO{
     cd_cliente: number;
 }
-export interface ClienteEditDTO {
-    cd_cliente: number;
-    nm_cliente: string;
-    cpf_cnpj:   string;
-    cep:        string;
-    bairro:     string;
-    nr_casa:    string;
-    status:     string;
-}
+
 export interface ClienteGetDTO {
     cd_cliente:        number;
     nm_cliente:        string;
