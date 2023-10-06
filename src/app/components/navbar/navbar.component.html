@@ -3,6 +3,7 @@
     <p-button
       type="button"
       class="mr-2"
+      styleClass="p-button-text"
       (click)="isVisible = true"
       icon="pi pi-align-justify "
     ></p-button>
@@ -44,25 +45,35 @@
 
   <div class="mt-3">
     <p-button
-      [style]="{ width: '100%', 'margin-bottom': '1rem' }"
-      label="Serviços"
-      routerLink="/servicos"
-      (onClick)="isVisible = false"
+    [style]="{ width: '100%', 'margin-bottom': '1rem' }"
+    label="Inicio"
+    icon="pi pi-home"
+    routerLink="/inicio"
+    (onClick)="isVisible = false"
     ></p-button>
     <p-button
       [style]="{ width: '100%', 'margin-bottom': '1rem' }"
       label="Clientes"
+      icon="pi pi-users"
       routerLink="/clientes"
       (onClick)="isVisible = false"
     ></p-button>
     <p-button
-      [style]="{ width: '100%', 'margin-bottom': '1rem' }"
-      label="Frankenstein"
-      routerLink="/frankenstein"
-      (onClick)="isVisible = false"
+    [style]="{ width: '100%', 'margin-bottom': '1rem' }"
+    label="Serviços"
+    icon="pi pi-car"
+    routerLink="/servicos"
+    (onClick)="isVisible = false"
     ></p-button>
+    <!-- <p-button
+    [style]="{ width: '100%', 'margin-bottom': '1rem' }"
+    label="Frankenstein"
+    routerLink="/frankenstein"
+    (onClick)="isVisible = false"
+  ></p-button> -->
   </div>
 
+  <ng-template pTemplate="footer">Lava Jato © Copyright 2023</ng-template>
   <!-- <div class="card mt-3">
             <div class="flex flex-column card-container green-container">
                 <div class="flex align-items-center justify-content-center font-bold text-white border-round m-2"><p-button label="Submit"></p-button></div>

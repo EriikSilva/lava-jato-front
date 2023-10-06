@@ -30,6 +30,7 @@ import { TelefoneFormatPipe } from './utils/TelefonePipe';
 import { PrimengModule } from '../app/primeng/primeng.module'
 
 import { AuthInterceptor } from './shared/AuthInterceptor';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
     NewCarComponent,
     PerfilComponent,
     CarDetailsComponent,
+    InicioComponent,
   ],
   imports: [
     BrowserAnimationsModule,

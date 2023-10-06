@@ -7,11 +7,17 @@ import { ClientesComponent } from './components/clientes/clientes.component';
 import { AuthGuard } from './components/guard/auth.guard';
 import { FrankensteinComponent } from './components/frankenstein/frankenstein.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 const routes: Routes = [
   {
     path:'login',
     component:LoginComponent
+  },
+  {
+    path:'inicio',
+    component:InicioComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:'dashboard',

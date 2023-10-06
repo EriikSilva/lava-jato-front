@@ -60,7 +60,7 @@ export class LoginComponent  implements OnInit, AfterViewInit{
         this.loginService.setToken(token)
         this.loginService.setUser(user)
         if(token)
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/inicio']);
       },
       error: (res: any) => {
         this.buttonLoading = false
