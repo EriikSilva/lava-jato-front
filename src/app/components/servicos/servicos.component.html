@@ -1,1 +1,58 @@
-<p>servicos works!</p>
+
+
+
+<div style="display: flex;">
+<p-card [style]="{'margin': '1rem'}">
+    <div class="flex flex-row flex-wrap card-container blue-container">
+        <div class="flex align-items-center justify-content-center">
+
+            <p-autoComplete 
+            [(ngModel)]="selectedItem" 
+            [suggestions]="suggestions"
+            (ngModelChange)="onSelectedItemChange($event)"
+            (completeMethod)="search($event)"></p-autoComplete>
+
+        </div>
+        <!-- <div class="flex align-items-center justify-content-center">2</div>
+        <div class="flex align-items-center justify-content-center">3</div> -->
+    </div>
+</p-card>
+
+<p-card [style]="{'margin': '1rem'}">
+    <div class="flex flex-row flex-wrap card-container blue-container">
+        <div class="flex align-items-center justify-content-center">1</div>
+        <div class="flex align-items-center justify-content-center">2</div>
+        <div class="flex align-items-center justify-content-center">3</div>
+    </div>
+</p-card>
+
+<!-- <p-card [style]="{'margin': '1rem'}">
+    <div class="flex flex-row flex-wrap card-container blue-container">
+        <div class="flex align-items-center justify-content-center">1</div>
+        <div class="flex align-items-center justify-content-center">2</div>
+        <div class="flex align-items-center justify-content-center">3</div>
+    </div>
+</p-card>
+
+<p-card [style]="{'margin': '1rem'}">
+    <div class="flex flex-row flex-wrap card-container blue-container">
+        <div class="flex align-items-center justify-content-center w-4rem h-4rem bg-blue-500 font-bold text-white border-round m-2">1</div>
+        <div class="flex align-items-center justify-content-center w-4rem h-4rem bg-blue-500 font-bold text-white border-round m-2">2</div>
+        <div class="flex align-items-center justify-content-center w-4rem h-4rem bg-blue-500 font-bold text-white border-round m-2">3</div>
+    </div>
+</p-card>
+</div> -->
+
+
+<!-- <div class="p-grid">
+    <div class="p-col">
+      <p-card [style]="{ 'margin-top': '1rem' }">
+      </p-card>
+    </div>
+  
+    <div class="p-col">
+      <p-card [style]="{ 'margin-top': '1rem' }">
+      </p-card>
+    </div>
+  </div>
+   -->
