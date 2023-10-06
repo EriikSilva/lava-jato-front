@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientesService } from '../clientes/clientes.service';
+import { ServicosService } from './servicos.service';
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -14,10 +15,14 @@ export class ServicosComponent implements OnInit {
   items: any[] = [];
   clientDetails:any;
   selectedItem: any;
+  dadosServicos: any;
 
   suggestions: any[] = [];
 
-  constructor(private clientsService: ClientesService) {}
+  constructor(
+    private clientsService: ClientesService,
+    private servicosService:ServicosService
+    ) {}
 
   search(event: AutoCompleteCompleteEvent) {
     let filtered: any[] = [];
@@ -30,6 +35,7 @@ export class ServicosComponent implements OnInit {
         filtered.push(client.nm_cliente + ' - ' + client.bairro);
       }
     }
+
     this.suggestions = filtered;
   }
 
@@ -46,6 +52,14 @@ export class ServicosComponent implements OnInit {
   onSelectedItemChange(newValue: any) {
     const { cd_cliente } = this.clientDetails
     //FAZER TODO O RESTO
+    this.servicosService.atendimentosAgendamento(cd_cliente)
+    .subscribe({
+      next: (res:any) => {
+        this.dadosServicos = res.data
+        console.log('res',  this.dadosServicos )
+      }
+    })
+
   }
   ngOnInit(): void {
     this.getClients();

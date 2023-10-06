@@ -20,9 +20,38 @@
 
 <p-card [style]="{'margin': '1rem'}">
     <div class="flex flex-row flex-wrap card-container blue-container">
-        <div class="flex align-items-center justify-content-center">1</div>
-        <div class="flex align-items-center justify-content-center">2</div>
-        <div class="flex align-items-center justify-content-center">3</div>
+        <div class="flex align-items-center justify-content-center">
+            <div *ngFor="let atendimento of dadosServicos">
+                <h2>Número de Atendimento: {{ atendimento.dadosAtendimento.nr_atendimento }}</h2>
+                <p>Data e Hora de Início: {{ atendimento.dadosAtendimento.dh_inicio_atendimento }}</p>
+                <p>Valor Total: {{ atendimento.dadosAtendimento.valor_total }}</p>
+                <p>Quantidade de Serviços no Atendimento: {{ atendimento.dadosAtendimento.qtd_servicos_atendimento }}</p>
+                <p>Status do Atendimento: {{ atendimento.dadosAtendimento.status_atendimento }}</p>
+                <h3>Dados do Cliente:</h3>
+                <p>Cliente: {{ atendimento.dadosAtendimento.dadosCLiente[0].cliente }}</p>
+                <p>Código do Cliente: {{ atendimento.dadosAtendimento.dadosCLiente[0].cd_cliente }}</p>
+                <p>Contato: {{ atendimento.dadosAtendimento.dadosCLiente[0].contato }}</p>
+                <h3>Dados do Serviço:</h3>
+                <ul>
+                  <li *ngFor="let servico of atendimento.dadosAtendimento.dadosServico">
+                    <p>Número do Serviço: {{ servico.nr_servico_atendimento }}</p>
+                    <p>Placa: {{ servico.placa }}</p>
+                    <p>Código do Serviço: {{ servico.cd_servico }}</p>
+                    <p>Tipo de Veículo: {{ servico.tipo_veiculo }}</p>
+                    <p>Modelo do Veículo: {{ servico.modelo_veiculo }}</p>
+                    <p>Valor: {{ servico.valor }}</p>
+                    <p>Serviço: {{ servico.servico }}</p>
+                    <p>Status do Serviço: {{ servico.status_servico }}</p>
+                    <p>Data e Hora de Início do Serviço: {{ servico.dh_inicio_servico }}</p>
+                    <p>Data e Hora do Fim do Serviço: {{ servico.dh_fim_servico || 'Não finalizado' }}</p>
+                  </li>
+                </ul>
+              </div>
+              
+
+
+            <!-- Carro: {{ carroCliente}} -->
+        </div>
     </div>
 </p-card>
 
