@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ClientesService } from '../clientes/clientes.service';
 import { ServicosService } from './servicos.service';
+import { Subject, takeUntil } from 'rxjs';
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -11,11 +12,15 @@ interface AutoCompleteCompleteEvent {
   templateUrl: './servicos.component.html',
   styleUrls: ['./servicos.component.scss'],
 })
-export class ServicosComponent implements OnInit {
+export class ServicosComponent implements OnInit, OnDestroy {
   items: any[] = [];
   clientDetails:any;
   selectedItem: any;
   dadosServicos: any;
+  cd_cliente: any;
+  contatoCliente:any
+
+  private destroy$: Subject<void> = new Subject<void>();
 
   suggestions: any[] = [];
 
@@ -53,21 +58,32 @@ export class ServicosComponent implements OnInit {
     const { cd_cliente } = this.clientDetails
     //FAZER TODO O RESTO
     this.servicosService.atendimentosAgendamento(cd_cliente)
+    .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: (res:any) => {
-        this.dadosServicos = res.data
-        console.log('res',  this.dadosServicos )
+        const { data} = res 
+        this.dadosServicos  = data
+        this.cd_cliente     = data[0].dadosAtendimento.dadosCLiente[0].cd_cliente
+        this.contatoCliente = data[0].dadosAtendimento.dadosCLiente[0].contato
+      }, error: (res:any) => {
+        this.dadosServicos = []
       }
     })
 
   }
 
   limparPesquisa(){
-   this.dadosServicos = []
-   this.dadosServicos = false
+   this.dadosServicos = ""
+   this.clientDetails = ""
+   this.selectedItem = ""
   }
 
   ngOnInit(): void {
     this.getClients();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

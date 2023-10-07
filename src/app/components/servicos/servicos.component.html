@@ -4,7 +4,7 @@
 <div>
 <p-card [style]="{'margin': '1rem'}">
     <div class="flex flex-row flex-wrap card-container blue-container">
-        <div class="flex align-items-center justify-content-center">
+        <div class="flex align-items-center justify-content-between">
 
             <p-autoComplete 
             [(ngModel)]="selectedItem" 
@@ -15,17 +15,34 @@
             <button 
             pButton 
             label="Limpar"
+            [disabled]="!dadosServicos || selectedItem == ''"
             icon="pi p"
             class="ml-2"
             (click)="limparPesquisa()"></button>
-<!-- 
-            <div *ngFor="let atendimento of dadosServicos">
-              <ul>
-                <li *ngFor="let servico of atendimento.dadosAtendimento.dadosServico">
-                  <p>Número do Serviço: {{ servico.nr_servico_atendimento.length }}</p>
-                </li>
-              </ul>
-            </div> -->
+
+            <button 
+            pButton 
+            label="Novo"
+            icon="pi pi-plus"
+            class="ml-2 p-button-success"
+            ></button>
+
+            
+            <div class="ml-4" *ngIf="dadosServicos">
+              Contato: <b>{{ contatoCliente | telefoneFormat }}</b>
+            </div>
+
+    
+            <div class="ml-4" *ngIf="dadosServicos">
+              Total de Serviços: <b>{{ dadosServicos.length }}</b>
+            </div>
+
+
+            <div class="ml-4" *ngIf="dadosServicos">
+              Código do Cliente: <b>{{ cd_cliente }}</b>
+            </div>
+            
+
 
         </div>
     </div>
@@ -43,9 +60,9 @@
                   <th>Cliente</th>
                   <th>Data e Hora de Início</th>
                   <th>Valor Total</th>
-                  <th>Contato</th>
+                  <!-- <th>Contato</th> -->
                   <th>Atendimento</th>
-                  <th>Ações</th>
+                  <!-- <th>Ações</th> -->
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-atendimento>
@@ -53,14 +70,14 @@
                   <td>{{  atendimento.dadosAtendimento.dadosCLiente[0].cliente  }}</td>
                   <td>{{ atendimento.dadosAtendimento.dh_inicio_atendimento }}</td>
                   <td>{{ atendimento.dadosAtendimento.valor_total | currency:"BRL":"symbol"}}</td>
-                  <td>{{ atendimento.dadosAtendimento.dadosCLiente[0].contato | telefoneFormat }}</td>
+                  <!-- <td>{{ atendimento.dadosAtendimento.dadosCLiente[0].contato | telefoneFormat }}</td> -->
                   <td>{{ atendimento.dadosAtendimento.nr_atendimento }}</td>
-                  <td>
+                  <!-- <td>
                     <button
                       pButton
                       icon="pi pi-car"
                     ></button>
-                  </td>
+                  </td> -->
                 </tr>
             </ng-template>
         </p-table>
