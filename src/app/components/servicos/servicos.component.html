@@ -1,7 +1,7 @@
 
 
 
-<div style="display: flex;">
+<div>
 <p-card [style]="{'margin': '1rem'}">
     <div class="flex flex-row flex-wrap card-container blue-container">
         <div class="flex align-items-center justify-content-center">
@@ -12,18 +12,64 @@
             (ngModelChange)="onSelectedItemChange($event)"
             (completeMethod)="search($event)"></p-autoComplete>
 
+            <button 
+            pButton 
+            label="Limpar"
+            icon="pi p"
+            class="ml-2"
+            (click)="limparPesquisa()"></button>
+<!-- 
+            <div *ngFor="let atendimento of dadosServicos">
+              <ul>
+                <li *ngFor="let servico of atendimento.dadosAtendimento.dadosServico">
+                  <p>Número do Serviço: {{ servico.nr_servico_atendimento.length }}</p>
+                </li>
+              </ul>
+            </div> -->
+
         </div>
-        <!-- <div class="flex align-items-center justify-content-center">2</div>
-        <div class="flex align-items-center justify-content-center">3</div> -->
     </div>
 </p-card>
 
-<p-card [style]="{'margin': '1rem'}">
+<p-card [style]="{'margin': '1rem'}" *ngIf="dadosServicos">
     <div class="flex flex-row flex-wrap card-container blue-container">
         <div class="flex align-items-center justify-content-center">
-            <div *ngFor="let atendimento of dadosServicos">
-                <h2>Número de Atendimento: {{ atendimento.dadosAtendimento.nr_atendimento }}</h2>
-                <p>Data e Hora de Início: {{ atendimento.dadosAtendimento.dh_inicio_atendimento }}</p>
+
+          <p-table 
+          [value]="dadosServicos" 
+          [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                  <th>Cliente</th>
+                  <th>Data e Hora de Início</th>
+                  <th>Valor Total</th>
+                  <th>Contato</th>
+                  <th>Atendimento</th>
+                  <th>Ações</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-atendimento>
+                <tr>
+                  <td>{{  atendimento.dadosAtendimento.dadosCLiente[0].cliente  }}</td>
+                  <td>{{ atendimento.dadosAtendimento.dh_inicio_atendimento }}</td>
+                  <td>{{ atendimento.dadosAtendimento.valor_total | currency:"BRL":"symbol"}}</td>
+                  <td>{{ atendimento.dadosAtendimento.dadosCLiente[0].contato | telefoneFormat }}</td>
+                  <td>{{ atendimento.dadosAtendimento.nr_atendimento }}</td>
+                  <td>
+                    <button
+                      pButton
+                      icon="pi pi-car"
+                    ></button>
+                  </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+
+
+               <!--   <div *ngFor="let atendimento of dadosServicos">
+                <h4>Número de Atendimento: {{ atendimento.dadosAtendimento.nr_atendimento }}</h4>
+           <p>Data e Hora de Início: {{ atendimento.dadosAtendimento.dh_inicio_atendimento }}</p>
                 <p>Valor Total: {{ atendimento.dadosAtendimento.valor_total }}</p>
                 <p>Quantidade de Serviços no Atendimento: {{ atendimento.dadosAtendimento.qtd_servicos_atendimento }}</p>
                 <p>Status do Atendimento: {{ atendimento.dadosAtendimento.status_atendimento }}</p>
@@ -46,42 +92,8 @@
                     <p>Data e Hora do Fim do Serviço: {{ servico.dh_fim_servico || 'Não finalizado' }}</p>
                   </li>
                 </ul>
-              </div>
-              
+              </div> -->
 
-
-            <!-- Carro: {{ carroCliente}} -->
         </div>
     </div>
 </p-card>
-
-<!-- <p-card [style]="{'margin': '1rem'}">
-    <div class="flex flex-row flex-wrap card-container blue-container">
-        <div class="flex align-items-center justify-content-center">1</div>
-        <div class="flex align-items-center justify-content-center">2</div>
-        <div class="flex align-items-center justify-content-center">3</div>
-    </div>
-</p-card>
-
-<p-card [style]="{'margin': '1rem'}">
-    <div class="flex flex-row flex-wrap card-container blue-container">
-        <div class="flex align-items-center justify-content-center w-4rem h-4rem bg-blue-500 font-bold text-white border-round m-2">1</div>
-        <div class="flex align-items-center justify-content-center w-4rem h-4rem bg-blue-500 font-bold text-white border-round m-2">2</div>
-        <div class="flex align-items-center justify-content-center w-4rem h-4rem bg-blue-500 font-bold text-white border-round m-2">3</div>
-    </div>
-</p-card>
-</div> -->
-
-
-<!-- <div class="p-grid">
-    <div class="p-col">
-      <p-card [style]="{ 'margin-top': '1rem' }">
-      </p-card>
-    </div>
-  
-    <div class="p-col">
-      <p-card [style]="{ 'margin-top': '1rem' }">
-      </p-card>
-    </div>
-  </div>
-   -->

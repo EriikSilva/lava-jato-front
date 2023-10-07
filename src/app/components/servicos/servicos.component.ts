@@ -61,6 +61,12 @@ export class ServicosComponent implements OnInit {
     })
 
   }
+
+  limparPesquisa(){
+   this.dadosServicos = []
+   this.dadosServicos = false
+  }
+
   ngOnInit(): void {
     this.getClients();
   }
