@@ -7,6 +7,7 @@
         <div class="flex align-items-center justify-content-between">
 
             <p-autoComplete 
+            placeholder="Buscar Cliente"
             [(ngModel)]="selectedItem" 
             [suggestions]="suggestions"
             (ngModelChange)="onSelectedItemChange($event)"
