@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
       },
       {
         label:'Sair',
-        icon:'pi pi-fw pi-power-off',
+        icon:'pi pi-sign-out',
         command: () => {
           this.logout()
         }
