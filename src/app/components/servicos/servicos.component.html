@@ -10,7 +10,7 @@
             placeholder="Buscar Cliente"
             [(ngModel)]="selectedItem" 
             [suggestions]="suggestions"
-            (ngModelChange)="onSelectedItemChange($event)"
+            (onSelect)="onSelectedItemChange($event)"
             (completeMethod)="search($event)"></p-autoComplete>
 
             <button 
@@ -63,7 +63,7 @@
                   <th>Valor Total</th>
                   <!-- <th>Contato</th> -->
                   <th>Atendimento</th>
-                  <!-- <th>Ações</th> -->
+                  <th>Ações</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-atendimento>
@@ -73,12 +73,13 @@
                   <td>{{ atendimento.dadosAtendimento.valor_total | currency:"BRL":"symbol"}}</td>
                   <!-- <td>{{ atendimento.dadosAtendimento.dadosCLiente[0].contato | telefoneFormat }}</td> -->
                   <td>{{ atendimento.dadosAtendimento.nr_atendimento }}</td>
-                  <!-- <td>
-                    <button
-                      pButton
-                      icon="pi pi-car"
-                    ></button>
-                  </td> -->
+                  <td>
+                    <p-button 
+                    icon="pi pi-trash" 
+                    styleClass="p-button-rounded p-button-danger p-button-text p-button-raised"
+                    (onClick)="deletarAtendimento(atendimento)"
+                    ></p-button>
+                  </td>
                 </tr>
             </ng-template>
         </p-table>
