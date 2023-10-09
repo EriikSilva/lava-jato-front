@@ -20,6 +20,8 @@ export class ServicosComponent implements OnInit, OnDestroy {
   cd_cliente: any;
   contatoCliente:any
 
+  atendimentoDialog:boolean = false
+
   private destroy$: Subject<void> = new Subject<void>();
 
   suggestions: any[] = [];
@@ -53,8 +55,13 @@ export class ServicosComponent implements OnInit, OnDestroy {
     });
   }
 
+
+  newAtendimento(){
+    this.atendimentoDialog = true
+  }
+
   openDialogDetails(atendimento:any){
-    
+    console.log('aqui')
   }
 
   deletarAtendimento(atendimento:any){
@@ -87,6 +94,11 @@ export class ServicosComponent implements OnInit, OnDestroy {
    this.dadosServicos = ""
    this.clientDetails = ""
    this.selectedItem = ""
+  }
+
+
+  onDialogClosed(){
+    this.atendimentoDialog = false;
   }
 
   ngOnInit(): void {
