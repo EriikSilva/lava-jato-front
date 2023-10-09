@@ -33,7 +33,7 @@
             pRipple
             label="Novo"
             icon="pi pi-plus"
-            class="p-button-success"
+            class="p-button-primary"
             (click)="openNew()"
           ></button>
         </div>
@@ -90,34 +90,28 @@
         </td>
         <td  [ngClass]="getStatusClass(client.status)">
           <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-            {{ client.status == "A" ? "ATIVO" : "INATIVO" }}
+            <b>   {{ client.status == "A" ? "ATIVO" : "INATIVO" }}</b>
           </ng-container>
         </td>
         <td>
           <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-            <button
-            pButton
-            pRipple
-            icon="pi pi-car"
-            class="p-button-rounded p-button-primary mr-2"
-            (click)="carClientModal('center', client)"
-          ></button>
+          <p-button
+          icon="pi pi-car" 
+          (click)="carClientModal('center', client)"
+          styleClass="p-button-rounded p-button-primary p-button-text"
+          ></p-button>
 
-          <button
-            pButton
-            pRipple
-            icon="pi pi-pencil"
-            class="p-button-rounded p-button-primary mr-2"
-            (click)="editClientModal(client)"
-          ></button>
+          <p-button
+          icon="pi pi-pencil" 
+          (click)="editClientModal(client)"
+          styleClass="p-button-rounded p-button-primary p-button-text"
+          ></p-button>
 
-          <button
-            pButton
-            pRipple
-            icon="pi pi-trash"
-            class="p-button-rounded p-button-danger mr-2"
-            (click)="confirmDelete($event, client)"
-          ></button>
+          <p-button
+          icon="pi pi-trash" 
+          (click)="confirmDelete($event, client)"
+          styleClass="p-button-rounded p-button-primary p-button-text"
+          ></p-button>
           </ng-container>
           <ng-template #skeleton>
             <!-- Conteúdo de esqueleto para os botões -->
