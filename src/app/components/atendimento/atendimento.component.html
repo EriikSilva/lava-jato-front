@@ -1,125 +1,90 @@
-
-
-
 <div>
-<p-card [style]="{'margin': '1rem'}">
+  <p-card [style]="{ margin: '1rem' }">
     <div class="flex flex-row flex-wrap card-container blue-container">
-        <div class="flex align-items-center justify-content-between">
+      <div class="flex align-items-center justify-content-between">
+        <p-autoComplete
+          placeholder="Buscar Cliente"
+          [(ngModel)]="selectedItem"
+          [suggestions]="suggestions"
+          (onSelect)="onSelectedItemChange($event)"
+          (completeMethod)="search($event)"
+        ></p-autoComplete>
 
-            <p-autoComplete 
-            placeholder="Buscar Cliente"
-            [(ngModel)]="selectedItem" 
-            [suggestions]="suggestions"
-            (onSelect)="onSelectedItemChange($event)"
-            (completeMethod)="search($event)"></p-autoComplete>
+        <button
+          pButton
+          label="Limpar"
+          [disabled]="!dadosAtendimento || selectedItem == ''"
+          class="ml-2"
+          (click)="limparPesquisa()"
+        ></button>
 
-            <button 
-            pButton 
-            label="Limpar"
-            [disabled]="!dadosAtendimento || selectedItem == ''"
-            icon="pi p"
-            class="ml-2"
-            (click)="limparPesquisa()"></button>
-
-            <!-- <button 
-            pButton 
-            label="Novo"
-            icon="pi pi-plus"
-            class="ml-2 p-button-primary"
-            (click)="newAtendimento()"
-            ></button>
-             -->
-            <div class="ml-4" *ngIf="dadosAtendimento">
-              Contato: <b>{{ contatoCliente | telefoneFormat }}</b>
-            </div>
-
-    
-            <div class="ml-4" *ngIf="dadosAtendimento">
-              Total de Serviços: <b>{{ dadosAtendimento.length }}</b>
-            </div>
-
-
-            <div class="ml-4" *ngIf="dadosAtendimento">
-              Código do Cliente: <b>{{ cd_cliente }}</b>
-            </div>
-            
-
-
+        <div class="ml-4" *ngIf="dadosAtendimento">
+          <label>Contato:</label>
+          <b>{{ contatoCliente | telefoneFormat }}</b>
         </div>
-    </div>
-</p-card>
 
-<!-- <p-card [style]="{'margin': '1rem'}" *ngIf="dadosServicos"> -->
-    <div class="flex flex-row flex-wrap card-container blue-container">
-        <div class="flex align-items-center justify-content-center table_formatation" >
-
-          <p-table 
-          *ngIf="dadosAtendimento"
-          [value]="dadosAtendimento" 
-          [tableStyle]="{ 'min-width': '50rem', 'marign-left': '40%' }">
-            <ng-template pTemplate="header">
-                <tr>
-                  <th>Cliente</th>
-                  <th>Data e Hora de Início</th>
-                  <th>Valor Total</th>
-                  <th>Atendimento</th>
-                  <th>Ações</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-atendimento>
-                <tr>
-                  <td>{{  atendimento.dadosAtendimento.dadosCLiente[0].cliente  }}</td>
-                  <td>{{ atendimento.dadosAtendimento.dh_inicio_atendimento }}</td>
-                  <td>{{ atendimento.dadosAtendimento.valor_total | currency:"BRL":"symbol"}}</td>
-                  <td>{{ atendimento.dadosAtendimento.nr_atendimento }}</td>
-                  <td>
-                    <p-button 
-                    icon="pi pi-car" 
-                    styleClass="p-button-rounded p-button-info p-button-text p-button-raised"
-                    (onClick)="newAtendimento(atendimento)"
-                    ></p-button>
-                    <p-button 
-                    icon="pi pi-trash" 
-                    styleClass="p-button-rounded p-button-danger p-button-text p-button-raised"
-                    (onClick)="deletarAtendimento(atendimento)"
-                    ></p-button>
-                  </td>
-                </tr>
-            </ng-template>
-        </p-table>
-
-
-
-               <!--   <div *ngFor="let atendimento of dadosAtendimento">
-                <h4>Número de Atendimento: {{ atendimento.dadosAtendimento.nr_atendimento }}</h4>
-           <p>Data e Hora de Início: {{ atendimento.dadosAtendimento.dh_inicio_atendimento }}</p>
-                <p>Valor Total: {{ atendimento.dadosAtendimento.valor_total }}</p>
-                <p>Quantidade de Serviços no Atendimento: {{ atendimento.dadosAtendimento.qtd_servicos_atendimento }}</p>
-                <p>Status do Atendimento: {{ atendimento.dadosAtendimento.status_atendimento }}</p>
-                <h3>Dados do Cliente:</h3>
-                <p>Cliente: {{ atendimento.dadosAtendimento.dadosCLiente[0].cliente }}</p>
-                <p>Código do Cliente: {{ atendimento.dadosAtendimento.dadosCLiente[0].cd_cliente }}</p>
-                <p>Contato: {{ atendimento.dadosAtendimento.dadosCLiente[0].contato }}</p>
-                <h3>Dados do Serviço:</h3>
-                <ul>
-                  <li *ngFor="let servico of atendimento.dadosAtendimento.dadosServico">
-                    <p>Número do Serviço: {{ servico.nr_servico_atendimento }}</p>
-                    <p>Placa: {{ servico.placa }}</p>
-                    <p>Código do Serviço: {{ servico.cd_servico }}</p>
-                    <p>Tipo de Veículo: {{ servico.tipo_veiculo }}</p>
-                    <p>Modelo do Veículo: {{ servico.modelo_veiculo }}</p>
-                    <p>Valor: {{ servico.valor }}</p>
-                    <p>Serviço: {{ servico.servico }}</p>
-                    <p>Status do Serviço: {{ servico.status_servico }}</p>
-                    <p>Data e Hora de Início do Serviço: {{ servico.dh_inicio_servico }}</p>
-                    <p>Data e Hora do Fim do Serviço: {{ servico.dh_fim_servico || 'Não finalizado' }}</p>
-                  </li>
-                </ul>
-              </div> -->
-
+        <div class="ml-4" *ngIf="dadosAtendimento">
+          <label>Total de Serviços:</label>
+          <b>{{ dadosAtendimento.length }}</b>
         </div>
+
+        <div class="ml-4" *ngIf="dadosAtendimento">
+          <label>Código do Cliente:</label>
+          <b>{{ cd_cliente }}</b>
+        </div>
+      </div>
     </div>
-<!-- </p-card> -->
+  </p-card>
+
+  <!-- <p-card [style]="{'margin': '1rem'}" *ngIf="dadosServicos"> -->
+  <div class="flex flex-row flex-wrap card-container blue-container">
+    <div
+      class="flex align-items-center justify-content-center table_formatation"
+    >
+      <p-table
+        *ngIf="dadosAtendimento"
+        [value]="dadosAtendimento"
+        [tableStyle]="{ 'min-width': '50rem', 'marign-left': '40%' }"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Cliente</th>
+            <th>Data e Hora de Início</th>
+            <th>Valor Total</th>
+            <th>Atendimento</th>
+            <th>Ações</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-atendimento>
+          <tr>
+            <td>{{ atendimento.dadosAtendimento.dadosCLiente[0].cliente }}</td>
+            <td>{{ atendimento.dadosAtendimento.dh_inicio_atendimento }}</td>
+            <td>
+              {{
+                atendimento.dadosAtendimento.valor_total
+                  | currency : "BRL" : "symbol"
+              }}
+            </td>
+            <td>{{ atendimento.dadosAtendimento.nr_atendimento }}</td>
+            <td>
+              <p-button
+                icon="pi pi-car"
+                styleClass="p-button-rounded p-button-info p-button-text p-button-raised"
+                (onClick)="newAtendimento(atendimento)"
+              ></p-button>
+              <p-button
+                icon="pi pi-trash"
+                styleClass="p-button-rounded p-button-danger p-button-text p-button-raised"
+                (onClick)="deletarAtendimento(atendimento)"
+              ></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
 
 
 <app-new-atendimento
@@ -128,6 +93,3 @@
 [atendimentoDialog]="atendimentoDialog"
 >
 </app-new-atendimento>
-
-
-
