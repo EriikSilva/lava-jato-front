@@ -28,4 +28,12 @@ export class AtendimentoService {
     return this.http.post<FinalizarServicoDTO>(`${this.apiUrl}/atendimentos/finalizarServico`, body)
   }
 
+  finalizarAtendimento(nr_atendimento:any,nr_servico:any):Observable<any>{
+    const body = {
+      nr_atendimento_p: nr_atendimento,
+      nr_servico_p:nr_servico
+    }
+    return this.http.post(`${this.apiUrl}/atendimentos/finalizarAtendimento/${nr_atendimento}`, body)
+  }
+
 }
