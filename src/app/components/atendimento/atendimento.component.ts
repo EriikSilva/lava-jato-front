@@ -21,7 +21,8 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   contatoCliente:any;
 
   atendimentoDialog:boolean = false
-
+  finalizarAtendimentoDialog:boolean = false
+  
   private destroy$: Subject<void> = new Subject<void>();
 
   suggestions: any[] = [];
@@ -53,6 +54,11 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
         this.items = data;
       },
     });
+  }
+
+  finalizarAtendimento(atendimento:any){
+    this.finalizarAtendimentoDialog = true
+
   }
 
 
@@ -102,6 +108,7 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
 
   onDialogClosed(){
     this.atendimentoDialog = false;
+    this.finalizarAtendimentoDialog = false
   }
 
   ngOnInit(): void {

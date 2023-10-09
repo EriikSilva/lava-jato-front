@@ -32,6 +32,7 @@ import { PrimengModule } from '../app/primeng/primeng.module'
 import { AuthInterceptor } from './shared/AuthInterceptor';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { NewAtendimentoComponent } from './components/atendimento/dialogs/new-atendimento/new-atendimento.component';
+import { FinalizarAtendimentoComponent } from './components/atendimento/dialogs/finalizar-atendimento/finalizar-atendimento.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { NewAtendimentoComponent } from './components/atendimento/dialogs/new-at
     PerfilComponent,
     CarDetailsComponent,
     InicioComponent,
-    NewAtendimentoComponent
+    NewAtendimentoComponent,
+    FinalizarAtendimentoComponent
   ],
   imports: [
     BrowserAnimationsModule,

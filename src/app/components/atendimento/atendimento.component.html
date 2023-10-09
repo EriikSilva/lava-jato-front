@@ -70,7 +70,7 @@
               <p-button
                 icon="pi pi-car"
                 styleClass="p-button-rounded p-button-info p-button-text p-button-raised"
-                (onClick)="newAtendimento(atendimento)"
+                (onClick)="finalizarAtendimento(atendimento)"
               ></p-button>
               <p-button
                 icon="pi pi-trash"
@@ -86,10 +86,17 @@
 </div>
 
 
-
+<!-- 
 <app-new-atendimento
 #NewAtendimentoComponent
 (dialogClosed)="onDialogClosed()"
 [atendimentoDialog]="atendimentoDialog"
 >
-</app-new-atendimento>
+</app-new-atendimento> -->
+
+<app-finalizar-atendimento
+#FinalizarAtendimentoComponent
+(dialogClosed)="onDialogClosed()"
+[finalizarAtendimentoDialog]="finalizarAtendimentoDialog"
+>  
+</app-finalizar-atendimento>
