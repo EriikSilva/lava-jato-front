@@ -12,7 +12,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //COMPONENTS
 import { FrankensteinComponent } from './components/frankenstein/frankenstein.component';
-import { ServicosComponent } from './components/servicos/servicos.component';
+import { AtendimentoComponent } from './components/atendimento/atendimento.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
@@ -31,7 +31,7 @@ import { PrimengModule } from '../app/primeng/primeng.module'
 
 import { AuthInterceptor } from './shared/AuthInterceptor';
 import { InicioComponent } from './components/inicio/inicio.component';
-import { NewAtendimentoComponent } from './components/servicos/dialogs/new-atendimento/new-atendimento.component';
+import { NewAtendimentoComponent } from './components/atendimento/dialogs/new-atendimento/new-atendimento.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { NewAtendimentoComponent } from './components/servicos/dialogs/new-atend
     DashboardComponent,
     NavbarComponent,
     FrankensteinComponent,
-    ServicosComponent,
+    AtendimentoComponent,
     ClientesComponent,
     CapitalCasePipe,
     CpfCnpjMaskDirective,

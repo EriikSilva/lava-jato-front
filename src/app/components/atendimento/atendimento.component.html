@@ -21,15 +21,14 @@
             class="ml-2"
             (click)="limparPesquisa()"></button>
 
-            <button 
+            <!-- <button 
             pButton 
             label="Novo"
             icon="pi pi-plus"
-            class="ml-2 p-button-success"
+            class="ml-2 p-button-primary"
             (click)="newAtendimento()"
             ></button>
-
-            
+             -->
             <div class="ml-4" *ngIf="dadosServicos">
               Contato: <b>{{ contatoCliente | telefoneFormat }}</b>
             </div>
@@ -77,7 +76,7 @@
                     <p-button 
                     icon="pi pi-car" 
                     styleClass="p-button-rounded p-button-info p-button-text p-button-raised"
-                    (onClick)="openDialogDetails(atendimento)"
+                    (onClick)="newAtendimento(atendimento)"
                     ></p-button>
                     <p-button 
                     icon="pi pi-trash" 

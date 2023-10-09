@@ -15,9 +15,9 @@
     askdjalskdj
   </div> -->
   <div class="p-toolbar-group-end">
-    <img src="../../../assets/profile_icon3.png" class="img_formatation">
+    <!-- <img src="../../../assets/profile_icon3.png" class="img_formatation"> -->
     <div class="mr-3">
-      <h3>Bem Vindo: {{ nm_usuario | capitalCase}}</h3>
+      <h4>{{ nm_usuario | capitalCase}}</h4>
     </div>
 
     <div class="mr-3">
@@ -25,7 +25,7 @@
       #btn
       type="button"
       pButton
-      icon="pi pi-ellipsis-h"
+      icon="pi pi-user"
       (click)="menu.toggle($event)"
     ></button>
     <p-slideMenu
@@ -62,7 +62,7 @@
     [style]="{ width: '100%', 'margin-bottom': '1rem' }"
     label="Atendimentos"
     icon="pi pi-car"
-    routerLink="/servicos"
+    routerLink="/atendimento"
     (onClick)="isVisible = false"
     ></p-button>
     <!-- <p-button

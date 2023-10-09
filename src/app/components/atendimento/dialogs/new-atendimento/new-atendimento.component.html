@@ -1,0 +1,39 @@
+<p-dialog
+  [(visible)]="atendimentoDialog"
+  (onHide)="closeDialog()"
+  [style]="{ width: '450px' }"
+  [header]="'Novo Atendimento'"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <form [formGroup]="newAtendimentoForm">
+    <div class="field">
+      <label for="nome">Cliente:</label>
+      <span class="danger"> * </span>
+      <input
+        type="text"
+        pInputText
+        maxlength="50"
+        formControlName="cd_cliente_p"
+        id="nome"
+        required
+        autofocus
+      />
+    </div>
+    <div class="field">
+      <label for="nome">Cliente:</label>
+      <span class="danger"> * </span>
+      <input
+        type="text"
+        pInputText
+        maxlength="50"
+        formControlName="cd_cliente_p"
+        id="nome"
+        required
+        autofocus
+      />
+    </div>
+  </form>
+  </ng-template>
+</p-dialog>

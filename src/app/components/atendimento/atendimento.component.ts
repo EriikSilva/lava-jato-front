@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ClientesService } from '../clientes/clientes.service';
-import { ServicosService } from './servicos.service';
+import { AtendimentoService } from './atendimento.service';
 import { Subject, takeUntil } from 'rxjs';
 
 interface AutoCompleteCompleteEvent {
@@ -8,17 +8,17 @@ interface AutoCompleteCompleteEvent {
   query: string;
 }
 @Component({
-  selector: 'app-servicos',
-  templateUrl: './servicos.component.html',
-  styleUrls: ['./servicos.component.scss'],
+  selector: 'app-atendimento',
+  templateUrl: './atendimento.component.html',
+  styleUrls: ['./atendimento.component.scss'],
 })
-export class ServicosComponent implements OnInit, OnDestroy {
+export class AtendimentoComponent implements OnInit, OnDestroy {
   items: any[] = [];
   clientDetails:any;
   selectedItem: any;
   dadosServicos: any;
   cd_cliente: any;
-  contatoCliente:any
+  contatoCliente:any;
 
   atendimentoDialog:boolean = false
 
@@ -28,7 +28,7 @@ export class ServicosComponent implements OnInit, OnDestroy {
 
   constructor(
     private clientsService: ClientesService,
-    private servicosService:ServicosService
+    private atendimentoService:AtendimentoService
     ) {}
 
   search(event: AutoCompleteCompleteEvent) {
@@ -56,7 +56,10 @@ export class ServicosComponent implements OnInit, OnDestroy {
   }
 
 
-  newAtendimento(){
+  newAtendimento(atendimento:any){
+    
+    console.log('atendimento', atendimento.dadosServicos)
+    
     this.atendimentoDialog = true
   }
 
@@ -72,7 +75,7 @@ export class ServicosComponent implements OnInit, OnDestroy {
 
   onSelectedItemChange(newValue: any) {
     const { cd_cliente } = this.clientDetails
-    this.servicosService.atendimentosAgendamento(cd_cliente)
+    this.atendimentoService.atendimentosAgendamento(cd_cliente)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: (res:any) => {

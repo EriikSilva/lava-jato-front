@@ -7,7 +7,7 @@ import { FinalizarServicoDTO } from './DTO/servicosDTO';
 @Injectable({
   providedIn: 'root'
 })
-export class ServicosService {
+export class AtendimentoService {
   
   private readonly apiUrl = environment.apiUrl
 
