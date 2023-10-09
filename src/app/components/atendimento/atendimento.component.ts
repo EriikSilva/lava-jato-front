@@ -16,7 +16,7 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   items: any[] = [];
   clientDetails:any;
   selectedItem: any;
-  dadosServicos: any;
+  dadosAtendimento: any;
   cd_cliente: any;
   contatoCliente:any;
 
@@ -83,18 +83,18 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
         const { cd_cliente, contato } = data[0].dadosAtendimento.dadosCLiente[0]
 
 
-        this.dadosServicos  = data
+        this.dadosAtendimento  = data
         this.cd_cliente     = cd_cliente
         this.contatoCliente = contato
       }, error: (res:any) => {
-        this.dadosServicos = []
+        this.dadosAtendimento = []
       }
     })
 
   }
 
   limparPesquisa(){
-   this.dadosServicos = ""
+   this.dadosAtendimento = ""
    this.clientDetails = ""
    this.selectedItem = ""
   }

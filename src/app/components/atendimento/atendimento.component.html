@@ -16,7 +16,7 @@
             <button 
             pButton 
             label="Limpar"
-            [disabled]="!dadosServicos || selectedItem == ''"
+            [disabled]="!dadosAtendimento || selectedItem == ''"
             icon="pi p"
             class="ml-2"
             (click)="limparPesquisa()"></button>
@@ -29,17 +29,17 @@
             (click)="newAtendimento()"
             ></button>
              -->
-            <div class="ml-4" *ngIf="dadosServicos">
+            <div class="ml-4" *ngIf="dadosAtendimento">
               Contato: <b>{{ contatoCliente | telefoneFormat }}</b>
             </div>
 
     
-            <div class="ml-4" *ngIf="dadosServicos">
-              Total de Serviços: <b>{{ dadosServicos.length }}</b>
+            <div class="ml-4" *ngIf="dadosAtendimento">
+              Total de Serviços: <b>{{ dadosAtendimento.length }}</b>
             </div>
 
 
-            <div class="ml-4" *ngIf="dadosServicos">
+            <div class="ml-4" *ngIf="dadosAtendimento">
               Código do Cliente: <b>{{ cd_cliente }}</b>
             </div>
             
@@ -54,8 +54,8 @@
         <div class="flex align-items-center justify-content-center table_formatation" >
 
           <p-table 
-          *ngIf="dadosServicos"
-          [value]="dadosServicos" 
+          *ngIf="dadosAtendimento"
+          [value]="dadosAtendimento" 
           [tableStyle]="{ 'min-width': '50rem', 'marign-left': '40%' }">
             <ng-template pTemplate="header">
                 <tr>
@@ -90,7 +90,7 @@
 
 
 
-               <!--   <div *ngFor="let atendimento of dadosServicos">
+               <!--   <div *ngFor="let atendimento of dadosAtendimento">
                 <h4>Número de Atendimento: {{ atendimento.dadosAtendimento.nr_atendimento }}</h4>
            <p>Data e Hora de Início: {{ atendimento.dadosAtendimento.dh_inicio_atendimento }}</p>
                 <p>Valor Total: {{ atendimento.dadosAtendimento.valor_total }}</p>
