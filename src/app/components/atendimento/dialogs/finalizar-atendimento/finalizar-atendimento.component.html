@@ -1,11 +1,48 @@
 <p-dialog
   [(visible)]="finalizarAtendimentoDialog"
   (onHide)="closeDialog()"
-  [style]="{ width: '450px' }"
+  [style]="{ width: '500px', 'height': '1000px' }"
   [header]="'Finalizar Atendimento'"
   [modal]="true"
   styleClass="p-fluid"
 >
+  <form [formGroup]="finalizarAtendimentoForm">
+    <div class="field">
+      <label for="descricao">Descrição:</label>
+      <span class="danger"> * </span>
+      <p-dropdown
+        id="nm_cliente"
+        [options]="clientes"
+        formControlName="cd_cliente_p"
+        placeholder="Selecione"
+        optionLabel="nm_cliente"
+        (onChange)="onDropdownChange($event)"
+      >
+      </p-dropdown>
+    </div>
 
- 
+    <div class="field">
+      <label for="placa">Placa</label>
+      <span class="danger"> * </span>
+      <p-dropdown
+      id="placa"
+      [options]="carroCliente"
+      formControlName="placa"
+      placeholder="Selecione"
+      optionLabel="placa"
+      [disabled]="!carroCliente"
+      (onChange)="onDropdownChange2($event)"
+    >
+    </p-dropdown>
+    </div>
+
+    <div class="field">
+      <label for="descricao">Dia do Atendimento:</label>
+      <span class="danger"> * </span>
+      <input
+      pInputText
+      type="date"
+      />
+    </div>
+  </form>
 </p-dialog>
