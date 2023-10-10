@@ -20,6 +20,10 @@ export class AtendimentoService {
     return this.http.get(`${this.apiUrl}/atendimentos/agendamento/${cd_cliente}`)
   }
   
+  getAtendimentosAgendamento():Observable<any>{
+    return this.http.get(`${this.apiUrl}/atendimentos/agendamento/`)
+  }
+
   servicosFinalizados():Observable<any>{
     return this.http.get(`${this.apiUrl}/atendimentos/servicosFinalizados`)
   }

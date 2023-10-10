@@ -1,99 +1,59 @@
-<div>
-  <p-card [style]="{ margin: '1rem' }">
-    <div class="flex flex-row flex-wrap card-container blue-container">
-      <div class="flex align-items-center justify-content-between">
-        <p-autoComplete
-          placeholder="Buscar Cliente"
-          [(ngModel)]="selectedItem"
-          [suggestions]="suggestions"
-          (onSelect)="onSelectedItemChange($event)"
-          (completeMethod)="search($event)"
-        ></p-autoComplete>
+<!-- <p-autoComplete
+placeholder="Buscar Cliente"
+[(ngModel)]="selectedItem"
+[suggestions]="suggestions"
+(onSelect)="onSelectedItemChange($event)"
+(completeMethod)="search($event)"
+></p-autoComplete> -->
 
-        <button
-          pButton
-          label="Limpar"
-          [disabled]="!dadosAtendimento || selectedItem == ''"
-          class="ml-2"
-          (click)="limparPesquisa()"
-        ></button>
+<div class="table_formatation">
+  <p-table
+    [value]="atendimentos"
+    [tableStyle]="{ 'min-width': '50rem', 'marign-left': '40%' }"
+    [rows]="5"
+    [paginator]="true"
+    [globalFilterFields]="['nm_cliente', 'cpf_cnpj']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    dataKey="id"
+    currentPageReportTemplate="Mostrando do {first} ao {last} de {totalRecords} Itens"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Cliente</th>
+        <th>Data e Hora de Início</th>
+        <th>Valor Total</th>
+        <th>Atendimento</th>
+        <th>Ações</th>
+      </tr>
+    </ng-template>
 
-        <div class="ml-4" *ngIf="dadosAtendimento">
-          <label>Contato:</label>
-          <b>{{ contatoCliente | telefoneFormat }}</b>
-        </div>
-
-        <div class="ml-4" *ngIf="dadosAtendimento">
-          <label>Total de Serviços:</label>
-          <b>{{ dadosAtendimento.length }}</b>
-        </div>
-
-        <div class="ml-4" *ngIf="dadosAtendimento">
-          <label>Código do Cliente:</label>
-          <b>{{ cd_cliente }}</b>
-        </div>
-      </div>
-    </div>
-  </p-card>
-
-  <!-- <p-card [style]="{'margin': '1rem'}" *ngIf="dadosServicos"> -->
-  <div class="flex flex-row flex-wrap card-container blue-container">
-    <div
-      class="flex align-items-center justify-content-center table_formatation"
-    >
-      <p-table
-        *ngIf="dadosAtendimento"
-        [value]="dadosAtendimento"
-        [tableStyle]="{ 'min-width': '50rem', 'marign-left': '40%' }"
-      >
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Cliente</th>
-            <th>Data e Hora de Início</th>
-            <th>Valor Total</th>
-            <th>Atendimento</th>
-            <th>Ações</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-atendimento>
-          <tr>
-            <td>{{ atendimento.dadosAtendimento.dadosCLiente[0].cliente }}</td>
-            <td>{{ atendimento.dadosAtendimento.dh_inicio_atendimento }}</td>
-            <td>
-              {{
-                atendimento.dadosAtendimento.valor_total
-                  | currency : "BRL" : "symbol"
-              }}
-            </td>
-            <td>{{ atendimento.dadosAtendimento.nr_atendimento }}</td>
-            <td>
-              <p-button
-                icon="pi pi-car"
-                styleClass="p-button-rounded p-button-info p-button-text p-button-raised"
-                (onClick)="finalizarAtendimento(atendimento)"
-              ></p-button>
-              <p-button
-                icon="pi pi-trash"
-                styleClass="p-button-rounded p-button-danger p-button-text p-button-raised"
-                (onClick)="deletarAtendimento(atendimento)"
-              ></p-button>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
-  </div>
+    <ng-template pTemplate="body" let-atendimento>
+      <tr>
+        <td>{{ atendimento.dadosAtendimento.dadosCLiente[0].cliente }}</td>
+        <td>{{ atendimento.dadosAtendimento.dh_inicio_atendimento }}</td>
+        <td>
+          {{
+            atendimento.dadosAtendimento.valor_total
+              | currency : "BRL" : "symbol"
+          }}
+        </td>
+        <td>{{ atendimento.dadosAtendimento.nr_atendimento }}</td>
+        <td>
+          <p-button
+            icon="pi pi-check-circle"
+            styleClass="p-button-rounded p-button-info p-button-text p-button-raised"
+            (onClick)="finalizarAtendimento(atendimento)"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
 
 
-<!-- 
-<app-new-atendimento
-#NewAtendimentoComponent
-(dialogClosed)="onDialogClosed()"
-[atendimentoDialog]="atendimentoDialog"
->
-</app-new-atendimento> -->
 
+<!-- DIALOGS -->
 <app-finalizar-atendimento
 #FinalizarAtendimentoComponent
 (dialogClosed)="onDialogClosed()"

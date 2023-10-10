@@ -20,6 +20,10 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   cd_cliente: any;
   contatoCliente:any;
 
+
+
+  atendimentos:any;
+
   atendimentoDialog:boolean = false
   finalizarAtendimentoDialog:boolean = false
   
@@ -32,20 +36,37 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
     private atendimentoService:AtendimentoService
     ) {}
 
-  search(event: AutoCompleteCompleteEvent) {
-    let filtered: any[] = [];
-    let query = event.query;
+  // search(event: AutoCompleteCompleteEvent) {
+  //   let filtered: any[] = [];
+  //   let query = event.query;
 
-    for (let i = 0; i < (this.items as any[]).length; i++) {
-      let client = (this.items as any[])[i];
-      if (client.nm_cliente.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-          this.clientDetails = client
-        filtered.push(client.nm_cliente + ' - ' + client.bairro);
+  //   for (let i = 0; i < (this.items as any[]).length; i++) {
+  //     let client = (this.items as any[])[i];
+  //     if (client.nm_cliente.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+  //         this.clientDetails = client
+  //       filtered.push(client.nm_cliente + ' - ' + client.bairro);
+  //     }
+  //   }
+
+  //   this.suggestions = filtered;
+  // }
+
+
+  getAtendimentos(){
+    this.atendimentoService.getAtendimentosAgendamento()
+    .subscribe({
+      next:(res:any) => {
+        const { data } = res
+        this.atendimentos = data
+        console.log(' this.atendimentos',   this.atendimentos)
+      }, error:(error:any) => {
+
       }
-    }
-
-    this.suggestions = filtered;
+    })
   }
+
+
+
 
   getClients() {
     this.clientsService.getClients().subscribe({
@@ -113,6 +134,7 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getClients();
+    this.getAtendimentos();
   }
 
   ngOnDestroy() {
