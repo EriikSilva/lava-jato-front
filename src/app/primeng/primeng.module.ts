@@ -23,7 +23,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CardModule } from 'primeng/card';
 import { SkeletonModule } from 'primeng/skeleton';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-
+import { CalendarModule } from 'primeng/calendar';
 @NgModule({
   declarations: [],
   exports: [
@@ -49,7 +49,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     KeyFilterModule,
     CardModule,
     SkeletonModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    CalendarModule
   ]
 })
 export class PrimengModule { }
