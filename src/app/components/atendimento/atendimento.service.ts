@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/app/environments/environment.development';
-import { FinalizarServicoDTO } from './DTO/atendimentoDTO';
+import { AgendamentosDTO, FinalizarServicoDTO } from './DTO/atendimentoDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,10 @@ export class AtendimentoService {
   
   atendimentosAgendamento(cd_cliente:string):Observable<any>{
     return this.http.get(`${this.apiUrl}/atendimentos/agendamento/${cd_cliente}`)
+  }
+
+  gerarAtendimento(body:AgendamentosDTO):Observable<AgendamentosDTO>{
+    return this.http.post<AgendamentosDTO>(`${this.apiUrl}/atendimentos/agendamento`, body)
   }
   
   getAtendimentosAgendamento():Observable<any>{
