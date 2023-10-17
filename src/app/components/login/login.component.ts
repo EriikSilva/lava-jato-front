@@ -54,11 +54,12 @@ export class LoginComponent  implements OnInit, AfterViewInit{
 
     this.loginService.userLogin(bodyLogin).subscribe({
       next: (res: any) => {
-        const { token, user } = res;
+        const { token, user, cd_usuario} = res;
         this.buttonLoading = false
         
         this.loginService.setToken(token)
         this.loginService.setUser(user)
+        this.loginService.setCdUsuario(cd_usuario)
         if(token)
         this.router.navigate(['/inicio']);
       },

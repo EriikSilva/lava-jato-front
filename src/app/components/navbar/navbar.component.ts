@@ -42,6 +42,8 @@ export class NavbarComponent implements OnInit {
 
   logout(){
     this.loginService.removeToken();
+    this.loginService.removeUser();
+    this.loginService.removeCdUsuario();
     this.router.navigate(['/login'])
   }
 

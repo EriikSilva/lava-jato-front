@@ -54,7 +54,7 @@ export class NewAtendimentoComponent implements OnInit {
 
     let horario_p = formValue.horario_p || '';
     horario_p = format(new Date(horario_p), 'yyyy-MM-dd HH:mm:ss');
-    let cd_usuario_p = 1;
+    let cd_usuario_p = Number(localStorage.getItem('cd_usuario'));
     
     let bodyNewAtendimento: AgendamentosDTO = {
       horario_p,

@@ -11,11 +11,25 @@ export class LoginService {
 
   private token: string = ''
   private user:string = ''
+  private cd_usuario = ""
   baseUrl = environment.apiUrl
 
   private readonly apiUrl = environment.apiUrl
 
   constructor(private http:HttpClient) { }
+
+  setCdUsuario(cd_usuario:any){
+    this.cd_usuario = cd_usuario
+    localStorage.setItem('cd_usuario', cd_usuario)
+  }
+
+  getCdUsuario(){
+    return localStorage.getItem('cd_usuario')
+  }
+
+  removeCdUsuario(){
+    return localStorage.removeItem('cd_usuario')
+  }
 
   setUser(user:string){
     this.user = user

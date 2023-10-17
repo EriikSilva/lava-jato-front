@@ -6,7 +6,7 @@ export interface FinalizarServicoDTO {
 export interface AgendamentosDTO {
     horario_p:  string;
     cd_cliente_p: number;
-    cd_usuario_p: number;
+    cd_usuario_p: string | number | null;
     cd_servico_p: number[];
     placa_p:      string;
     cd_veiculo_p: number;
