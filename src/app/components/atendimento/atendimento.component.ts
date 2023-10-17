@@ -58,7 +58,6 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
       next:(res:any) => {
         const { data } = res
         this.atendimentos = data
-        console.log(' this.atendimentos',   this.atendimentos)
       }, error:(error:any) => {
 
       }
