@@ -26,7 +26,6 @@
       <p-dropdown
         id="placa"
         [options]="carroCliente"
-        formControlName="placa_p"
         placeholder="Selecione"
         optionLabel="placa"
         [disabled]="!carroCliente"
@@ -41,7 +40,7 @@
 
       <p-multiSelect 
       [options]="servicos" 
-      [(ngModel)]="cd_servico_p"
+      formControlName="cd_servico_p"
       defaultLabel="Selecione os Serviços" 
       optionLabel="desc_servico" 
       display="chip"
@@ -77,3 +76,8 @@
     ></button>
   </ng-template> 
 </p-dialog>
+
+
+<div class="card">
+  <p-toast></p-toast>
+</div>
