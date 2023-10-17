@@ -13,6 +13,7 @@
       <p-dropdown
         id="nm_cliente"
         [options]="clientes"
+        formControlName="cd_cliente_p"
         placeholder="Selecione"
         optionLabel="nm_cliente"
         (onChange)="onDropdownChangeCliente($event)"

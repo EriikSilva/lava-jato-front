@@ -42,6 +42,7 @@ export class NewAtendimentoComponent implements OnInit {
   newAtendimentoForm = new FormGroup({
     horario_p: new FormControl(''),
     cd_servico_p: new FormControl(''),
+    cd_cliente_p: new FormControl('')
   });
 
   saveNewAtendimento() {
@@ -53,9 +54,9 @@ export class NewAtendimentoComponent implements OnInit {
 
     let horario_p = formValue.horario_p || '';
     horario_p = format(new Date(horario_p), 'yyyy-MM-dd HH:mm:ss');
-    const cd_usuario_p = 1;
-
-    const bodyNewAtendimento: AgendamentosDTO = {
+    let cd_usuario_p = 1;
+    
+    let bodyNewAtendimento: AgendamentosDTO = {
       horario_p,
       cd_cliente_p: this.cd_cliente,
       cd_usuario_p,
@@ -77,6 +78,9 @@ export class NewAtendimentoComponent implements OnInit {
             summary: 'Sucesso ao cadastrar',
             detail: message,
           });
+      
+          this.carroCliente = ""
+          this.newAtendimentoForm.reset();
         },
         error: (res: any) => {
           this.MessageService.add({
