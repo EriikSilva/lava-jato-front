@@ -4,7 +4,7 @@ export interface FinalizarServicoDTO {
 }
 
 export interface AgendamentosDTO {
-    cd_agenda_p:  number;
+    horario_p:  string;
     cd_cliente_p: number;
     cd_usuario_p: number;
     cd_servico_p: number[];

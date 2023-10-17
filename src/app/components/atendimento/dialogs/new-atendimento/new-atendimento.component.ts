@@ -4,6 +4,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ServicosService } from 'src/app/components/servicos/servicos.service';
 import { format, addDays } from 'date-fns';
+import { AgendamentosDTO } from '../../DTO/atendimentoDTO';
+import { AtendimentoService } from '../../atendimento.service';
 @Component({
   selector: 'app-new-atendimento',
   templateUrl: './new-atendimento.component.html',
@@ -13,7 +15,8 @@ export class NewAtendimentoComponent implements OnInit {
   constructor(
     private carrosService: CarrosService,
     private clienteService: ClientesService,
-    private servicosService: ServicosService
+    private servicosService: ServicosService,
+    private atendimentoService:AtendimentoService
   ) {}
 
   @Input() atendimentoDialog: boolean = false;
@@ -45,7 +48,7 @@ export class NewAtendimentoComponent implements OnInit {
     horario_p = format(new Date(horario_p), 'yyyy-MM-dd HH:mm:ss');
     const cd_usuario_p = 1;
 
-    const bodyNewAtendimento = {
+    const bodyNewAtendimento: AgendamentosDTO= {
       horario_p,
       cd_cliente_p:this.cd_cliente,
       cd_usuario_p,
@@ -54,15 +57,15 @@ export class NewAtendimentoComponent implements OnInit {
       cd_veiculo_p: this.cd_veiculo,
     };
     
-    console.log('bodyNewAtendimento', bodyNewAtendimento)
-
-
-    // const bodyNewCar: postCarClientDTO = {
-    //   modelo,
-    //   placa,
-    //   cd_tipo_veiculo: cd_tipo_veiculo_p,
-    //   cd_cliente: this.cd_cliente,
-    // };
+    this.atendimentoService.gerarAtendimento(bodyNewAtendimento)
+    .subscribe({
+      next:(res:any) => {
+        console.log('res', res)
+      }, error:(error:any) => {
+        console.log('re',error)
+      }
+    })
+ 
   }
 
   getCarrosCliente(cd_cliente: any) {
