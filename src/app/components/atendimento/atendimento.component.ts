@@ -67,9 +67,6 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
     })
   }
 
-
-
-
   getClients() {
     this.clientsService.getClients().subscribe({
       next: (res: any) => {
