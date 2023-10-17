@@ -21,7 +21,8 @@ placeholder="Buscar Cliente"
     <ng-template pTemplate="header">
       <tr>
         <th>Cliente</th>
-        <th>Data e Hora de Início</th>
+        <th>Data e Hora do Início</th>
+        <!-- <th>Data e Hora do Fim</th> -->
         <th>Valor Total</th>
         <th>Atendimento</th>
         <th>Ações</th>
@@ -32,6 +33,7 @@ placeholder="Buscar Cliente"
       <tr>
         <td>{{ atendimento.dadosAtendimento.dadosCLiente[0].cliente }}</td>
         <td>{{ atendimento.dadosAtendimento.dh_inicio_atendimento }}</td>
+        <!-- <td>{{ atendimento.dadosAtendimento.dadosServico }}</td> -->
         <td>
           {{
             atendimento.dadosAtendimento.valor_total
@@ -41,7 +43,7 @@ placeholder="Buscar Cliente"
         <td>{{ atendimento.dadosAtendimento.nr_atendimento }}</td>
         <td>
           <p-button
-            icon="pi pi-check-circle"
+            icon="pi pi-times"
             styleClass="p-button-rounded p-button-info p-button-text p-button-raised"
             (onClick)="finalizarAtendimento(atendimento)"
           ></p-button>
