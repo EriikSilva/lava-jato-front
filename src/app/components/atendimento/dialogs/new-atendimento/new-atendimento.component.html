@@ -20,21 +20,7 @@
       >
       </p-dropdown>
     </div>
-
-    <div class="field">
-      <label for="placa">Placa</label>
-      <span class="danger"> * </span>
-      <p-dropdown
-        id="placa"
-        [options]="carroCliente"
-        placeholder="Selecione"
-        optionLabel="placa"
-        [disabled]="!carroCliente"
-        (onChange)="onDropdownChangeCarro($event)"
-      >
-      </p-dropdown>
-    </div>
-
+    
     <div class="field">
       <label for="placa">Serviços</label>
       <span class="danger"> * </span>
@@ -48,6 +34,23 @@
       (onChange)="onMultiSelectChangeServicos($event)"
       ></p-multiSelect>
     </div>
+
+
+    <div class="field">
+      <label for="placa">Placa</label>
+      <span class="danger"> * </span>
+      <p-dropdown
+        id="placa"
+        [options]="carroCliente"
+        placeholder="Selecione"
+        optionLabel="placa"
+        [disabled]="!carroCliente || noCarsValidation"
+        (onChange)="onDropdownChangeCarro($event)"
+      >
+      </p-dropdown>
+      <span class="danger" *ngIf="noCarsValidation">Este cliente não possui carros disponiveis</span>
+    </div>
+
 
     <div class="field">
       <label for="descricao">Dia do Atendimento:</label>

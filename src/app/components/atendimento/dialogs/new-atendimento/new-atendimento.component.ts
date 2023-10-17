@@ -33,6 +33,7 @@ export class NewAtendimentoComponent implements OnInit {
   servicos: any;
   cd_servico_p: any;
   cd_cliente: any;
+  noCarsValidation:boolean = false
 
   ngOnInit(): void {
     this.getClientes();
@@ -140,6 +141,7 @@ export class NewAtendimentoComponent implements OnInit {
     const { value } = cliente;
     this.carroCliente = value;
     this.cd_cliente = value.cd_cliente;
+    this.noCarsValidation = false
     this.getCarroCliente(value.cd_cliente);
   }
 
@@ -147,8 +149,11 @@ export class NewAtendimentoComponent implements OnInit {
     this.carrosService.getVeiculoCliente(cd_client).subscribe({
       next: (res: any) => {
         const { data } = res;
+  
         this.carroCliente = data;
-      },
+      },error:(res:any) => {
+          this.noCarsValidation = true
+      }
     });
   }
 
