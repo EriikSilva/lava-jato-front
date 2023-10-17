@@ -12,12 +12,36 @@ placeholder="Buscar Cliente"
     [tableStyle]="{ 'min-width': '50rem', 'marign-left': '40%' }"
     [rows]="5"
     [paginator]="true"
-    [globalFilterFields]="['nm_cliente', 'cpf_cnpj']"
+    [globalFilterFields]="['dadosAtendimento.dadosCLiente[0].cliente']"
     [tableStyle]="{ 'min-width': '75rem' }"
     dataKey="id"
     currentPageReportTemplate="Mostrando do {first} ao {last} de {totalRecords} Itens"
     [showCurrentPageReport]="true"
   >
+  <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-content-between">
+      <h2 class="m-0">CLIENTES</h2>
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          pTooltip="Nome"
+          tooltipPosition="top"
+          (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Procurar... "
+        />
+      </span>
+      <div>
+        <p-button
+        label="Novo Atendimento"
+        icon="pi pi-plus"
+        (onClick)="newAtendimento()"
+        >
+        </p-button>
+      </div>
+    </div>
+  </ng-template>
     <ng-template pTemplate="header">
       <tr>
         <th>Cliente</th>
@@ -54,12 +78,7 @@ placeholder="Buscar Cliente"
 </div>
 
 
-<p-button
-label="teste"
-(onClick)="newAtendimento()"
->
 
-</p-button>
 
 
 

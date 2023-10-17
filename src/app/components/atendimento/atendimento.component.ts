@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ClientesService } from '../clientes/clientes.service';
 import { AtendimentoService } from './atendimento.service';
 import { Subject, takeUntil } from 'rxjs';
+import { Table } from 'primeng/table';
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -13,6 +14,8 @@ interface AutoCompleteCompleteEvent {
   styleUrls: ['./atendimento.component.scss'],
 })
 export class AtendimentoComponent implements OnInit, OnDestroy {
+  @ViewChild('dt') dt: Table | undefined;
+
   items: any[] = [];
   clientDetails:any;
   selectedItem: any;
@@ -58,6 +61,7 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
       next:(res:any) => {
         const { data } = res
         this.atendimentos = data
+        console.log('data', data)
       }, error:(error:any) => {
 
       }
@@ -116,6 +120,13 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
     })
 
   }
+
+  applyFilterGlobal($event: any, stringVal: any) {
+    if (this.dt) {
+      this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+    }
+  }
+
 
   limparPesquisa(){
    this.dadosAtendimento = ""
