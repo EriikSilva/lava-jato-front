@@ -52,6 +52,14 @@ placeholder="Buscar Cliente"
 </div>
 
 
+<p-button
+label="teste"
+(onClick)="newAtendimento()"
+>
+
+</p-button>
+
+
 
 <!-- DIALOGS -->
 <app-finalizar-atendimento
@@ -60,3 +68,10 @@ placeholder="Buscar Cliente"
 [finalizarAtendimentoDialog]="finalizarAtendimentoDialog"
 >  
 </app-finalizar-atendimento>
+
+<app-new-atendimento
+#NewAtendimentoComponent
+(dialogClosed)="onDialogClosed()"
+[atendimentoDialog]="atendimentoDialog"
+>
+</app-new-atendimento>

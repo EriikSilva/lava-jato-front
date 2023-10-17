@@ -14,8 +14,8 @@ export class AtendimentoService {
   constructor(
     private http:HttpClient
   ) { }
-    
 
+  
   atendimentosAgendamento(cd_cliente:string):Observable<any>{
     return this.http.get(`${this.apiUrl}/atendimentos/agendamento/${cd_cliente}`)
   }

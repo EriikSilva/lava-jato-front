@@ -1,39 +1,78 @@
 <p-dialog
   [(visible)]="atendimentoDialog"
   (onHide)="closeDialog()"
-  [style]="{ width: '450px' }"
+  [style]="{ width: '500px', height: '1000px' }"
   [header]="'Novo Atendimento'"
   [modal]="true"
   styleClass="p-fluid"
 >
-  <ng-template pTemplate="content">
-    <form [formGroup]="newAtendimentoForm">
+  <form [formGroup]="newAtendimentoForm">
     <div class="field">
-      <label for="nome">Cliente:</label>
+      <label for="descricao">Descrição:</label>
       <span class="danger"> * </span>
-      <input
-        type="text"
-        pInputText
-        maxlength="50"
+      <p-dropdown
+        id="nm_cliente"
+        [options]="clientes"
         formControlName="cd_cliente_p"
-        id="nome"
-        required
-        autofocus
-      />
+        placeholder="Selecione"
+        optionLabel="nm_cliente"
+        (onChange)="onDropdownChangeCliente($event)"
+      >
+      </p-dropdown>
     </div>
+
     <div class="field">
-      <label for="nome">Cliente:</label>
+      <label for="placa">Placa</label>
       <span class="danger"> * </span>
-      <input
-        type="text"
-        pInputText
-        maxlength="50"
-        formControlName="cd_cliente_p"
-        id="nome"
-        required
-        autofocus
-      />
+      <p-dropdown
+        id="placa"
+        [options]="carroCliente"
+        formControlName="placa_p"
+        placeholder="Selecione"
+        optionLabel="placa"
+        [disabled]="!carroCliente"
+        (onChange)="onDropdownChangeCarro($event)"
+      >
+      </p-dropdown>
+    </div>
+
+    <div class="field">
+      <label for="placa">Serviços</label>
+      <span class="danger"> * </span>
+
+      <p-multiSelect 
+      [options]="servicos" 
+      formControlName="cd_servico_p"
+      defaultLabel="Selecione os Serviços" 
+      optionLabel="desc_servico" 
+      display="chip"></p-multiSelect>
+    </div>
+
+    <div class="field">
+      <label for="descricao">Dia do Atendimento:</label>
+      <span class="danger"> * </span>
+      <input pInputText type="date" formControlName="horario_p" />
     </div>
   </form>
-  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancelar"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="closeDialog()"
+    ></button>
+
+    <button
+    [disabled]="!newAtendimentoForm.valid"
+    pButton
+    pRipple
+    label="Salvar"
+    icon="pi pi-check"
+    class="p-button-text"
+    (click)="saveNewAtendimento()"
+    ></button>
+  </ng-template> 
 </p-dialog>

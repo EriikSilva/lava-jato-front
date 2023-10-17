@@ -83,10 +83,8 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   }
 
 
-  newAtendimento(atendimento:any){
-    
-    console.log('atendimento', atendimento.dadosServicos)
-    
+  newAtendimento(){
+   
     this.atendimentoDialog = true
   }
 
