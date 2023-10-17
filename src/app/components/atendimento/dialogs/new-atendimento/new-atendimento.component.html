@@ -1,7 +1,7 @@
 <p-dialog
   [(visible)]="atendimentoDialog"
   (onHide)="closeDialog()"
-  [style]="{ width: '500px', height: '1000px' }"
+  [style]="{ width: '800px', height: '1000px' }"
   [header]="'Novo Atendimento'"
   [modal]="true"
   styleClass="p-fluid"
@@ -13,7 +13,6 @@
       <p-dropdown
         id="nm_cliente"
         [options]="clientes"
-        formControlName="cd_cliente_p"
         placeholder="Selecione"
         optionLabel="nm_cliente"
         (onChange)="onDropdownChangeCliente($event)"
@@ -42,16 +41,18 @@
 
       <p-multiSelect 
       [options]="servicos" 
-      formControlName="cd_servico_p"
+      [(ngModel)]="cd_servico_p"
       defaultLabel="Selecione os Serviços" 
       optionLabel="desc_servico" 
-      display="chip"></p-multiSelect>
+      display="chip"
+      (onChange)="onMultiSelectChangeServicos($event)"
+      ></p-multiSelect>
     </div>
 
     <div class="field">
       <label for="descricao">Dia do Atendimento:</label>
       <span class="danger"> * </span>
-      <input pInputText type="date" formControlName="horario_p" />
+      <input pInputText type="datetime-local" formControlName="horario_p" />
     </div>
   </form>
 
