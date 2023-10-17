@@ -33,6 +33,7 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { NewAtendimentoComponent } from './components/atendimento/dialogs/new-atendimento/new-atendimento.component';
 import { FinalizarAtendimentoComponent } from './components/atendimento/dialogs/finalizar-atendimento/finalizar-atendimento.component';
+import { ServicosComponent } from './components/servicos/servicos.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { FinalizarAtendimentoComponent } from './components/atendimento/dialogs/
     CarDetailsComponent,
     InicioComponent,
     NewAtendimentoComponent,
-    FinalizarAtendimentoComponent
+    FinalizarAtendimentoComponent,
+    ServicosComponent
   ],
   imports: [
     BrowserAnimationsModule,
