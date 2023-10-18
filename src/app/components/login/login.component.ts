@@ -52,7 +52,8 @@ export class LoginComponent  implements OnInit, AfterViewInit{
       senha,
     };
 
-    this.loginService.userLogin(bodyLogin).subscribe({
+    this.loginService.userLogin(bodyLogin)
+    .subscribe({
       next: (res: any) => {
         const { token, user, cd_usuario} = res;
         this.buttonLoading = false
@@ -64,6 +65,10 @@ export class LoginComponent  implements OnInit, AfterViewInit{
         this.router.navigate(['/inicio']);
       },
       error: (res: any) => {
+        const senhaControl = this.userFormLogin.get('senha');
+        if (senhaControl) {
+          senhaControl.reset();
+        }
         this.buttonLoading = false
         const { error } = res.error
         this.messageService.add({
