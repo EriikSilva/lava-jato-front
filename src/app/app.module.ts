@@ -34,6 +34,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { NewAtendimentoComponent } from './components/atendimento/dialogs/new-atendimento/new-atendimento.component';
 import { FinalizarAtendimentoComponent } from './components/atendimento/dialogs/finalizar-atendimento/finalizar-atendimento.component';
 import { ServicosComponent } from './components/servicos/servicos.component';
+import { VisualizarServicoComponent } from './components/atendimento/dialogs/visualizar-servico/visualizar-servico.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ServicosComponent } from './components/servicos/servicos.component';
     InicioComponent,
     NewAtendimentoComponent,
     FinalizarAtendimentoComponent,
-    ServicosComponent
+    ServicosComponent,
+    VisualizarServicoComponent
   ],
   imports: [
     BrowserAnimationsModule,
