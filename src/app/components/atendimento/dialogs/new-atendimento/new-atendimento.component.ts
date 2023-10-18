@@ -156,7 +156,7 @@ export class NewAtendimentoComponent implements OnInit {
         const { data } = res;
         const carroConcatenado = data.map((veiculo:any) => ({
           ...veiculo,
-          placaModeloConcatenado: `Placa: ${veiculo.placa} - Modelo: ${veiculo.modelo}`
+          placaModeloConcatenado: `Modelo: ${veiculo.modelo} - Placa: ${veiculo.placa}`
         }))
         this.veiculoCliente = carroConcatenado
       },error:(res:any) => {
