@@ -15,4 +15,12 @@ export class ServicosService {
   getServicos():Observable<any>{
     return this.http.get<any>(`${this.apiUrl}/servicos`)
   }
+
+  finalizarServico(nr_atendimento_p:number,nr_servico_p:number):Observable<any>{
+    const bodyFinalizarServico = {
+      nr_atendimento_p,
+      nr_servico_p
+    }
+    return this.http.post<any>(`${this.apiUrl}/atendimentos/finalizarServico`,bodyFinalizarServico )
+  }
 }

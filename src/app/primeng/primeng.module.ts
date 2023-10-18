@@ -25,6 +25,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CalendarModule } from 'primeng/calendar';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 @NgModule({
   declarations: [],
   exports: [
@@ -52,7 +53,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     SkeletonModule,
     AutoCompleteModule,
     CalendarModule,
-    MultiSelectModule
+    MultiSelectModule,
+    ConfirmDialogModule
   ]
 })
 export class PrimengModule { }

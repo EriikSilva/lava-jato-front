@@ -1,8 +1,10 @@
+import { ServicosService } from 'src/app/components/servicos/servicos.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ClientesService } from '../clientes/clientes.service';
 import { AtendimentoService } from './atendimento.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Table } from 'primeng/table';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -12,6 +14,7 @@ interface AutoCompleteCompleteEvent {
   selector: 'app-atendimento',
   templateUrl: './atendimento.component.html',
   styleUrls: ['./atendimento.component.scss'],
+  providers:[ConfirmationService,MessageService ]
 })
 export class AtendimentoComponent implements OnInit, OnDestroy {
   @ViewChild('dt') dt: Table | undefined;
@@ -36,7 +39,10 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
 
   constructor(
     private clientsService: ClientesService,
-    private atendimentoService:AtendimentoService
+    private atendimentoService:AtendimentoService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
+    private ServicosService:ServicosService
     ) {}
 
   // search(event: AutoCompleteCompleteEvent) {
@@ -77,11 +83,60 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   }
 
   finalizarAtendimento(atendimento:any){
-    this.finalizarAtendimentoDialog = true
+    // this.finalizarAtendimentoDialog = true
+     const nr_atendimento = atendimento.dadosAtendimento.nr_atendimento
+     const nr_servico = atendimento.dadosAtendimento.dadosServico[0].nr_servico_atendimento
+  
 
+    this.confirmationService.confirm({
+      message: 'Deseja Finalizar Esse Atendimento?',
+      header: 'Atenção',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        this.finalizarServico(nr_atendimento, nr_servico)
+        // this.finalizarAtendimento2(nr_atendimento, nr_servico)
+    },
+    })
+  }
+  
+  finalizarServico(nr_atendimento_p:number, nr_servico_p:number){
+    this.ServicosService.finalizarServico(nr_atendimento_p, nr_servico_p)
+    .subscribe({
+      next:(res:any) => {
+        const { message } = res
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: message
+        });
+
+        this.finalizarAtendimento2(nr_atendimento_p, nr_servico_p)
+      }, error:(res:any) => {
+          this.messageService.add({
+          severity: 'error',
+          summary: 'Erro ao Finalizar Serviço',
+          detail: res.error.error,
+        });
+      }
+    })
   }
 
-
+  finalizarAtendimento2(nr_atendimento:number, nr_servico:number){
+    this.atendimentoService.finalizarAtendimento(nr_atendimento,nr_servico)
+    .subscribe({
+      next:(res:any) => {
+        console.log(res);
+      }, error:(res:any) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro ao Finalizar Atendimento',
+          detail: res.error.error,
+        });
+      }
+    })
+  }
   newAtendimento(){
    
     this.atendimentoDialog = true
