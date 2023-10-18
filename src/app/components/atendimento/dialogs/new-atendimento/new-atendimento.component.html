@@ -60,6 +60,7 @@
   </form>
 
   <ng-template pTemplate="footer">
+    <h3 *ngIf="precoServicoFinal" class="valor_total_servico">TOTAL: {{precoServicoFinal | currency : "BRL" : "symbol"}}</h3>
     <button
       pButton
       pRipple
