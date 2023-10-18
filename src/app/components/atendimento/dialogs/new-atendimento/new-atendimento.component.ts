@@ -154,8 +154,6 @@ export class NewAtendimentoComponent implements OnInit {
     this.carrosService.getVeiculoCliente(cd_client).subscribe({
       next: (res: any) => {
         const { data } = res;
-        // this.carroCliente = data;
-
         const carroConcatenado = data.map((veiculo:any) => ({
           ...veiculo,
           placaModeloConcatenado: `Placa: ${veiculo.placa} - Modelo: ${veiculo.modelo}`
