@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-visualizar-servico',
@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./visualizar-servico.component.scss']
 })
 export class VisualizarServicoComponent {
+
+  @Input() visualizarServicoDialog:boolean = false
+  @Output() dialogClosed = new EventEmitter<void>();
+
+  closeDialog(){
+    this.visualizarServicoDialog = false
+    this.dialogClosed.emit();
+  }
 
 }

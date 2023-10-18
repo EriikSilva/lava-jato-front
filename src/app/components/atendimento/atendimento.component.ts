@@ -14,36 +14,35 @@ interface AutoCompleteCompleteEvent {
   selector: 'app-atendimento',
   templateUrl: './atendimento.component.html',
   styleUrls: ['./atendimento.component.scss'],
-  providers:[ConfirmationService,MessageService ]
+  providers: [ConfirmationService, MessageService],
 })
 export class AtendimentoComponent implements OnInit, OnDestroy {
   @ViewChild('dt') dt: Table | undefined;
 
   items: any[] = [];
-  clientDetails:any;
+  clientDetails: any;
   selectedItem: any;
   dadosAtendimento: any;
   cd_cliente: any;
-  contatoCliente:any;
+  contatoCliente: any;
 
+  atendimentos: any;
 
+  atendimentoDialog: boolean = false;
+  finalizarAtendimentoDialog: boolean = false;
+  visualizarServicoDialog: boolean = false;
 
-  atendimentos:any;
-
-  atendimentoDialog:boolean = false
-  finalizarAtendimentoDialog:boolean = false
-  
   private destroy$: Subject<void> = new Subject<void>();
 
   suggestions: any[] = [];
 
   constructor(
     private clientsService: ClientesService,
-    private atendimentoService:AtendimentoService,
+    private atendimentoService: AtendimentoService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private ServicosService:ServicosService
-    ) {}
+    private ServicosService: ServicosService
+  ) {}
 
   // search(event: AutoCompleteCompleteEvent) {
   //   let filtered: any[] = [];
@@ -60,17 +59,14 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   //   this.suggestions = filtered;
   // }
 
-
-  getAtendimentos(){
-    this.atendimentoService.getAtendimentosAgendamento()
-    .subscribe({
-      next:(res:any) => {
-        const { data } = res
-        this.atendimentos = data
-      }, error:(error:any) => {
-
-      }
-    })
+  getAtendimentos() {
+    this.atendimentoService.getAtendimentosAgendamento().subscribe({
+      next: (res: any) => {
+        const { data } = res;
+        this.atendimentos = data;
+      },
+      error: (error: any) => {},
+    });
   }
 
   getClients() {
@@ -82,11 +78,11 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
     });
   }
 
-  finalizarAtendimento(atendimento:any){
+  finalizarAtendimento(atendimento: any) {
     // this.finalizarAtendimentoDialog = true
-     const nr_atendimento = atendimento.dadosAtendimento.nr_atendimento
-     const nr_servico = atendimento.dadosAtendimento.dadosServico[0].nr_servico_atendimento
-  
+    const nr_atendimento = atendimento.dadosAtendimento.nr_atendimento;
+    const nr_servico =
+      atendimento.dadosAtendimento.dadosServico[0].nr_servico_atendimento;
 
     this.confirmationService.confirm({
       message: 'Deseja Finalizar Esse Atendimento?',
@@ -95,100 +91,101 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
       acceptLabel: 'Sim',
       rejectLabel: 'Não',
       accept: () => {
-        this.finalizarServico(nr_atendimento, nr_servico)
+        this.finalizarServico(nr_atendimento, nr_servico);
         // this.finalizarAtendimento2(nr_atendimento, nr_servico)
-    },
-    })
+      },
+    });
   }
-  
-  finalizarServico(nr_atendimento_p:number, nr_servico_p:number){
-    this.ServicosService.finalizarServico(nr_atendimento_p, nr_servico_p)
-    .subscribe({
-      next:(res:any) => {
-        const { message } = res
+
+  finalizarServico(nr_atendimento_p: number, nr_servico_p: number) {
+    this.ServicosService.finalizarServico(
+      nr_atendimento_p,
+      nr_servico_p
+    ).subscribe({
+      next: (res: any) => {
+        const { message } = res;
         this.messageService.add({
           severity: 'success',
           summary: 'Sucesso',
-          detail: message
+          detail: message,
         });
 
-        this.finalizarAtendimento2(nr_atendimento_p, nr_servico_p)
-      }, error:(res:any) => {
-          this.messageService.add({
+        this.finalizarAtendimento2(nr_atendimento_p, nr_servico_p);
+      },
+      error: (res: any) => {
+        this.messageService.add({
           severity: 'error',
           summary: 'Erro ao Finalizar Serviço',
           detail: res.error.error,
         });
-      }
-    })
+      },
+    });
   }
 
-  finalizarAtendimento2(nr_atendimento:number, nr_servico:number){
-    this.atendimentoService.finalizarAtendimento(nr_atendimento,nr_servico)
-    .subscribe({
-      next:(res:any) => {
-        console.log(res);
-      }, error:(res:any) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Erro ao Finalizar Atendimento',
-          detail: res.error.error,
-        });
-      }
-    })
+  finalizarAtendimento2(nr_atendimento: number, nr_servico: number) {
+    this.atendimentoService
+      .finalizarAtendimento(nr_atendimento, nr_servico)
+      .subscribe({
+        next: (res: any) => {
+          console.log(res);
+        },
+        error: (res: any) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro ao Finalizar Atendimento',
+            detail: res.error.error,
+          });
+        },
+      });
   }
-  newAtendimento(){
-   
-    this.atendimentoDialog = true
-  }
-
-  openDialogDetails(atendimento:any){
-    console.log('aqui')
+  newAtendimento() {
+    this.atendimentoDialog = true;
   }
 
-  deletarAtendimento(atendimento:any){
-    const { nr_atendimento,  } = atendimento
-    console.log('agend', atendimento)
+  visualizarServicos(atendimento: any) {
+    this.visualizarServicoDialog = true
   }
-
 
   onSelectedItemChange(newValue: any) {
-    const { cd_cliente } = this.clientDetails
-    this.atendimentoService.atendimentosAgendamento(cd_cliente)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next: (res:any) => {
-        const { data } = res 
-        const { cd_cliente, contato } = data[0].dadosAtendimento.dadosCLiente[0]
+    const { cd_cliente } = this.clientDetails;
+    this.atendimentoService
+      .atendimentosAgendamento(cd_cliente)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (res: any) => {
+          const { data } = res;
+          const { cd_cliente, contato } =
+            data[0].dadosAtendimento.dadosCLiente[0];
 
-
-        this.dadosAtendimento  = data
-        this.cd_cliente     = cd_cliente
-        this.contatoCliente = contato
-      }, error: (res:any) => {
-        this.dadosAtendimento = []
-      }
-    })
-
+          this.dadosAtendimento = data;
+          this.cd_cliente = cd_cliente;
+          this.contatoCliente = contato;
+        },
+        error: (res: any) => {
+          this.dadosAtendimento = [];
+        },
+      });
   }
 
   applyFilterGlobal($event: any, stringVal: any) {
     if (this.dt) {
-      this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+      this.dt.filterGlobal(
+        ($event.target as HTMLInputElement).value,
+        stringVal
+      );
     }
   }
 
-
-  limparPesquisa(){
-   this.dadosAtendimento = ""
-   this.clientDetails = ""
-   this.selectedItem = ""
+  limparPesquisa() {
+    this.dadosAtendimento = '';
+    this.clientDetails = '';
+    this.selectedItem = '';
   }
 
-
-  onDialogClosed(){
+  onDialogClosed() {
     this.atendimentoDialog = false;
-    this.finalizarAtendimentoDialog = false
+    this.finalizarAtendimentoDialog = false;
+    this.visualizarServicoDialog = false
   }
 
   ngOnInit(): void {

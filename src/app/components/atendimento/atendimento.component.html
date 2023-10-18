@@ -69,9 +69,9 @@ placeholder="Buscar Cliente"
         <td>{{ atendimento.dadosAtendimento.status_atendimento == 'A' ? "ABERTO": "FECHADO" }}</td>
         <td>
           <p-button
-            icon="pi pi-times"
+            icon="pi pi-eye"
             styleClass="p-button-rounded p-button-info p-button-text p-button-raised"
-            (onClick)="finalizarAtendimento(atendimento)"
+            (onClick)="visualizarServicos(atendimento)"
           ></p-button>
         </td>
       </tr>
@@ -91,6 +91,13 @@ placeholder="Buscar Cliente"
 [finalizarAtendimentoDialog]="finalizarAtendimentoDialog"
 >  
 </app-finalizar-atendimento> -->
+
+<app-visualizar-servico
+#VisualizarServicoComponent
+(dialogClosed)="onDialogClosed()"
+[visualizarServicoDialog]="visualizarServicoDialog"
+>  
+</app-visualizar-servico>
 
 <app-new-atendimento
 #NewAtendimentoComponent
