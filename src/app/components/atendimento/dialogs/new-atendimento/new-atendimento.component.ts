@@ -124,7 +124,12 @@ export class NewAtendimentoComponent implements OnInit {
   getServicos() {
     this.servicosService.getServicos().subscribe((res: any) => {
       const { data } = res;
-      this.servicos = data;
+
+      const servicosConcatenados = data.map((servico: any) => ({
+        ...servico,
+        desc_vlr_servico: `${servico.desc_servico} - R$ ${servico.vlr_servico.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`,
+      }));  
+      this.servicos = servicosConcatenados
     });
   }
 

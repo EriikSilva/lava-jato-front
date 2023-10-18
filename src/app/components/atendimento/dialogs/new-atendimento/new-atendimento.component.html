@@ -29,7 +29,7 @@
       [options]="servicos" 
       formControlName="cd_servico_p"
       defaultLabel="Selecione os Serviços" 
-      optionLabel="desc_servico" 
+      optionLabel="desc_vlr_servico" 
       display="chip"
       (onChange)="onMultiSelectChangeServicos($event)"
       ></p-multiSelect>
@@ -70,7 +70,6 @@
     ></button>
 
     <button
-    [disabled]="!newAtendimentoForm.valid"
     pButton
     pRipple
     label="Salvar"
