@@ -80,8 +80,7 @@ export class NewAtendimentoComponent implements OnInit {
             detail: message,
           });
       
-          this.carroCliente = ""
-          this.newAtendimentoForm.reset();
+          this.limparFormNovoAtendimento();
         },
         error: (res: any) => {
           this.MessageService.add({
@@ -162,6 +161,12 @@ export class NewAtendimentoComponent implements OnInit {
     });
   }
 
+  limparFormNovoAtendimento(){
+    this.noCarsValidation = false
+    this.carroCliente = ""
+    this.newAtendimentoForm.reset();
+  }
+
   onDropdownChangeCarro(cliente: any) {
     const { value } = cliente;
     this.placa = value.placa;
@@ -176,5 +181,6 @@ export class NewAtendimentoComponent implements OnInit {
   closeDialog() {
     this.atendimentoDialog = false;
     this.dialogClosed.emit();
+    this.limparFormNovoAtendimento();
   }
 }
