@@ -22,7 +22,7 @@
     </div>
     
     <div class="field">
-      <label for="placa">Serviços</label>
+      <label for="servicos">Serviços</label>
       <span class="danger"> * </span>
 
       <p-multiSelect 
@@ -37,14 +37,14 @@
 
 
     <div class="field">
-      <label for="placa">Placa</label>
+      <label for="veiculo">Veiculo</label>
       <span class="danger"> * </span>
       <p-dropdown
-        id="placa"
-        [options]="carroCliente"
+        id="veiculo"
+        [options]="veiculoCliente"
         placeholder="Selecione"
-        optionLabel="placa"
-        [disabled]="!carroCliente || noCarsValidation"
+        optionLabel="placaModeloConcatenado"
+        [disabled]="!veiculoCliente || noCarsValidation"
         (onChange)="onDropdownChangeCarro($event)"
       >
       </p-dropdown>

@@ -27,7 +27,7 @@ export class NewAtendimentoComponent implements OnInit {
   @Output() getAtendimentos = new EventEmitter<void>();
 
   clientes: any;
-  carroCliente: any;
+  veiculoCliente: any;
   placa: any;
   cd_veiculo: any;
   servicos: any;
@@ -144,7 +144,7 @@ export class NewAtendimentoComponent implements OnInit {
 
   onDropdownChangeCliente(cliente: any) {
     const { value } = cliente;
-    this.carroCliente = value;
+    this.veiculoCliente = value;
     this.cd_cliente = value.cd_cliente;
     this.noCarsValidation = false
     this.getCarroCliente(value.cd_cliente);
@@ -154,8 +154,13 @@ export class NewAtendimentoComponent implements OnInit {
     this.carrosService.getVeiculoCliente(cd_client).subscribe({
       next: (res: any) => {
         const { data } = res;
-  
-        this.carroCliente = data;
+        // this.carroCliente = data;
+
+        const carroConcatenado = data.map((veiculo:any) => ({
+          ...veiculo,
+          placaModeloConcatenado: `Placa: ${veiculo.placa} - Modelo: ${veiculo.modelo}`
+        }))
+        this.veiculoCliente = carroConcatenado
       },error:(res:any) => {
           this.noCarsValidation = true
       }
@@ -164,7 +169,7 @@ export class NewAtendimentoComponent implements OnInit {
 
   limparFormNovoAtendimento(){
     this.noCarsValidation = false
-    this.carroCliente = ""
+    this.veiculoCliente = ""
     this.newAtendimentoForm.reset();
   }
 
