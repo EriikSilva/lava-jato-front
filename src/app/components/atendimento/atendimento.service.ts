@@ -14,8 +14,6 @@ export class AtendimentoService {
   constructor(
     private http:HttpClient
   ) { }
-
-  
   
   getAtendimentosAgendamentos():Observable<any>{
     return this.http.get(`${this.apiUrl}/atendimentos/agendamento/`)
@@ -27,7 +25,6 @@ export class AtendimentoService {
   gerarAtendimento(body:AgendamentosDTO):Observable<AgendamentosDTO>{
     return this.http.post<AgendamentosDTO>(`${this.apiUrl}/atendimentos/agendamento`, body)
   }
-  
 
   servicosFinalizados():Observable<any>{
     return this.http.get(`${this.apiUrl}/atendimentos/servicosFinalizados`)

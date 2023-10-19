@@ -5,6 +5,8 @@ import { AtendimentoService } from './atendimento.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Table } from 'primeng/table';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { AtendimentoDTO } from './DTO/atendimentoDTO';
+import { VisualizarServicoComponent } from './dialogs/visualizar-servico/visualizar-servico.component';
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -18,6 +20,8 @@ interface AutoCompleteCompleteEvent {
 })
 export class AtendimentoComponent implements OnInit, OnDestroy {
   @ViewChild('dt') dt: Table | undefined;
+  @ViewChild('VisualizarServicoComponent') VisualizarServicoComponent: VisualizarServicoComponent | undefined;
+
 
   items: any[] = [];
   clientDetails: any;
@@ -142,11 +146,14 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
     this.atendimentoDialog = true;
   }
 
-  visualizarServicos(atendimento: any) {
+  visualizarServicos(atendimento: AtendimentoDTO) {
+    const { cd_cliente } = atendimento.dadosAtendimento.dadosCLiente[0]
     this.visualizarServicoDialog = true
+    this.cd_cliente =  cd_cliente
+    this.VisualizarServicoComponent?.getServicosByClient(this.cd_cliente)
   }
 
-  onSelectedItemChange(newValue: any) {
+  onSelectedItemChange() {
     const { cd_cliente } = this.clientDetails;
     this.atendimentoService
       .getAtendimentosAgendamento(cd_cliente)
