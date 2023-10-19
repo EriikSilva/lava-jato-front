@@ -17,7 +17,13 @@
   </div> -->
   <div class="p-toolbar-group-end">
     <!-- <img src="../../../assets/profile_icon3.png" class="img_formatation"> -->
-    <div class="mr-3">
+    <span class="pi pi-moon mr-3"></span>
+    <p-inputSwitch
+        [(ngModel)]="themeSelection"
+        (onChange)="changeTheme($event.checked)"
+      >
+      </p-inputSwitch>
+    <div class="mr-3 ml-3">
       <h4>{{ nm_usuario | capitalCase}}</h4>
     </div>
 
