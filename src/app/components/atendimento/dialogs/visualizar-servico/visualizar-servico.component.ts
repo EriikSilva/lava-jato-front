@@ -47,7 +47,16 @@ export class VisualizarServicoComponent {
       nr_servico_p: nr_servicos_string
     }
 
-    console.log('bodyFinalizarServico',bodyFinalizarServico)
+    this.atendimentoService.finalizarServico(bodyFinalizarServico)
+    .subscribe({
+      next:(res:any) => {
+        const { message } = res
+        console.log('message', message)
+      }, error:(res:any) => {
+        console.log()
+      }
+    })
+
 
   }
 
