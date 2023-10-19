@@ -40,21 +40,6 @@ export class VisualizarServicoComponent {
     })
   }
 
-  onCheckboxChange(value: boolean) {
-    console.log('Checkbox selecionado:', value);
-    // Outras ações relacionadas à seleção aqui, se necessário
-}
-toggleSelection(item: any) {
-  const index = this.selectedItems.indexOf(item);
-
-  if (index === -1) {
-    this.selectedItems.push(item);
-  } else {
-    this.selectedItems.splice(index, 1);
-  }
-}
-
-
   closeDialog(){
     this.visualizarServicoDialog = false
     this.dialogClosed.emit();
