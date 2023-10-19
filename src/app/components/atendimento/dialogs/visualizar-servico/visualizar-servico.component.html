@@ -11,8 +11,8 @@
   <ng-template pTemplate="content">
     <p-table
       [value]="servicoCliente"
-      [(selection)]="a"
-      dataKey="code"
+      [(selection)]="selectedItems"
+      dataKey="nr_servico"
       [tableStyle]="{ 'min-width': '50rem' }"
     >
       <ng-template pTemplate="header">
@@ -22,20 +22,22 @@
           <th>Modelo</th>
           <th>Placa</th>
           <th>Veiculo</th>
+          <th>Nr Servico</th>
           <th>Valor</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-servico>
         <tr>
             <td>
-                <p-tableCheckbox [value]="a"></p-tableCheckbox>
+                <p-tableCheckbox [value]="servico" dataKey="nr_servico"></p-tableCheckbox>
             </td>
-            <td>{{servico[0].servico}}</td>
-            <td>{{servico[0].modelo_veiculo}}</td>
-            <td>{{servico[0].placa}}</td>
-            <td>{{servico[0].tipo_veiculo}}</td>
+            <td>{{servico.servico}}</td>
+            <td>{{servico.modelo_veiculo}}</td>
+            <td>{{servico.placa}}</td>
+            <td>{{servico.tipo_veiculo}}</td>
+            <td>{{servico.nr_servico}}</td>
             <td>
-              <b>{{servico[0].valor | currency : "BRL" : "symbol"}}</b>
+              <b>{{servico.valor | currency : "BRL" : "symbol"}}</b>
             </td>
         </tr>
     </ng-template>

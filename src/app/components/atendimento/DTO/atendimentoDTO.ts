@@ -47,3 +47,13 @@ export interface DadosServico {
     dh_inicio_servico:      string;
     dh_fim_servico:         null;
 }
+export interface JSONServico {
+    cd_servico:     number;
+    servico:        string;
+    tipo_veiculo:   string;
+    status_servico: string;
+    placa:          string;
+    modelo_veiculo: string;
+    valor:          number;
+    nr_servico:     number;
+}

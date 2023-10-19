@@ -1,5 +1,7 @@
 import { AtendimentoService } from './../../atendimento.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { json_servico } from './json-servico-cliente';
+import { JSONServico } from '../../DTO/atendimentoDTO';
 
 @Component({
   selector: 'app-visualizar-servico',
@@ -14,16 +16,44 @@ export class VisualizarServicoComponent {
 
   @Input() visualizarServicoDialog:boolean = false
   @Output() dialogClosed = new EventEmitter<void>();
+  selectAll: boolean = false;
+  selectedItems:any
 
+
+
+
+  servicoCliente:any;
+  a:any
 
   getServicosByClient(cd_cliente:string){
     this.atendimentoService.getAtendimentosAgendamento(cd_cliente)
     .subscribe({
       next:(res:any) => {
-        console.log('res', res)
+        const { data } = res
+        // this.servicoCliente = data
+        console.log('data', data)
+
+        const response = json_servico(data)
+        console.log('res' ,response)
+        this.servicoCliente = response
       }
     })
   }
+
+  onCheckboxChange(value: boolean) {
+    console.log('Checkbox selecionado:', value);
+    // Outras ações relacionadas à seleção aqui, se necessário
+}
+toggleSelection(item: any) {
+  const index = this.selectedItems.indexOf(item);
+
+  if (index === -1) {
+    this.selectedItems.push(item);
+  } else {
+    this.selectedItems.splice(index, 1);
+  }
+}
+
 
   closeDialog(){
     this.visualizarServicoDialog = false
