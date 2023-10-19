@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ClienteGetDTO, VeiculosCliente } from '../../DTO/clientesDTO';
 import { CarrosService } from '../../carros.service';
 import { GetTypeCarDTO, editClientCarDTO } from '../../DTO/carrosDTO';
@@ -11,7 +11,7 @@ import { NewCarComponent } from '../new-car/new-car.component';
   styleUrls: ['./car-details.component.scss'],
   providers: [MessageService]
 })
-export class CarDetailsComponent implements OnInit{
+export class CarDetailsComponent{
 
   @ViewChild('NewCarComponent') NewCarComponent: NewCarComponent | undefined;
 
@@ -38,9 +38,6 @@ export class CarDetailsComponent implements OnInit{
   newCarDialog: boolean = false;
   showNoDataMessage = false;
 
-  ngOnInit(): void {
-    this.getCarByClient(this.cd_cliente);
-  }
 
   carClientModal(position: string, cliente: ClienteGetDTO) {
     const { cd_cliente } = cliente;
