@@ -19,9 +19,9 @@
         <tr>
           <th>Selecione</th>
           <th>Serviço</th>
-          <th>Modelo</th>
-          <th>Placa</th>
-          <th>Veiculo</th>
+          <!-- <th>Modelo</th> -->
+          <!-- <th>Placa</th> -->
+          <!-- <th>Veiculo</th> -->
           <th>Status</th>
           <th>Valor</th>
         </tr>
@@ -32,10 +32,10 @@
                 <p-tableCheckbox [value]="servico" dataKey="nr_servico" [disabled]="servico.status_servico === 'F'"></p-tableCheckbox>
             </td>
             <td>{{servico.servico}}</td>
-            <td>{{servico.modelo_veiculo}}</td>
-            <td>{{servico.placa}}</td>
-            <td>{{servico.tipo_veiculo}}</td>
-            <td>{{servico.status_servico}}</td>
+            <!-- <td>{{servico.modelo_veiculo}}</td> -->
+            <!-- <td>{{servico.placa}}</td> -->
+            <!-- <td>{{servico.tipo_veiculo}}</td> -->
+            <td>{{servico.status_servico == 'F' ? "FINALIZADO" : "ABERTO"}}</td>
             <td>
               <b>{{servico.valor | currency : "BRL" : "symbol"}}</b>
             </td>

@@ -22,8 +22,14 @@ export class VisualizarServicoComponent {
   selectAll: boolean = false;
   selectedItems:any
   servicoCliente:any;
+  cdCliente:any;
+  nrAtendimento:any
 
   getServicosByClient(cd_cliente:string, nr_atendimento:number){
+
+    this.cdCliente = cd_cliente
+    this.nrAtendimento = nr_atendimento
+
     this.atendimentoService.getAtendimentosAgendamento(cd_cliente)
     .subscribe({
       next:(res:any) => {
@@ -31,7 +37,6 @@ export class VisualizarServicoComponent {
         
         const response = json_servico(data, nr_atendimento)
         this.servicoCliente = response
-        // console.log('res', response)
       }
     })
   }
@@ -56,8 +61,8 @@ export class VisualizarServicoComponent {
           summary: 'Sucesso',
           detail: message,
         });
+        this.getServicosByClient(this.cdCliente, this.nrAtendimento)
         this.selectedItems = []
-        this.closeDialog()
       }, error:(res:any) => {
         console.log()
       }
