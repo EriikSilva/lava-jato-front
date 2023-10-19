@@ -80,7 +80,7 @@ export class NewAtendimentoComponent implements OnInit {
             summary: 'Sucesso ao cadastrar',
             detail: message,
           });
-      
+          this.precoServicoFinal = false
           this.limparFormNovoAtendimento();
         },
         error: (res: any) => {
@@ -186,6 +186,7 @@ export class NewAtendimentoComponent implements OnInit {
 
   closeDialog() {
     this.atendimentoDialog = false;
+    this.precoServicoFinal = false;
     this.dialogClosed.emit();
     this.limparFormNovoAtendimento();
   }

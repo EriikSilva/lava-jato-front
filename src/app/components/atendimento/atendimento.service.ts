@@ -16,7 +16,11 @@ export class AtendimentoService {
   ) { }
 
   
-  atendimentosAgendamento(cd_cliente:string):Observable<any>{
+  
+  getAtendimentosAgendamentos():Observable<any>{
+    return this.http.get(`${this.apiUrl}/atendimentos/agendamento/`)
+  }
+  getAtendimentosAgendamento(cd_cliente:string):Observable<any>{
     return this.http.get(`${this.apiUrl}/atendimentos/agendamento/${cd_cliente}`)
   }
 
@@ -24,9 +28,6 @@ export class AtendimentoService {
     return this.http.post<AgendamentosDTO>(`${this.apiUrl}/atendimentos/agendamento`, body)
   }
   
-  getAtendimentosAgendamento():Observable<any>{
-    return this.http.get(`${this.apiUrl}/atendimentos/agendamento/`)
-  }
 
   servicosFinalizados():Observable<any>{
     return this.http.get(`${this.apiUrl}/atendimentos/servicosFinalizados`)

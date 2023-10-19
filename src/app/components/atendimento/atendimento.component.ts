@@ -60,7 +60,7 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   // }
 
   getAtendimentos() {
-    this.atendimentoService.getAtendimentosAgendamento().subscribe({
+    this.atendimentoService.getAtendimentosAgendamentos().subscribe({
       next: (res: any) => {
         const { data } = res;
         this.atendimentos = data;
@@ -149,7 +149,7 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   onSelectedItemChange(newValue: any) {
     const { cd_cliente } = this.clientDetails;
     this.atendimentoService
-      .atendimentosAgendamento(cd_cliente)
+      .getAtendimentosAgendamento(cd_cliente)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (res: any) => {
