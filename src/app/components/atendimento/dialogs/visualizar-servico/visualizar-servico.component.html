@@ -4,12 +4,59 @@
   [header]="'Serviços'"
   [modal]="true"
   styleClass="p-fluid"
-  [draggable]="false" 
-
-  [breakpoints]="{ '960px': '75vw' }" 
-  [style]="{ width: '90vw', 'height': '90vh' }"
+  [draggable]="false"
+  [breakpoints]="{ '960px': '75vw' }"
+  [style]="{ width: '90vw', height: '90vh' }"
 >
-<div class="card">
+  <ng-template pTemplate="content">
+    <p-table
+      [value]="servicoCliente"
+      [(selection)]="a"
+      dataKey="code"
+      [tableStyle]="{ 'min-width': '50rem' }"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Selecione</th>
+          <th>Serviço</th>
+          <th>Modelo</th>
+          <th>Placa</th>
+          <th>Veiculo</th>
+          <th>Valor</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-servico>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="a"></p-tableCheckbox>
+            </td>
+            <td>{{servico[0].servico}}</td>
+            <td>{{servico[0].modelo_veiculo}}</td>
+            <td>{{servico[0].placa}}</td>
+            <td>{{servico[0].tipo_veiculo}}</td>
+            <td>
+              <b>{{servico[0].valor | currency : "BRL" : "symbol"}}</b>
+            </td>
+        </tr>
+    </ng-template>
+    </p-table>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancelar"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="closeDialog()"
+    ></button>
   
-</div>
+      <button
+      pButton
+      pRipple
+      label="Salvar"
+      icon="pi pi-check"
+      class="p-button-text"
+      ></button>
+  </ng-template>
 </p-dialog>
