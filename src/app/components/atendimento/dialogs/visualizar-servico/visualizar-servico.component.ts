@@ -30,14 +30,25 @@ export class VisualizarServicoComponent {
     .subscribe({
       next:(res:any) => {
         const { data } = res
-        // this.servicoCliente = data
-        console.log('data', data)
-
         const response = json_servico(data)
-        console.log('res' ,response)
         this.servicoCliente = response
       }
     })
+  }
+
+  finalizarServico(){
+    const nr_servicos = this.selectedItems.map((item:any) => item.nr_servico);
+    const nr_servicos_string = nr_servicos.map((nr_servico:any) => nr_servico.toString());
+    const nr_atendimento = this.selectedItems[0].nr_atendimento
+
+
+    const bodyFinalizarServico = {
+      nr_atendimento_p:nr_atendimento,
+      nr_servico_p: nr_servicos_string
+    }
+
+    console.log('bodyFinalizarServico',bodyFinalizarServico)
+
   }
 
   closeDialog(){

@@ -1,6 +1,8 @@
+import { DadosAtendimento } from './../../DTO/atendimentoDTO';
 export const json_servico = (servico:any) => {    
     const servicosMapeados = servico.map((atendimento:any) => 
     atendimento.dadosAtendimento.dadosServico.map((servico:any) => ({
+        nr_atendimento:atendimento.dadosAtendimento.nr_atendimento,
         cd_servico: servico.cd_servico,
         servico: servico.servico,
         tipo_veiculo: servico.tipo_veiculo,
