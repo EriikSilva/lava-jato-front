@@ -80,10 +80,11 @@ export class ClientesComponent implements OnInit, OnDestroy {
     const { cd_cliente } = cliente;
     this.clientsService.deleteClient(cd_cliente as any).subscribe({
       next: (res: any) => {
+        const { message } = res
         this.messageService.add({
           severity: 'success',
           summary: 'Sucesso',
-          detail: res.message,
+          detail: message,
         });
         this.getClients();
       },
