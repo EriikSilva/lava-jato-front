@@ -35,7 +35,7 @@
             <td>{{servico.modelo_veiculo}}</td>
             <td>{{servico.placa}}</td>
             <td>{{servico.tipo_veiculo}}</td>
-            <td>{{servico.status_servico == 'F' ? "FINALIZADO" : "ABERTO"}}</td>
+            <td>{{servico.status_servico}}</td>
             <td>
               <b>{{servico.valor | currency : "BRL" : "symbol"}}</b>
             </td>
@@ -63,3 +63,8 @@
       ></button>
   </ng-template>
 </p-dialog>
+
+
+<div class="card">
+  <p-toast></p-toast>
+</div>

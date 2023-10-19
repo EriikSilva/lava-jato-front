@@ -147,10 +147,11 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   }
 
   visualizarServicos(atendimento: AtendimentoDTO) {
-    const { cd_cliente } = atendimento.dadosAtendimento.dadosCLiente[0]
+    const { cd_cliente } = atendimento.dadosAtendimento.dadosCLiente[0];
+    const nr_atendimento =  atendimento.dadosAtendimento.nr_atendimento
     this.visualizarServicoDialog = true
     this.cd_cliente =  cd_cliente
-    this.VisualizarServicoComponent?.getServicosByClient(this.cd_cliente)
+    this.VisualizarServicoComponent?.getServicosByClient(this.cd_cliente, nr_atendimento)
   }
 
   onSelectedItemChange() {

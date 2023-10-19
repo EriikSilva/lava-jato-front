@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { AtendimentoService } from './../../atendimento.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { json_servico } from './json-servico-cliente';
@@ -6,32 +7,31 @@ import { JSONServico } from '../../DTO/atendimentoDTO';
 @Component({
   selector: 'app-visualizar-servico',
   templateUrl: './visualizar-servico.component.html',
-  styleUrls: ['./visualizar-servico.component.scss']
+  styleUrls: ['./visualizar-servico.component.scss'],
+  providers:[MessageService]
 })
 export class VisualizarServicoComponent {
 
   constructor(
-    private atendimentoService:AtendimentoService
+    private atendimentoService:AtendimentoService,
+    private messageService:MessageService,
   ){}
 
   @Input() visualizarServicoDialog:boolean = false
   @Output() dialogClosed = new EventEmitter<void>();
   selectAll: boolean = false;
   selectedItems:any
-
-
-
-
   servicoCliente:any;
-  a:any
 
-  getServicosByClient(cd_cliente:string){
+  getServicosByClient(cd_cliente:string, nr_atendimento:number){
     this.atendimentoService.getAtendimentosAgendamento(cd_cliente)
     .subscribe({
       next:(res:any) => {
         const { data } = res
-        const response = json_servico(data)
+        
+        const response = json_servico(data, nr_atendimento)
         this.servicoCliente = response
+        // console.log('res', response)
       }
     })
   }
@@ -51,7 +51,13 @@ export class VisualizarServicoComponent {
     .subscribe({
       next:(res:any) => {
         const { message } = res
-        console.log('message', message)
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: message,
+        });
+        this.selectedItems = []
+        this.closeDialog()
       }, error:(res:any) => {
         console.log()
       }
