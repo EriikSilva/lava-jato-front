@@ -82,3 +82,22 @@ export interface ServicoClienteDTO {
     valor:          number;
     nr_servico:     number;
 }
+
+
+export interface ServicosFinalizadosDTO {
+    dh_inicio_servico: string;
+    dh_fim_servico:    string;
+    nr_seq_servico:    number;
+    tempo_servico:     null;
+    cd_veiculo:        number;
+    placa:             string;
+    cd_servico:        number;
+    tipo_veiculo:      string;
+    modelo_veiculo:    string;
+    valor:             number;
+    servico:           string;
+    status_servico:    string;
+    cliente:           string;
+    cd_cliente:        number;
+    contato:           string;
+}
