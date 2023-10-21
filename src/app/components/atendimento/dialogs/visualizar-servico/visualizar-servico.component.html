@@ -26,9 +26,6 @@
         <tr>
           <th>Selecione</th>
           <th>Serviço</th>
-          <!-- <th>Modelo</th> -->
-          <!-- <th>Placa</th> -->
-          <!-- <th>Veiculo</th> -->
           <th>Valor</th>
           <th>Status</th>
         </tr>
@@ -39,9 +36,6 @@
                 <p-tableCheckbox [value]="servico" dataKey="nr_servico" [disabled]="servico.status_servico === 'F'"></p-tableCheckbox>
             </td>
             <td>{{servico.servico}}</td>
-            <!-- <td>{{servico.modelo_veiculo}}</td> -->
-            <!-- <td>{{servico.placa}}</td> -->
-            <!-- <td>{{servico.tipo_veiculo}}</td> -->
             <td>
               <b>{{servico.valor | currency : "BRL" : "symbol"}}</b>
             </td>
@@ -64,6 +58,7 @@
   
       <button
       pButton
+      [disabled]="selectedItems.length == 0"
       pRipple
       label="Executar"
       icon="pi pi-check"
