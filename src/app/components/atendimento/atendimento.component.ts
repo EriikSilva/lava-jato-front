@@ -153,14 +153,8 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
     this.VisualizarServicoComponent?.getServicosByClient(this.cd_cliente, nr_atendimento)
   }
   applyFilterGlobal($event: any, stringVal: any) {
-    if (this.dt) {
-      this.dt.filterGlobal(
-        ($event.target as HTMLInputElement).value,
-        stringVal
-      );
-    }
+    this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
-
   limparPesquisa() {
     this.dadosAtendimento = '';
     this.clientDetails = '';

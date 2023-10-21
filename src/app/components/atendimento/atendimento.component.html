@@ -1,5 +1,7 @@
 <div class="table_formatation">
   <p-table
+    #dt
+    #textInput
     [value]="atendimentos"
     [tableStyle]="{ 'min-width': '50rem', 'marign-left': '40%' }"
     [rows]="5"
@@ -69,18 +71,6 @@
   </p-table>
 </div>
 
-
-
-
-
-
-<!-- DIALOGS -->
-<!-- <app-finalizar-atendimento
-#FinalizarAtendimentoComponent
-(dialogClosed)="onDialogClosed()"
-[finalizarAtendimentoDialog]="finalizarAtendimentoDialog"
->  
-</app-finalizar-atendimento> -->
 
 <app-visualizar-servico
 #VisualizarServicoComponent
