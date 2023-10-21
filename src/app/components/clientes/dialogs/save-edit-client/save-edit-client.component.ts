@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CepService } from 'src/app/services/cep.service';
 import { ClientesService } from '../../clientes.service';
 import { ClientEditDTO, ClientRegisterDTO } from '../../DTO/clientesDTO';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { MaskUtils, removerCaracteresCPF_CNPJ, removeCaracteresTelefone } from 'src/app/utils/Cpf_Cnpj_Validations';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-save-edit-client',
@@ -12,7 +13,10 @@ import { MaskUtils, removerCaracteresCPF_CNPJ, removeCaracteresTelefone } from '
   styleUrls: ['./save-edit-client.component.scss'],
   providers: [MessageService, MaskUtils, ConfirmationService],
 })
-export class SaveEditClientComponent {
+export class SaveEditClientComponent implements OnDestroy{
+  
+  private destroy$: Subject<void> = new Subject<void>();
+
 
   @Input() cd_cliente: any;
   @Input() clientDialog: boolean = false;
@@ -148,13 +152,16 @@ export class SaveEditClientComponent {
     }
   }
 
-  getBairroByCpf() {
+  getBairroByCep() {
     const formValue = this.clientRegisterForm.value;
 
     if (formValue.cep?.length == 8) {
-      this.cepService.getEnderecoByCep(formValue.cep).subscribe((data) => {
+      this.cepService.getEnderecoByCep(formValue.cep)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        const { bairro } = data
         this.clientRegisterForm.get('bairro')?.setValue(data.bairro);
-        formValue.bairro = data.bairro || '';
+        formValue.bairro = bairro
       });
     }
   }
@@ -208,5 +215,11 @@ export class SaveEditClientComponent {
 
   formatCpfCnpj(value: string): string {
     return this.maskUtils.formatCpfCnpj(value);
+  }
+
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
