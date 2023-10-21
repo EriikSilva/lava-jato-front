@@ -6,7 +6,7 @@
     [tableStyle]="{ 'min-width': '50rem', 'marign-left': '40%' }"
     [rows]="5"
     [paginator]="true"
-    [globalFilterFields]="['cliente']"
+    [globalFilterFields]="['cliente', 'nr_atendimento']"
     [tableStyle]="{ 'min-width': '75rem' }"
     dataKey="id"
     currentPageReportTemplate="Mostrando do {first} ao {last} de {totalRecords} Itens"
@@ -20,7 +20,7 @@
         <input
           pInputText
           type="text"
-          pTooltip="Nome"
+          pTooltip="Nome ou Numero do Atendimento"
           tooltipPosition="top"
           (input)="applyFilterGlobal($event, 'contains')"
           placeholder="Procurar... "
@@ -38,11 +38,19 @@
   </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th>Cliente</th>
-        <th>Data e Hora do Início</th>
+        <th pSortableColumn="cliente">
+          Cliente <p-sortIcon field="nr_atendimento"></p-sortIcon>
+        </th>
+        <th  pSortableColumn="dh_inicio_servico">
+          Data e Hora do Início <p-sortIcon field="nm_cliente"></p-sortIcon>
+        </th>
         <th>Valor Total</th>
-        <th>Atendimento</th>
-        <th>Status</th>
+        <th  pSortableColumn="nr_atendimento">
+          Atendimento <p-sortIcon field="nr_atendimento"></p-sortIcon>
+        </th>
+        <th pSortableColumn="status_servico">
+          Status <p-sortIcon field="status_servico"></p-sortIcon>
+        </th>
         <th>Ações</th>
       </tr>
     </ng-template>
