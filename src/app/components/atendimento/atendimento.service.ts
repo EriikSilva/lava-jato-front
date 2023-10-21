@@ -16,10 +16,14 @@ export class AtendimentoService {
   ) { }
   
   getAtendimentosAgendamentos():Observable<AtendimentoDTO>{
-    return this.http.get<AtendimentoDTO>(`${this.apiUrl}/atendimentos/agendamento/`)
+    return this.http.get<AtendimentoDTO>(`${this.apiUrl}/atendimentos/servicosAndamento/`)
   }
   getAtendimentosAgendamento(cd_cliente:string):Observable<AtendimentoDTO>{
     return this.http.get<AtendimentoDTO>(`${this.apiUrl}/atendimentos/agendamento/${cd_cliente}`)
+  }
+
+  getServicosEmAndamento(nr_atendimento:number): Observable<any>{
+    return this.http.get(`${this.apiUrl}/atendimentos/servicosAndamento/${nr_atendimento}`)
   }
 
   gerarAtendimento(body:AgendamentosDTO):Observable<AgendamentosDTO>{

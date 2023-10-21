@@ -32,28 +32,39 @@ export class VisualizarServicoComponent {
     this.cdCliente = cd_cliente
     this.nrAtendimento = nr_atendimento
 
-    this.atendimentoService.getAtendimentosAgendamento(cd_cliente)
+    this.atendimentoService.getServicosEmAndamento(nr_atendimento)
     .subscribe({
       next:(res:any) => {
         const { data } = res
-        
-        const response = json_servico(data, nr_atendimento)
+        const response = json_servico(data, this.nrAtendimento)
         this.servicoCliente = response
         this.veiculo = response[0].modelo_veiculo
         this.placa = response[0].placa
+
       }
     })
+
+    // this.atendimentoService.getAtendimentosAgendamento(cd_cliente)
+    // .subscribe({
+    //   next:(res:any) => {
+    //     const { data } = res
+    //     console.log('data', data)
+        
+    //     const response = json_servico(data, nr_atendimento)
+    //     console.log('res', response)
+    //     this.servicoCliente = response
+    //     this.veiculo = response[0].modelo_veiculo
+    //     this.placa = response[0].placa
+    //   }
+    // })
   }
 
   finalizarServico(){
-    const nr_servicos = this.selectedItems.map((item:any) => item.nr_servico);
-    const nr_servicos_string = nr_servicos.map((nr_servico:any) => nr_servico.toString());
-    const nr_atendimento = this.selectedItems[0].nr_atendimento
-
+    const cdServicoArray = this.selectedItems.map(item => item.cd_servico.toString());
 
     const bodyFinalizarServico:FinalizarServicoDTO = {
-      nr_atendimento_p:String(nr_atendimento),
-      nr_servico_p: nr_servicos_string
+      nr_atendimento_p:String(this.nrAtendimento),
+      nr_servico_p: cdServicoArray
     }
 
     this.atendimentoService.finalizarServico(bodyFinalizarServico)
@@ -68,7 +79,13 @@ export class VisualizarServicoComponent {
         this.getServicosByClient(this.cdCliente, this.nrAtendimento)
         this.selectedItems = []
       }, error:(res:any) => {
-        console.log('res', res)
+        console.log(res)
+        const { error } = res.error
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: error,
+        });
       }
     })
 

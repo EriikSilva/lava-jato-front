@@ -10,16 +10,16 @@
 >
 <span style="display: flex; align-items: center; justify-content: center;margin-bottom: 1rem;">
   <i class="pi pi-car" style="margin-right: 6px;"></i>
-  <b>Veiculo: </b>{{veiculo}}
+  <b>Veiculo: </b>{{veiculo | uppercase}}
   <i class="pi pi-directions" style="margin-right: 6px; margin-left:1rem;"></i>
-  <b>Placa: </b>{{placa}}
+  <b>Placa: </b>{{placa | uppercase}}
 </span>
 
   <ng-template pTemplate="content">
     <p-table
       [value]="servicoCliente"
       [(selection)]="selectedItems"
-      dataKey="nr_servico"
+      dataKey="cd_servico"
       [tableStyle]="{ 'min-width': '50rem' }"
     >
       <ng-template pTemplate="header">
@@ -33,7 +33,7 @@
       <ng-template pTemplate="body" let-servico>
         <tr>
             <td>
-                <p-tableCheckbox [value]="servico" dataKey="nr_servico" [disabled]="servico.status_servico === 'F'"></p-tableCheckbox>
+                <p-tableCheckbox [value]="servico" dataKey="cd_servico" [disabled]="servico.status_servico === 'F'"></p-tableCheckbox>
             </td>
             <td>{{servico.servico}}</td>
             <td>

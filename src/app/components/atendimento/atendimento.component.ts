@@ -147,34 +147,11 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   }
 
   visualizarServicos(atendimento: AtendimentoDTO) {
-    const { cd_cliente } = atendimento.dadosAtendimento.dadosCLiente[0];
-    const nr_atendimento =  atendimento.dadosAtendimento.nr_atendimento
+    const { cd_cliente, nr_atendimento } = atendimento
     this.visualizarServicoDialog = true
     this.cd_cliente =  cd_cliente
     this.VisualizarServicoComponent?.getServicosByClient(this.cd_cliente, nr_atendimento)
   }
-
-  onSelectedItemChange() {
-    const { cd_cliente } = this.clientDetails;
-    this.atendimentoService
-      .getAtendimentosAgendamento(cd_cliente)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (res: any) => {
-          const { data } = res;
-          const { cd_cliente, contato } =
-            data[0].dadosAtendimento.dadosCLiente[0];
-
-          this.dadosAtendimento = data;
-          this.cd_cliente = cd_cliente;
-          this.contatoCliente = contato;
-        },
-        error: (res: any) => {
-          this.dadosAtendimento = [];
-        },
-      });
-  }
-
   applyFilterGlobal($event: any, stringVal: any) {
     if (this.dt) {
       this.dt.filterGlobal(

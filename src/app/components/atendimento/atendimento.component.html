@@ -1,18 +1,10 @@
-<!-- <p-autoComplete
-placeholder="Buscar Cliente"
-[(ngModel)]="selectedItem"
-[suggestions]="suggestions"
-(onSelect)="onSelectedItemChange($event)"
-(completeMethod)="search($event)"
-></p-autoComplete> -->
-
 <div class="table_formatation">
   <p-table
     [value]="atendimentos"
     [tableStyle]="{ 'min-width': '50rem', 'marign-left': '40%' }"
     [rows]="5"
     [paginator]="true"
-    [globalFilterFields]="['dadosAtendimento.dadosCLiente[0].cliente']"
+    [globalFilterFields]="['cliente']"
     [tableStyle]="{ 'min-width': '75rem' }"
     dataKey="id"
     currentPageReportTemplate="Mostrando do {first} ao {last} de {totalRecords} Itens"
@@ -55,16 +47,16 @@ placeholder="Buscar Cliente"
 
     <ng-template pTemplate="body" let-atendimento>
       <tr>
-        <td>{{ atendimento.dadosAtendimento.dadosCLiente[0].cliente }}</td>
-        <td>{{ atendimento.dadosAtendimento.dh_inicio_atendimento }}</td>
+        <td>{{ atendimento.cliente}}</td>
+        <td>{{ atendimento.dh_inicio_servico }}</td>
         <td>
           {{
-            atendimento.dadosAtendimento.valor_total
+            atendimento.valor
               | currency : "BRL" : "symbol"
           }}
         </td>
-        <td>{{ atendimento.dadosAtendimento.nr_atendimento }}</td>
-        <td>{{ atendimento.dadosAtendimento.status_atendimento == 'A' ? "ABERTO": "FECHADO" }}</td>
+        <td>{{ atendimento.nr_atendimento }}</td>
+        <td>{{ atendimento.status_servico == 'A' ? "ABERTO": "FECHADO" }}</td>
         <td>
           <p-button
             icon="pi pi-eye"
