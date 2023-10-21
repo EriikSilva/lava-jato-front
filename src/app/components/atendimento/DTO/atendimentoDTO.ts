@@ -1,6 +1,6 @@
 export interface FinalizarServicoDTO {
     nr_atendimento_p: string;
-    nr_servico_p:     string;
+    nr_servico_p:     string[];
 }
 
 export interface AgendamentosDTO {
@@ -48,6 +48,31 @@ export interface DadosServico {
     dh_fim_servico:         null;
 }
 export interface JSONServico {
+    cd_servico:     number;
+    servico:        string;
+    tipo_veiculo:   string;
+    status_servico: string;
+    placa:          string;
+    modelo_veiculo: string;
+    valor:          number;
+    nr_servico:     number;
+}
+
+export interface ItensSelecionadosDTO {
+    nr_atendimento: number;
+    cd_servico:     number;
+    servico:        string;
+    tipo_veiculo:   string;
+    status_servico: string;
+    placa:          string;
+    modelo_veiculo: string;
+    valor:          number;
+    nr_servico:     number;
+}
+
+
+export interface ServicoClienteDTO {
+    nr_atendimento: number;
     cd_servico:     number;
     servico:        string;
     tipo_veiculo:   string;

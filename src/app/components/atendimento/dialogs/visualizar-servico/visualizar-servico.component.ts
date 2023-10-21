@@ -2,7 +2,7 @@ import { MessageService } from 'primeng/api';
 import { AtendimentoService } from './../../atendimento.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { json_servico } from './json-servico-cliente';
-import { JSONServico } from '../../DTO/atendimentoDTO';
+import { FinalizarServicoDTO, ItensSelecionadosDTO, ServicoClienteDTO } from '../../DTO/atendimentoDTO';
 
 @Component({
   selector: 'app-visualizar-servico',
@@ -20,10 +20,10 @@ export class VisualizarServicoComponent {
   @Input() visualizarServicoDialog:boolean = false
   @Output() dialogClosed = new EventEmitter<void>();
   selectAll: boolean = false;
-  selectedItems:any
-  servicoCliente:any;
-  cdCliente:any;
-  nrAtendimento:any
+  selectedItems:ItensSelecionadosDTO[] = []
+  servicoCliente:ServicoClienteDTO[] = [];
+  cdCliente:string = ""
+  nrAtendimento:number = 0;
   veiculo:string = ""
   placa:string = ""
 
@@ -51,8 +51,8 @@ export class VisualizarServicoComponent {
     const nr_atendimento = this.selectedItems[0].nr_atendimento
 
 
-    const bodyFinalizarServico = {
-      nr_atendimento_p:nr_atendimento,
+    const bodyFinalizarServico:FinalizarServicoDTO = {
+      nr_atendimento_p:String(nr_atendimento),
       nr_servico_p: nr_servicos_string
     }
 
@@ -68,7 +68,7 @@ export class VisualizarServicoComponent {
         this.getServicosByClient(this.cdCliente, this.nrAtendimento)
         this.selectedItems = []
       }, error:(res:any) => {
-        console.log()
+        console.log('res', res)
       }
     })
 
