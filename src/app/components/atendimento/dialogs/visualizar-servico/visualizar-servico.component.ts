@@ -24,6 +24,8 @@ export class VisualizarServicoComponent {
   servicoCliente:any;
   cdCliente:any;
   nrAtendimento:any
+  veiculo:string = ""
+  placa:string = ""
 
   getServicosByClient(cd_cliente:string, nr_atendimento:number){
 
@@ -37,6 +39,8 @@ export class VisualizarServicoComponent {
         
         const response = json_servico(data, nr_atendimento)
         this.servicoCliente = response
+        this.veiculo = response[0].modelo_veiculo
+        this.placa = response[0].placa
       }
     })
   }

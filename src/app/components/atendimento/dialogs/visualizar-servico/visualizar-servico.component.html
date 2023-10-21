@@ -8,6 +8,13 @@
   [breakpoints]="{ '960px': '75vw' }"
   [style]="{ width: '75vw', height: '75vh' }"
 >
+<span style="display: flex; align-items: center; justify-content: center;margin-bottom: 1rem;">
+  <i class="pi pi-car" style="margin-right: 6px;"></i>
+  <b>Veiculo: </b>{{veiculo}}
+  <i class="pi pi-directions" style="margin-right: 6px; margin-left:1rem;"></i>
+  <b>Placa: </b>{{placa}}
+</span>
+
   <ng-template pTemplate="content">
     <p-table
       [value]="servicoCliente"
@@ -22,8 +29,8 @@
           <!-- <th>Modelo</th> -->
           <!-- <th>Placa</th> -->
           <!-- <th>Veiculo</th> -->
-          <th>Status</th>
           <th>Valor</th>
+          <th>Status</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-servico>
@@ -35,10 +42,12 @@
             <!-- <td>{{servico.modelo_veiculo}}</td> -->
             <!-- <td>{{servico.placa}}</td> -->
             <!-- <td>{{servico.tipo_veiculo}}</td> -->
-            <td>{{servico.status_servico == 'F' ? "FINALIZADO" : "ABERTO"}}</td>
             <td>
               <b>{{servico.valor | currency : "BRL" : "symbol"}}</b>
             </td>
+            <td [ngStyle]="{'background-color': servico.status_servico === 'F' ? 'green' : 'red'}">
+              <b><i>  {{servico.status_servico === 'F' ? "FINALIZADO" : "ABERTO"}}</i></b>
+            </td>   
         </tr>
     </ng-template>
     </p-table>
