@@ -16,7 +16,7 @@ export class AtendimentoService {
   ) { }
   
   getAtendimentosAgendamentos():Observable<AtendimentoDTO>{
-    return this.http.get<AtendimentoDTO>(`${this.apiUrl}/atendimentos/servicosAndamento/`)
+    return this.http.get<AtendimentoDTO>(`${this.apiUrl}/atendimentos/agendamento/`)
   }
   getAtendimentosAgendamento(cd_cliente:string):Observable<AtendimentoDTO>{
     return this.http.get<AtendimentoDTO>(`${this.apiUrl}/atendimentos/agendamento/${cd_cliente}`)
