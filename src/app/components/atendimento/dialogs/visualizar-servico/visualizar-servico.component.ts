@@ -46,8 +46,9 @@ export class VisualizarServicoComponent {
   }
 
   finalizarServico() {
+
     const cdServicoArray = this.selectedItems.map((item) =>
-      item.cd_servico.toString()
+      item.nr_seq_servico.toString()
     );
 
     const bodyFinalizarServico: FinalizarServicoDTO = {

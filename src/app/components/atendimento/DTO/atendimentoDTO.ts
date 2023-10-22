@@ -64,7 +64,7 @@ export interface ItensSelecionadosDTO {
     placa:          string;
     modelo_veiculo: string;
     valor:          number;
-    nr_servico:     number;
+    nr_seq_servico: number;
 }
 
 
