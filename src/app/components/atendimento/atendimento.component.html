@@ -1,11 +1,6 @@
-<button
-pButton 
-type="button" 
-icon="pi pi-arrow-left"
-routerLink="/inicio"
-class="p-button-outlined button_formatation"
-></button>
-<div class="table_formatation">
+
+<div class="card">
+  <h2 class="mb-5">ATENDIMENTOS</h2>
   <p-table
     #dt
     #textInput
@@ -21,7 +16,13 @@ class="p-button-outlined button_formatation"
   >
   <ng-template pTemplate="caption">
     <div class="flex align-items-center justify-content-between">
-      <h2 class="m-0">ATENDIMENTOS</h2>
+      <button
+      pButton 
+      type="button" 
+      icon="pi pi-arrow-left"
+      routerLink="/inicio"
+      class="p-button-outlined button_formatation"
+      ></button>
       <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
         <input
@@ -55,8 +56,8 @@ class="p-button-outlined button_formatation"
         <th  pSortableColumn="nr_atendimento">
           Atendimento <p-sortIcon field="nr_atendimento"></p-sortIcon>
         </th>
-        <th pSortableColumn="status_servico">
-          Status <p-sortIcon field="status_servico"></p-sortIcon>
+        <th pSortableColumn="status_atendimento">
+          Status <p-sortIcon field="status_atendimento"></p-sortIcon>
         </th>
         <th>Valor Total</th>
         <th>Ações</th>
@@ -69,7 +70,7 @@ class="p-button-outlined button_formatation"
         <td>{{ atendimento.dh_inicio_atendimento }}</td>
 
         <td>{{ atendimento.nr_atendimento }}</td>
-        <td>{{ atendimento.status_servico == 'A' ? "ABERTO": "FECHADO" }}</td>
+        <td>{{ atendimento.status_atendimento == 'A' ? "ABERTO": "FECHADO" }}</td>
         <td>{{ atendimento.valor_total | currency : "BRL" : "symbol"}}
         </td>
         <td>
