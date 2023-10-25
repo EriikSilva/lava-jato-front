@@ -5,6 +5,7 @@
   [header]="saveMode ? 'Novo Cliente' : editMode ? 'Editar Cliente' : ''"
   [modal]="true"
   styleClass="p-fluid"
+  [draggable]="false"
 >
   <ng-template pTemplate="content">
     <form [formGroup]="clientRegisterForm">

@@ -5,6 +5,7 @@
   [header]="saveMode ? 'Novo Carro' : 'Editar Carro'"
   [modal]="true"
   styleClass="p-fluid"
+  [draggable]="false"
 >
 <ng-template pTemplate="content">
     <form [formGroup]="newCarForm">
