@@ -51,13 +51,14 @@ class="p-button-outlined button_formatation"
         <th  pSortableColumn="dh_inicio_servico">
           Data e Hora do Início <p-sortIcon field="nm_cliente"></p-sortIcon>
         </th>
-        <th>Valor Total</th>
+
         <th  pSortableColumn="nr_atendimento">
           Atendimento <p-sortIcon field="nr_atendimento"></p-sortIcon>
         </th>
         <th pSortableColumn="status_servico">
           Status <p-sortIcon field="status_servico"></p-sortIcon>
         </th>
+        <th>Valor Total</th>
         <th>Ações</th>
       </tr>
     </ng-template>
@@ -65,15 +66,12 @@ class="p-button-outlined button_formatation"
     <ng-template pTemplate="body" let-atendimento>
       <tr>
         <td>{{ atendimento.cliente}}</td>
-        <td>{{ atendimento.dh_inicio_servico }}</td>
-        <td>
-          {{
-            atendimento.valor
-              | currency : "BRL" : "symbol"
-          }}
-        </td>
+        <td>{{ atendimento.dh_inicio_atendimento }}</td>
+
         <td>{{ atendimento.nr_atendimento }}</td>
         <td>{{ atendimento.status_servico == 'A' ? "ABERTO": "FECHADO" }}</td>
+        <td>{{ atendimento.valor_total | currency : "BRL" : "symbol"}}
+        </td>
         <td>
           <p-button
             icon="pi pi-eye"
