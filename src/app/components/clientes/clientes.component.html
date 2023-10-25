@@ -1,13 +1,7 @@
-<button
-pButton 
-type="button" 
-icon="pi pi-arrow-left"
-routerLink="/inicio"
-class="p-button-outlined button_formatation"
-></button>
 
 <!-- TABLE -->
-<div class="table_formatation">
+<div class="card">
+  <h2 class="m-0">CLIENTES</h2>
   <p-card>
   <p-table
     #dt
@@ -16,14 +10,21 @@ class="p-button-outlined button_formatation"
     [rows]="5"
     [paginator]="true"
     [globalFilterFields]="['nm_cliente', 'cpf_cnpj']"
-    [tableStyle]="{ 'min-width': '75rem' }"
+    [tableStyle]="{ 'min-width': '55rem', 'marign-left': '40%'}"
     dataKey="id"
     currentPageReportTemplate="Mostrando do {first} ao {last} de {totalRecords} Itens"
     [showCurrentPageReport]="true"
   >
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
-        <h2 class="m-0">CLIENTES</h2>
+        <button
+          pButton 
+          type="button" 
+          icon="pi pi-arrow-left"
+          routerLink="/inicio"
+          class="p-button-outlined button_formatation"
+          ></button>
+
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
           <input
