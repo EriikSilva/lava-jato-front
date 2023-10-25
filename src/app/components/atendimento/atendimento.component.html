@@ -1,11 +1,6 @@
-<button
-pButton 
-type="button" 
-icon="pi pi-arrow-left"
-routerLink="/inicio"
-class="p-button-outlined button_formatation"
-></button>
-<div class="table_formatation">
+
+<div class="card">
+  <h2 class="mb-5">ATENDIMENTOS</h2>
   <p-table
     #dt
     #textInput
@@ -21,7 +16,13 @@ class="p-button-outlined button_formatation"
   >
   <ng-template pTemplate="caption">
     <div class="flex align-items-center justify-content-between">
-      <h2 class="m-0">ATENDIMENTOS</h2>
+      <button
+      pButton 
+      type="button" 
+      icon="pi pi-arrow-left"
+      routerLink="/inicio"
+      class="p-button-outlined button_formatation"
+      ></button>
       <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
         <input
