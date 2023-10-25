@@ -3,10 +3,12 @@
 }
 
 .message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: Arial, sans-serif;
     text-align: center;
     font-size: 24px;
-    margin-left: 12rem;
     color: #ffffff;
     animation: blink 1s infinite alternate;
 }
