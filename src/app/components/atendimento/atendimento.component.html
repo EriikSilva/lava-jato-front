@@ -56,8 +56,8 @@
         <th  pSortableColumn="nr_atendimento">
           Atendimento <p-sortIcon field="nr_atendimento"></p-sortIcon>
         </th>
-        <th pSortableColumn="status_servico">
-          Status <p-sortIcon field="status_servico"></p-sortIcon>
+        <th pSortableColumn="status_atendimento">
+          Status <p-sortIcon field="status_atendimento"></p-sortIcon>
         </th>
         <th>Valor Total</th>
         <th>Ações</th>
@@ -70,7 +70,7 @@
         <td>{{ atendimento.dh_inicio_atendimento }}</td>
 
         <td>{{ atendimento.nr_atendimento }}</td>
-        <td>{{ atendimento.status_servico == 'A' ? "ABERTO": "FECHADO" }}</td>
+        <td>{{ atendimento.status_atendimento == 'A' ? "ABERTO": "FECHADO" }}</td>
         <td>{{ atendimento.valor_total | currency : "BRL" : "symbol"}}
         </td>
         <td>
