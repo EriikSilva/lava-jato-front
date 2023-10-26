@@ -84,7 +84,7 @@
           pInputText
           pKeyFilter="int"
           (blur)="getBairroByCep()"
-          maxlength="8"
+          maxlength="9"
           formControlName="cep"
           id="cep"
           required
@@ -100,6 +100,19 @@
           maxlength="70"
           formControlName="bairro"
           id="bairro"
+          required
+          autofocus
+        />
+      </div>
+      <div class="field">
+        <label for="rua">Rua:</label>
+        <span class="danger"> * </span>
+        <input
+          type="text"
+          pInputText
+          maxlength="50"
+          formControlName="rua"
+          id="rua"
           required
           autofocus
         />

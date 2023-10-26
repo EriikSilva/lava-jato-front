@@ -4,6 +4,7 @@ export interface ClientRegisterDTO {
     cep:        string;
     bairro:     string;
     nr_casa:    string;
+    rua:        string;
     telefone1:  string;
     telefone2:  string;
 }
@@ -15,6 +16,7 @@ export interface ClientEditDTO {
     cpf_cnpj:   string;
     cep:        string;
     bairro:     string;
+    rua:        string;
     nr_casa:    string;
     telefone1:  string;
     telefone2:  string;

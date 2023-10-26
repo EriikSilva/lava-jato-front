@@ -38,6 +38,7 @@ export class SaveEditClientComponent implements OnDestroy{
     cpf_cnpj:          new FormControl('', Validators.required),
     cep:               new FormControl('', [Validators.required, Validators.maxLength(8)]),
     bairro:            new FormControl('', Validators.required),
+    rua:               new FormControl('', Validators.required),
     nr_casa:           new FormControl('', Validators.required),
     telefone1:         new FormControl('', [Validators.required, Validators.minLength(11)]),
     telefone2:         new FormControl(''),
@@ -55,6 +56,7 @@ export class SaveEditClientComponent implements OnDestroy{
       const cep               = formValue.cep || '';
       const bairro            = formValue.bairro || '';
       const nr_casa           = formValue.nr_casa || '';
+      const rua               = formValue.rua || '';
       const telefone1         = formValue.telefone1 || "";
       const telefone2         = formValue.telefone2 || "";
 
@@ -67,6 +69,7 @@ export class SaveEditClientComponent implements OnDestroy{
         cep,
         bairro,
         nr_casa,
+        rua,
         telefone1: telefone1Formatado,
         telefone2: telefone2Formatado
       }
@@ -109,6 +112,7 @@ export class SaveEditClientComponent implements OnDestroy{
       const cep               = formValue.cep || '';
       const bairro            = formValue.bairro || '';
       const nr_casa           = formValue.nr_casa || '';
+      const rua               = formValue.rua || '';
       const status            = formValue.status || '';
       const telefone1         = formValue.telefone1 || '';
       const telefone2         = formValue.telefone2 || '';
@@ -124,6 +128,7 @@ export class SaveEditClientComponent implements OnDestroy{
         cep,
         bairro,
         nr_casa,
+        rua,
         telefone1: telefone1Formatado,
         telefone2: telefone2Formatado
       };
@@ -155,13 +160,15 @@ export class SaveEditClientComponent implements OnDestroy{
   getBairroByCep() {
     const formValue = this.clientRegisterForm.value;
 
-    if (formValue.cep?.length == 8) {
+    if (formValue.cep && formValue.cep?.length >= 8) {
       this.cepService.getEnderecoByCep(formValue.cep)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
-        const { bairro } = data
-        this.clientRegisterForm.get('bairro')?.setValue(data.bairro);
+        const { bairro, logradouro} = data
+        this.clientRegisterForm.get('bairro')?.setValue(bairro);
+        this.clientRegisterForm.get('rua')?.setValue(logradouro)
         formValue.bairro = bairro
+        formValue.rua = logradouro
       });
     }
   }
@@ -194,13 +201,14 @@ export class SaveEditClientComponent implements OnDestroy{
   }
 
   editClientModal(cliente: ClientEditDTO) {
-    const { cd_cliente, nm_cliente, cpf_cnpj, cep, bairro, nr_casa, telefone1, telefone2, status} = cliente
+    const { cd_cliente, nm_cliente, cpf_cnpj, cep, bairro, rua , nr_casa, telefone1, telefone2, status} = cliente
 
     this.cd_cliente    = cd_cliente
     this.clientRegisterForm.get('nm_cliente')?.setValue(nm_cliente);
     this.clientRegisterForm.get('cpf_cnpj')?.setValue(this.formatCpfCnpj(cpf_cnpj));
     this.clientRegisterForm.get('cep')?.setValue(cep);
     this.clientRegisterForm.get('bairro')?.setValue(bairro);
+    this.clientRegisterForm.get('rua')?.setValue(rua)
     this.clientRegisterForm.get('nr_casa')?.setValue(nr_casa); 
     this.clientRegisterForm.get('telefone1')?.setValue(telefone1); 
     this.clientRegisterForm.get('telefone2')?.setValue(telefone2); 
