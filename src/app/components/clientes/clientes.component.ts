@@ -9,7 +9,6 @@ import { Table } from 'primeng/table';
 import { SaveEditClientComponent } from './dialogs/save-edit-client/save-edit-client.component';
 import { CarDetailsComponent } from './dialogs/car-details/car-details.component';
 import { Subject, takeUntil } from 'rxjs';
-import { Pulsar } from '@uiball/loaders'
 
 @Component({
   selector: 'app-clientes',
