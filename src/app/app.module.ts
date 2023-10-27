@@ -35,6 +35,7 @@ import { NewAtendimentoComponent } from './components/atendimento/dialogs/new-at
 import { FinalizarAtendimentoComponent } from './components/atendimento/dialogs/finalizar-atendimento/finalizar-atendimento.component';
 import { ServicosComponent } from './components/servicos/servicos.component';
 import { VisualizarServicoComponent } from './components/atendimento/dialogs/visualizar-servico/visualizar-servico.component';
+import { CarWashLoaderComponent } from './components/car-wash-loader/car-wash-loader.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { VisualizarServicoComponent } from './components/atendimento/dialogs/vis
     NewAtendimentoComponent,
     FinalizarAtendimentoComponent,
     ServicosComponent,
-    VisualizarServicoComponent
+    VisualizarServicoComponent,
+    CarWashLoaderComponent
   ],
   imports: [
     BrowserAnimationsModule,
