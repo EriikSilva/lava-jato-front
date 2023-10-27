@@ -17,6 +17,7 @@ export class SaveEditClientComponent implements OnDestroy{
   
   private destroy$: Subject<void> = new Subject<void>();
 
+  isLoading:Boolean = false
 
   @Input() cd_cliente: any;
   @Input() clientDialog: boolean = false;
@@ -73,23 +74,23 @@ export class SaveEditClientComponent implements OnDestroy{
         telefone1: telefone1Formatado,
         telefone2: telefone2Formatado
       }
-
-
+      this.isLoading = true;
       this.clientsService.postClients(bodyRegistro)
       .subscribe({
         next: (res: any) => {
           const { message } = res
-
+          this.closeDialog();
+          this.clientRegisterForm.reset();
           this.messageService.add({
             severity: 'success',
             summary: 'Sucesso ao cadastrar',
             detail: message,
-          });
-          this.clientRegisterForm.reset();
-          this.closeDialog();
+          });    
           this.getClients.emit();
+          this.isLoading = false
         },
         error: (res: any) => {
+          this.isLoading = false
           const { error } = res.error
           this.messageService.add({
             severity: 'error',
@@ -132,18 +133,22 @@ export class SaveEditClientComponent implements OnDestroy{
         telefone1: telefone1Formatado,
         telefone2: telefone2Formatado
       };
+     
+     this.isLoading = true 
   
      this.clientsService.editClient(bodyEdit)
      .subscribe({
         next: (res: any) => {
+          const { message } = res
+          this.closeDialog();
+          this.clientRegisterForm.reset();
+          this.getClients.emit();
+          this.isLoading = false
           this.messageService.add({
             severity: 'success',
             summary: 'Edição',
-            detail: 'Sucesso ao Editar',
+            detail: message
           });
-          this.clientRegisterForm.reset();
-          this.closeDialog();
-          this.getClients.emit();
         },
         error: (res: any) => {
           const { error } = res.error
