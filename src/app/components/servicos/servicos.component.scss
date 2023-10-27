@@ -2,3 +2,25 @@
     width: 80vw;
     margin: 3rem auto;
 }
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-element {
+    flex: 1; /* O elemento da esquerda ocupará o espaço restante */
+    margin-right: 10px; /* Adicione margem direita para espaçamento entre os elementos */
+}
+
+.right-element {
+    flex: 1; /* O elemento da direita ocupará o espaço restante */
+}
+
+.formulario input {
+    display: block; 
+    width: 80%; 
+    margin:2rem auto; 
+
+}

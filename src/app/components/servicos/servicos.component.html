@@ -2,10 +2,47 @@
 <div class="tab_config">
     <p-tabView>
         <p-tabPanel header="Header I">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <div class="container">
+                <div class="left-element">
+                    <form class="formulario">
+                        <input
+                        type="text"
+                        pInputText
+                        maxlength="50"
+                        formControlName="nm_cliente"
+                        id="nome"
+                        required
+                        autofocus
+                      />
+    
+                      <input type="text" pInputText />
+                    </form>
+                </div>
+                <div class="right-element">
+                    <!-- <p-virtualScroller [value]="servicos" [style]="{'width': '400px', 'margin-left':'100px'}" scrollHeight="200px" [itemSize]="50">
+                        <ng-template pTemplate="item" let-servico>
+                            <div class="flex align-items-center p-2 h-full">
+                                {{ servico.desc_servico }} - {{ servico.vlr_servico }}
+                            </div>
+                        </ng-template>
+                    </p-virtualScroller> -->
+
+                    <p-table [value]="servicos" [tableStyle]="{ 'min-width': '30rem' }">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-servico>
+                            <tr>
+                                <td>{{ servico.desc_servico }}</td>
+                                <td>{{ servico.vlr_servico | currency : "BRL" : "symbol"}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
         </p-tabPanel>
         <p-tabPanel header="Header II">
             <p>

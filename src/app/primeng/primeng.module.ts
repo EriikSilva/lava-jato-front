@@ -28,6 +28,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { VirtualScrollerModule } from 'primeng/virtualscroller';
 @NgModule({
   declarations: [],
   exports: [
@@ -58,7 +59,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     MultiSelectModule,
     ConfirmDialogModule,
     InputSwitchModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    VirtualScrollerModule
   ]
 })
 export class PrimengModule { }
