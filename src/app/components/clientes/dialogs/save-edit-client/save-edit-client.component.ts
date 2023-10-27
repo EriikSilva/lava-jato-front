@@ -133,9 +133,8 @@ export class SaveEditClientComponent implements OnDestroy{
         telefone1: telefone1Formatado,
         telefone2: telefone2Formatado
       };
-     
-     this.isLoading = true 
-  
+
+     this.isLoading = true
      this.clientsService.editClient(bodyEdit)
      .subscribe({
         next: (res: any) => {
@@ -143,7 +142,6 @@ export class SaveEditClientComponent implements OnDestroy{
           this.closeDialog();
           this.clientRegisterForm.reset();
           this.getClients.emit();
-          this.isLoading = false
           this.messageService.add({
             severity: 'success',
             summary: 'Edição',
