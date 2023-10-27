@@ -31,6 +31,8 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   atendimentoDialog: boolean = false;
   finalizarAtendimentoDialog: boolean = false;
   visualizarServicoDialog: boolean = false;
+  isLoading: boolean = false
+  requisicaoCompleta: boolean = false
 
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -40,17 +42,28 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   ) {}
 
   getAtendimentos() {
+    this.requisicaoCompleta = false
+    this.isLoading = true
     this.atendimentoService.getAtendimentosAgendamentos().subscribe({
       next: (res: any) => {
+        setTimeout(() => {
+          this.isLoading = false;
+          this.requisicaoCompleta = true
+        },1000)
         const { data } = res;
         this.atendimentos = data;
       },
-      error: (error: any) => {},
+      error: (error: any) => {
+
+      },
     });
   }
 
   getClients() {
-    this.clientsService.getClients().subscribe({
+    this.isLoading = true
+    this.requisicaoCompleta = false
+    this.clientsService.getClients()
+    .subscribe({
       next: (res: any) => {
         const { data } = res;
         this.items = data;

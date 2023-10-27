@@ -64,22 +64,50 @@
       </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-atendimento>
+    <ng-template pTemplate="body" let-atendimento let-expanded="expanded">
       <tr>
-        <td>{{ atendimento.cliente}}</td>
-        <td>{{ atendimento.dh_inicio_atendimento }}</td>
-
-        <td>{{ atendimento.nr_atendimento }}</td>
-        <td>{{ atendimento.status_atendimento == 'A' ? "ABERTO": "FECHADO" }}</td>
-        <td>{{ atendimento.valor_total | currency : "BRL" : "symbol"}}
-        </td>
         <td>
-          <p-button
+          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+            {{ atendimento.cliente}}
+          </ng-container>
+        </td>
+
+        <td>
+          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+            {{ atendimento.dh_inicio_atendimento }}
+          </ng-container>
+        </td>
+
+        <td>
+          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+            {{ atendimento.nr_atendimento }}
+          </ng-container>
+        </td>
+
+        <td>
+          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+            {{ atendimento.status_atendimento == 'A' ? "ABERTO": "FECHADO" }}
+          </ng-container>
+        </td>
+
+        <td>
+          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+            {{ atendimento.valor_total | currency : "BRL" : "symbol"}}
+          </ng-container>
+        </td>
+        
+        <td>
+          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+            <p-button
             icon="pi pi-eye"
             styleClass="p-button-rounded p-button-info p-button-text p-button-raised"
             (onClick)="visualizarServicos(atendimento)"
           ></p-button>
+          </ng-container>
         </td>
+        <ng-template #skeleton>
+          <p-skeleton></p-skeleton>
+        </ng-template>
       </tr>
     </ng-template>
   </p-table>
@@ -103,3 +131,7 @@
 
 <p-toast></p-toast>
 <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+<div *ngIf="isLoading" class="loading-overlay">
+  <app-car-wash-loader></app-car-wash-loader>
+</div>
