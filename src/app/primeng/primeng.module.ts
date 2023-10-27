@@ -27,6 +27,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 @NgModule({
   declarations: [],
   exports: [
@@ -56,7 +57,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     CalendarModule,
     MultiSelectModule,
     ConfirmDialogModule,
-    InputSwitchModule
+    InputSwitchModule,
+    ProgressSpinnerModule
   ]
 })
 export class PrimengModule { }

@@ -28,8 +28,9 @@ export class CarDetailsComponent{
   @Output() dialogClosed = new EventEmitter<void>();
 
 
-  editMode:boolean = false;
-  saveMode:boolean = false
+  editMode:Boolean = false;
+  saveMode:Boolean = false
+  progressSpinner: Boolean = false
   
   
   messages:Message[] = [];
@@ -39,8 +40,9 @@ export class CarDetailsComponent{
   showNoDataMessage = false;
 
 
-  carClientModal(position: string, cliente: ClienteGetDTO) {
+ carClientModal(position: string, cliente: ClienteGetDTO) {
     const { cd_cliente } = cliente;
+    this.progressSpinner = true
 
     this.cd_cliente      = cd_cliente
     this.position        = position;
@@ -52,18 +54,19 @@ export class CarDetailsComponent{
     this.carrosService.getCarByClient(cd_cliente)
     .subscribe({
       next:(res:any) => {
+        this.progressSpinner = false
         const { data } = res
         this.clientsVehicles = data
         this.showNoDataMessage = this.clientsVehicles.length === 0;
       },
       error: (res: any) => {
         this.clientsVehicles = [];
+        this.progressSpinner = false
         this.showNoDataMessage = this.clientsVehicles.length === 0;
         console.log('erro', res)
       },
     })
   }
-
 
   getTipoCarros(){
     this.carrosService.getTypeCar()
@@ -133,6 +136,7 @@ export class CarDetailsComponent{
 
   closeDialog() {
     this.dialogClosed.emit();
+    this.clientsVehicles = []
   }
 
   

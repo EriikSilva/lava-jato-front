@@ -1,25 +1,28 @@
-*{
-    padding: 0;
-    margin: 0;
+* {
+  padding: 0;
+  margin: 0;
 }
 
-
-:root{
-    --var-background-viva-dark:#040c18;
-    --var-border-background-viva-dark:#070d16
+:root {
+  --var-background-viva-dark: #040c18;
+  --var-border-background-viva-dark: #070d16;
 }
-
 
 .loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo com transparência */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo com transparência */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Garante que o overlay fique acima de outros elementos na página */
+}
+
+.progressSpinner{
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 999; /* Garante que o overlay fique acima de outros elementos na página */
-  }
-  
+    justify-content: center;
+}

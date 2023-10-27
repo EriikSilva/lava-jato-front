@@ -16,10 +16,10 @@ export class NewCarComponent {
   ) {}
 
   @Input() carsType: any;
-  @Input() newCarDialog: boolean = false;
+  @Input() newCarDialog: Boolean = false;
   @Input() cd_cliente: any;
-  @Input() saveMode: boolean = false;
-  @Input() editMode: boolean = false;
+  @Input() saveMode: Boolean = false;
+  @Input() editMode: Boolean = false;
 
   @Output() dialogClosed = new EventEmitter<void>();
   @Output() getCarByClient = new EventEmitter<void>();
