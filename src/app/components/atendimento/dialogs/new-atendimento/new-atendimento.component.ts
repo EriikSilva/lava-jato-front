@@ -2,11 +2,12 @@ import { MessageService } from 'primeng/api';
 import { ClientesService } from 'src/app/components/clientes/clientes.service';
 import { CarrosService } from './../../../clientes/carros.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ServicosService } from 'src/app/components/servicos/servicos.service';
 import { format, addDays } from 'date-fns';
 import { AgendamentosDTO } from '../../DTO/atendimentoDTO';
 import { AtendimentoService } from '../../atendimento.service';
+import { ClienteGetDTO } from 'src/app/components/clientes/DTO/clientesDTO';
 @Component({
   selector: 'app-new-atendimento',
   templateUrl: './new-atendimento.component.html',
@@ -26,15 +27,16 @@ export class NewAtendimentoComponent implements OnInit {
   @Output() dialogClosed = new EventEmitter<void>();
   @Output() getAtendimentos = new EventEmitter<void>();
 
-  clientes: any;
-  veiculoCliente: any;
-  placa: any;
-  cd_veiculo: any;
+  clientes: ClienteGetDTO[] = []
+  veiculoCliente: ClienteGetDTO[] = [];
+  placa: string = "";
+  cd_veiculo: number = 0;
   servicos: any;
-  cd_servico_p: any;
-  cd_cliente: any;
+  cd_servico_p: number[] = [];
+  cd_cliente: number = 0;
   noCarsValidation:boolean = false
   precoServicoFinal:any
+  buttonLoading:boolean = false
 
   ngOnInit(): void {
     this.getClientes();
@@ -42,9 +44,9 @@ export class NewAtendimentoComponent implements OnInit {
   }
 
   newAtendimentoForm = new FormGroup({
-    horario_p: new FormControl(''),
-    cd_servico_p: new FormControl(''),
-    cd_cliente_p: new FormControl('')
+    horario_p: new FormControl('', Validators.required),
+    cd_servico_p: new FormControl('', Validators.required),
+    cd_cliente_p: new FormControl('', Validators.required)
   });
 
   saveNewAtendimento() {
@@ -70,6 +72,7 @@ export class NewAtendimentoComponent implements OnInit {
     const isValid = this.validateAndShowMessage(bodyNewAtendimento);
 
     if (isValid) {
+      this.buttonLoading = true
       this.atendimentoService.gerarAtendimento(bodyNewAtendimento).subscribe({
         next: (res: any) => {
           const { message } = res;
@@ -82,8 +85,10 @@ export class NewAtendimentoComponent implements OnInit {
           });
           this.precoServicoFinal = false
           this.limparFormNovoAtendimento();
+          this.buttonLoading = false
         },
         error: (res: any) => {
+          this.buttonLoading = false
           this.MessageService.add({
             severity: 'error',
             summary: 'Erro ao cadastrar',
@@ -134,7 +139,8 @@ export class NewAtendimentoComponent implements OnInit {
   }
 
   getClientes() {
-    this.clienteService.getClients().subscribe({
+    this.clienteService.getClients()
+    .subscribe({
       next: (res: any) => {
         const { data } = res;
         this.clientes = data;
@@ -167,7 +173,7 @@ export class NewAtendimentoComponent implements OnInit {
 
   limparFormNovoAtendimento(){
     this.noCarsValidation = false
-    this.veiculoCliente = ""
+    this.veiculoCliente = []
     this.newAtendimentoForm.reset();
   }
 

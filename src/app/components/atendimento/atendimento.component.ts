@@ -44,7 +44,8 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   getAtendimentos() {
     this.requisicaoCompleta = false
     this.isLoading = true
-    this.atendimentoService.getAtendimentosAgendamentos().subscribe({
+    this.atendimentoService.getAtendimentosAgendamentos()
+    .subscribe({
       next: (res: any) => {
         setTimeout(() => {
           this.isLoading = false;
@@ -54,7 +55,7 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
         this.atendimentos = data;
       },
       error: (error: any) => {
-
+        this.isLoading = false
       },
     });
   }

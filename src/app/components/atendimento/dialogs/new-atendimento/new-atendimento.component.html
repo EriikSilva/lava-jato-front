@@ -66,16 +66,16 @@
       pButton
       pRipple
       label="Cancelar"
-      icon="pi pi-times"
       class="p-button-text"
       (click)="closeDialog()"
     ></button>
 
     <button
+    [disabled]="!newAtendimentoForm.valid"
     pButton
     pRipple
     label="Salvar"
-    icon="pi pi-check"
+    [loading]="buttonLoading"
     class="p-button-text"
     (click)="saveNewAtendimento()"
     ></button>
