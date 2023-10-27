@@ -45,30 +45,18 @@
         </div>
       </div>
     </ng-template>
-    <!-- HEADER -->
     <ng-template pTemplate="header">
       <tr>
-        <!-- <th></th> -->
         <th pSortableColumn="nm_cliente">
           Nome <p-sortIcon field="nm_cliente"></p-sortIcon>
         </th>
-        <th>
-          CPF/CNPJ
-        </th>
-        <th>
-          Bairro
-        </th>
-        <th>
-          Telefone
-        </th>
-        <th pSortableColumn="status">
-          Status <p-sortIcon field="status"></p-sortIcon>
-        </th>
+        <th>CPF/CNPJ</th>
+        <th>Bairro</th>
+        <th>Telefone</th>
+        <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
         <th >Ações</th>
       </tr>
     </ng-template>
-    <!-- CONTENT -->
-
     <ng-template pTemplate="body" let-client let-expanded="expanded">
       <tr>
         <td>
