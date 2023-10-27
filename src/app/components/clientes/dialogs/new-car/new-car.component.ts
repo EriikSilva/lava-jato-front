@@ -25,6 +25,7 @@ export class NewCarComponent {
   @Output() getCarByClient = new EventEmitter<void>();
 
   cd_veiculo_p?: any 
+  buttonLoading:boolean = false
 
   newCarForm = new FormGroup({
     placa: new FormControl('', Validators.required),
@@ -52,7 +53,7 @@ export class NewCarComponent {
       cd_tipo_veiculo: cd_tipo_veiculo_p,
       cd_cliente: this.cd_cliente,
     };
-
+    this.buttonLoading = true
     this.carrosService.postClientCar(bodyNewCar)
     .subscribe({
       next: (res: any) => {
@@ -65,8 +66,10 @@ export class NewCarComponent {
         this.newCarForm.reset();
         this.getCarByClient.emit();
         this.closeDialog();
+        this.buttonLoading = false
       },
       error: (res: any) => {
+        this.buttonLoading = false
         this.messageService.add({
           severity: 'error',
           summary: 'Erro ao cadastrar',
@@ -112,6 +115,7 @@ export class NewCarComponent {
         cd_veiculo:this.cd_veiculo_p
       };
   
+      this.buttonLoading = true
       this.carrosService.editClientCar(bodyEditClientCar)
       .subscribe({
         next:(res:any) => {
@@ -124,7 +128,9 @@ export class NewCarComponent {
           this.closeDialog();
           this.newCarForm.reset();
           this.getCarByClient.emit();
+          this.buttonLoading = false
         }, error:(res:any) => {
+          this.buttonLoading = false
           const { error } = res.error 
           this.messageService.add({
             severity: 'error',

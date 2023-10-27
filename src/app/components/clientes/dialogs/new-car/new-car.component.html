@@ -54,7 +54,6 @@
     pButton
     pRipple
     label="Cancelar"
-    icon="pi pi-times"
     class="p-button-text"
     (click)="closeDialog()"
   ></button>
@@ -65,7 +64,7 @@
     pButton
     pRipple
     label="Salvar"
-    icon="pi pi-check"
+    [loading]="buttonLoading"
     class="p-button-text"
     (click)="saveNewClientCar()"
     ></button>
@@ -75,7 +74,7 @@
     pButton
     pRipple
     label="Editar"
-    icon="pi pi-pencil"
+    [loading]="buttonLoading"
     class="p-button-text"
     (click)="editCarClient()"
   ></button>

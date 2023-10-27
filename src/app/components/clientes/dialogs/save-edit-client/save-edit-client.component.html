@@ -155,29 +155,28 @@
       pButton
       pRipple
       label="Cancelar"
-      icon="pi pi-times"
       class="p-button-text"
       (click)="closeDialog()"
     ></button>
 
     <button
       *ngIf="saveMode"
+      [loading]="buttonLoading"
       [disabled]="!clientRegisterForm.valid"
       pButton
       pRipple
       label="Salvar"
-      icon="pi pi-check"
       class="p-button-text"
       (click)="saveClient()"
     ></button>
 
     <button
       *ngIf="editMode"
+      [loading]="buttonLoading"
       [disabled]="!clientRegisterForm.valid"
       pButton
       pRipple
       label="Editar"
-      icon="pi pi-pencil"
       class="p-button-text"
       (click)="editClient()"
     ></button>

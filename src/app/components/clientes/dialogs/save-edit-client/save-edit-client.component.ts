@@ -18,6 +18,7 @@ export class SaveEditClientComponent implements OnDestroy{
   private destroy$: Subject<void> = new Subject<void>();
 
   isLoading:Boolean = false
+  buttonLoading:boolean = false
 
   @Input() cd_cliente: any;
   @Input() clientDialog: boolean = false;
@@ -133,11 +134,12 @@ export class SaveEditClientComponent implements OnDestroy{
         telefone1: telefone1Formatado,
         telefone2: telefone2Formatado
       };
+      this.buttonLoading = true
 
-     this.isLoading = true
      this.clientsService.editClient(bodyEdit)
      .subscribe({
         next: (res: any) => {
+          this.buttonLoading = false
           const { message } = res
           this.closeDialog();
           this.clientRegisterForm.reset();
