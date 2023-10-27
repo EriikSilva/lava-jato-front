@@ -29,13 +29,16 @@ export class VisualizarServicoComponent {
   nrAtendimento: number = 0;
   veiculo: string = '';
   placa: string = '';
+  progressSpinner:boolean = false
 
   getServicosByClient(cd_cliente: string, nr_atendimento: number) {
+    this.progressSpinner = true
     this.cdCliente = cd_cliente;
     this.nrAtendimento = nr_atendimento;
 
     this.atendimentoService.getServicosEmAndamento(nr_atendimento).subscribe({
       next: (res: any) => {
+        this.progressSpinner = false
         const { data } = res;
         const response = json_servico(data, this.nrAtendimento);
         this.servicoCliente = response;
@@ -46,7 +49,6 @@ export class VisualizarServicoComponent {
   }
 
   finalizarServico() {
-
     const cdServicoArray = this.selectedItems.map((item) =>
       item.nr_seq_servico.toString()
     );
@@ -80,6 +82,9 @@ export class VisualizarServicoComponent {
   }
 
   closeDialog() {
+    this.servicoCliente = [];
+    this.veiculo = "";
+    this.placa = "";
     this.visualizarServicoDialog = false;
     this.dialogClosed.emit();
   }
