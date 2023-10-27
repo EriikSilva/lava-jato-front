@@ -9,6 +9,7 @@ import { Table } from 'primeng/table';
 import { SaveEditClientComponent } from './dialogs/save-edit-client/save-edit-client.component';
 import { CarDetailsComponent } from './dialogs/car-details/car-details.component';
 import { Subject, takeUntil } from 'rxjs';
+import { Pulsar } from '@uiball/loaders'
 
 @Component({
   selector: 'app-clientes',
@@ -38,6 +39,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
   carClientDialog: boolean = false;
   newCarDialog:    boolean = false;
   requisicaoCompleta: boolean = false
+  isLoading: boolean = false
 
   constructor(
     private clientsService:      ClientesService,
@@ -59,24 +61,28 @@ export class ClientesComponent implements OnInit, OnDestroy {
 
   /********************** REQUESTS ***************************/
   getClients() {
+    this.isLoading = true
     this.requisicaoCompleta = false
     this.clientsService.getClients()
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: (res: any) => {
+        setTimeout(() => {
+          this.isLoading = false
+          this.requisicaoCompleta = true
+        }, 1000)
+
         const { data } = res;
         this.clients = data;
-        setTimeout(() => {
-          this.requisicaoCompleta = true
-        }, 200)
       },
-      error(res: any) {
+      error:(res: any) => {
         console.log(res.error.message);
       },
     });
   }
 
   deleteClient(cliente:ClienteDeleteDTO) {
+    this.isLoading = true
     const { cd_cliente } = cliente;
     this.clientsService.deleteClient(cd_cliente as any).subscribe({
       next: (res: any) => {
@@ -89,6 +95,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
         this.getClients();
       },
       error: (res: any) => {
+        this.isLoading = false
         const { error } = res
         this.messageService.add({
           severity: 'error',

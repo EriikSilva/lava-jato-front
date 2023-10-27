@@ -153,5 +153,10 @@
   <p-toast></p-toast>
 </div>
 
+<div *ngIf="isLoading" class="loading-overlay">
+  <app-car-wash-loader></app-car-wash-loader>
+</div>
+
+
 <!-- CONFIRM POPUP -->
 <p-confirmPopup></p-confirmPopup>
