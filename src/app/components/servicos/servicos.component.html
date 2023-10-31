@@ -1,34 +1,37 @@
-
 <div class="tab_config">
-    <p-tabView>
-        <p-tabPanel header="Serviço">
-            <div class="container">
-                <div class="left-element">
-                    <div class="topo">
-                        <button
-                        pButton 
-                        type="button" 
-                        icon="pi pi-arrow-left"
-                        routerLink="/inicio"
-                        class="p-button-outlined"
-                        ></button>
-                        <h2 class="ml-3">INSIRA UM NOVO SERVIÇO:</h2>
-                    </div>
-                    <form class="formulario" [formGroup]="newServicoForm">
-                        <label for="desc_servico"><b>Descrição do Serviço </b><span class="ml-2"> * </span></label>
-                        <input
-                        type="text"
-                        id="desc_servico"
-                        pInputText
-                        maxlength="50"
-                        placeholder="Descrição"
-                        formControlName="desc_servico"
-                        required
-                        autofocus
-                      />    
-                        
-                      <label for="vlr_servico"><b>Valor do Serviço</b><span class="ml-2"> * </span></label>
-                      <!-- <input
+  <p-tabView>
+    <p-tabPanel header="Serviço">
+      <div class="container">
+        <div class="left-element">
+          <div class="topo">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-arrow-left"
+              routerLink="/inicio"
+              class="p-button-outlined"
+            ></button>
+            <h2 class="ml-3">INSIRA UM NOVO SERVIÇO:</h2>
+          </div>
+          <form class="formulario" [formGroup]="newServicoForm">
+            <label for="desc_servico"
+              ><b>Descrição do Serviço </b><span class="ml-2"> * </span></label
+            >
+            <input
+              type="text"
+              id="desc_servico"
+              pInputText
+              maxlength="50"
+              placeholder="Descrição"
+              formControlName="desc_servico"
+              required
+              autofocus
+            />
+
+            <label for="vlr_servico"
+              ><b>Valor do Serviço</b><span class="ml-2"> * </span></label
+            >
+            <!-- <input
                       type="text"
                       id="vlr_servico"
                       pInputText
@@ -38,45 +41,50 @@
                       autofocus
                     /> -->
 
-                    <p-inputNumber
-                    [style]="{'width':'100%'}"
-                    placeholder="Preço"
-                    mode="currency"
-                    currency="BRL"
-                    [maxlength]="12"
-                    formControlName="vlr_servico"
-                    >
-                   </p-inputNumber>
-                    <p-button 
-                    *ngIf="saveButton"
-                    [loading]="buttonLoading"
-                    [disabled]="!newServicoForm.valid"
-                    [style]="{'width':'80%','margin-top':'1.3rem'}"
-                    class="mt-4" 
-                    (onClick)="salvarServico()"
-                    label="Salvar"></p-button>
+            <p-inputNumber
+              [style]="{ width: '100%' }"
+              placeholder="Preço"
+              mode="currency"
+              currency="BRL"
+              [maxlength]="12"
+              formControlName="vlr_servico"
+            >
+            </p-inputNumber>
+            <p-button
+              *ngIf="saveButton"
+              [loading]="buttonLoading"
+              [disabled]="!newServicoForm.valid"
+              [style]="{ width: '80%', 'margin-top': '1.3rem' }"
+              class="mt-4"
+              (onClick)="salvarServico()"
+              label="Salvar"
+            ></p-button>
 
-                        <!-- <button
-                        *ngIf="editButton"
-                        pButton 
-                        type="button" 
-                        icon="pi pi-arrow-left"
-                        class="p-button-outlined"
-                        (click)="modo()"
-                        ></button> -->
-                        
-                        <p-button 
-                        *ngIf="editButton"
-                        [loading]="buttonLoading"
-                        [disabled]="!newServicoForm.valid"
-                        [style]="{'width':'80%','margin-top':'1.3rem'}"
-                        class="mt-4"
-                        label="Editar"></p-button>
+            <div class="button-container">
+            <button
+            *ngIf="editButton"
+            pButton
+            type="button"
+            class="mt-4"
+            icon="pi pi-arrow-left"
+            (click)="modo()"
+            ></button>
+              <button
+              pButton
+              *ngIf="editButton"
+              [loading]="buttonLoading"
+              [disabled]="!newServicoForm.valid"
+              [style]="{ width: '80%', 'margin-top': '1.3rem' }"
+              class="mt-4 ml-2"
+              label="Editar"
+            ></button>
+            </div>
 
-                    </form>
-                </div>
-                <div class="right-element">
-                    <!-- <p-virtualScroller [value]="servicos" [style]="{'width': '400px', 'height':'22rem','margin-left':'100px', 'border':'2px solid red'}" scrollHeight="21rem" [itemSize]="50">
+
+          </form>
+        </div>
+        <div class="right-element">
+          <!-- <p-virtualScroller [value]="servicos" [style]="{'width': '400px', 'height':'22rem','margin-left':'100px', 'border':'2px solid red'}" scrollHeight="21rem" [itemSize]="50">
                         <ng-template pTemplate="item" let-servico>
                             <div class="flex align-items-center p-2 h-full">
                                 {{ servico.desc_servico }} - {{ servico.vlr_servico }}
@@ -84,57 +92,65 @@
                         </ng-template>
                     </p-virtualScroller> -->
 
-                    <p-table 
-                    [value]="servicos" 
-                    [tableStyle]="{ 'min-width': '30rem' }"
-                    [paginator]="true" 
-                    [rows]="5" 
-                    [selectionPageOnly]="true"
-                    >
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>Descrição</th>
-                                <th>Valor</th>
-                                <th>Ações</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-servico>
-                            <tr>
-                                <td>{{ servico.desc_servico }}</td>
-                                <td>{{ servico.vlr_servico | currency : "BRL" : "symbol"}}</td>
-                                <td>
-                                    <p-button
-                                    icon="pi pi-pencil" 
-                                    styleClass="p-button-rounded p-button-primary p-button-text"
-                                    (onClick)="editarServico()"
-                                    ></p-button>
-                                    <p-button
-                                    icon="pi pi-trash" 
-                                    styleClass="p-button-rounded p-button-primary p-button-text"
-                                    (onClick)="deletarServico(servico)"
-                                    ></p-button>
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                    <p-progressSpinner
-                    class="progressSpinner"
-                    *ngIf="progressSpinner">
-                    </p-progressSpinner>
-                </div>
-            </div>
-        </p-tabPanel>
-        <p-tabPanel header="Header II">
-            <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-                ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
-            </p>
-        </p-tabPanel>
-        <p-tabPanel header="Header III">
-            <p>
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa
-                qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-            </p>
-        </p-tabPanel>
-    </p-tabView>
+          <p-table
+            [value]="servicos"
+            [tableStyle]="{ 'min-width': '30rem' }"
+            [paginator]="true"
+            [rows]="5"
+            [selectionPageOnly]="true"
+          >
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Ações</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-servico>
+              <tr>
+                <td>{{ servico.desc_servico }}</td>
+                <td>{{ servico.vlr_servico | currency : "BRL" : "symbol" }}</td>
+                <td>
+                  <p-button
+                    icon="pi pi-pencil"
+                    styleClass="p-button-rounded p-button-primary p-button-text"
+                    (onClick)="editarServico()"
+                  ></p-button>
+                  <p-button
+                    icon="pi pi-trash"
+                    styleClass="p-button-rounded p-button-primary p-button-text"
+                    (onClick)="deletarServico(servico)"
+                  ></p-button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+          <p-progressSpinner class="progressSpinner" *ngIf="progressSpinner">
+          </p-progressSpinner>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Header II">
+      <p>
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non
+        numquam eius modi.
+      </p>
+    </p-tabPanel>
+    <p-tabPanel header="Header III">
+      <p>
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui
+        blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
+        et quas molestias excepturi sint occaecati cupiditate non provident,
+        similique sunt in culpa qui officia deserunt mollitia animi, id est
+        laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
+        distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+        cumque nihil impedit quo minus.
+      </p>
+    </p-tabPanel>
+  </p-tabView>
 </div>

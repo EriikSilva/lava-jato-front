@@ -51,8 +51,13 @@
     color: red;
 }
 
-.button-container {
+.buton-edit{
     display: flex;
-    justify-content: flex-start;
-  }
-  
+    justify-content: center;
+    border: 1px solid red;
+}
+
+.button-container{
+    display: flex;
+    margin-left: 4.7rem;
+}
