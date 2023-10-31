@@ -3,7 +3,6 @@
     margin: 3rem auto;
 }
 
-
 .container {
     display: flex;
     justify-content: space-between;
@@ -18,9 +17,42 @@
     flex: 1; /* O elemento da direita ocupará o espaço restante */
 }
 
-.formulario input {
+.topo{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.formulario{
+    margin-top: 9%;
+    height: 430px;
+}
+
+.formulario input, p-inputNumber{
     display: block; 
     width: 80%; 
-    margin:2rem auto; 
-
+    margin:1rem auto; 
 }
+
+.formulario label:not(:last-child) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+
+.formulario p-button{
+    display: flex;
+    justify-content: center;
+}
+
+.formulario span{
+    color: red;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
