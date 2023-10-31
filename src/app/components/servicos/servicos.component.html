@@ -61,26 +61,25 @@
             ></p-button>
 
             <div class="button-container">
-            <button
-            *ngIf="editButton"
-            pButton
-            type="button"
-            class="mt-4"
-            icon="pi pi-arrow-left"
-            (click)="modo()"
-            ></button>
               <button
-              pButton
-              *ngIf="editButton"
-              [loading]="buttonLoading"
-              [disabled]="!newServicoForm.valid"
-              [style]="{ width: '80%', 'margin-top': '1.3rem' }"
-              class="mt-4 ml-2"
-              label="Editar"
-            ></button>
+                *ngIf="editButton"
+                pButton
+                type="button"
+                class="mt-4"
+                icon="pi pi-arrow-left"
+                (click)="modo()"
+              ></button>
+              <button
+                pButton
+                *ngIf="editButton"
+                [loading]="buttonLoading"
+                [disabled]="!newServicoForm.valid"
+                [style]="{ width: '80%', 'margin-top': '1.3rem' }"
+                class="mt-4 ml-2"
+                label="Editar"
+                (click)="editarServico()"
+              ></button>
             </div>
-
-
           </form>
         </div>
         <div class="right-element">
@@ -114,13 +113,14 @@
                   <p-button
                     icon="pi pi-pencil"
                     styleClass="p-button-rounded p-button-primary p-button-text"
-                    (onClick)="editarServico()"
+                    (onClick)="editMode(servico)"
                   ></p-button>
                   <p-button
                     icon="pi pi-trash"
                     styleClass="p-button-rounded p-button-primary p-button-text"
-                    (onClick)="deletarServico(servico)"
+                    (onClick)="deletarServico($event, servico)"
                   ></p-button>
+                  <!--      (click)="deletarServico($event, client)" -->
                 </td>
               </tr>
             </ng-template>
@@ -154,3 +154,11 @@
     </p-tabPanel>
   </p-tabView>
 </div>
+
+<div>
+  <p-toast></p-toast>
+</div>
+
+<!-- CONFIRM POPUP -->
+<p-confirmPopup></p-confirmPopup>
+

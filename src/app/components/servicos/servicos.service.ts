@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/app/environments/environment.development';
-import { PostServico } from './DTO/servicos.DTO';
+import { PostServico, PutServico } from './DTO/servicos.DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +25,8 @@ export class ServicosService {
     return this.http.post<PostServico>(`${this.apiUrl}/servicos`,body)
   }  
 
-  editServico(body:any){
-    return this.http.put(`${this.apiUrl}/servicos`, body)
+  editServico(body:PutServico):Observable<PutServico>{
+    return this.http.put<PutServico>(`${this.apiUrl}/servicos`, body)
   }
   
   deleteServico(cd_servico:number){
