@@ -59,6 +59,7 @@ export class ServicosComponent implements OnInit {
     this.gestaoService.postServicos(desc_servico, vlr_servico)
     .subscribe({
       next: (res: any) => {
+        this.modo()
         this.buttonLoading = false;
         const { message } = res;
         this.messageService.add({
@@ -66,7 +67,7 @@ export class ServicosComponent implements OnInit {
           summary: 'Sucesso ao cadastrar',
           detail: message,
         });
-        this.modo()
+        this.getServicos();
       },
       error: (res: any) => {
         this.messageService.add({
@@ -157,8 +158,7 @@ export class ServicosComponent implements OnInit {
   modo() {
     this.editButton = false;
     this.saveButton = true;
-    this.newServicoForm.get('desc_servico')?.setValue('');
-    this.newServicoForm.get('vlr_servico')?.setValue(null);
+    this.newServicoForm.reset();
   }
 
 
