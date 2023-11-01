@@ -1,15 +1,15 @@
+import { GestaoService } from './gestao.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ServicosService } from './servicos.service';
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-servicos',
-  templateUrl: './servicos.component.html',
-  styleUrls: ['./servicos.component.scss'],
+  templateUrl: './gestao.component.html',
+  styleUrls: ['./gestao.component.scss'],
   providers: [MessageService, ConfirmationService],
 })
-export class ServicosComponent implements OnInit {
+export class GestaoComponent implements OnInit {
   servicos: any;
   progressSpinner: boolean = false;
   buttonLoading: boolean = false;
@@ -19,7 +19,7 @@ export class ServicosComponent implements OnInit {
   body: any;
 
   constructor(
-    private servicosService: ServicosService,
+    private gestaoService: GestaoService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {}
@@ -38,7 +38,7 @@ export class ServicosComponent implements OnInit {
 
   getServicos() {
     this.progressSpinner = true;
-    this.servicosService.getServicos().subscribe({
+    this.gestaoService.getServicos().subscribe({
       next: (res: any) => {
         this.progressSpinner = false;
         const { data } = res;
@@ -55,7 +55,7 @@ export class ServicosComponent implements OnInit {
 
     this.buttonLoading = true;
 
-    this.servicosService.postServicos(desc_servico, vlr_servico)
+    this.gestaoService.postServicos(desc_servico, vlr_servico)
     .subscribe({
       next: (res: any) => {
         this.buttonLoading = false;
@@ -89,7 +89,7 @@ export class ServicosComponent implements OnInit {
       cd_servico: this.cd_servico,
     };
 
-    this.servicosService.editServico(body).subscribe({
+    this.gestaoService.editServico(body).subscribe({
       next: (res: any) => {
         const { message } = res;
         this.messageService.add({
@@ -112,7 +112,7 @@ export class ServicosComponent implements OnInit {
       acceptLabel: 'Sim',
       rejectLabel: 'Não',
       accept: () => {
-        this.servicosService.deleteServico(cd_servico).subscribe({
+        this.gestaoService.deleteServico(cd_servico).subscribe({
           next: (res: any) => {
             const { message } = res;
             this.messageService.add({

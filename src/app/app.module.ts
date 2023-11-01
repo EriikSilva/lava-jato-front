@@ -33,9 +33,11 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { NewAtendimentoComponent } from './components/atendimento/dialogs/new-atendimento/new-atendimento.component';
 import { FinalizarAtendimentoComponent } from './components/atendimento/dialogs/finalizar-atendimento/finalizar-atendimento.component';
-import { ServicosComponent } from './components/servicos/servicos.component';
+import { GestaoComponent } from './components/gestao/gestao.component';
 import { VisualizarServicoComponent } from './components/atendimento/dialogs/visualizar-servico/visualizar-servico.component';
 import { CarWashLoaderComponent } from './components/car-wash-loader/car-wash-loader.component';
+import { ServicosComponent } from './components/gestao/pages/servicos/servicos.component';
+import { TiposPagamentoComponent } from './components/gestao/pages/tipos-pagamento/tipos-pagamento.component';
 
 @NgModule({
   declarations: [
@@ -57,9 +59,11 @@ import { CarWashLoaderComponent } from './components/car-wash-loader/car-wash-lo
     InicioComponent,
     NewAtendimentoComponent,
     FinalizarAtendimentoComponent,
-    ServicosComponent,
+    GestaoComponent,
     VisualizarServicoComponent,
-    CarWashLoaderComponent
+    CarWashLoaderComponent,
+    ServicosComponent,
+    TiposPagamentoComponent
   ],
   imports: [
     BrowserAnimationsModule,

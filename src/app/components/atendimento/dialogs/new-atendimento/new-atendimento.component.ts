@@ -1,9 +1,9 @@
+import { GestaoService } from './../../../gestao/gestao.service';
 import { MessageService } from 'primeng/api';
 import { ClientesService } from 'src/app/components/clientes/clientes.service';
 import { CarrosService } from './../../../clientes/carros.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ServicosService } from 'src/app/components/servicos/servicos.service';
 import { format, addDays } from 'date-fns';
 import { AgendamentosDTO } from '../../DTO/atendimentoDTO';
 import { AtendimentoService } from '../../atendimento.service';
@@ -18,7 +18,7 @@ export class NewAtendimentoComponent implements OnInit {
   constructor(
     private carrosService: CarrosService,
     private clienteService: ClientesService,
-    private servicosService: ServicosService,
+    private gestaoService: GestaoService,
     private atendimentoService: AtendimentoService,
     private MessageService: MessageService
   ) {}
@@ -127,7 +127,7 @@ export class NewAtendimentoComponent implements OnInit {
   }
 
   getServicos() {
-    this.servicosService.getServicos().subscribe((res: any) => {
+    this.gestaoService.getServicos().subscribe((res: any) => {
       const { data } = res;
 
       const servicosConcatenados = data.map((servico: any) => ({

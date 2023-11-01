@@ -1,4 +1,4 @@
-import { ServicosService } from 'src/app/components/servicos/servicos.service';
+import { GestaoService } from './../gestao/gestao.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ClientesService } from '../clientes/clientes.service';
 import { AtendimentoService } from './atendimento.service';

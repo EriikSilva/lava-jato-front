@@ -7,7 +7,7 @@ import { PostServico, PutServico } from './DTO/servicos.DTO';
 @Injectable({
   providedIn: 'root'
 })
-export class ServicosService {
+export class GestaoService {
 
   private readonly apiUrl = environment.apiUrl
 

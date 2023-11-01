@@ -8,8 +8,7 @@ import { FrankensteinComponent } from './components/frankenstein/frankenstein.co
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { AtendimentoComponent } from './components/atendimento/atendimento.component';
-import { ServicosComponent } from './components/servicos/servicos.component';
-
+import { GestaoComponent } from './components/gestao/gestao.component';
 const routes: Routes = [
   {
     path:'login',
@@ -31,8 +30,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'servicos',
-    component:ServicosComponent,
+    path: 'gestao',
+    component:GestaoComponent,
     canActivate:[AuthGuard]
   },
   {
