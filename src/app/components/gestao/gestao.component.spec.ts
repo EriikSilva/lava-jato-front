@@ -1,16 +1,15 @@
+import { GestaoComponent } from './gestao.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ServicosComponent } from './servicos.component';
-
-describe('ServicosComponent', () => {
-  let component: ServicosComponent;
-  let fixture: ComponentFixture<ServicosComponent>;
+describe('GestaoComponent', () => {
+  let component: GestaoComponent;
+  let fixture: ComponentFixture<GestaoComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ServicosComponent]
+      declarations: [GestaoComponent]
     });
-    fixture = TestBed.createComponent(ServicosComponent);
+    fixture = TestBed.createComponent(GestaoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
