@@ -71,12 +71,29 @@
   </div>
   <div class="right-element">
     <p-table
+      #dt
+      #textInput
       [value]="servicos"
+      [globalFilterFields]="['desc_servico']"
       [tableStyle]="{ 'min-width': '30rem' }"
       [paginator]="true"
-      [rows]="5"
+      [rows]="4"
       [selectionPageOnly]="true"
     >
+      <ng-template pTemplate="caption">
+        <span class="search_input">
+          <!-- <i class="pi pi-search"></i> -->
+          <input
+            pInputText
+            type="text"
+            pTooltip="Nome do serviço"
+            tooltipPosition="top"
+            (input)="applyFilterGlobal($event, 'contains')"
+            placeholder="Pesquisar... "
+          />
+        </span>
+      </ng-template>
+
       <ng-template pTemplate="header">
         <tr>
           <th>Descrição</th>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { GestaoService } from '../../gestao.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-servicos',
@@ -10,6 +11,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   providers: [MessageService, ConfirmationService],
 })
 export class ServicosComponent implements OnInit {
+
+  @ViewChild('dt') dt: Table | undefined;
 
   servicos: any;
   progressSpinner: boolean = false;
@@ -153,6 +156,11 @@ export class ServicosComponent implements OnInit {
     };
 
     this.body = bodyEdit;
+  }
+
+
+  applyFilterGlobal($event: any, stringVal: any) {
+    this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
   modo() {
