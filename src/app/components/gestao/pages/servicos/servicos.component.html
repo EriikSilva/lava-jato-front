@@ -1,76 +1,76 @@
 <div class="container">
-    <div class="left-element">
-      <div class="topo">
+  <div class="left-element">
+    <div class="topo">
+      <button
+        pButton
+        type="button"
+        icon="pi pi-arrow-left"
+        routerLink="/inicio"
+        class="p-button-outlined"
+      ></button>
+      <h2 class="ml-3">INSIRA UM NOVO SERVIÇO:</h2>
+    </div>
+    <form class="formulario" [formGroup]="newServicoForm">
+      <label for="desc_servico"
+        ><b>Descrição do Serviço </b><span class="ml-2"> * </span></label
+      >
+      <input
+        type="text"
+        id="desc_servico"
+        pInputText
+        maxlength="50"
+        placeholder="Descrição"
+        formControlName="desc_servico"
+        required
+        autofocus
+      />
+
+      <label for="vlr_servico"
+        ><b>Valor do Serviço</b><span class="ml-2"> * </span></label
+      >
+      <p-inputNumber
+        [style]="{ width: '100%' }"
+        placeholder="Preço"
+        mode="currency"
+        currency="BRL"
+        [maxlength]="12"
+        formControlName="vlr_servico"
+      >
+      </p-inputNumber>
+      <p-button
+        *ngIf="saveButton"
+        [loading]="buttonLoading"
+        [disabled]="!newServicoForm.valid"
+        [style]="{ width: '80%', 'margin-top': '1.3rem' }"
+        class="mt-4"
+        (onClick)="salvarServico()"
+        label="Salvar"
+      ></p-button>
+
+      <div class="button-container">
         <button
+          *ngIf="editButton"
           pButton
           type="button"
+          class="mt-4"
           icon="pi pi-arrow-left"
-          routerLink="/inicio"
-          class="p-button-outlined"
+          (click)="modo()"
         ></button>
-        <h2 class="ml-3">INSIRA UM NOVO SERVIÇO:</h2>
-      </div>
-      <form class="formulario" [formGroup]="newServicoForm">
-        <label for="desc_servico"
-          ><b>Descrição do Serviço </b><span class="ml-2"> * </span></label
-        >
-        <input
-          type="text"
-          id="desc_servico"
-          pInputText
-          maxlength="50"
-          placeholder="Descrição"
-          formControlName="desc_servico"
-          required
-          autofocus
-        />
-
-        <label for="vlr_servico"
-          ><b>Valor do Serviço</b><span class="ml-2"> * </span></label
-        >
-        <p-inputNumber
-          [style]="{ width: '100%' }"
-          placeholder="Preço"
-          mode="currency"
-          currency="BRL"
-          [maxlength]="12"
-          formControlName="vlr_servico"
-        >
-        </p-inputNumber>
-        <p-button
-          *ngIf="saveButton"
+        <button
+          pButton
+          *ngIf="editButton"
           [loading]="buttonLoading"
           [disabled]="!newServicoForm.valid"
           [style]="{ width: '80%', 'margin-top': '1.3rem' }"
-          class="mt-4"
-          (onClick)="salvarServico()"
-          label="Salvar"
-        ></p-button>
-
-        <div class="button-container">
-          <button
-            *ngIf="editButton"
-            pButton
-            type="button"
-            class="mt-4"
-            icon="pi pi-arrow-left"
-            (click)="modo()"
-          ></button>
-          <button
-            pButton
-            *ngIf="editButton"
-            [loading]="buttonLoading"
-            [disabled]="!newServicoForm.valid"
-            [style]="{ width: '80%', 'margin-top': '1.3rem' }"
-            class="mt-4 ml-2"
-            label="Editar"
-            (click)="editarServico()"
-          ></button>
-        </div>
-      </form>
-    </div>
-    <div class="right-element">
-      <!-- <p-virtualScroller [value]="servicos" [style]="{'width': '400px', 'height':'22rem','margin-left':'100px', 'border':'2px solid red'}" scrollHeight="21rem" [itemSize]="50">
+          class="mt-4 ml-2"
+          label="Editar"
+          (click)="editarServico()"
+        ></button>
+      </div>
+    </form>
+  </div>
+  <div class="right-element">
+    <!-- <p-virtualScroller [value]="servicos" [style]="{'width': '400px', 'height':'22rem','margin-left':'100px', 'border':'2px solid red'}" scrollHeight="21rem" [itemSize]="50">
                     <ng-template pTemplate="item" let-servico>
                         <div class="flex align-items-center p-2 h-full">
                             {{ servico.desc_servico }} - {{ servico.vlr_servico }}
@@ -78,51 +78,47 @@
                     </ng-template>
                 </p-virtualScroller> -->
 
-      <p-table
-        [value]="servicos"
-        [tableStyle]="{ 'min-width': '30rem' }"
-        [paginator]="true"
-        [rows]="5"
-        [selectionPageOnly]="true"
-      >
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Descrição</th>
-            <th>Valor</th>
-            <th>Ações</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-servico>
-          <tr>
-            <td>{{ servico.desc_servico }}</td>
-            <td>{{ servico.vlr_servico | currency : "BRL" : "symbol" }}</td>
-            <td>
-              <p-button
-                icon="pi pi-pencil"
-                styleClass="p-button-rounded p-button-primary p-button-text"
-                (onClick)="editMode(servico)"
-              ></p-button>
-              <p-button
-                icon="pi pi-trash"
-                styleClass="p-button-rounded p-button-primary p-button-text"
-                (onClick)="deletarServico($event, servico)"
-              ></p-button>
-              <!--      (click)="deletarServico($event, client)" -->
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-      <p-progressSpinner class="progressSpinner" *ngIf="progressSpinner">
-      </p-progressSpinner>
-    </div>
+    <p-table
+      [value]="servicos"
+      [tableStyle]="{ 'min-width': '30rem' }"
+      [paginator]="true"
+      [rows]="5"
+      [selectionPageOnly]="true"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Descrição</th>
+          <th>Valor</th>
+          <th>Ações</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-servico>
+        <tr>
+          <td>{{ servico.desc_servico }}</td>
+          <td>{{ servico.vlr_servico | currency : "BRL" : "symbol" }}</td>
+          <td>
+            <p-button
+              icon="pi pi-pencil"
+              styleClass="p-button-rounded p-button-primary p-button-text"
+              (onClick)="editMode(servico)"
+            ></p-button>
+            <p-button
+              icon="pi pi-trash"
+              styleClass="p-button-rounded p-button-primary p-button-text"
+              (onClick)="deletarServico($event, servico)"
+            ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-progressSpinner class="progressSpinner" *ngIf="progressSpinner">
+    </p-progressSpinner>
   </div>
+</div>
 
+<div>
+  <p-toast></p-toast>
+</div>
 
-  <div>
-    <p-toast></p-toast>
-  </div>
-  
-  <!-- CONFIRM POPUP -->
-  <p-confirmPopup></p-confirmPopup>
-  
-  
+<!-- CONFIRM POPUP -->
+<p-confirmPopup></p-confirmPopup>
