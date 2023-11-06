@@ -113,7 +113,7 @@ export class ServicosComponent implements OnInit {
     const { cd_servico } = servico;
     this.confirmationService.confirm({
       target: event.target as EventTarget,
-      message: 'Deseja excluir este s erviço?',
+      message: 'Deseja excluir este serviço?',
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Sim',
       rejectLabel: 'Não',
@@ -123,7 +123,7 @@ export class ServicosComponent implements OnInit {
             const { message } = res;
             this.messageService.add({
               severity: 'success',
-              summary: 'Sucesso ao editar',
+              summary: 'Sucesso ao deletar',
               detail: message,
             });
             this.getServicos();
@@ -132,7 +132,7 @@ export class ServicosComponent implements OnInit {
             const { error } = res.error
             this.messageService.add({
               severity: 'error',
-              summary: 'Error ao editar',
+              summary: 'Error ao deletar',
               detail: error,
             });
           },
