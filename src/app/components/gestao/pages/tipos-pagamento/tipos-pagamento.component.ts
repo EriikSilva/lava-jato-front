@@ -108,10 +108,11 @@ export class TiposPagamentoComponent implements OnInit {
     const descricao = String(formValue.descricao);
 
     const body: PutTipoPagamento = {
-      cd_pagamento: this.cd_pagamento,
+      cd_pagamento: Number(this.cd_pagamento),
       descricao,
       qtd_parcelas: this.selectedParcela.value,
     };
+
     this.buttonLoading = true;
     this.tiposPagamentoService.putTiposPagamento(body)
     .subscribe({
@@ -137,6 +138,40 @@ export class TiposPagamentoComponent implements OnInit {
     });
   }
 
+
+  deletarTipoPagamento(event: Event, tipo_pagamento: any){
+    const { cd_pagamento } = tipo_pagamento
+
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Deseja excluir este tipo de pagamento?',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        this.tiposPagamentoService.deleteTipoPagamento(cd_pagamento).
+        subscribe({
+          next: (res: any) => {
+            const { message } = res;
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Sucesso ao deletar',
+              detail: message,
+            });
+            this.getTiposPagamento();
+          },
+          error: (res: any) => {
+            const { error } = res.error
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error ao deletar',
+              detail: error,
+            });
+          },
+        });
+      },
+    });
+  }
 
   modo() {
     this.editButton = false;

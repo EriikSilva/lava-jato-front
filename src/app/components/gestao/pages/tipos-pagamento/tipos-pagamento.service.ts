@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/app/environments/environment.development';
-import { PostTipoPagamento, PutTipoPagamento } from '../../DTO/servicos.DTO';
+import { DeleteTipoPagamento, PostTipoPagamento, PutTipoPagamento } from '../../DTO/servicos.DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +26,9 @@ export class TiposPagamentoService {
 
   putTiposPagamento(body:PutTipoPagamento):Observable<PutTipoPagamento>{
     return this.http.put<PutTipoPagamento>(`${this.apiUrl}/financeiro/tipospagamentos`, body)
+  }
+
+  deleteTipoPagamento(cd_pagamento:number):Observable<DeleteTipoPagamento>{
+    return this.http.delete<DeleteTipoPagamento>(`${this.apiUrl}/financeiro/tipospagamentos/${cd_pagamento}`)
   }
 }
