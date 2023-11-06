@@ -33,3 +33,7 @@ export interface PutVeiculo{
     cd_tipo_veiculo: number;
     descricao: string;
 }
+
+export interface DeleteVeiculo{
+    cd_tipo_veiculo: number;
+}
