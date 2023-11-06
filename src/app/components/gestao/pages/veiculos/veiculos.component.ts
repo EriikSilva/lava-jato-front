@@ -37,9 +37,11 @@ export class VeiculosComponent implements OnInit{
   })
 
   getVeiculos(){
+    this.progressSpinner = true;
     this.veiculoService.getVeiculos()
     .subscribe({
       next:(res:any) => {
+      this.progressSpinner = false;
         const { data } = res
         this.veiculos = data
       }
@@ -124,7 +126,37 @@ export class VeiculosComponent implements OnInit{
   }
 
   deletarVeiculo(event: Event, veiculo: any){
-
+    const { cd_tipo_veiculo } = veiculo
+    
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Deseja excluir este veículo?',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        this.veiculoService.deleteVeiculo(cd_tipo_veiculo)
+        .subscribe({
+          next: (res: any) => {
+            const { message } = res;
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Sucesso ao deletar',
+              detail: message,
+            });
+            this.getVeiculos();
+          },
+          error: (res: any) => {
+            const { error } = res.error
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error ao deletar',
+              detail: error,
+            });
+          },
+        });
+      },
+    });
   }
 
   modo() {
