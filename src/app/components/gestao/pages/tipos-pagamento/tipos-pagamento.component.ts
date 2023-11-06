@@ -77,6 +77,7 @@ export class TiposPagamentoComponent implements OnInit {
           detail: message,
         });
         this.modo();
+        this.getTiposPagamento();
       },
       error: (res: any) => {
         this.buttonLoading = false;
@@ -125,6 +126,7 @@ export class TiposPagamentoComponent implements OnInit {
           detail: message,
         });
         this.modo();
+        this.getTiposPagamento();
       },
       error: (res: any) => {
         this.buttonLoading = false;
