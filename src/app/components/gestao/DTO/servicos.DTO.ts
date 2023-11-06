@@ -20,3 +20,6 @@ export interface PutTipoPagamento {
     qtd_parcelas:      number;
 }
 
+export interface DeleteTipoPagamento{
+    cd_pagamento:      number;
+}
