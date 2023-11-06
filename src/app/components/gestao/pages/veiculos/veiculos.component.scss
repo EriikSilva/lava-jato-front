@@ -1,0 +1,64 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-element {
+    flex: 1;
+    margin-right: 10px; 
+}
+
+.right-element {
+    flex: 1;
+}
+
+.topo{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.formulario{
+    margin-top: 9%;
+    height: 430px;
+}
+
+.formulario input, p-inputNumber, p-dropdown {
+    display: block; 
+    width: 80%; 
+    margin:1rem auto; 
+}
+
+.formulario label:not(:last-child) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+
+.formulario p-button{
+    display: flex;
+    justify-content: center;
+}
+
+.formulario span{
+    color: red;
+}
+
+.buton-edit{
+    display: flex;
+    justify-content: center;
+    border: 1px solid red;
+}
+
+.button-container{
+    display: flex;
+    margin-left: 4.7rem;
+}
+
+.search_input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
