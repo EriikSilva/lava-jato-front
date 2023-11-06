@@ -47,9 +47,10 @@
         label="Salvar"
       ></p-button>
 
-      <div class="button-container">
+      <div 
+      class="button-container" 
+      *ngIf="editButton">
         <button
-          *ngIf="editButton"
           pButton
           type="button"
           class="mt-4"
@@ -58,7 +59,6 @@
         ></button>
         <button
           pButton
-          *ngIf="editButton"
           [loading]="buttonLoading"
           [disabled]="!newServicoForm.valid"
           [style]="{ width: '80%', 'margin-top': '1.3rem' }"
