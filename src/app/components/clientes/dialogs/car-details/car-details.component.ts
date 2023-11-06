@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ClienteGetDTO, VeiculosCliente } from '../../DTO/clientesDTO';
 import { CarrosService } from '../../carros.service';
 import { GetTypeCarDTO, editClientCarDTO } from '../../DTO/carrosDTO';
@@ -11,7 +11,11 @@ import { NewCarComponent } from '../new-car/new-car.component';
   styleUrls: ['./car-details.component.scss'],
   providers: [MessageService]
 })
-export class CarDetailsComponent{
+export class CarDetailsComponent implements OnInit{
+
+  ngOnInit(): void {
+      this.getTipoCarros();
+  }
 
   @ViewChild('NewCarComponent') NewCarComponent: NewCarComponent | undefined;
 
