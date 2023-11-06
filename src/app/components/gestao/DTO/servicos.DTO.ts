@@ -28,3 +28,8 @@ export interface DeleteTipoPagamento{
 export interface PostVeiculo{
     descricao: string;
 }
+
+export interface PutVeiculo{
+    cd_tipo_veiculo: number;
+    descricao: string;
+}
