@@ -2,72 +2,73 @@ import { TiposPagamentoService } from './tipos-pagamento.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Table } from 'primeng/table';
-import { PostTipoPagamento } from '../../DTO/servicos.DTO';
+import { PostTipoPagamento, PutTipoPagamento } from '../../DTO/servicos.DTO';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-tipos-pagamento',
   templateUrl: './tipos-pagamento.component.html',
   styleUrls: ['./tipos-pagamento.component.scss'],
-  providers: [ConfirmationService,MessageService]
+  providers: [ConfirmationService, MessageService],
 })
-export class TiposPagamentoComponent implements OnInit{
-
+export class TiposPagamentoComponent implements OnInit {
   @ViewChild('dt') dt: Table | undefined;
 
-  tiposPagamento:any
+  tiposPagamento: any;
   progressSpinner: boolean = false;
   buttonLoading: boolean = false;
   saveButton: boolean = true;
   editButton: boolean = false;
-  parcelas_p:number = 0
+  parcelas_p: number = 0;
+  selectedParcela: any;
+  cd_pagamento: number = 0;
 
   parcelas = [
-    {label:'1'},
-    {label:'2'},
-    {label:'3'},
-    {label:'4'},    
-  ]
+    { label: '1', value: 1 },
+    { label: '2', value: 2 },
+    { label: '3', value: 3 },
+    { label: '4', value: 4 },
+  ];
 
   constructor(
-    private tiposPagamentoService:TiposPagamentoService,
+    private tiposPagamentoService: TiposPagamentoService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
-    ){}
+  ) {}
 
   newTipoPagamentoForm = new FormGroup({
-    descricao: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    qtd_parcelas: new FormControl(null,[Validators.required])
-  })
-
+    descricao: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+    ]),
+    qtd_parcelas: new FormControl(null, [Validators.required]),
+  });
 
   ngOnInit(): void {
     this.getTiposPagamento();
   }
 
-  getTiposPagamento(){
-    this.tiposPagamentoService.getTiposPagamento()
-    .subscribe({
-      next:(res:any) => {
-        const { data } = res
-        this.tiposPagamento = data
-      }
-    })
+  getTiposPagamento() {
+    this.tiposPagamentoService.getTiposPagamento().subscribe({
+      next: (res: any) => {
+        const { data } = res;
+        this.tiposPagamento = data;
+      },
+    });
   }
 
-  salvarTipoPagamento(){
+  salvarTipoPagamento() {
     const formValue = this.newTipoPagamentoForm.value;
     const descricao = String(formValue.descricao);
 
-    const body:PostTipoPagamento = {
+    const body: PostTipoPagamento = {
       descricao,
-      qtd_parcelas: this.parcelas_p
-    }
+      qtd_parcelas: this.parcelas_p,
+    };
     this.buttonLoading = true;
-    
-    this.tiposPagamentoService.postTiposPagamento(body)
-    .subscribe({
-      next:(res:any) => {
+
+    this.tiposPagamentoService.postTiposPagamento(body).subscribe({
+      next: (res: any) => {
         const { message } = res;
         this.buttonLoading = false;
         this.messageService.add({
@@ -75,27 +76,77 @@ export class TiposPagamentoComponent implements OnInit{
           summary: 'Sucesso ao cadastrar',
           detail: message,
         });
-        this.limparDados();
-      }, error:(res:any) => {
+        this.modo();
+      },
+      error: (res: any) => {
         this.buttonLoading = false;
-        const { error } = res.error
+        const { error } = res.error;
         this.messageService.add({
           severity: 'error',
           summary: 'Erro ao cadastrar',
           detail: error,
         });
-      }
-    })
-
+      },
+    });
   }
 
-  limparDados(){
+  editMode(tipo_pagamento: any) {
+    const { cd_pagamento, descricao, qtd_parcelas } = tipo_pagamento;
+
+    this.saveButton = false;
+    this.editButton = true;
+
+    this.newTipoPagamentoForm.get('descricao')?.setValue(descricao);
+    this.selectedParcela = this.parcelas.find(
+      (parcela) => parcela.value === qtd_parcelas
+    );
+    this.cd_pagamento = cd_pagamento;
+  }
+
+  editarTipoPagamento() {
+    const formValue = this.newTipoPagamentoForm.value;
+    const descricao = String(formValue.descricao);
+
+    const body: PutTipoPagamento = {
+      cd_pagamento: this.cd_pagamento,
+      descricao,
+      qtd_parcelas: this.selectedParcela.value,
+    };
+    this.buttonLoading = true;
+    this.tiposPagamentoService.putTiposPagamento(body)
+    .subscribe({
+      next: (res: any) => {
+        const { message } = res;
+        this.buttonLoading = false;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso ao Editar',
+          detail: message,
+        });
+        this.modo();
+      },
+      error: (res: any) => {
+        this.buttonLoading = false;
+        const { error } = res.error;
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro ao Editar',
+          detail: error,
+        });
+      },
+    });
+  }
+
+
+  modo() {
+    this.editButton = false;
+    this.saveButton = true;
     this.newTipoPagamentoForm.reset();
   }
 
-  onDropdownChangeParcelas(event:any){
-    const { value } = event
-    this.parcelas_p = Number(value.label)
+  onDropdownChangeParcelas(event: any) {
+    const { value } = event;
+    this.parcelas_p = Number(value.label);
   }
 
   applyFilterGlobal($event: any, stringVal: any) {

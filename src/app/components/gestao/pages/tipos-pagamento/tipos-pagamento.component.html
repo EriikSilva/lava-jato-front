@@ -25,19 +25,6 @@
             />
 
           <label for="qtd_parcelas"><b>Quantidade de Parcelas</b><span class="ml-2"> * </span></label>
-          <!-- <input
-            [style]="{ width: '80%' }"
-            type="text"
-            pInputText
-            pKeyFilter="int"
-            maxlength="2"
-            formControlName="qtd_parcelas"
-            id="qtd_parcelas"
-            required
-            autofocus
-            placeholder="1x"
-          /> -->
-
           <p-dropdown 
           [style]="{ width: '100%' }"
           id="descricao"
@@ -45,8 +32,9 @@
           formControlName="qtd_parcelas" 
           placeholder="Selecione"
           optionLabel="label"
+          [(ngModel)]="selectedParcela"
           (onChange)="onDropdownChangeParcelas($event)"
-          ></p-dropdown>
+        ></p-dropdown>
 
           <p-button
           *ngIf="saveButton"
@@ -57,6 +45,28 @@
           (onClick)="salvarTipoPagamento()"
           label="Salvar"
         ></p-button>
+        <div 
+        class="button-container"  
+        *ngIf="editButton">
+          <button
+          pButton
+          type="button"
+          class="mt-4"
+          icon="pi pi-arrow-left"
+          (click)="modo()"
+          ></button>
+        
+          <button
+          pButton
+          [loading]="buttonLoading"
+          [disabled]="!newTipoPagamentoForm.valid"
+          [style]="{ width: '80%', 'margin-top': '1.3rem' }"
+          class="mt-4 ml-2"
+          label="Editar"
+          (click)="editarTipoPagamento()"
+        ></button>
+        </div>
+
 
           </form>
     </div>
@@ -99,9 +109,9 @@
               <p-button
                 icon="pi pi-pencil"
                 styleClass="p-button-rounded p-button-primary p-button-text"
-
+                (onClick)="editMode(tipos_pagamento)"
               ></p-button>
-              <!-- (onClick)="editMode(servico)" -->
+
               <p-button
                 icon="pi pi-trash"
                 styleClass="p-button-rounded p-button-primary p-button-text"
