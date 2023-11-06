@@ -1,62 +1,64 @@
 <div class="container">
-    <div class="left-element">
-        <div class="topo">
-            <button
-              pButton
-              type="button"
-              icon="pi pi-arrow-left"
-              routerLink="/inicio"
-              class="p-button-outlined"
-            ></button>
-            <h2 class="ml-3">INSIRA UM NOVO TIPO DE PAGAMENTO:</h2>
-          </div>
+  <div class="left-element">
+    <div class="topo">
+      <button
+        pButton
+        type="button"
+        icon="pi pi-arrow-left"
+        routerLink="/inicio"
+        class="p-button-outlined"
+      ></button>
+      <h2 class="ml-3">INSIRA UM NOVO TIPO DE PAGAMENTO:</h2>
+    </div>
 
-          <form class="formulario" [formGroup]="newTipoPagamentoForm">
-            <label for="descricao"><b>Tipo de pagamento </b><span class="ml-2"> * </span></label>
-            <input
-              type="text"
-              id="descricao"
-              pInputText
-              maxlength="50"
-              placeholder="Descrição"
-              formControlName="descricao"
-              required
-              autofocus
-            />
+    <form class="formulario" [formGroup]="newTipoPagamentoForm">
+      <label for="descricao"
+        ><b>Tipo de pagamento </b><span class="ml-2"> * </span></label
+      >
+      <input
+        type="text"
+        id="descricao"
+        pInputText
+        maxlength="50"
+        placeholder="Descrição"
+        formControlName="descricao"
+        required
+        autofocus
+      />
 
-          <label for="qtd_parcelas"><b>Quantidade de Parcelas</b><span class="ml-2"> * </span></label>
-          <p-dropdown 
-          [style]="{ width: '100%' }"
-          id="descricao"
-          [options]="parcelas" 
-          formControlName="qtd_parcelas" 
-          placeholder="Selecione"
-          optionLabel="label"
-          [(ngModel)]="selectedParcela"
-          (onChange)="onDropdownChangeParcelas($event)"
-        ></p-dropdown>
+      <label for="qtd_parcelas"
+        ><b>Quantidade de Parcelas</b><span class="ml-2"> * </span></label
+      >
+      <p-dropdown
+        [style]="{ width: '100%' }"
+        id="descricao"
+        [options]="parcelas"
+        formControlName="qtd_parcelas"
+        placeholder="Selecione"
+        optionLabel="label"
+        [(ngModel)]="selectedParcela"
+        (onChange)="onDropdownChangeParcelas($event)"
+      ></p-dropdown>
 
-          <p-button
-          *ngIf="saveButton"
-          [loading]="buttonLoading"
-          [disabled]="!newTipoPagamentoForm.valid"
-          [style]="{ width: '80%', 'margin-top': '1.3rem' }"
-          class="mt-4"
-          (onClick)="salvarTipoPagamento()"
-          label="Salvar"
-        ></p-button>
-        <div 
-        class="button-container"  
-        *ngIf="editButton">
-          <button
+      <p-button
+        *ngIf="saveButton"
+        [loading]="buttonLoading"
+        [disabled]="!newTipoPagamentoForm.valid"
+        [style]="{ width: '80%', 'margin-top': '1.3rem' }"
+        class="mt-4"
+        (onClick)="salvarTipoPagamento()"
+        label="Salvar"
+      ></p-button>
+      <div class="button-container" *ngIf="editButton">
+        <button
           pButton
           type="button"
           class="mt-4"
           icon="pi pi-arrow-left"
           (click)="modo()"
-          ></button>
-        
-          <button
+        ></button>
+
+        <button
           pButton
           [loading]="buttonLoading"
           [disabled]="!newTipoPagamentoForm.valid"
@@ -65,66 +67,62 @@
           label="Editar"
           (click)="editarTipoPagamento()"
         ></button>
-        </div>
+      </div>
+    </form>
+  </div>
+  <div class="right-element">
+    <p-table
+      #dt
+      #textInput
+      [value]="tiposPagamento"
+      [globalFilterFields]="['descricao']"
+      [tableStyle]="{ 'min-width': '30rem' }"
+      [paginator]="true"
+      [rows]="4"
+      [selectionPageOnly]="true"
+    >
+      <ng-template pTemplate="caption">
+        <span class="search_input">
+          <input
+            pInputText
+            type="text"
+            pTooltip="tipo de pagamento"
+            tooltipPosition="top"
+            (input)="applyFilterGlobal($event, 'contains')"
+            placeholder="Pesquisar... "
+          />
+        </span>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Tipo de Pagamento</th>
+          <th>Parcelas</th>
+          <th>Ações</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-tipos_pagamento>
+        <tr>
+          <td>{{ tipos_pagamento.descricao }}</td>
+          <td>{{ tipos_pagamento.qtd_parcelas }} X</td>
+          <td>
+            <p-button
+              icon="pi pi-pencil"
+              styleClass="p-button-rounded p-button-primary p-button-text"
+              (onClick)="editMode(tipos_pagamento)"
+            ></p-button>
 
-
-          </form>
-    </div>
-    <div class="right-element">
-        <p-table
-        #dt
-        #textInput
-        [value]="tiposPagamento"
-        [globalFilterFields]="['descricao']"
-        [tableStyle]="{ 'min-width': '30rem' }"
-        [paginator]="true"
-        [rows]="4"
-        [selectionPageOnly]="true"
-      >
-        <ng-template pTemplate="caption">
-          <span class="search_input">
-            <input
-              pInputText
-              type="text"
-              pTooltip="tipo de pagamento"
-              tooltipPosition="top"
-              (input)="applyFilterGlobal($event, 'contains')"
-              placeholder="Pesquisar... "
-            />
-
-          </span>
-        </ng-template>
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Tipo de Pagamento</th>
-            <th>Parcelas</th>
-            <th>Ações</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-tipos_pagamento>
-          <tr>
-            <td>{{ tipos_pagamento.descricao }}</td>
-            <td>{{ tipos_pagamento.qtd_parcelas }} X</td>
-            <td>
-              <p-button
-                icon="pi pi-pencil"
-                styleClass="p-button-rounded p-button-primary p-button-text"
-                (onClick)="editMode(tipos_pagamento)"
-              ></p-button>
-
-              <p-button
-                icon="pi pi-trash"
-                styleClass="p-button-rounded p-button-primary p-button-text"
-                (onClick)="deletarTipoPagamento($event, tipos_pagamento)"
-              ></p-button>
-
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-      <p-progressSpinner class="progressSpinner" *ngIf="progressSpinner">
-      </p-progressSpinner>
-    </div>
+            <p-button
+              icon="pi pi-trash"
+              styleClass="p-button-rounded p-button-primary p-button-text"
+              (onClick)="deletarTipoPagamento($event, tipos_pagamento)"
+            ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-progressSpinner class="progressSpinner" *ngIf="progressSpinner">
+    </p-progressSpinner>
+  </div>
 </div>
 
 <div>
