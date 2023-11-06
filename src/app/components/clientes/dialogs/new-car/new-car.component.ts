@@ -115,8 +115,6 @@ export class NewCarComponent {
         cd_cliente: this.cd_cliente,
         cd_veiculo:this.cd_veiculo_p
       };
-
-      return console.log('bodyEditClientCar', bodyEditClientCar)
   
       this.buttonLoading = true
       this.carrosService.editClientCar(bodyEditClientCar)
