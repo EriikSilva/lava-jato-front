@@ -1,9 +1,9 @@
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { VeiculosService } from './veiculos.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Table } from 'primeng/table';
-import { PostVeiculo } from '../../DTO/servicos.DTO';
+import { PostVeiculo, PutVeiculo } from '../../DTO/servicos.DTO';
 
 @Component({
   selector: 'app-veiculos',
@@ -20,6 +20,7 @@ export class VeiculosComponent implements OnInit{
   buttonLoading: boolean = false;
   saveButton: boolean = true;
   editButton: boolean = false;
+  cd_tipo_veiculo: number = 0
 
   constructor(
     private veiculoService:VeiculosService,
@@ -32,7 +33,7 @@ export class VeiculosComponent implements OnInit{
   }
 
   newVeiculoForm = new FormGroup({
-    descricao: new FormControl
+    descricao: new FormControl("", [Validators.required, Validators.minLength(2)])
   })
 
   getVeiculos(){
@@ -79,12 +80,47 @@ export class VeiculosComponent implements OnInit{
 
   }
   editarVeiculo(){
+    const formValue = this.newVeiculoForm.value
 
+    const descricao = String(formValue.descricao);
+
+    const body:PutVeiculo = {
+      descricao,
+      cd_tipo_veiculo:this.cd_tipo_veiculo
+    }
+    this.veiculoService.putVeiculo(body)
+    .subscribe({
+      next:(res:any) => {
+        const { message } = res;
+        this.buttonLoading = false;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso ao Editar',
+          detail: message,
+        });
+        this.modo();
+        this.getVeiculos();
+      },error: (res: any) => {
+        this.buttonLoading = false;
+        const { error } = res.error;
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro ao Editar',
+          detail: error,
+        });
+      },
+    })
   }
 
 
   editMode(veiculo: any) {
+    const { cd_tipo_veiculo, descricao } = veiculo
+    
+    this.saveButton = false;
+    this.editButton = true;
 
+    this.newVeiculoForm.get('descricao')?.setValue(descricao);
+    this.cd_tipo_veiculo = cd_tipo_veiculo
   }
 
   deletarVeiculo(event: Event, veiculo: any){

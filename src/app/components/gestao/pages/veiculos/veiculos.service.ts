@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/app/environments/environment.development';
-import { PostVeiculo } from '../../DTO/servicos.DTO';
+import { PostVeiculo, PutVeiculo } from '../../DTO/servicos.DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,8 @@ export class VeiculosService {
     return this.http.post<PostVeiculo>(`${this.apiUrl}/veiculo/tipo`, body)
   }
 
-  
-
+  putVeiculo(body:PutVeiculo):Observable<PutVeiculo>{
+    return this.http.put<PutVeiculo>(`${this.apiUrl}/veiculo/tipo`, body)
+  }
 
 }
