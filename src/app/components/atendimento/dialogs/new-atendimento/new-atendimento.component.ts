@@ -1,4 +1,4 @@
-import { GestaoService } from './../../../gestao/gestao.service';
+import { ServicoService } from './../../../gestao/pages/servicos/servico.service';
 import { MessageService } from 'primeng/api';
 import { ClientesService } from 'src/app/components/clientes/clientes.service';
 import { CarrosService } from './../../../clientes/carros.service';
@@ -18,7 +18,7 @@ export class NewAtendimentoComponent implements OnInit {
   constructor(
     private carrosService: CarrosService,
     private clienteService: ClientesService,
-    private gestaoService: GestaoService,
+    private servicosService: ServicoService,
     private atendimentoService: AtendimentoService,
     private MessageService: MessageService
   ) {}
@@ -127,7 +127,7 @@ export class NewAtendimentoComponent implements OnInit {
   }
 
   getServicos() {
-    this.gestaoService.getServicos().subscribe((res: any) => {
+    this.servicosService.getServicos().subscribe((res: any) => {
       const { data } = res;
 
       const servicosConcatenados = data.map((servico: any) => ({

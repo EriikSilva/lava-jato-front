@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { GestaoService } from '../../gestao.service';
+import { ServicoService } from './servico.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Table } from 'primeng/table';
@@ -23,7 +23,7 @@ export class ServicosComponent implements OnInit {
   body: any;
 
   constructor(
-    private gestaoService: GestaoService,
+    private servicosService: ServicoService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {}
@@ -42,7 +42,7 @@ export class ServicosComponent implements OnInit {
 
   getServicos() {
     this.progressSpinner = true;
-    this.gestaoService.getServicos().subscribe({
+    this.servicosService.getServicos().subscribe({
       next: (res: any) => {
         this.progressSpinner = false;
         const { data } = res;
@@ -59,7 +59,7 @@ export class ServicosComponent implements OnInit {
 
     this.buttonLoading = true;
 
-    this.gestaoService.postServicos(desc_servico, vlr_servico)
+    this.servicosService.postServicos(desc_servico, vlr_servico)
     .subscribe({
       next: (res: any) => {
         this.modo()
@@ -94,7 +94,7 @@ export class ServicosComponent implements OnInit {
       cd_servico: this.cd_servico,
     };
 
-    this.gestaoService.editServico(body).subscribe({
+    this.servicosService.editServico(body).subscribe({
       next: (res: any) => {
         const { message } = res;
         this.messageService.add({
@@ -117,7 +117,7 @@ export class ServicosComponent implements OnInit {
       acceptLabel: 'Sim',
       rejectLabel: 'Não',
       accept: () => {
-        this.gestaoService.deleteServico(cd_servico).subscribe({
+        this.servicosService.deleteServico(cd_servico).subscribe({
           next: (res: any) => {
             const { message } = res;
             this.messageService.add({
