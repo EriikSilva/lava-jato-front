@@ -12,7 +12,7 @@
           </div>
 
           <form class="formulario" [formGroup]="newTipoPagamentoForm">
-            <label for="descricao"><b>Descrição do pagamento </b><span class="ml-2"> * </span></label>
+            <label for="descricao"><b>Tipo de pagamento </b><span class="ml-2"> * </span></label>
             <input
               type="text"
               id="descricao"
@@ -25,7 +25,7 @@
             />
 
           <label for="qtd_parcelas"><b>Quantidade de Parcelas</b><span class="ml-2"> * </span></label>
-          <input
+          <!-- <input
             [style]="{ width: '80%' }"
             type="text"
             pInputText
@@ -36,7 +36,17 @@
             required
             autofocus
             placeholder="1x"
-          />
+          /> -->
+
+          <p-dropdown 
+          [style]="{ width: '100%' }"
+          id="descricao"
+          [options]="parcelas" 
+          formControlName="qtd_parcelas" 
+          placeholder="Selecione"
+          optionLabel="label"
+          (onChange)="onDropdownChangeParcelas($event)"
+          ></p-dropdown>
 
           <p-button
           *ngIf="saveButton"
@@ -66,7 +76,7 @@
             <input
               pInputText
               type="text"
-              pTooltip="Descrição do serviço"
+              pTooltip="tipo de pagamento"
               tooltipPosition="top"
               (input)="applyFilterGlobal($event, 'contains')"
               placeholder="Pesquisar... "
@@ -76,7 +86,7 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th>Descrição</th>
+            <th>Tipo de Pagamento</th>
             <th>Parcelas</th>
             <th>Ações</th>
           </tr>
@@ -104,3 +114,10 @@
       </p-table>
     </div>
 </div>
+
+<div>
+  <p-toast></p-toast>
+</div>
+
+<!-- CONFIRM POPUP -->
+<p-confirmPopup></p-confirmPopup>

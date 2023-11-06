@@ -73,6 +73,7 @@ export class ServicosComponent implements OnInit {
         this.getServicos();
       },
       error: (res: any) => {
+        this.buttonLoading = false;
         this.messageService.add({
           severity: 'error',
           summary: 'Erro',

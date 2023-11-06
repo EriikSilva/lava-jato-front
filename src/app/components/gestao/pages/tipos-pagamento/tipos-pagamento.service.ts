@@ -1,6 +1,8 @@
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/app/environments/environment.development';
+import { PostTipoPagamento } from '../../DTO/servicos.DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,7 @@ export class TiposPagamentoService {
    return this.http.get(`${this.apiUrl}/financeiro/tipospagamentos`) 
   }
 
-
-
+  postTiposPagamento(body:PostTipoPagamento):Observable<PostTipoPagamento>{
+    return this.http.post<PostTipoPagamento>(`${this.apiUrl}/financeiro/tipospagamentos`, body)
+  }  
 }
