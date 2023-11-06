@@ -106,8 +106,6 @@ export class NewCarComponent {
       const toJson            = JSON.parse(toStringify);
       const cd_tipo_veiculo_p = toJson.cd_tipo_veiculo;
   
-  
-  
       const bodyEditClientCar: editClientCarDTO = {
         modelo,
         placa,

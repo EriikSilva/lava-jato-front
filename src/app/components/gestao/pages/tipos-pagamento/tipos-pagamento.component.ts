@@ -49,8 +49,10 @@ export class TiposPagamentoComponent implements OnInit {
   }
 
   getTiposPagamento() {
+    this.progressSpinner = true;
     this.tiposPagamentoService.getTiposPagamento().subscribe({
       next: (res: any) => {
+        this.progressSpinner = false;
         const { data } = res;
         this.tiposPagamento = data;
       },
