@@ -26,6 +26,7 @@ export class NewCarComponent {
 
   cd_veiculo_p?: any 
   buttonLoading:boolean = false
+  selectTipoVeiculo:any
 
   newCarForm = new FormGroup({
     placa: new FormControl('', Validators.required),
@@ -86,11 +87,11 @@ export class NewCarComponent {
      this.cd_veiculo_p = cd_veiculo
 
     this.newCarForm.get('placa')?.setValue(placa);
-    this.newCarForm.get('modelo')?.setValue(modelo);
-    /*************************O erik do futuro vai resolver**************************************/
-    // this.newCarForm.get('cd_tipo_veiculo')?.setValue(cd_tipo_veiculo)
+    this.newCarForm.get('modelo')?.setValue(modelo);  
 
-
+    this.selectTipoVeiculo = this.carsType.find(
+      (carro:any) => carro.cd_tipo_veiculo === cd_tipo_veiculo
+    );
   }
 
   editCarClient(){
@@ -114,6 +115,8 @@ export class NewCarComponent {
         cd_cliente: this.cd_cliente,
         cd_veiculo:this.cd_veiculo_p
       };
+
+      return console.log('bodyEditClientCar', bodyEditClientCar)
   
       this.buttonLoading = true
       this.carrosService.editClientCar(bodyEditClientCar)
