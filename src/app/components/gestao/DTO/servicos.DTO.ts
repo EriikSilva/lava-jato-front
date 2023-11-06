@@ -23,3 +23,8 @@ export interface PutTipoPagamento {
 export interface DeleteTipoPagamento{
     cd_pagamento:      number;
 }
+
+
+export interface PostVeiculo{
+    descricao: string;
+}
