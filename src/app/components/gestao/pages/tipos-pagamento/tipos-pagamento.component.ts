@@ -36,8 +36,8 @@ export class TiposPagamentoComponent implements OnInit{
     ){}
 
   newTipoPagamentoForm = new FormGroup({
-    descricao: new FormControl(''),
-    qtd_parcelas: new FormControl(null)
+    descricao: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    qtd_parcelas: new FormControl(null,[Validators.required])
   })
 
 
