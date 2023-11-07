@@ -1,11 +1,31 @@
 <p-dialog
   [(visible)]="chamarModalPagamento"
   (onHide)="closeDialog()"
-  [style]="{ width: '700px', height: '1000px' }"
-  [header]="'Novo Atendimento'"
+  [style]="{ width: '1250px', height: '700px' }"
+  [header]="'Pagamento'"
   [modal]="true"
   styleClass="p-fluid"
   [draggable]="false"
 >
+  <div class="container">
+    <div class="left-element">
+      <div class="field">
+        <label for="vl_desconto_p">Desconto:</label>
+        <span class="danger"> * </span>
+        <p-inputNumber
+        placeholder="Desconto"
+        mode="currency"
+        currency="BRL"
+        [maxlength]="12"
+        formControlName="vl_desconto_p"
+        >
+        </p-inputNumber>
+      </div>
+    </div>
+    <div class="right-element">teste2</div>
+  </div>
+
+
+
 
 </p-dialog>
