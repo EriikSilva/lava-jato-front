@@ -10,10 +10,12 @@
   [draggable]="false"
 >
 <span style="display: flex; align-items: center; justify-content: center;margin-bottom: 1rem;">
-  <i class="pi pi-car" style="margin-right: 6px;"></i>
-  <b>Veiculo: </b>{{veiculo | uppercase}}
-  <i class="pi pi-directions" style="margin-right: 6px; margin-left:1rem;"></i>
-  <b>Placa: </b>{{placa | uppercase}}
+  <h3>
+    <i class="pi pi-car" style="margin-right: 6px;"></i>
+    <b>Veículo: </b>{{veiculo | uppercase}}
+    <i class="pi pi-directions" style="margin-right: 6px; margin-left:1rem;"></i>
+    <b>Placa: </b>{{placa | uppercase}}
+  </h3>
 </span>
   
   <ng-template pTemplate="content">
@@ -27,7 +29,9 @@
         <tr>
           <th>Selecione</th>
           <th>Serviço</th>
-          <th>Valor</th>
+          <th pSortableColumn="valor">
+            Valor <p-sortIcon field="valor"></p-sortIcon>
+          </th> 
           <th pSortableColumn="status_servico">
             Status <p-sortIcon field="status_servico"></p-sortIcon>
           </th>
