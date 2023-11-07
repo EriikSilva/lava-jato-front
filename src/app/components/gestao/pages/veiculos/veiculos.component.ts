@@ -145,6 +145,7 @@ export class VeiculosComponent implements OnInit{
               detail: message,
             });
             this.getVeiculos();
+            this.modo();
           },
           error: (res: any) => {
             const { error } = res.error

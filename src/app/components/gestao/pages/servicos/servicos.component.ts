@@ -127,6 +127,7 @@ export class ServicosComponent implements OnInit {
               detail: message,
             });
             this.getServicos();
+            this.modo();
           },
           error: (res: any) => {
             const { error } = res.error

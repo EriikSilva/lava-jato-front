@@ -163,6 +163,7 @@ export class TiposPagamentoComponent implements OnInit {
               detail: message,
             });
             this.getTiposPagamento();
+            this.modo();
           },
           error: (res: any) => {
             const { error } = res.error
