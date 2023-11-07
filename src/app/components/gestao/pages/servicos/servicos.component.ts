@@ -73,12 +73,13 @@ export class ServicosComponent implements OnInit {
         this.getServicos();
       },
       error: (res: any) => {
+        const { message } = res.error
         this.buttonLoading = false;
         this.messageService.add({
           severity: 'error',
           summary: 'Erro',
+          detail: message
         });
-        console.log('error', res);
       },
     });
   }
