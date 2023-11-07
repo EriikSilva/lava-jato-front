@@ -39,6 +39,7 @@ import { CarWashLoaderComponent } from './components/car-wash-loader/car-wash-lo
 import { ServicosComponent } from './components/gestao/pages/servicos/servicos.component';
 import { TiposPagamentoComponent } from './components/gestao/pages/tipos-pagamento/tipos-pagamento.component';
 import { VeiculosComponent } from './components/gestao/pages/veiculos/veiculos.component';
+import { PagamentoComponent } from './components/atendimento/dialogs/pagamento/pagamento.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { VeiculosComponent } from './components/gestao/pages/veiculos/veiculos.c
     CarWashLoaderComponent,
     ServicosComponent,
     TiposPagamentoComponent,
-    VeiculosComponent
+    VeiculosComponent,
+    PagamentoComponent
   ],
   imports: [
     BrowserAnimationsModule,
