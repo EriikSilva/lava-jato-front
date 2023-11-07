@@ -163,6 +163,7 @@ export class NewCarComponent {
 
   resetarFormulario(){
     this.newCarForm.reset();
+    this.selectTipoVeiculo = ""
   }
 
 
