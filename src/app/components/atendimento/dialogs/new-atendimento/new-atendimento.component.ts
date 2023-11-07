@@ -1,5 +1,5 @@
 import { ServicoService } from './../../../gestao/pages/servicos/servico.service';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { ClientesService } from 'src/app/components/clientes/clientes.service';
 import { CarrosService } from './../../../clientes/carros.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -12,7 +12,7 @@ import { ClienteGetDTO } from 'src/app/components/clientes/DTO/clientesDTO';
   selector: 'app-new-atendimento',
   templateUrl: './new-atendimento.component.html',
   styleUrls: ['./new-atendimento.component.scss'],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
 })
 export class NewAtendimentoComponent implements OnInit {
   constructor(
@@ -20,7 +20,8 @@ export class NewAtendimentoComponent implements OnInit {
     private clienteService: ClientesService,
     private servicosService: ServicoService,
     private atendimentoService: AtendimentoService,
-    private MessageService: MessageService
+    private MessageService: MessageService,
+    private confirmationService:ConfirmationService
   ) {}
 
   @Input() atendimentoDialog: boolean = false;
@@ -37,6 +38,7 @@ export class NewAtendimentoComponent implements OnInit {
   noCarsValidation:boolean = false
   precoServicoFinal:any
   buttonLoading:boolean = false
+  chamarModalPagamento:boolean = false
 
   ngOnInit(): void {
     this.getClientes();
@@ -97,6 +99,18 @@ export class NewAtendimentoComponent implements OnInit {
         },
       });
     }
+  }
+
+  chamarPopup(){
+    this.confirmationService.confirm({
+      message: 'Deseja Realizar o Pagamento Agora?',
+      header: 'Pagamento',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        this.chamarModalPagamento = true
+      },})
   }
 
   private validateAndShowMessage(atendimento: any) {
@@ -193,6 +207,7 @@ export class NewAtendimentoComponent implements OnInit {
   closeDialog() {
     this.atendimentoDialog = false;
     this.precoServicoFinal = false;
+    this.chamarModalPagamento = false
     this.dialogClosed.emit();
     this.limparFormNovoAtendimento();
   }

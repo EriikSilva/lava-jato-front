@@ -83,6 +83,19 @@
 </p-dialog>
 
 
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+
+<app-pagamento
+#PagamentoComponent
+[chamarModalPagamento]="chamarModalPagamento"
+(dialogClosed)="closeDialog()"
+>
+</app-pagamento>
+
+
+<p-button (onClick)="chamarPopup()">Chamar Modal</p-button>
+
 <div class="card">
   <p-toast></p-toast>
 </div>
