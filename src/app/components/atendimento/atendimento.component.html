@@ -99,10 +99,17 @@
         <td>
           <ng-container  *ngIf="requisicaoCompleta; else skeleton">
             <p-button
-            icon="pi pi-eye"
-            styleClass="p-button-rounded p-button-info p-button-text p-button-raised"
-            (onClick)="visualizarServicos(atendimento)"
+            [disabled]="atendimento.status_pagamento == 'P' ? true : false"
+            icon="pi pi-money-bill"
+            styleClass="p-button-rounded p-button-info p-button-text p-button-raised mr-2"
+            (onClick)="chamarPopUp(atendimento)"
           ></p-button>
+
+          <p-button
+          icon="pi pi-eye"
+          styleClass="p-button-rounded p-button-info p-button-text p-button-raised"
+          (onClick)="visualizarServicos(atendimento)"
+        ></p-button>
           </ng-container>
         </td>
         <ng-template #skeleton>
@@ -128,6 +135,13 @@
 (getAtendimentos)="getAtendimentos()"
 >
 </app-new-atendimento>
+<app-pagamento
+#PagamentoComponent
+[chamarModalPagamento]="chamarModalPagamento"
+(dialogClosed)="onDialogClosed()"
+>
+</app-pagamento>
+
 
 <p-toast></p-toast>
 <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>

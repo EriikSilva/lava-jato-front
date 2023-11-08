@@ -9,23 +9,50 @@
 >
   <div class="container">
     <div class="left-element">
-      <div class="field">
-        <label for="vl_desconto_p">Desconto:</label>
-        <span class="danger"> * </span>
-        <p-inputNumber
-        placeholder="Desconto"
-        mode="currency"
-        currency="BRL"
-        [maxlength]="12"
-        formControlName="vl_desconto_p"
-        >
-        </p-inputNumber>
-      </div>
+      <form [formGroup]="pagamentoForm">
+        <div class="field">
+          <label for="vl_desconto_p">Desconto R$:</label>
+          <p-inputNumber
+          placeholder="Desconto"
+          mode="currency"
+          currency="BRL"
+          [maxlength]="12"
+          formControlName="vl_desconto_p"
+          >
+          </p-inputNumber>
+        </div>
+        <div class="field">
+          <label for="perc_desc_p">Desconto em percentual:</label>
+          <p-inputNumber 
+          formControlName="perc_desc_p"
+          [maxlength]="2"
+          inputId="percent" 
+          suffix="%"></p-inputNumber>
+        </div>
+      </form>
     </div>
-    <div class="right-element">teste2</div>
+    <div class="right-element">
+      teste2
+    </div>
   </div>
+  <ng-template pTemplate="footer">
+    <button
+    pButton
+    pRipple
+    label="Cancelar"
+    class="p-button-text"
+    (click)="closeDialog()"
+  ></button>
 
+  <button
+  pButton
+  pRipple
+  label="Salvar"
+  [loading]="buttonLoading"
+  class="p-button-text"
+  (click)="pagamento()"
+  ></button>
 
-
+  </ng-template>
 
 </p-dialog>

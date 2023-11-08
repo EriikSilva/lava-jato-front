@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ServicosComponent } from '../servicos/servicos.component';
+import { GestaoComponent } from '../gestao/gestao.component';
 import { PrimengModule } from 'src/app/primeng/primeng.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppModule } from 'src/app/app.module';
 import { HttpClient } from '@angular/common/http';
 
 describe('ServicosComponent', () => {
-  let component: ServicosComponent;
-  let fixture: ComponentFixture<ServicosComponent>;
+  let component: GestaoComponent;
+  let fixture: ComponentFixture<GestaoComponent>;
   let http:HttpClient
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [PrimengModule, 
         HttpClientTestingModule,AppModule],
-      declarations: [ServicosComponent]
+      declarations: [GestaoComponent]
     });
-    fixture = TestBed.createComponent(ServicosComponent);
+    fixture = TestBed.createComponent(GestaoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     http    = TestBed.inject(HttpClient)

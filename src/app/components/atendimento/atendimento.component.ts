@@ -33,6 +33,7 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   visualizarServicoDialog: boolean = false;
   isLoading: boolean = false
   requisicaoCompleta: boolean = false
+  chamarModalPagamento:boolean = false
 
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -85,13 +86,20 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
+  chamarPopUp(atendimento:any){
+    this.chamarModalPagamento = true;
+    console.log('atendimento', atendimento)
+    
+  }
 
   onDialogClosed() {
     this.atendimentoDialog = false;
     this.finalizarAtendimentoDialog = false;
     this.visualizarServicoDialog = false
+    this.chamarModalPagamento = false
   }
 
+  
   ngOnInit(): void {
     this.getClients();
     this.getAtendimentos();
