@@ -18,7 +18,8 @@ export class PagamentoComponent implements OnInit{
   buttonLoading:boolean = false
   formasDePagamento:any;
   selectedPagamentos:any;
-  servicos:any
+  servicos:any;
+  precoFinal: any;
 
   @Input() chamarModalPagamento:boolean = false
   @Output() dialogClosed = new EventEmitter<void>();
@@ -49,18 +50,16 @@ export class PagamentoComponent implements OnInit{
   }
 
   getPagamentoByClient(servicos:any){
-    // this.atendimentoService
-    const { nr_atendimento } = servicos
+    const { nr_atendimento, valor_total } = servicos
+    
+    this.precoFinal = valor_total
     this.atendimentoService.getServicosEmAndamento(nr_atendimento)
     .subscribe({
       next:(res:any) => {
         const { data } = res
-        this.servicos = data
-        console.log('res', res)
+        this.servicos = data         
       }
     })
-
-    console.log('servicos', servicos)
   }
 
   onMultiSelectChangePagamento(pagamento:any){
