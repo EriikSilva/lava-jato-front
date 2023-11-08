@@ -30,6 +30,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { RadioButtonModule } from 'primeng/radiobutton';
 @NgModule({
   declarations: [],
   exports: [
@@ -62,7 +63,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     InputSwitchModule,
     ProgressSpinnerModule,
     VirtualScrollerModule,
-    InputNumberModule
+    InputNumberModule,
+    RadioButtonModule
   ]
 })
 export class PrimengModule { }

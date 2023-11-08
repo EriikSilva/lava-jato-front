@@ -21,14 +21,25 @@
           (ngModelChange)="calcularPrecoComDesconto($event)"
           >
           </p-inputNumber>
+          <div class="flex flex-wrap gap-3">
+            <div class="flex align-items-center">
+                <p-radioButton name="desconto" value="desconto" [(ngModel)]="tipoDesconto" inputId="desconto"></p-radioButton>
+                <label for="desconto" class="ml-2">Desconto em dinheiro</label>
+            </div>
+            <div class="flex align-items-center">
+              <p-radioButton name="porcentual" value="porcentual" [(ngModel)]="tipoDesconto" inputId="porcentual"></p-radioButton>
+              <label for="porcentual" class="ml-2">Porcentual</label>
+          </div>
+            </div>
         </div>
         <div class="field">
           <label for="perc_desc_p">Desconto em percentual:</label>
           <p-inputNumber 
           formControlName="perc_desc_p"
-          [maxlength]="2"
+          [maxlength]="3"
+          (ngModelChange)="calcularDescontoPercentual($event)"
           inputId="percent" 
-          suffix="%"></p-inputNumber>
+          prefix="%"></p-inputNumber>
         </div>
         <div class="field"> 
           <label for="pagamentos">Formas de Pagamento:</label>
@@ -76,7 +87,7 @@
     </div>
   </div>
   <ng-template pTemplate="footer">
-    <h3 *ngIf="precoFinal" class="valor_total_servico">TOTAL: {{precoFinal | currency : "BRL" : "symbol"}}</h3>
+    <h3 class="valor_total_servico">TOTAL: {{precoFinal <= 0 ? "R$ 0" : precoFinal | currency : "BRL" : "symbol"}}</h3>
     <button
     pButton
     pRipple
@@ -86,6 +97,7 @@
   ></button>
 
   <button
+  [disabled]="desabilitarBotao"
   pButton
   pRipple
   label="Salvar"
