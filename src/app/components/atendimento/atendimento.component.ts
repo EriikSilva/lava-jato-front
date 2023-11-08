@@ -1,3 +1,4 @@
+import { PagamentoComponent } from './dialogs/pagamento/pagamento.component';
 import { GestaoService } from './../gestao/gestao.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ClientesService } from '../clientes/clientes.service';
@@ -21,6 +22,7 @@ interface AutoCompleteCompleteEvent {
 export class AtendimentoComponent implements OnInit, OnDestroy {
   @ViewChild('dt') dt: Table | undefined;
   @ViewChild('VisualizarServicoComponent') VisualizarServicoComponent: VisualizarServicoComponent | undefined;
+  @ViewChild('PagamentoComponent') PagamentoComponent:PagamentoComponent | undefined
 
 
   items: any[] = []; //clientes
@@ -88,8 +90,7 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
 
   chamarPopUp(atendimento:any){
     this.chamarModalPagamento = true;
-    console.log('atendimento', atendimento)
-    
+    this.PagamentoComponent?.getPagamentoByClient(atendimento)    
   }
 
   onDialogClosed() {
