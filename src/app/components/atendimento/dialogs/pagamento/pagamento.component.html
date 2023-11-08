@@ -18,6 +18,7 @@
           currency="BRL"
           [maxlength]="12"
           formControlName="vl_desconto_p"
+          (ngModelChange)="calcularPrecoComDesconto($event)"
           >
           </p-inputNumber>
         </div>

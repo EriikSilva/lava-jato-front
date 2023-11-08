@@ -20,6 +20,8 @@ export class PagamentoComponent implements OnInit{
   selectedPagamentos:any;
   servicos:any;
   precoFinal: any;
+  desconto:any;
+  precoOriginal:any
 
   @Input() chamarModalPagamento:boolean = false
   @Output() dialogClosed = new EventEmitter<void>();
@@ -51,8 +53,9 @@ export class PagamentoComponent implements OnInit{
 
   getPagamentoByClient(servicos:any){
     const { nr_atendimento, valor_total } = servicos
-    
+
     this.precoFinal = valor_total
+    this.precoOriginal = valor_total
     this.atendimentoService.getServicosEmAndamento(nr_atendimento)
     .subscribe({
       next:(res:any) => {
@@ -61,6 +64,26 @@ export class PagamentoComponent implements OnInit{
       }
     })
   }
+
+
+  calcularPrecoComDesconto(event: Event) {
+    const novoDesconto = Number(event)
+    if (!isNaN(novoDesconto)) {
+      this.desconto = novoDesconto;
+    }
+
+    if(novoDesconto > this.precoFinal){
+      console.log('maior')
+    }
+    this.precoFinal = this.precoOriginal - this.desconto;
+  }
+  
+  
+
+  // atualizarPrecoFinal(result:any){
+  //   console.log('res', result)
+  //   console.log('preco',Number(this.precoFinal))
+  // }
 
   onMultiSelectChangePagamento(pagamento:any){
     this.selectedPagamentos = pagamento.value;
