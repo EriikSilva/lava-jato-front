@@ -200,7 +200,7 @@ export class NewAtendimentoComponent implements OnInit {
   onMultiSelectChangeServicos(servico: any) {
     const cd_servicoValores = servico.value.map((item: any) => item.cd_servico);
     this.cd_servico_p = cd_servicoValores;
-    const somaVlrServico = servico.value.reduce((total:any, servico:any) => total + servico.vlr_servico, 0);
+    const somaVlrServico = servico.value.reduce((total:any, servico:any) => total + Number(servico.vlr_servico), 0);
     this.precoServicoFinal = somaVlrServico
   }
 
