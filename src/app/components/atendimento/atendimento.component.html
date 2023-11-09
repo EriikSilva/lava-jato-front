@@ -99,7 +99,7 @@
         <td>
           <ng-container  *ngIf="requisicaoCompleta; else skeleton">
             <p-button
-            [disabled]="atendimento.status_pagamento == 'P' ? true : false"
+            [disabled]="atendimento.status_pagamento == 'PG' ? true : false"
             icon="pi pi-money-bill"
             styleClass="p-button-rounded p-button-info p-button-text p-button-raised mr-2"
             (onClick)="chamarPopUp(atendimento)"
