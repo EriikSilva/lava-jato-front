@@ -1,7 +1,50 @@
-<button (click)="openDialog()">aaaaaaaaaaaaaas</button>
+<!-- Add question -->
+<div class="demo-container p-mx-6 p-p-0 p-p-sm-1 p-p-md-2 p-p-lg-6">
+	<p-card>
+		<div class="p-grid p-mx-5">
+			<div class="p-col-12">
+				<h3 class="table-title">AÑADIR PREGUNTA</h3>
+			</div>
+		</div>
+		<hr>
 
-<!-- <app-car-details
-[abrirDialog]="abrirDialog"
->
+		<!-- PRODUCT FILTER -->
+		<form novalidate [formGroup]="questionForm" #qform="ngForm" >
+			<div class="p-grid p-mx-5">
+				<p class="p-ml-2">Filtros de producto</p>
+			</div>
 
-</app-car-details> -->
+			<!-- CREATE QUESTION -->
+			<div class="p-grid p-mx-5">
+				<div class="p-col-12 p-mt-4">
+					<span class="p-float-label">
+                        <input id="pregunta" formControlName="pregunta" class="p-inputtext-lg fill-width" type="text" pInputText>
+                        <label for="float-input">Pregunta</label>
+                    </span>
+				</div>
+
+				<div class="p-col-12">
+					<p>Tipo de pregunta</p>
+
+
+					<div *ngFor="let tipo_pregunta of tipos_pregunta">
+						<p-radioButton formControlName="tipo_de_pregunta" inputIt="tipo_pregunta.value"
+							name="tipo_pregunta" [value]="tipo_pregunta" [label]="tipo_pregunta.label" class="p-mb-3">
+						</p-radioButton>
+					</div>
+				</div>
+			</div>
+
+			<div class="p-grid p-jc-end p-mt-6 p-mx-5">
+				<div class="p-grid p-formgrid p-fluid">
+					<div class="p-mb-2 p-col-6 p-mb-lg-0">
+						<button pButton pRipple type="button" label="Atras" class="p-button-secondary"></button>
+					</div>
+					<div class="p-mb-2 p-col-6 p-mb-lg-0">
+						<button pButton pRipple type="submit" label="Crear"></button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</p-card>
+</div>
