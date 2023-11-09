@@ -46,7 +46,8 @@ export class PagamentoComponent implements OnInit {
     vl_desconto_p: new FormControl(''),
     pagamentos: new FormControl(''),
     pregunta: new FormControl(''),
-    tipo_de_pregunta: new FormControl(null)
+    tipo_de_pregunta: new FormControl(null),
+    pagamento: new FormControl("")
   });
 
     
@@ -57,7 +58,8 @@ export class PagamentoComponent implements OnInit {
   }
 
   pagamento() {
-    // this.atendimentoService.postPagamento()
+    const formValue = this.pagamentoForm.value;
+    console.log('formValue', formValue)
   }
 
   getTipoPagamento() {
@@ -150,5 +152,8 @@ export class PagamentoComponent implements OnInit {
 
   closeDialog() {
     this.dialogClosed.emit();
+    this.pagamentoForm.reset();
+    // this.formasDePagamento = {}
+    this.selectedPagamentos = []
   }
 }
