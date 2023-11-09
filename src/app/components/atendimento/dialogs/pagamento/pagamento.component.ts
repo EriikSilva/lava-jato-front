@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AtendimentoService } from '../../atendimento.service';
 import { TiposPagamentoService } from 'src/app/components/gestao/pages/tipos-pagamento/tipos-pagamento.service';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-pagamento',
@@ -59,9 +60,19 @@ export class PagamentoComponent implements OnInit {
   }
 
   pagamento() {
-    const formValue = this.pagamentoForm.value;
-
+    const servicos = this.servicos
+    const dataAtual = new Date();
+    const formatoDesejado = 'yyyy-MM-dd HH:mm:ss';
+    const nr_atendimento = servicos[0].nr_atendimento
     const arrayDePagamentos = [];
+
+    //BODY
+    const formValue = this.pagamentoForm.value;
+    const vl_desconto_p = formValue.vl_desconto_p;
+    const perc_desc_p = formValue.perc_desc_p;
+    const dataFormatada = format(dataAtual, formatoDesejado);
+    const cd_usuario_p = localStorage.getItem("cd_usuario")
+
 
     for (const pagamento of this.selectedPagamentos) {
       const cd_tipo_pagamento = pagamento.cd_pagamento;
@@ -71,15 +82,24 @@ export class PagamentoComponent implements OnInit {
     }
 
     const bodyPagamento = {
-      nr_atendimento_p: 2,
-      vl_desconto_p: 0,
-      cd_usuario_p: 1,
-      perc_desc_p: 0,
-      dh_vencimento_p: "2023-10-15 17:33:36",
+      nr_atendimento_p: nr_atendimento,
+      vl_desconto_p: vl_desconto_p == '' || vl_desconto_p == null ? 0: vl_desconto_p,
+      cd_usuario_p,
+      perc_desc_p: perc_desc_p == '' || perc_desc_p == null ? 0: perc_desc_p,
+      dh_vencimento_p: dataFormatada,
       pagamentos: arrayDePagamentos
     }
 
-    console.log('body', bodyPagamento)
+    // return console.log('bodyPagamento', bodyPagamento)
+    this.atendimentoService.postPagamento(bodyPagamento)
+    .subscribe({
+      next:(res:any) => {
+        const { message } = res
+        console.log('message', message)
+      }, error:(res:any) => {
+        console.log('res', res)
+      }
+    })
 
   }
 
