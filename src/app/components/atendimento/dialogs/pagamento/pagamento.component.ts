@@ -155,5 +155,7 @@ export class PagamentoComponent implements OnInit {
     this.pagamentoForm.reset();
     // this.formasDePagamento = {}
     this.selectedPagamentos = []
+    this.isMoney = false;
+    this.isPercent = false
   }
 }
