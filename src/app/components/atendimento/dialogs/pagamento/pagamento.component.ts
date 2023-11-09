@@ -26,6 +26,7 @@ export class PagamentoComponent implements OnInit {
   isMoney:boolean = false;
   isPercent:boolean = false;
   vl_desconto_p:any;
+  valoresDosPagamentos: { [cd_pagamento: number]: number } = {};
 
   tipos_pregunta = [
     {
@@ -59,7 +60,27 @@ export class PagamentoComponent implements OnInit {
 
   pagamento() {
     const formValue = this.pagamentoForm.value;
-    console.log('formValue', formValue)
+
+    const arrayDePagamentos = [];
+
+    for (const pagamento of this.selectedPagamentos) {
+      const cd_tipo_pagamento = pagamento.cd_pagamento;
+      const valor = this.valoresDosPagamentos[cd_tipo_pagamento] || 0;
+
+      arrayDePagamentos.push({ cd_tipo_pagamento, valor });
+    }
+
+    const bodyPagamento = {
+      nr_atendimento_p: 2,
+      vl_desconto_p: 0,
+      cd_usuario_p: 1,
+      perc_desc_p: 0,
+      dh_vencimento_p: "2023-10-15 17:33:36",
+      pagamentos: arrayDePagamentos
+    }
+
+    console.log('body', bodyPagamento)
+
   }
 
   getTipoPagamento() {

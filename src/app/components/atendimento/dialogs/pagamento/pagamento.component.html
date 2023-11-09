@@ -73,6 +73,7 @@
               currency="BRL"
               formControlName="pagamento"
               [maxlength]="12"
+              [(ngModel)]="valoresDosPagamentos[pagamento.cd_pagamento]"
             >
             </p-inputNumber>
           </div>
