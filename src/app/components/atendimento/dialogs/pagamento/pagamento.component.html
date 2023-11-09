@@ -9,103 +9,132 @@
 >
   <div class="container">
     <div class="left-element">
-      <form [formGroup]="pagamentoForm">
+      <form class="mt-3" [formGroup]="pagamentoForm">
         <div class="field">
-          <label for="vl_desconto_p">Desconto R$:</label>
-          <p-inputNumber
-          placeholder="Desconto"
-          mode="currency"
-          currency="BRL"
-          [maxlength]="12"
-          formControlName="vl_desconto_p"
-          (ngModelChange)="calcularPrecoComDesconto($event)"
-          >
-          </p-inputNumber>
-          <div class="flex flex-wrap gap-3">
-            <div class="flex align-items-center">
-                <p-radioButton name="desconto" value="desconto" [(ngModel)]="tipoDesconto" inputId="desconto"></p-radioButton>
-                <label for="desconto" class="ml-2">Desconto em dinheiro</label>
-            </div>
-            <div class="flex align-items-center">
-              <p-radioButton name="porcentual" value="porcentual" [(ngModel)]="tipoDesconto" inputId="porcentual"></p-radioButton>
-              <label for="porcentual" class="ml-2">Porcentual</label>
+          <div class="mb-2">Deseja aplicar algum desconto? (opcional)</div>
+
+          <div *ngIf="isMoney">
+            <!-- <label for="vl_desconto_p" >R$:</label> -->
+            <p-inputNumber
+              placeholder="R$"
+              mode="currency"
+              currency="BRL"
+              [maxlength]="12"
+              formControlName="vl_desconto_p"
+              (ngModelChange)="calcularPrecoComDesconto($event)"
+            >
+            </p-inputNumber>
           </div>
+          
+          <div *ngIf="isPercent">
+              <!-- <label for="perc_desc_p">%:</label> -->
+              <p-inputNumber
+                placeholder="%"
+                formControlName="perc_desc_p"
+                [maxlength]="3"
+                inputId="percent"
+                prefix="%"
+                (ngModelChange)="calcularDescontoPercentual($event)"
+              ></p-inputNumber>
+          </div>
+
+          <div class="flex flex-wrap gap-3 mt-4 mr-2">
+            <div *ngFor="let tipo_pregunta of tipos_pregunta">
+              <p-radioButton
+                formControlName="tipo_de_pregunta"
+                inputIt="tipo_pregunta.value"
+                name="tipo_de_pregunta"
+                [value]="tipo_pregunta"
+                [label]="tipo_pregunta.label"
+                class="p-mb-3"                
+                (ngModelChange)="tipoDescontoRadio($event)"
+              >
+              </p-radioButton>
             </div>
+          </div>
         </div>
         <div class="field">
-          <label for="perc_desc_p">Desconto em percentual:</label>
-          <p-inputNumber 
-          formControlName="perc_desc_p"
-          [maxlength]="3"
-          (ngModelChange)="calcularDescontoPercentual($event)"
-          inputId="percent" 
-          prefix="%"></p-inputNumber>
-        </div>
-        <div class="field"> 
           <label for="pagamentos">Formas de Pagamento:</label>
-          <p-multiSelect 
-          [style]="{'max-width':'590px'}"
-          [options]="formasDePagamento" 
-          formControlName="pagamentos"
-          defaultLabel="Selecione as formas de pagamento" 
-          optionLabel="pagamentoEparcelas" 
-          display="chip"
-          (onChange)="onMultiSelectChangePagamento($event)"
+          <span class="danger"> * </span>
+          <p-multiSelect
+            [style]="{ 'max-width': '590px' }"
+            [options]="formasDePagamento"
+            formControlName="pagamentos"
+            defaultLabel="Selecione as formas de pagamento"
+            optionLabel="pagamentoEparcelas"
+            display="chip"
+            (onChange)="onMultiSelectChangePagamento($event)"
           ></p-multiSelect>
         </div>
-        <div class="field" *ngFor="let pagamento of selectedPagamentos">  
-          <label for="pagamentos">{{pagamento.descricao}}:</label>
+        <div class="field" *ngFor="let pagamento of selectedPagamentos">
+          <label for="pagamentos">{{ pagamento.descricao }}:</label>
           <p-inputNumber
-           placeholder="Digite o valor do {{pagamento.descricao}}"
-           mode="currency"
-           currency="BRL"
-           [maxlength]="12"
-           >
-           </p-inputNumber>
+            placeholder="Digite o valor do {{ pagamento.descricao }}"
+            mode="currency"
+            currency="BRL"
+            [maxlength]="12"
+          >
+          </p-inputNumber>
         </div>
       </form>
     </div>
     <div class="right-element">
-      <p-table 
-      [value]="servicos" 
-      [tableStyle]="{ 'max-width': '37rem' }">
+      <p-table [value]="servicos" [tableStyle]="{ 'max-width': '37rem' }">
         <ng-template pTemplate="header">
-            <tr>
-                <th>Serviço</th>
-                <th>Status</th>
-                <th>Valor</th>
-            </tr>
+          <tr>
+            <th>Serviço</th>
+            <th>Status</th>
+            <th>Valor</th>
+          </tr>
         </ng-template>
         <ng-template pTemplate="body" let-servico>
-            <tr>
-                <td>{{ servico.servico }}</td>
-                <td>{{ servico.status_servico == "A" ? 'Aberto': 'Fechado' }}</td>
-                <td>{{ servico.valor | currency : "BRL" : "symbol" }}</td>
-            </tr>
+          <tr>
+            <td>{{ servico.servico }}</td>
+            <td>{{ servico.status_servico == "A" ? "Aberto" : "Fechado" }}</td>
+            <td>{{ servico.valor | currency : "BRL" : "symbol" }}</td>
+          </tr>
         </ng-template>
-    </p-table>
+      </p-table>
     </div>
   </div>
   <ng-template pTemplate="footer">
-    <h3 class="valor_total_servico">TOTAL: {{precoFinal <= 0 ? "R$ 0" : precoFinal | currency : "BRL" : "symbol"}}</h3>
+    <div style="display: flex;justify-content: flex-start;">
+      <h3 class="valor_total_servico">
+        TOTAL A PAGAR:
+        {{
+          precoFinal <= 0 ? "R$ 0" : (precoFinal | currency : "BRL" : "symbol")
+        }}
+      </h3>
+      <h3 *ngIf="desconto" class="valor_total_servico">
+        VALOR ORIGINAL:
+         {{
+          precoOriginal <= 0 ? "R$ 0" : (precoOriginal | currency : "BRL" : "symbol")
+        }}
+      </h3>
+      <h3 style="color: green;" *ngIf="desconto" class="valor_total_servico">
+        DESCONTO:
+        - {{
+          isMoney == true ? (desconto | currency : "BRL" : "symbol") :  desconto + "%"
+        }}
+      </h3>
+    </div>
+    
     <button
-    pButton
-    pRipple
-    label="Cancelar"
-    class="p-button-text"
-    (click)="closeDialog()"
-  ></button>
+      pButton
+      pRipple
+      label="Cancelar"
+      class="p-button-text"
+      (click)="closeDialog()"
+    ></button>
 
-  <button
-  [disabled]="desabilitarBotao"
-  pButton
-  pRipple
-  label="Salvar"
-  [loading]="buttonLoading"
-  class="p-button-text"
-  (click)="pagamento()"
-  ></button>
-
+    <button
+      [disabled]="desabilitarBotao"
+      pButton
+      pRipple
+      label="Salvar"
+      [loading]="buttonLoading"
+      class="p-button-text"
+      (click)="pagamento()"
+    ></button>
   </ng-template>
-
 </p-dialog>

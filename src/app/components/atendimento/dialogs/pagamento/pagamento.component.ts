@@ -12,7 +12,9 @@ export class PagamentoComponent implements OnInit {
   constructor(
     private atendimentoService: AtendimentoService,
     private tiposPagamentoService: TiposPagamentoService
-  ) {}
+  ) {
+   
+  }
 
   buttonLoading: boolean = false;
   formasDePagamento: any;
@@ -23,6 +25,20 @@ export class PagamentoComponent implements OnInit {
   precoOriginal: any;
   desabilitarBotao: any;
   tipoDesconto: string = "";
+  isMoney:boolean = false;
+  isPercent:boolean = false;
+  vl_desconto_p:any;
+
+  tipos_pregunta = [
+    {
+      label: "Desconto em R$",
+      value: 1
+    },
+    {
+      label: "Desconto em %",
+      value: 2
+    },
+  ]
 
   @Input() chamarModalPagamento: boolean = false;
   @Output() dialogClosed = new EventEmitter<void>();
@@ -31,7 +47,16 @@ export class PagamentoComponent implements OnInit {
     perc_desc_p: new FormControl(''),
     vl_desconto_p: new FormControl(''),
     pagamentos: new FormControl(''),
+    pregunta: new FormControl(''),
+    tipo_de_pregunta: new FormControl(null)
   });
+
+    
+  createForm(){
+    this.pagamentoForm?.valueChanges.subscribe((e:any) => {
+      this.pagamentoForm?.setValue(e, { emitEvent: false });
+    });
+  }
 
   pagamento() {
     // this.atendimentoService.postPagamento()
@@ -43,11 +68,7 @@ export class PagamentoComponent implements OnInit {
         const { data } = res;
         const pagamentoConcatenado = data.map((pagamento: any) => ({
           ...pagamento,
-          pagamentoEparcelas: `${pagamento.descricao} - ${
-            pagamento.qtd_parcelas > 1 ? 'Até' : ''
-          } ${pagamento.qtd_parcelas}x ${
-            pagamento.qtd_parcelas == 1 ? '(Pagamento a vista)' : 'Parcelas'
-          }`,
+          pagamentoEparcelas: `${pagamento.descricao} - ${pagamento.qtd_parcelas > 1 ? 'Até' : ''} ${pagamento.qtd_parcelas}x ${pagamento.qtd_parcelas == 1 ? '(Pagamento a vista)' : 'Parcelas'}`,
         }));
 
         this.formasDePagamento = pagamentoConcatenado;
@@ -70,14 +91,15 @@ export class PagamentoComponent implements OnInit {
 
   calcularPrecoComDesconto(event: Event) {
     const novoDesconto = Number(event);
-    if (event == null) {
-      return;
-    }
 
     this.desabilitarBotao = false;
 
     if (!isNaN(novoDesconto)) {
       this.desconto = novoDesconto;
+    }
+
+    if (event == null) {
+      this.desconto = 0
     }
 
     if (novoDesconto > this.precoFinal) {
@@ -89,21 +111,35 @@ export class PagamentoComponent implements OnInit {
   calcularDescontoPercentual(event: Event) {
     const novoDesconto = Number(event);
 
-    if (event == null) {
-      return;
-    }
-
     if (!isNaN(novoDesconto)) {
       this.desconto = novoDesconto;
 
-      const valorPercentual = (this.desconto / 100) * this.precoFinal;
-      console.log('valorPercentual', valorPercentual);
+      const valorPercentual = (this.desconto / 100) * this.precoOriginal;
 
       this.precoFinal = this.precoOriginal - valorPercentual;
-      console.log('this.precoFinal', this.precoFinal);
-    } else {
-      console.log('Valor de desconto inválido');
     }
+
+    if (event == null) {
+      this.desconto = 0
+    }
+
+  }
+
+  tipoDescontoRadio(event: any){
+    const a = Object(event)
+
+    console.log('a',a)
+    if(a.value == 1 ){  
+      this.isMoney = true
+      this.isPercent = false
+    }
+
+    if(a.value == 2){
+      this.isMoney = false
+      this.isPercent = true
+
+    }
+    
   }
 
   // atualizarPrecoFinal(result:any){
@@ -116,6 +152,7 @@ export class PagamentoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.createForm();
     this.getTipoPagamento();
   }
 
