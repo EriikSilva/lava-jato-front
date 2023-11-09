@@ -98,3 +98,18 @@ export interface ServicosFinalizadosDTO {
     cd_cliente:        number;
     contato:           string;
 }
+
+
+export interface PostPagamentoDTO {
+    nr_atendimento_p: number ;
+    vl_desconto_p:    number;
+    cd_usuario_p:     number | null;
+    perc_desc_p:      number;
+    dh_vencimento_p:  string;
+    pagamentos:       Pagamento[];
+}
+
+export interface Pagamento {
+    cd_tipo_pagamento: number;
+    valor:             number;
+}
