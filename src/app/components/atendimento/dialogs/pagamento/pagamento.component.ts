@@ -12,9 +12,7 @@ export class PagamentoComponent implements OnInit {
   constructor(
     private atendimentoService: AtendimentoService,
     private tiposPagamentoService: TiposPagamentoService
-  ) {
-   
-  }
+  ) {}
 
   buttonLoading: boolean = false;
   formasDePagamento: any;
@@ -128,31 +126,25 @@ export class PagamentoComponent implements OnInit {
   tipoDescontoRadio(event: any){
     const a = Object(event)
 
-    console.log('a',a)
     if(a.value == 1 ){  
+      this.pagamentoForm.get('perc_desc_p')?.setValue('');
       this.isMoney = true
       this.isPercent = false
     }
 
     if(a.value == 2){
+      this.pagamentoForm.get('vl_desconto_p')?.setValue('');
       this.isMoney = false
       this.isPercent = true
-
     }
     
   }
-
-  // atualizarPrecoFinal(result:any){
-  //   console.log('res', result)
-  //   console.log('preco',Number(this.precoFinal))
-  // }
 
   onMultiSelectChangePagamento(pagamento: any) {
     this.selectedPagamentos = pagamento.value;
   }
 
   ngOnInit(): void {
-    this.createForm();
     this.getTipoPagamento();
   }
 
