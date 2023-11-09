@@ -23,18 +23,6 @@
             (onChange)="onMultiSelectChangePagamento($event)"
           ></p-multiSelect>
         </div>
-        <div class="field" *ngFor="let pagamento of selectedPagamentos">
-          <label for="pagamentos">{{ pagamento.descricao }}:</label>
-          <p-inputNumber
-            placeholder="Digite o valor do {{ pagamento.descricao }}"
-            mode="currency"
-            currency="BRL"
-            formControlName="pagamento"
-            [maxlength]="12"
-          >
-          </p-inputNumber>
-        </div>
-
         <div class="field">
           <div class="mb-2">Deseja aplicar algum desconto? (opcional)</div>
 
@@ -63,7 +51,7 @@
             ></p-inputNumber>
           </div>
 
-          <div class="flex flex-wrap gap-3 mt-4 ">
+          <div class="flex flex-wrap gap-3 mt-4 mb-3 ml-1 ">
             <div *ngFor="let tipo_pregunta of tipos_pregunta">
               <p-radioButton
                 formControlName="tipo_de_pregunta"
@@ -76,6 +64,17 @@
               >
               </p-radioButton>
             </div>
+          </div>
+          <div class="field" *ngFor="let pagamento of selectedPagamentos">
+            <label for="pagamentos">{{ pagamento.descricao }}:</label>
+            <p-inputNumber
+              placeholder="Digite o valor do {{ pagamento.descricao }}"
+              mode="currency"
+              currency="BRL"
+              formControlName="pagamento"
+              [maxlength]="12"
+            >
+            </p-inputNumber>
           </div>
         </div>
       </form>
