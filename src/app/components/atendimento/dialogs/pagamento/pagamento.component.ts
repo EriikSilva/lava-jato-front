@@ -32,6 +32,7 @@ export class PagamentoComponent implements OnInit {
   valorDigitado:any
   valorSomatoria:any
 
+
   tipos_pregunta = [
     {
       label: "Desconto em R$",
@@ -133,16 +134,9 @@ export class PagamentoComponent implements OnInit {
     });
   }
 
-  onMultiSelectChangePagamento2(event: any) {
-    // O parâmetro 'event' contém as informações sobre a seleção atual
-  
-    // Exiba um console.log para verificar o conteúdo do 'event'
-    console.log('Seleção atual:', event);
-  }
-  
-
   exibirValorDigitado(pagamento: any, novoValor:any) {
     const { cd_pagamento } = pagamento
+
 
     if(novoValor == null || novoValor == undefined){
       novoValor = 0
@@ -157,7 +151,7 @@ export class PagamentoComponent implements OnInit {
     
     const somatoriaDoValorTotal = c.reduce((total:any, pagamento:any) => total + pagamento.valor, 0);
     const temDinheiro = c.some((pagamento:any) => pagamento.cd_pagamento === 2);
-    
+   
     this.valorSomatoria = somatoriaDoValorTotal
 
     if(temDinheiro){
@@ -178,8 +172,6 @@ export class PagamentoComponent implements OnInit {
     }
 
   }
-
-
 
   calcularPrecoComDesconto(event: Event) {
     const novoDesconto = Number(event);
@@ -220,7 +212,7 @@ export class PagamentoComponent implements OnInit {
   tipoDescontoRadio(event: any){
     const a = Object(event)
 
-    if(a.value == 1 ){  
+    if(a.value == 1){  
       this.pagamentoForm.get('perc_desc_p')?.setValue('');
       this.isMoney = true
       this.isPercent = false
@@ -235,6 +227,16 @@ export class PagamentoComponent implements OnInit {
   }
 
   onMultiSelectChangePagamento(pagamento: any) {
+    console.log('pagamento', pagamento)
+    
+    if(pagamento){
+      this.valorDigitado = pagamento.value.reduce((total:any, pagamento:any) => total + pagamento.valor, 0);
+      this.troco = this.valorDigitado - this.precoFinal
+      if(this.troco < 0){
+        this.troco = 0
+      }
+    }
+
     this.selectedPagamentos = pagamento.value;
   }
 

@@ -110,7 +110,7 @@
             : (precoOriginal | currency : "BRL" : "symbol")
         }}
       </h4>
-      <h4 style="color: green" *ngIf="desconto" class="valores_finais">
+      <h4 style="color: red" *ngIf="desconto" class="valores_finais">
         DESCONTO: -
         {{
           isMoney == true
@@ -123,14 +123,14 @@
           precoFinal <= 0 ? "R$ 0" : (precoFinal | currency : "BRL" : "symbol")
         }}
       </h4>
-      <h4 *ngIf="troco" class="valores_finais">
-        TROCO:{{
-         troco | currency : "BRL" : "symbol"
-        }}
-      </h4>
-      <h4 *ngIf="valorDigitado" class="valores_finais">
+      <h4 style="color: green"  *ngIf="valorDigitado" class="valores_finais">
         Valor Pago:{{
          valorDigitado | currency : "BRL" : "symbol"
+        }}
+      </h4>
+      <h4 style="color: yellow;" *ngIf="troco" class="valores_finais">
+        TROCO:{{
+         troco | currency : "BRL" : "symbol"
         }}
       </h4>
     </div>
