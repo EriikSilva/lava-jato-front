@@ -28,6 +28,9 @@ export class PagamentoComponent implements OnInit {
   isPercent:boolean = false;
   vl_desconto_p:any;
   valoresDosPagamentos: { [cd_pagamento: number]: number } = {};
+  troco:any
+  valorDigitado:any
+  valorSomatoria:any
 
   tipos_pregunta = [
     {
@@ -129,6 +132,54 @@ export class PagamentoComponent implements OnInit {
       },
     });
   }
+
+  onMultiSelectChangePagamento2(event: any) {
+    // O parâmetro 'event' contém as informações sobre a seleção atual
+  
+    // Exiba um console.log para verificar o conteúdo do 'event'
+    console.log('Seleção atual:', event);
+  }
+  
+
+  exibirValorDigitado(pagamento: any, novoValor:any) {
+    const { cd_pagamento } = pagamento
+
+    if(novoValor == null || novoValor == undefined){
+      novoValor = 0
+    }
+
+    const c = this.selectedPagamentos.map((pagamento:any) => {
+      if (pagamento.cd_pagamento === cd_pagamento) {
+        pagamento.valor = novoValor; 
+      }
+      return pagamento;
+    });
+    
+    const somatoriaDoValorTotal = c.reduce((total:any, pagamento:any) => total + pagamento.valor, 0);
+    const temDinheiro = c.some((pagamento:any) => pagamento.cd_pagamento === 2);
+    
+    this.valorSomatoria = somatoriaDoValorTotal
+
+    if(temDinheiro){
+
+      if(c.length > 1){
+       this.valorDigitado = somatoriaDoValorTotal
+       this.troco = somatoriaDoValorTotal - this.precoFinal
+      }
+
+      if(c.length == 1){
+        this.valorDigitado = novoValor
+        this.troco = novoValor - this.precoFinal
+      }
+
+      if(this.troco < 0){
+        this.troco = 0
+      }
+    }
+
+  }
+
+
 
   calcularPrecoComDesconto(event: Event) {
     const novoDesconto = Number(event);

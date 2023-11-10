@@ -74,6 +74,7 @@
               formControlName="pagamento"
               [maxlength]="12"
               [(ngModel)]="valoresDosPagamentos[pagamento.cd_pagamento]"
+              (ngModelChange)="exibirValorDigitado(pagamento, $event)"
             >
             </p-inputNumber>
           </div>
@@ -101,7 +102,7 @@
   </div>
   <ng-template pTemplate="footer">
     <div>
-      <h4 *ngIf="desconto" class="valor_total_servico">
+      <h4 *ngIf="desconto" class="valores_finais">
         VALOR ORIGINAL:
         {{
           precoOriginal <= 0
@@ -109,7 +110,7 @@
             : (precoOriginal | currency : "BRL" : "symbol")
         }}
       </h4>
-      <h4 style="color: green" *ngIf="desconto" class="valor_total_servico">
+      <h4 style="color: green" *ngIf="desconto" class="valores_finais">
         DESCONTO: -
         {{
           isMoney == true
@@ -117,9 +118,19 @@
             : desconto + "%"
         }}
       </h4>
-      <h4 class="valor_total_servico">
+      <h4 class="valores_finais">
         TOTAL A PAGAR:{{
           precoFinal <= 0 ? "R$ 0" : (precoFinal | currency : "BRL" : "symbol")
+        }}
+      </h4>
+      <h4 *ngIf="troco" class="valores_finais">
+        TROCO:{{
+         troco | currency : "BRL" : "symbol"
+        }}
+      </h4>
+      <h4 *ngIf="valorDigitado" class="valores_finais">
+        Valor Pago:{{
+         valorDigitado | currency : "BRL" : "symbol"
         }}
       </h4>
     </div>
