@@ -136,8 +136,7 @@ export class PagamentoComponent implements OnInit {
 
   exibirValorDigitado(pagamento: any, novoValor:any) {
     const { cd_pagamento } = pagamento
-
-
+ 
     if(novoValor == null || novoValor == undefined){
       novoValor = 0
     }
@@ -152,10 +151,9 @@ export class PagamentoComponent implements OnInit {
     const somatoriaDoValorTotal = c.reduce((total:any, pagamento:any) => total + pagamento.valor, 0);
     const temDinheiro = c.some((pagamento:any) => pagamento.cd_pagamento === 2);
    
-    this.valorSomatoria = somatoriaDoValorTotal
+    this.valorDigitado = somatoriaDoValorTotal
 
-    if(temDinheiro){
-
+    if(temDinheiro){  
       if(c.length > 1){
        this.valorDigitado = somatoriaDoValorTotal
        this.troco = somatoriaDoValorTotal - this.precoFinal
@@ -166,16 +164,14 @@ export class PagamentoComponent implements OnInit {
         this.troco = novoValor - this.precoFinal
       }
 
-      if(this.troco < 0){
+      if(this.troco < 0 ){
         this.troco = 0
       }
     }
-
-  }
+ }
 
   calcularPrecoComDesconto(event: Event) {
     const novoDesconto = Number(event);
-
     this.desabilitarBotao = false;
 
     if (!isNaN(novoDesconto)) {
@@ -226,9 +222,7 @@ export class PagamentoComponent implements OnInit {
     
   }
 
-  onMultiSelectChangePagamento(pagamento: any) {
-    console.log('pagamento', pagamento)
-    
+  onMultiSelectChangePagamento(pagamento: any) {    
     if(pagamento){
       this.valorDigitado = pagamento.value.reduce((total:any, pagamento:any) => total + pagamento.valor, 0);
       this.troco = this.valorDigitado - this.precoFinal
