@@ -141,25 +141,43 @@ export class PagamentoComponent implements OnInit {
       novoValor = 0
     }
 
-    const c = this.selectedPagamentos.map((pagamento:any) => {
+    const arraySelecionados = this.selectedPagamentos.map((pagamento:any) => {
       if (pagamento.cd_pagamento === cd_pagamento) {
         pagamento.valor = novoValor; 
       }
       return pagamento;
     });
     
-    const somatoriaDoValorTotal = c.reduce((total:any, pagamento:any) => total + pagamento.valor, 0);
-    const temDinheiro = c.some((pagamento:any) => pagamento.cd_pagamento === 2);
-   
+
+    const somatoriaDoValorTotal = arraySelecionados.reduce((total:any, pagamento:any) => total + pagamento.valor, 0);
+    const temDinheiro = arraySelecionados.some((pagamento:any) => pagamento.cd_pagamento === 2);
+
     this.valorDigitado = somatoriaDoValorTotal
 
     if(temDinheiro){  
-      if(c.length > 1){
+      if(arraySelecionados.length > 1){
        this.valorDigitado = somatoriaDoValorTotal
-       this.troco = somatoriaDoValorTotal - this.precoFinal
+       const valorDinheiro = arraySelecionados.filter((res:any) => res.cd_pagamento == 2)
+       const valoresSemDinheiro = arraySelecionados.filter((res:any) => res.cd_pagamento !==2);
+       const dinheiro = Number(valorDinheiro[0].valor)
+   
+       let totalSemDinhero = 0;
+   
+       for (const item of valoresSemDinheiro) {
+         totalSemDinhero += item.valor;
+       }
+   
+       const validacao = totalSemDinhero + dinheiro
+   
+       if(validacao > this.precoFinal){
+         const logicaTroco = (totalSemDinhero - this.precoFinal) + dinheiro
+   
+         this.troco = logicaTroco
+       }
+     
       }
 
-      if(c.length == 1){
+      if(arraySelecionados.length == 1){
         this.valorDigitado = novoValor
         this.troco = novoValor - this.precoFinal
       }
