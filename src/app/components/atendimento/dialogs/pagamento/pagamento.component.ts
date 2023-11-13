@@ -31,6 +31,7 @@ export class PagamentoComponent implements OnInit {
   troco:any
   valorDigitado:any
   valorSomatoria:any
+  arraySelecionados:any
 
 
   tipos_pregunta = [
@@ -141,7 +142,8 @@ export class PagamentoComponent implements OnInit {
       novoValor = 0
     }
 
-    const arraySelecionados = this.selectedPagamentos.map((pagamento:any) => {
+    
+    this.arraySelecionados = this.selectedPagamentos.map((pagamento:any) => {
       if (pagamento.cd_pagamento === cd_pagamento) {
         pagamento.valor = novoValor; 
       }
@@ -149,16 +151,16 @@ export class PagamentoComponent implements OnInit {
     });
     
 
-    const somatoriaDoValorTotal = arraySelecionados.reduce((total:any, pagamento:any) => total + pagamento.valor, 0);
-    const temDinheiro = arraySelecionados.some((pagamento:any) => pagamento.cd_pagamento === 2);
+    const somatoriaDoValorTotal = this.arraySelecionados.reduce((total:any, pagamento:any) => total + pagamento.valor, 0);
+    const temDinheiro = this.arraySelecionados.some((pagamento:any) => pagamento.cd_pagamento === 2);
 
     this.valorDigitado = somatoriaDoValorTotal
 
     if(temDinheiro){  
-      if(arraySelecionados.length > 1){
+      if(this.arraySelecionados.length > 1){
        this.valorDigitado = somatoriaDoValorTotal
-       const valorDinheiro = arraySelecionados.filter((res:any) => res.cd_pagamento == 2)
-       const valoresSemDinheiro = arraySelecionados.filter((res:any) => res.cd_pagamento !==2);
+       const valorDinheiro = this.arraySelecionados.filter((res:any) => res.cd_pagamento == 2)
+       const valoresSemDinheiro = this.arraySelecionados.filter((res:any) => res.cd_pagamento !==2);
        const dinheiro = Number(valorDinheiro[0].valor)
    
        let totalSemDinhero = 0;
@@ -179,7 +181,7 @@ export class PagamentoComponent implements OnInit {
      
       }
 
-      if(arraySelecionados.length == 1){
+      if(this.arraySelecionados.length == 1){
         this.valorDigitado = novoValor
         this.troco = novoValor - this.precoFinal
       }
@@ -206,6 +208,8 @@ export class PagamentoComponent implements OnInit {
       this.desabilitarBotao = true;
     }
     this.precoFinal = this.precoOriginal - this.desconto;
+
+    this.trocoParaDesconto();
   }
 
   calcularDescontoPercentual(event: Event) {
@@ -221,6 +225,39 @@ export class PagamentoComponent implements OnInit {
 
     if (event == null) {
       this.desconto = 0
+    }
+
+   this.trocoParaDesconto();
+
+  }
+
+
+  trocoParaDesconto(){
+    const temDinheiro = this.arraySelecionados.some((pagamento:any) => pagamento.cd_pagamento === 2);
+
+    if(temDinheiro){  
+      if(this.arraySelecionados.length > 1){
+        const valorDinheiro = this.arraySelecionados.filter((res:any) => res.cd_pagamento == 2)
+        const valoresSemDinheiro = this.arraySelecionados.filter((res:any) => res.cd_pagamento !==2);
+        const dinheiro = Number(valorDinheiro[0].valor)
+    
+        let totalSemDinhero = 0;
+    
+        for (const item of valoresSemDinheiro) {
+          totalSemDinhero += item.valor;
+        }
+    
+        const validacao = totalSemDinhero + dinheiro
+    
+        if(validacao > this.precoFinal && totalSemDinhero < this.precoFinal){
+          const logicaTroco = (totalSemDinhero - this.precoFinal) + dinheiro
+    
+          this.troco = logicaTroco
+        }else{
+         this.troco = 0
+        }
+      
+       } 
     }
 
   }
