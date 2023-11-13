@@ -169,10 +169,12 @@ export class PagamentoComponent implements OnInit {
    
        const validacao = totalSemDinhero + dinheiro
    
-       if(validacao > this.precoFinal){
+       if(validacao > this.precoFinal && totalSemDinhero < this.precoFinal){
          const logicaTroco = (totalSemDinhero - this.precoFinal) + dinheiro
    
          this.troco = logicaTroco
+       }else{
+        this.troco = 0
        }
      
       }
