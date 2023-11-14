@@ -70,7 +70,6 @@ export class VisualizarServicoComponent {
         this.selectedItems = [];
       },
       error: (res: any) => {
-        console.log(res);
         const { error } = res.error;
         this.messageService.add({
           severity: 'error',
