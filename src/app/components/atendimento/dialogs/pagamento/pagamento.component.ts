@@ -3,16 +3,20 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AtendimentoService } from '../../atendimento.service';
 import { TiposPagamentoService } from 'src/app/components/gestao/pages/tipos-pagamento/tipos-pagamento.service';
 import { format } from 'date-fns';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-pagamento',
   templateUrl: './pagamento.component.html',
   styleUrls: ['./pagamento.component.scss'],
+  providers:[MessageService]
+  
 })
 export class PagamentoComponent implements OnInit {
   constructor(
     private atendimentoService: AtendimentoService,
-    private tiposPagamentoService: TiposPagamentoService
+    private tiposPagamentoService: TiposPagamentoService,
+    private messageService: MessageService
   ) {}
 
   buttonLoading: boolean = false;
@@ -47,6 +51,7 @@ export class PagamentoComponent implements OnInit {
 
   @Input() chamarModalPagamento: boolean = false;
   @Output() dialogClosed = new EventEmitter<void>();
+  @Output() getListaPamento = new EventEmitter<void>();
 
   pagamentoForm = new FormGroup({
     perc_desc_p: new FormControl(''),
@@ -88,6 +93,7 @@ export class PagamentoComponent implements OnInit {
 
     const bodyPagamento = {
       nr_atendimento_p: nr_atendimento,
+      troco_p:this.troco <= 0 ? 0 : this.troco,
       vl_desconto_p: vl_desconto_p == '' || vl_desconto_p == null ? 0: vl_desconto_p,
       cd_usuario_p,
       perc_desc_p: perc_desc_p == '' || perc_desc_p == null ? 0: perc_desc_p,
@@ -95,17 +101,30 @@ export class PagamentoComponent implements OnInit {
       pagamentos: arrayDePagamentos
     }
 
-    // return console.log('bodyPagamento', bodyPagamento)
+    this.buttonLoading = true;
+
     this.atendimentoService.postPagamento(bodyPagamento)
     .subscribe({
       next:(res:any) => {
+        this.buttonLoading = false;
         const { message } = res
-        console.log('message', message)
+        this.closeDialog();
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: message,
+        });
+        this.getListaPamento.emit();
       }, error:(res:any) => {
-        console.log('res', res)
+        this.buttonLoading = false;
+         const { error } = res.error;
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: error,
+        });
       }
     })
-
   }
 
   getTipoPagamento() {
@@ -121,7 +140,7 @@ export class PagamentoComponent implements OnInit {
       },
     });
   }
-
+  
   getPagamentoByClient(servicos: any) {
     const { nr_atendimento, valor_total } = servicos;
 
@@ -141,7 +160,6 @@ export class PagamentoComponent implements OnInit {
     if(novoValor == null || novoValor == undefined){
       novoValor = 0
     }
-
     
     this.arraySelecionados = this.selectedPagamentos.map((pagamento:any) => {
       if (pagamento.cd_pagamento === cd_pagamento) {
@@ -149,7 +167,6 @@ export class PagamentoComponent implements OnInit {
       }
       return pagamento;
     });
-    
 
     const somatoriaDoValorTotal = this.arraySelecionados.reduce((total:any, pagamento:any) => total + pagamento.valor, 0);
     const temDinheiro = this.arraySelecionados.some((pagamento:any) => pagamento.cd_pagamento === 2);
@@ -230,7 +247,6 @@ export class PagamentoComponent implements OnInit {
    this.trocoParaDesconto();
 
   }
-
 
   trocoParaDesconto(){
     const temDinheiro = this.arraySelecionados.some((pagamento:any) => pagamento.cd_pagamento === 2);
