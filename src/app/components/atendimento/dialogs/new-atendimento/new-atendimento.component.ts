@@ -2,12 +2,13 @@ import { ServicoService } from './../../../gestao/pages/servicos/servico.service
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ClientesService } from 'src/app/components/clientes/clientes.service';
 import { CarrosService } from './../../../clientes/carros.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { format, addDays } from 'date-fns';
 import { AgendamentosDTO } from '../../DTO/atendimentoDTO';
 import { AtendimentoService } from '../../atendimento.service';
 import { ClienteGetDTO } from 'src/app/components/clientes/DTO/clientesDTO';
+import { PagamentoComponent } from '../pagamento/pagamento.component';
 @Component({
   selector: 'app-new-atendimento',
   templateUrl: './new-atendimento.component.html',
@@ -27,6 +28,7 @@ export class NewAtendimentoComponent implements OnInit {
   @Input() atendimentoDialog: boolean = false;
   @Output() dialogClosed = new EventEmitter<void>();
   @Output() getAtendimentos = new EventEmitter<void>();
+  @ViewChild('PagamentoComponent') PagamentoComponent:PagamentoComponent | undefined
 
   clientes: ClienteGetDTO[] = []
   veiculoCliente: ClienteGetDTO[] = [];
@@ -77,7 +79,7 @@ export class NewAtendimentoComponent implements OnInit {
       this.buttonLoading = true
       this.atendimentoService.gerarAtendimento(bodyNewAtendimento).subscribe({
         next: (res: any) => {
-          const { message } = res;
+          const { message, data } = res;          
           this.closeDialog();
           this.getAtendimentos.emit();
           this.MessageService.add({
@@ -88,6 +90,8 @@ export class NewAtendimentoComponent implements OnInit {
           this.precoServicoFinal = false
           this.limparFormNovoAtendimento();
           this.buttonLoading = false
+
+          this.chamarPopup(data)
         },
         error: (res: any) => {
           this.buttonLoading = false
@@ -101,7 +105,7 @@ export class NewAtendimentoComponent implements OnInit {
     }
   }
 
-  chamarPopup(){
+  chamarPopup(atendimento:any){
     this.confirmationService.confirm({
       message: 'Deseja Realizar o Pagamento Agora?',
       header: 'Pagamento',
@@ -110,6 +114,8 @@ export class NewAtendimentoComponent implements OnInit {
       rejectLabel: 'Não',
       accept: () => {
         this.chamarModalPagamento = true
+        this.PagamentoComponent?.getPagamentoByClient(atendimento)    
+        console.log('atendimento', atendimento)
       },})
   }
 
