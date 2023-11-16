@@ -26,7 +26,7 @@ export class PagamentoComponent implements OnInit {
   precoFinal: any;
   desconto: any;
   precoOriginal: any;
-  desabilitarBotao: any;
+  desabilitarBotao: boolean = false;
   tipoDesconto: string = "";
   isMoney:boolean = false;
   isPercent:boolean = false;
@@ -93,7 +93,7 @@ export class PagamentoComponent implements OnInit {
 
     const bodyPagamento = {
       nr_atendimento_p: nr_atendimento,
-      troco_p:this.troco <= 0 ? 0 : this.troco,
+      troco_p:this.troco <= 0 || this.troco == null || isNaN(this.troco) ? 0 : this.troco,
       vl_desconto_p: vl_desconto_p == '' || vl_desconto_p == null ? 0: vl_desconto_p,
       cd_usuario_p,
       perc_desc_p: perc_desc_p == '' || perc_desc_p == null ? 0: perc_desc_p,
@@ -117,18 +117,19 @@ export class PagamentoComponent implements OnInit {
         this.getListaPamento.emit();
       }, error:(res:any) => {
         this.buttonLoading = false;
-         const { error } = res.error;
+         const { message } = res.error;
         this.messageService.add({
           severity: 'error',
           summary: 'Erro',
-          detail: error,
+          detail: message,
         });
       }
     })
   }
 
   getTipoPagamento() {
-    this.tiposPagamentoService.getTiposPagamento().subscribe({
+    this.tiposPagamentoService.getTiposPagamento()
+    .subscribe({
       next: (res: any) => {
         const { data } = res;
         const pagamentoConcatenado = data.map((pagamento: any) => ({
@@ -146,7 +147,8 @@ export class PagamentoComponent implements OnInit {
 
     this.precoFinal = valor_total;
     this.precoOriginal = valor_total;
-    this.atendimentoService.getServicosEmAndamento(nr_atendimento).subscribe({
+    this.atendimentoService.getServicosEmAndamento(nr_atendimento)
+    .subscribe({
       next: (res: any) => {
         const { data } = res;
         this.servicos = data;
@@ -211,7 +213,6 @@ export class PagamentoComponent implements OnInit {
 
   calcularPrecoComDesconto(event: Event) {
     const novoDesconto = Number(event);
-    this.desabilitarBotao = false;
 
     if (!isNaN(novoDesconto)) {
       this.desconto = novoDesconto;

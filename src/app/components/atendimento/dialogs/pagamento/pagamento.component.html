@@ -144,7 +144,7 @@
     ></button>
 
     <button
-      [disabled]="desabilitarBotao"
+      [disabled]="desabilitarBotao || valorDigitado < precoFinal"
       pButton
       pRipple
       label="Salvar"
