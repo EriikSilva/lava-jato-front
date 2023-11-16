@@ -115,7 +115,6 @@ export class NewAtendimentoComponent implements OnInit {
       accept: () => {
         this.chamarModalPagamento = true
         this.PagamentoComponent?.getPagamentoByClient(atendimento)    
-        console.log('atendimento', atendimento)
       },})
   }
 
