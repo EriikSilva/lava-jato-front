@@ -1,5 +1,4 @@
 import { PagamentoComponent } from './dialogs/pagamento/pagamento.component';
-import { GestaoService } from './../gestao/gestao.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ClientesService } from '../clientes/clientes.service';
 import { AtendimentoService } from './atendimento.service';
