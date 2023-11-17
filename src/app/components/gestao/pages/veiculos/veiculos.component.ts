@@ -29,7 +29,7 @@ export class VeiculosComponent implements OnInit{
     ){}
 
   ngOnInit(): void {
-    this.getVeiculos();      
+    // this.getVeiculos();      
   }
 
   newVeiculoForm = new FormGroup({

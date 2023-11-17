@@ -1,13 +1,19 @@
 <div class="tab_config">
-  <p-tabView>
+  <p-tabView (onChange)="onTabChange($event)">
     <p-tabPanel header="Serviço">
-      <app-servicos></app-servicos>
+      <app-servicos
+      #ServicosComponent
+      ></app-servicos>
     </p-tabPanel>
     <p-tabPanel header="Tipos de Pagamento">
-      <app-tipos-pagamento></app-tipos-pagamento>
+      <app-tipos-pagamento
+      #TiposPagamentoComponent
+      ></app-tipos-pagamento>
     </p-tabPanel>
     <p-tabPanel header="Veículos">
-      <app-veiculos></app-veiculos>
+      <app-veiculos
+      #VeiculosComponent
+      ></app-veiculos>
     </p-tabPanel>
   </p-tabView>
 </div>

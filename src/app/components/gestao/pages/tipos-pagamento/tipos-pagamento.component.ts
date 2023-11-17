@@ -45,7 +45,7 @@ export class TiposPagamentoComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.getTiposPagamento();
+    // this.getTiposPagamento();
   }
 
   getTiposPagamento() {
