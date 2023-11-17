@@ -53,8 +53,17 @@ Projeto que tem como finalidade atender a administração de um lava jato
 <h2>Clientes</h2>
 <img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/d246c367-1f89-4b84-8aa5-f159fd85aea0" />
 
+<h2>Inserir Cliente</h2>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/c9b4de71-3980-4fc2-b843-5e5f7147ee08" />
+
+<h2>Novo Veículo para cliente</h2>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/aea679ee-3557-4a1d-84cf-84cbdc4c92e5" />
+
 <h2>Atendimento</h2>
 <img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/64b97419-e00d-48b4-aac6-4574533d7607"/>
+
+<h2>Pagamento do Atendimento</h2>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/4d4da582-5aa3-4989-9470-4647cef43c36"/>
 
 <h2>Controle de serviços e pagamentos</h2>
 <img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/6d384308-80a2-48a6-a97d-1730428bd590"/>
