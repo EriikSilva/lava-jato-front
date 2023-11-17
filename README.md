@@ -44,27 +44,26 @@ Projeto que tem como finalidade atender a administração de um lava jato
 (Imagens Provisórias)
 
 <h2>Login</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/2cd7aa1e-9d3c-453e-998f-a829bda50a4c"/>
-
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/79c94270-fe1b-4dd6-b1e5-50c7164f9723"/>
 
 <h2>Início</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/8cd8b8d5-8d5c-4699-9c2a-47f4cbaf5e73"/>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/120b04c1-7fd6-46e1-8f40-dec366e89215"/>
 
 <h2>Clientes</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/d246c367-1f89-4b84-8aa5-f159fd85aea0" />
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/4128e8ed-8abd-49a9-8729-5369d81cdf75" />
 
 <h2>Inserir Cliente</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/c9b4de71-3980-4fc2-b843-5e5f7147ee08" />
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/a1667d03-b658-435f-a32f-4761cbcc3f55" />
 
 <h2>Novo Veículo para cliente</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/aea679ee-3557-4a1d-84cf-84cbdc4c92e5" />
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/c8b6bac3-7eb3-40fb-a6fc-361296b167df" />
 
 <h2>Atendimento</h2>
 <img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/f8d14a68-e6a5-488e-bdf5-aed24e880191"/>
 
 <h2>Pagamento do Atendimento</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/4d4da582-5aa3-4989-9470-4647cef43c36"/>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/05a1ae18-2636-4158-a01f-e7ad38e12e8a"/>
 
 <h2>Controle de serviços e pagamentos</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/6d384308-80a2-48a6-a97d-1730428bd590"/>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/506a5517-e360-4281-8aa0-a8756ea6b871"/>
 
