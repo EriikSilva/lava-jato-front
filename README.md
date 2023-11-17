@@ -60,7 +60,7 @@ Projeto que tem como finalidade atender a administração de um lava jato
 <img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/aea679ee-3557-4a1d-84cf-84cbdc4c92e5" />
 
 <h2>Atendimento</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/64b97419-e00d-48b4-aac6-4574533d7607"/>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/f8d14a68-e6a5-488e-bdf5-aed24e880191"/>
 
 <h2>Pagamento do Atendimento</h2>
 <img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/4d4da582-5aa3-4989-9470-4647cef43c36"/>
