@@ -144,7 +144,7 @@
     ></button>
 
     <button
-      [disabled]="desabilitarBotao || valorDigitado < precoFinal"
+      [disabled]="desabilitarBotao || valorDigitado < precoFinal || !valorDigitado"
       pButton
       pRipple
       label="Salvar"
@@ -154,7 +154,6 @@
     ></button>
   </ng-template>
 </p-dialog>
-
 
 <div class="card">
   <p-toast></p-toast>
