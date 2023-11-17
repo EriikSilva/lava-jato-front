@@ -23,18 +23,18 @@ export class PagamentoComponent implements OnInit {
   formasDePagamento: any;
   selectedPagamentos: any;
   servicos: any;
-  precoFinal: any;
-  desconto: any;
-  precoOriginal: any;
+  precoFinal: number = 0;
+  desconto: number = 0;
+  precoOriginal: number = 0;
   desabilitarBotao: boolean = false;
   tipoDesconto: string = "";
   isMoney:boolean = false;
   isPercent:boolean = false;
-  vl_desconto_p:any;
+  vl_desconto_p:number = 0;
   valoresDosPagamentos: { [cd_pagamento: number]: number } = {};
-  troco:any
-  valorDigitado:any
-  valorSomatoria:any
+  troco:number = 0
+  valorDigitado:number = 0
+  valorSomatoria:number = 0
   arraySelecionados:any
 
 
