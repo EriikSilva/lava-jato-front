@@ -14,7 +14,7 @@ export class ServicosComponent implements OnInit {
 
   @ViewChild('dt') dt: Table | undefined;
 
-  servicos: any;
+  servicos: [] = [];
   progressSpinner: boolean = false;
   buttonLoading: boolean = false;
   saveButton: boolean = true;
@@ -41,7 +41,12 @@ export class ServicosComponent implements OnInit {
   }
 
   getServicos() {
-    this.progressSpinner = true;
+    if(this.servicos.length > 1){
+      this.progressSpinner = false;
+    }else{
+      this.progressSpinner = true;
+    }
+
     this.servicosService.getServicos().subscribe({
       next: (res: any) => {
         this.progressSpinner = false;

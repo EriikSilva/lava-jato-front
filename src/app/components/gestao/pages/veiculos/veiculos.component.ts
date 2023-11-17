@@ -15,7 +15,7 @@ export class VeiculosComponent implements OnInit{
 
   @ViewChild('dt') dt: Table | undefined;
 
-  veiculos:any;
+  veiculos: [] = [];
   progressSpinner: boolean = false;
   buttonLoading: boolean = false;
   saveButton: boolean = true;
@@ -37,7 +37,12 @@ export class VeiculosComponent implements OnInit{
   })
 
   getVeiculos(){
-    this.progressSpinner = true;
+    if(this.veiculos.length > 1){
+      this.progressSpinner = false;
+    }else{
+      this.progressSpinner = true;
+    }
+
     this.veiculoService.getVeiculos()
     .subscribe({
       next:(res:any) => {

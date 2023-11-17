@@ -14,7 +14,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 export class TiposPagamentoComponent implements OnInit {
   @ViewChild('dt') dt: Table | undefined;
 
-  tiposPagamento: any;
+  tiposPagamento: [] = [];
   progressSpinner: boolean = false;
   buttonLoading: boolean = false;
   saveButton: boolean = true;
@@ -49,7 +49,12 @@ export class TiposPagamentoComponent implements OnInit {
   }
 
   getTiposPagamento() {
-    this.progressSpinner = true;
+    if(this.tiposPagamento.length > 1){
+      this.progressSpinner = false
+    }else {
+      this.progressSpinner = true;
+    }
+
     this.tiposPagamentoService.getTiposPagamento().subscribe({
       next: (res: any) => {
         this.progressSpinner = false;
