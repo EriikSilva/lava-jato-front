@@ -51,7 +51,7 @@ export class PagamentoComponent implements OnInit {
 
   @Input() chamarModalPagamento: boolean = false;
   @Output() dialogClosed = new EventEmitter<void>();
-  @Output() getListaPamento = new EventEmitter<void>();
+  @Output() getListaPagamento = new EventEmitter<void>();
 
   pagamentoForm = new FormGroup({
     perc_desc_p: new FormControl(''),
@@ -114,7 +114,7 @@ export class PagamentoComponent implements OnInit {
           summary: 'Sucesso',
           detail: message,
         });
-        this.getListaPamento.emit();
+        this.getListaPagamento.emit();
       }, error:(res:any) => {
         this.buttonLoading = false;
          const { message } = res.error;
