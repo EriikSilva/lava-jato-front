@@ -40,17 +40,17 @@
       <ng-template pTemplate="body" let-servico>
         <tr>
             <td>
-                <p-tableCheckbox [value]="servico" dataKey="cd_servico" [disabled]="servico.status_servico === 'F'"></p-tableCheckbox>
+                <p-tableCheckbox [value]="servico" dataKey="cd_servico" [disabled]="servico.status_servico === 'F' || servico.status_servico === 'C'" ></p-tableCheckbox>
             </td>
             <td>{{servico.servico}}</td>
             <td>
               <b>{{servico.valor | currency : "BRL" : "symbol"}}</b>
             </td>
             <td [ngStyle]="{'background-color': servico.status_servico === 'F' ? 'green' : 'red'}">
-              <b><i>  {{servico.status_servico === 'F' ? "FINALIZADO" : "ABERTO"}}</i></b>
+              <b><i>  {{servico.status_servico === 'F' ? "FINALIZADO" :servico.status_servico === "C" ? "CANCELADO" : "ABERTO"}}</i></b>
             </td>   
         </tr>
-    </ng-template>
+      </ng-template>
     </p-table>
     <p-progressSpinner
     class="progressSpinner"

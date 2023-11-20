@@ -50,4 +50,7 @@ export class AtendimentoService {
     return this.http.post(`${this.apiUrl}/financeiro/pagamento`, body)
   }
 
+  cancelarAtendimento(nr_atendimento_p:number,cd_usuario_p:number):Observable<any>{
+    return this.http.post(`${this.apiUrl}/atendimentos/cancelar/${nr_atendimento_p}/${cd_usuario_p}`,[])
+  }
 }
