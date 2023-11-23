@@ -98,8 +98,8 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
             });
           },
           error: (res: any) => {
-          const {message} = res
-            this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: message });
+          const {message} = res.error
+            this.messageService.add({ severity: 'error', summary: 'Erro', detail: message });
           },
       });
   }
