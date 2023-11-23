@@ -53,4 +53,9 @@ export class AtendimentoService {
   cancelarAtendimento(nr_atendimento_p:number,cd_usuario_p:number):Observable<any>{
     return this.http.post(`${this.apiUrl}/atendimentos/cancelar/${nr_atendimento_p}/${cd_usuario_p}`,[])
   }
+
+  fecharAtendimento(nr_atendimento:number):Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/atendimento/finalizarAtendimento/${nr_atendimento}`,[])
+  }
+
 }
