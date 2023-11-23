@@ -93,7 +93,7 @@
         <ng-template pTemplate="body" let-servico>
           <tr>
             <td>{{ servico.servico }}</td>
-            <td>{{ servico.status_servico == "A" ? "Aberto" : "Fechado" }}</td>
+            <td>{{ servico.status_servico == "A" ? "Aberto" :servico.atendimento == "C" ? "Cancelado " : "Fechado" }}</td>
             <td>{{ servico.valor | currency : "BRL" : "symbol" }}</td>
           </tr>
         </ng-template>
@@ -144,7 +144,7 @@
     ></button>
 
     <button
-      [disabled]="desabilitarBotao || valorDigitado < precoFinal || !valorDigitado"
+      [disabled]="desabilitarBotao || !valorDigitado"
       pButton
       pRipple
       label="Salvar"
