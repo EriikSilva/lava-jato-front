@@ -105,18 +105,18 @@
             ></p-button>
 
             <p-button
-            [disabled]="atendimento.status_pagamento == 'PG' ? true : atendimento.status_atendimento =='C' ? false :  false"
+            [disabled]="atendimento.status_pagamento == 'PG' || atendimento.status_atendimento == 'C' ? true : false"
             icon="pi pi-money-bill"
             styleClass="p-button-rounded p-button-info p-button-text p-button-raised mr-2"
             (onClick)="chamarPopUp(atendimento)"
           ></p-button>
             
-        <p-button
-        [disabled]="atendimento.status_atendimento =='C' ? true :  false"
-        icon="pi pi-times"
-        styleClass="p-button-rounded p-button-info p-button-text p-button-raised"
-        (onClick)="cancelarAtendimento(atendimento)"
-      ></p-button>
+            <p-button
+            [disabled]="atendimento.status_atendimento == 'C' ? true :  false"
+            icon="pi pi-times"
+            styleClass="p-button-rounded p-button-info p-button-text p-button-raised"
+            (onClick)="cancelarAtendimento(atendimento)"
+          ></p-button>
           </ng-container>
         </td>
         <ng-template #skeleton>
