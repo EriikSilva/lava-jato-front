@@ -46,7 +46,7 @@
             <td>
               <b>{{servico.valor | currency : "BRL" : "symbol"}}</b>
             </td>
-            <td [ngStyle]="{'background-color': servico.status_servico === 'F' ? 'green' : 'red'}">
+            <td [ngStyle]="{'background-color': servico.status_servico === 'F' ? 'red' : servico.status_servico === 'C' ? 'red' :'blue'}">
               <b><i>  {{servico.status_servico === 'F' ? "FINALIZADO" :servico.status_servico === "C" ? "CANCELADO" : "ABERTO"}}</i></b>
             </td>   
         </tr>
