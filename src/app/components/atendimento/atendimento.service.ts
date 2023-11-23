@@ -38,12 +38,8 @@ export class AtendimentoService {
     return this.http.post<FinalizarServicoDTO>(`${this.apiUrl}/atendimentos/finalizarServico`, body)
   }
 
-  finalizarAtendimento(nr_atendimento:string,nr_servico:string[]):Observable<FinalizarServicoDTO>{
-    const body:FinalizarServicoDTO = {
-      nr_atendimento_p: nr_atendimento,
-      nr_servico_p:nr_servico
-    }
-    return this.http.post<FinalizarServicoDTO>(`${this.apiUrl}/atendimentos/finalizarAtendimento/${nr_atendimento}`, body)
+  finalizarAtendimento(nr_atendimento:string):Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/atendimentos/finalizarAtendimento/${nr_atendimento}`, [])
   }
 
   postPagamento(body:any){
@@ -53,9 +49,4 @@ export class AtendimentoService {
   cancelarAtendimento(nr_atendimento_p:number,cd_usuario_p:number):Observable<any>{
     return this.http.post(`${this.apiUrl}/atendimentos/cancelar/${nr_atendimento_p}/${cd_usuario_p}`,[])
   }
-
-  fecharAtendimento(nr_atendimento:number):Observable<any>{
-    return this.http.post<any>(`${this.apiUrl}/atendimento/finalizarAtendimento/${nr_atendimento}`,[])
-  }
-
 }
