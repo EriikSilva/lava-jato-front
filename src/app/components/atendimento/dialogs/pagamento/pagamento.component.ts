@@ -36,6 +36,7 @@ export class PagamentoComponent implements OnInit {
   valorDigitado:number = 0
   valorSomatoria:number = 0
   arraySelecionados:any
+  servicosFinalizados:any
 
 
   tipos_pregunta = [
@@ -68,6 +69,12 @@ export class PagamentoComponent implements OnInit {
       this.pagamentoForm?.setValue(e, { emitEvent: false });
     });
   }
+
+  verificaStatusServicoFinalizado(servico:any){
+    this.servicosFinalizados = servico.every((item:any) => item.status_servico === 'F')
+    return this.servicosFinalizados;
+  } 
+
 
   pagamento() {
     const servicos = this.servicos
@@ -114,6 +121,17 @@ export class PagamentoComponent implements OnInit {
           summary: 'Sucesso',
           detail: message,
         });
+
+        const verificaStatus = this.verificaStatusServicoFinalizado(servicos) 
+
+        if(verificaStatus){
+          this.atendimentoService.finalizarAtendimento(nr_atendimento)
+          .subscribe({
+            next:(res:any) => {
+            }
+          })
+        }
+
         this.getAtendimentos.emit();
       }, error:(res:any) => {
         this.buttonLoading = false;
