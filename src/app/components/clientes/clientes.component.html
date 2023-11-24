@@ -4,10 +4,10 @@
     #dt
     #textInput
     [value]="clients"
+    responsiveLayout="stack"
     [rows]="5"
     [paginator]="true"
     [globalFilterFields]="['nm_cliente', 'cpf_cnpj']"
-    [tableStyle]="{ 'min-width': '55rem', 'marign-left': '40%'}"
     dataKey="id"
     currentPageReportTemplate="Mostrando do {first} ao {last} de {totalRecords} Itens"
     [showCurrentPageReport]="true"
@@ -15,17 +15,18 @@
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
         <button
-          pButton 
-          type="button" 
+          pButton
+          type="button"
           icon="pi pi-arrow-left"
           routerLink="/inicio"
           class="p-button-outlined"
-          ></button>
+        ></button>
 
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
           <input
             pInputText
+            class="input_pesquisa"
             type="text"
             pTooltip="Nome ou CPF"
             tooltipPosition="top"
@@ -39,13 +40,20 @@
             pRipple
             label="Novo"
             icon="pi pi-plus"
-            class="p-button-primary"
+            class="botao_novo p-button-primary"
             (click)="openNew()"
           ></button>
+
+          <p-button
+            class="botao_create p-button-primary"
+            icon="pi pi-plus"
+            (click)="openNew()"
+          >
+          </p-button>
         </div>
       </div>
     </ng-template>
-    <ng-template pTemplate="header">
+    <ng-template pTemplate="header" let-columns>
       <tr>
         <th pSortableColumn="nm_cliente">
           Nome <p-sortIcon field="nm_cliente"></p-sortIcon>
@@ -53,59 +61,73 @@
         <th>CPF/CNPJ</th>
         <th>Bairro</th>
         <th>Telefone</th>
-        <th> Status </th>
-        <th >Ações</th>
+        <th>Status</th>
+        <th>Ações</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-client let-expanded="expanded">
+    <ng-template pTemplate="body" let-client let-columns="columns">
       <tr>
         <td>
-          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+          <ng-container *ngIf="requisicaoCompleta; else skeleton">
+            <span class="p-column-title">Nome</span>
             {{ client.nm_cliente | capitalCase }}
           </ng-container>
         </td>
         <td>
-          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+          <ng-container *ngIf="requisicaoCompleta; else skeleton">
+            <span class="p-column-title">CPF/CNPJ</span>
             {{ formatCpfCnpj(client.cpf_cnpj) }}
           </ng-container>
         </td>
         <td>
-          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
+          <ng-container *ngIf="requisicaoCompleta; else skeleton">
+            <span class="p-column-title">Bairro</span>
             {{ client.bairro | capitalCase }}
           </ng-container>
         </td>
         <td>
-          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-            <i class="pi pi-whatsapp" style="font-size: 1rem"></i> 
-            <a target="_blank" [href]="'https://api.whatsapp.com/send?phone=' + client.telefone1 + '&text=Olá, aqui é da lava jato'">
-            {{ client.telefone1 | telefoneFormat }}
+          <ng-container *ngIf="requisicaoCompleta; else skeleton">
+            <i class="pi pi-whatsapp icone_wpp" style="font-size: 1rem"></i>
+            <span class="p-column-title">Telefone</span>
+            <a
+              target="_blank"
+              [href]="
+                'https://api.whatsapp.com/send?phone=' +
+                client.telefone1 +
+                '&text=Olá, aqui é da lava jato'
+              "
+            >
+              {{ client.telefone1 | telefoneFormat }}
             </a>
           </ng-container>
         </td>
-        <td  [ngClass]="getStatusClass(client.status)">
-          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-            <b>   {{ client.status == "A" ? "ATIVO" : "INATIVO" }}</b>
+        <td>
+          <ng-container *ngIf="requisicaoCompleta; else skeleton">
+            <span class="p-column-title">Status</span>
+            <b [ngClass]="getStatusClass(client.status)">
+              {{ client.status == "A" ? "ATIVO" : "INATIVO" }}</b
+            >
           </ng-container>
         </td>
         <td>
-          <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-          <p-button
-          icon="pi pi-car" 
-          (click)="carClientModal('center', client)"
-          styleClass="p-button-rounded p-button-primary p-button-text"
-          ></p-button>
+          <ng-container *ngIf="requisicaoCompleta; else skeleton">
+            <p-button
+              icon="pi pi-car"
+              (click)="carClientModal('center', client)"
+              styleClass="p-button-rounded p-button-primary p-button-text"
+            ></p-button>
 
-          <p-button
-          icon="pi pi-pencil" 
-          (click)="editClientModal(client)"
-          styleClass="p-button-rounded p-button-primary p-button-text"
-          ></p-button>
+            <p-button
+              icon="pi pi-pencil"
+              (click)="editClientModal(client)"
+              styleClass="p-button-rounded p-button-primary p-button-text"
+            ></p-button>
 
-          <p-button
-          icon="pi pi-trash" 
-          (click)="confirmDelete($event, client)"
-          styleClass="p-button-rounded p-button-primary p-button-text"
-          ></p-button>
+            <p-button
+              icon="pi pi-trash"
+              (click)="confirmDelete($event, client)"
+              styleClass="p-button-rounded p-button-primary p-button-text"
+            ></p-button>
           </ng-container>
           <ng-template #skeleton>
             <p-skeleton></p-skeleton>
@@ -118,22 +140,22 @@
 
 <!-- DIALOG DE EDITAR E CRIAR CLIENTE -->
 <app-save-edit-client
-#SaveEditClientComponent
-(getClients)="getClients()"
-(dialogClosed)="onDialogClosed()"
-[cd_cliente]="cd_cliente"
-[clientDialog]="clientDialog"
-[saveMode]="saveMode"
-[editMode]="editMode"
+  #SaveEditClientComponent
+  (getClients)="getClients()"
+  (dialogClosed)="onDialogClosed()"
+  [cd_cliente]="cd_cliente"
+  [clientDialog]="clientDialog"
+  [saveMode]="saveMode"
+  [editMode]="editMode"
 ></app-save-edit-client>
 
 <!-- BOTAO DE CARRO -->
 <app-car-details
-#CarDetailsComponent
-[carClientDialog]="carClientDialog"
-[position]="position"
-(getClients)="getClients()"
-(dialogClosed)="onDialogClosed()"
+  #CarDetailsComponent
+  [carClientDialog]="carClientDialog"
+  [position]="position"
+  (getClients)="getClients()"
+  (dialogClosed)="onDialogClosed()"
 ></app-car-details>
 
 <div>
@@ -143,7 +165,6 @@
 <div *ngIf="isLoading" class="loading-overlay">
   <app-car-wash-loader></app-car-wash-loader>
 </div>
-
 
 <!-- CONFIRM POPUP -->
 <p-confirmPopup></p-confirmPopup>
