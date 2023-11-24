@@ -39,3 +39,30 @@
 .meu-tabview {
   width: 500px; 
 }
+
+
+.titulo{
+  display: none;
+}
+
+@media (max-width: 1390px) {
+
+  .img_ident{
+    display: none;
+  }
+
+  .titulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+  }
+
+  .tab_formatation{
+    margin: 1rem auto;
+  }
+  .img{
+    display: block;
+  }
+
+}
