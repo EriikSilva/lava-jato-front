@@ -3,7 +3,6 @@
   background: var(--var-background-viva-dark);
   border: 1px solid var(--var-border-background-viva-dark);
   padding: 2.5rem;
-  // margin-bottom: 2rem;
   margin: 2rem auto;
 
   box-shadow: #000;
@@ -35,6 +34,11 @@
     display: block;
   }
 
+  .card{
+    max-width: 100%;
+    padding: 1rem;
+  }
+
 }
 
 @media (max-width: 470px) {
@@ -44,6 +48,7 @@
 
   .card{
     max-width: 100%;
+    padding: 0.7rem;
   }
 
   .botao_create{
