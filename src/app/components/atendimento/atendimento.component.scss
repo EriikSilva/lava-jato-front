@@ -1,14 +1,3 @@
-.table_formatation{
-  width: 83%; 
-  margin-bottom: 1rem;
-  margin-left: 10%;
-  margin-top: 4vh
-}
-
-.button_formatation{
-  margin: 1rem 0 0 9.5rem;
-}
-
 .card {
   max-width: 85%;
   background: var(--var-background-viva-dark);
@@ -24,3 +13,48 @@
       margin-bottom: 0;
   }
 }
+
+.botao_create{
+  display: none;
+}
+
+.botao_create2{
+  display: none;
+}
+
+@media (max-width: 741px) {
+  .input_pesquisa{
+    width: 9rem;
+  }
+
+  .botao_novo{
+    display: none;
+  }
+  
+  .botao_create{
+    display: block;
+  }
+
+}
+
+@media (max-width: 470px) {
+  .input_pesquisa{
+    width: 8rem;
+  }
+
+  .card{
+    max-width: 100%;
+  }
+
+  .botao_create{
+    display: none;
+  }
+
+  .botao_create2{
+    display: block;
+  }
+}
+
+
+
+

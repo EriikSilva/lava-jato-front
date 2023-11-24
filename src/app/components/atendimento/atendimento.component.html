@@ -4,12 +4,12 @@
   <p-table
     #dt
     #textInput
+    responsiveLayout="stack"
     [value]="atendimentos"
-    [tableStyle]="{ 'min-width': '55rem', 'marign-left': '40%'}"
+    class="table_atendimento"
     [rows]="5"
     [paginator]="true"
     [globalFilterFields]="['cliente', 'nr_atendimento']"
-    [tableStyle]="{ 'min-width': '75rem' }"
     dataKey="id"
     currentPageReportTemplate="Mostrando do {first} ao {last} de {totalRecords} Itens"
     [showCurrentPageReport]="true"
@@ -21,13 +21,14 @@
       type="button" 
       icon="pi pi-arrow-left"
       routerLink="/inicio"
-      class="p-button-outlined"
+      class="p-button-outlined botao_voltar"
       ></button>
       <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
         <input
           pInputText
           type="text"
+          class="input_pesquisa"
           pTooltip="Nome ou Número do Atendimento"
           tooltipPosition="top"
           (input)="applyFilterGlobal($event, 'contains')"
@@ -37,6 +38,22 @@
       <div>
         <p-button
         label="Novo Atendimento"
+        class="botao_novo p-md-hidden p-lg-hidden"
+        icon="pi pi-plus"
+        (onClick)="newAtendimento()"
+        >
+        </p-button>
+
+        <p-button
+        label="Novo"
+        class="botao_create"
+        icon="pi pi-plus"
+        (onClick)="newAtendimento()"
+        >
+        </p-button>
+
+        <p-button
+        class="botao_create2"
         icon="pi pi-plus"
         (onClick)="newAtendimento()"
         >
