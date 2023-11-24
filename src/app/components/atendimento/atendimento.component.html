@@ -61,7 +61,7 @@
       </div>
     </div>
   </ng-template>
-    <ng-template pTemplate="header">
+    <ng-template pTemplate="header" let-columns>
       <tr>
         <th pSortableColumn="cliente">
           Cliente <p-sortIcon field="nr_atendimento"></p-sortIcon>
@@ -77,39 +77,38 @@
           Status <p-sortIcon field="status_atendimento"></p-sortIcon>
         </th>
         <th>Valor Total</th>
-        <th>Ações</th>
+        <th>Ações</th>  
       </tr>
     </ng-template>
-
-    <ng-template pTemplate="body" let-atendimento let-expanded="expanded">
+    <ng-template pTemplate="body" let-atendimento let-columns="columns">
       <tr>
         <td>
           <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-            {{ atendimento.cliente}}
+            <span class="p-column-title">Cliente</span>{{ atendimento.cliente}}
           </ng-container>
         </td>
 
         <td>
           <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-            {{ atendimento.dh_inicio_atendimento }}
+            <span class="p-column-title">Data/Hora do Início</span>{{ atendimento.dh_inicio_atendimento }}
           </ng-container>
         </td>
 
         <td>
           <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-            {{ atendimento.nr_atendimento }}
+            <span class="p-column-title">Atendimento</span>{{ atendimento.nr_atendimento }}
           </ng-container>
         </td>
 
         <td>
           <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-            {{ atendimento.status_atendimento == 'A' ? "ABERTO": atendimento.status_atendimento == 'C'? 'CANCELADO': "FECHADO" }}
+            <span class="p-column-title">Status</span>{{ atendimento.status_atendimento == 'A' ? "ABERTO": atendimento.status_atendimento == 'C'? 'CANCELADO': "FECHADO" }}
           </ng-container>
         </td>
 
         <td>
           <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-            {{ atendimento.valor_total | currency : "BRL" : "symbol"}}
+            <span class="p-column-title">Valor Total</span>{{ atendimento.valor_total | currency : "BRL" : "symbol"}}
           </ng-container>
         </td>
         
@@ -143,7 +142,6 @@
     </ng-template>
   </p-table>
 </div>
-
 
 <app-visualizar-servico
 #VisualizarServicoComponent
