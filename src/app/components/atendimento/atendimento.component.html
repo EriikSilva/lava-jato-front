@@ -84,31 +84,36 @@
       <tr>
         <td>
           <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-            <span class="p-column-title">Cliente</span>{{ atendimento.cliente}}
+            <span class="p-column-title">Cliente</span>
+            {{ atendimento.cliente}}
           </ng-container>
         </td>
 
         <td>
           <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-            <span class="p-column-title">Data/Hora do Início</span>{{ atendimento.dh_inicio_atendimento }}
+            <span class="p-column-title">Data/Hora do Início</span>
+            {{ atendimento.dh_inicio_atendimento }}
           </ng-container>
         </td>
 
         <td>
           <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-            <span class="p-column-title">Atendimento</span>{{ atendimento.nr_atendimento }}
+            <span class="p-column-title">Atendimento</span>
+            {{ atendimento.nr_atendimento }}
           </ng-container>
         </td>
 
         <td>
           <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-            <span class="p-column-title">Status</span>{{ atendimento.status_atendimento == 'A' ? "ABERTO": atendimento.status_atendimento == 'C'? 'CANCELADO': "FECHADO" }}
+            <span class="p-column-title">Status</span>
+            {{ atendimento.status_atendimento == 'A' ? "ABERTO": atendimento.status_atendimento == 'C'? 'CANCELADO': "FECHADO" }}
           </ng-container>
         </td>
 
         <td>
           <ng-container  *ngIf="requisicaoCompleta; else skeleton">
-            <span class="p-column-title">Valor Total</span>{{ atendimento.valor_total | currency : "BRL" : "symbol"}}
+            <span class="p-column-title">Valor Total</span>
+            {{ atendimento.valor_total | currency : "BRL" : "symbol"}}
           </ng-container>
         </td>
         
