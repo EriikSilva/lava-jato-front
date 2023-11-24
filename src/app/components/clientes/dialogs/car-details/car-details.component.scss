@@ -13,12 +13,18 @@
     animation: blink 1s infinite alternate;
 }
 
-
 @keyframes blink {
     0% {
         opacity: 1;
     }
     100% {
         opacity: 0;
+    }
+}
+
+@media (max-width: 513px) {
+    .message{
+        font-size: 20px;
+        padding: 1rem;
     }
 }

@@ -3,10 +3,10 @@
   [(visible)]="carClientDialog"
   (onHide)="closeDialog()"
   [modal]="true"
-  [style]="{ width: '50vw' }"
   [draggable]="false"
   [resizable]="false"
   [position]="position"
+  [style]="{width:'85vw'}"
 >
   <button
     pButton
@@ -22,27 +22,34 @@
     *ngIf="!showNoDataMessage"
     dataKey="id"
     editMode="row"
-    [tableStyle]="{ width: '100%' }"
-    class="flex align-items-center justify-content-between"
+    responsiveLayout="stack"
   >
-    <ng-template pTemplate="header">
+    <ng-template pTemplate="header" let-columns>
       <tr>
-        <th style="width: 220px">Modelo</th>
-        <th style="width: 220px">Placa</th>
-        <th style="width: 220px">Descrição</th>
-        <th style="width: 220px">Ações</th>
+        <th>Modelo</th>
+        <th>Placa</th>
+        <th>Descrição</th>
+        <th>Ações</th>
       </tr>
     </ng-template>
     <ng-template
       pTemplate="body"
       let-vehicle
-      let-editing="editing"
+      let-columns="columns"
     >
     <tr>
-      <td>{{vehicle.modelo | uppercase }}</td>
-      <td>{{vehicle.placa | uppercase}}</td>
-      <td>{{vehicle.tipo_veiculos.descricao}}</td>
       <td>
+        <span class="p-column-title"><b><i>Modelo</i></b></span>
+        {{vehicle.modelo | uppercase }}
+      </td>
+      <td>
+        <span class="p-column-title"><b><i>Placa</i></b></span>
+        {{vehicle.placa | uppercase}}</td>
+      <td>
+        <span class="p-column-title"><b><i>Descrição</i></b></span>
+        {{vehicle.tipo_veiculos.descricao}}</td>
+      <td>
+        <span class="p-column-title"><b><i>Ações</i></b></span>
         <button
         pButton
         pRipple
