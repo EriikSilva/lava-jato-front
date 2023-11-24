@@ -1,2 +1,12 @@
-
-
+::ng-deep .smaller-card {
+    width: 24rem;
+    margin-bottom: 2em;
+    margin-left: 2.2em;
+    cursor: pointer;
+}
+@media (max-width: 413px) {
+  .smaller-card {
+    width: 19rem;
+    margin-left:1em
+  }
+}

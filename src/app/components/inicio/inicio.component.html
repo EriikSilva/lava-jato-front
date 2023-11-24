@@ -43,20 +43,49 @@
   </div>
 </div> -->
 
-
 <div class="card-container overflow-hidden">
+  <div class="flex flex-wrap align-items-center justify-content-center" style="margin-top: 3em;">
+    <div class="smaller-card">
+      <p-card 
+      header="Clientes"  
+      routerLink="/clientes"
+    >
+      <ng-template pTemplate="header">
+        <img alt="Card" src="assets/clientes_inicio.jpg" />
+      </ng-template>
+    </p-card>
+    </div>
+
+    <div class="smaller-card">
+      <p-card header="Atendimentos"
+      routerLink="/atendimento">
+        <ng-template pTemplate="header">
+          <img alt="Card" src="assets/atendimento_inicio.jpg" />
+        </ng-template>
+      </p-card>
+    </div>
+    <div class="smaller-card">
+      <p-card header="Administração de Serviços"
+      routerLink="/gestao">
+        <ng-template pTemplate="header">
+          <img alt="Card" src="assets/servicos_inicio.jpg" />
+        </ng-template>
+    
+      </p-card>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- <div class="card-container overflow-hidden">
     <div class="flex flex-wrap align-items-center justify-content-center" style="margin-top: 3em;">
       <div class="p-card-container">
         <p-card header="Clientes"  class="mr-2 mb-2 ml-1"
         routerLink="/clientes"
-        [style]="{
-            width: '22rem',
-            'max-heigth': '10rem',
-            'margin-top': '1.3em',
-            'margin-bottom': '2em',
-            'margin-left': '2.2em',
-            'cursor': 'pointer'
-          }">
+       >
           <ng-template pTemplate="header">
             <img alt="Card" src="assets/clientes_inicio.jpg" />
           </ng-template>
@@ -92,5 +121,5 @@
         </p-card>
       </div>
     </div>
-  </div>
+  </div> -->
   

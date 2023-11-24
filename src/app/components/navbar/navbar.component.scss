@@ -8,3 +8,22 @@
   height: 40px;
   margin-top: 0.4rem;
 }
+
+.centro{
+  display: none;
+}
+
+@media (max-width: 500px) {
+  .img_formatation{
+    display: none;
+  }
+
+  .modo_escuro{
+    display: none;
+  }
+
+  .centro{
+    display: block;
+  }
+
+}
