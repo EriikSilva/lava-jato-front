@@ -23,9 +23,10 @@
       [value]="servicoCliente"
       [(selection)]="selectedItems"
       dataKey="cd_servico"
-      [tableStyle]="{ 'min-width': '50rem' }"
+      responsiveLayout="stack"
+
     >
-      <ng-template pTemplate="header">
+      <ng-template pTemplate="header" >
         <tr>
           <th>Selecione</th>
           <th>Serviço</th>
@@ -37,16 +38,21 @@
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-servico>
+      <ng-template pTemplate="body" let-servico let-columns="columns">
         <tr>
             <td>
+                <span class="p-column-title"><b><i>Selecione</i></b></span>
                 <p-tableCheckbox [value]="servico" dataKey="cd_servico" [disabled]="servico.status_servico === 'F' || servico.status_servico === 'C'" ></p-tableCheckbox>
             </td>
-            <td>{{servico.servico}}</td>
             <td>
+              <span class="p-column-title"><b><i>Serviço</i></b></span>
+              {{servico.servico}}</td>
+            <td>
+              <span class="p-column-title"><b><i>Valor</i></b></span>
               <b>{{servico.valor | currency : "BRL" : "symbol"}}</b>
             </td>
             <td [ngStyle]="{'background-color': servico.status_servico === 'F' ? 'red' : servico.status_servico === 'C' ? 'red' :'blue'}">
+              <span class="p-column-title"><b><i>Status</i></b></span>
               <b><i>  {{servico.status_servico === 'F' ? "FINALIZADO" :servico.status_servico === "C" ? "CANCELADO" : "ABERTO"}}</i></b>
             </td>   
         </tr>
@@ -57,8 +63,9 @@
     *ngIf="progressSpinner">
     </p-progressSpinner>
   </ng-template>
-  <ng-template pTemplate="footer">
-    <button
+  <ng-template pTemplate="footer" >
+    <div class="footer">
+      <button
       pButton
       pRipple
       label="Cancelar"
@@ -76,6 +83,7 @@
       class="p-button-text"
       (click)="finalizarServico()"
       ></button>
+    </div>
   </ng-template>
 </p-dialog>
 
