@@ -11,7 +11,7 @@ import { AtendimentoComponent } from './components/atendimento/atendimento.compo
 import { GestaoComponent } from './components/gestao/gestao.component';
 const routes: Routes = [
   {
-    path:'login',
+    path:'',
     component:LoginComponent
   },
   {
