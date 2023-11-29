@@ -7,6 +7,7 @@ export interface ClientRegisterDTO {
     rua:        string;
     telefone1:  string;
     telefone2:  string;
+    cd_usuario: number;
 }
 
 export interface ClientEditDTO {
