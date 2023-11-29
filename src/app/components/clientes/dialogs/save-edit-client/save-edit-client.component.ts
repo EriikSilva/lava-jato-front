@@ -61,6 +61,7 @@ export class SaveEditClientComponent implements OnDestroy{
       const rua               = formValue.rua || '';
       const telefone1         = formValue.telefone1 || "";
       const telefone2         = formValue.telefone2 || "";
+      const cd_usuario        = Number(localStorage.getItem("cd_usuario"))
 
       const telefone1Formatado = removeCaracteresTelefone(telefone1)
       const telefone2Formatado = removeCaracteresTelefone(telefone2)
@@ -73,7 +74,8 @@ export class SaveEditClientComponent implements OnDestroy{
         nr_casa,
         rua,
         telefone1: telefone1Formatado,
-        telefone2: telefone2Formatado
+        telefone2: telefone2Formatado,
+        cd_usuario
       }
       this.isLoading = true;
       this.clientsService.postClients(bodyRegistro)
@@ -92,11 +94,11 @@ export class SaveEditClientComponent implements OnDestroy{
         },
         error: (res: any) => {
           this.isLoading = false
-          const { error } = res.error
+          const { message } = res.error
           this.messageService.add({
             severity: 'error',
             summary:  'Erro ao cadastrar',
-            detail: error,
+            detail: message,
           });
         },
       });
