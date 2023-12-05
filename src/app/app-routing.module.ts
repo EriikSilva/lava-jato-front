@@ -9,6 +9,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { AtendimentoComponent } from './components/atendimento/atendimento.component';
 import { GestaoComponent } from './components/gestao/gestao.component';
+import { FinanceiroComponent } from './components/financeiro/financeiro.component';
 const routes: Routes = [
   {
     path:'login',
@@ -37,6 +38,11 @@ const routes: Routes = [
   {
     path: 'clientes',
     component: ClientesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'financeiro',
+    component: FinanceiroComponent,
     canActivate: [AuthGuard]
   },
   {
