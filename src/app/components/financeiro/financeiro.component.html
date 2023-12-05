@@ -21,6 +21,19 @@
           routerLink="/inicio"
           class="p-button-outlined"
         ></button>
+
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            class="input_pesquisa"
+            type="text"
+            pTooltip="Nome ou CPF"
+            tooltipPosition="top"
+            (input)="applyFilterGlobal($event, 'contains')"
+            placeholder="Procurar... "
+          />
+        </span>
     </div>
   </ng-template>
 
@@ -81,10 +94,8 @@
           </ng-template>
     </tr>
   </ng-template>
-
 </p-table>
 </div>
-
 
 <div *ngIf="isLoading" class="loading-overlay">
     <app-car-wash-loader></app-car-wash-loader>

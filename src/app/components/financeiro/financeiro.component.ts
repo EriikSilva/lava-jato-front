@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FinanceiroService } from './financeiro.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-financeiro',
@@ -9,6 +10,8 @@ import { FinanceiroService } from './financeiro.service';
 })
 export class FinanceiroComponent implements OnInit{
  
+  @ViewChild('dt') dt: Table | undefined;
+
   movimentacoes: [] = [];
   isLoading: boolean = false;
   requisicaoCompleta: boolean = false
@@ -42,7 +45,8 @@ export class FinanceiroComponent implements OnInit{
     })
   }
 
- 
 
-
+  applyFilterGlobal($event: any, stringVal: any) {
+    this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  }
 }
