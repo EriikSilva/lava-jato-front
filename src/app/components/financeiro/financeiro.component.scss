@@ -1,0 +1,16 @@
+.card {
+    max-width: 85%;
+    background: var(--var-background-viva-dark);
+    border: 1px solid var(--var-border-background-viva-dark);
+    padding: 2.5rem;
+    // margin-bottom: 2rem;
+    margin: 2rem auto;
+  
+    box-shadow: #000;
+    border-radius: 40px;
+  
+    &:last-child {
+        margin-bottom: 0;
+    }
+  
+  }
