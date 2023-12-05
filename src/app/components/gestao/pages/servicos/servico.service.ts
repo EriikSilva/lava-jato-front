@@ -14,7 +14,11 @@ export class ServicoService {
   constructor(private http:HttpClient) { }
     
   getServicos():Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/servicos`)
+    return this.http.get<any>(`${this.apiUrl}/servicos`);
+  }
+
+  getServicosByCdVeiculo(cd_veiculo:number){
+    return this.http.get<any>(`${this.apiUrl}/servicos/veiculos/${cd_veiculo}`)
   }
     
   postServicos(desc_servico:string, vlr_servico:number):Observable<PostServico>{
