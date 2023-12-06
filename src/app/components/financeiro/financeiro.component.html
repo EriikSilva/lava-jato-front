@@ -1,6 +1,6 @@
 <div class="card">
-    <h2 class="mb-5">FINANCEIRO</h2>
-    <p-table
+  <h2 class="mb-5">FINANCEIRO</h2>
+  <p-table
     #dt
     #textInput
     [value]="movimentacoes"
@@ -12,8 +12,8 @@
     currentPageReportTemplate="Mostrando do {first} ao {last} de {totalRecords} Itens"
     [showCurrentPageReport]="true"
   >
-  <ng-template pTemplate="caption">
-    <div class="flex align-items-center justify-content-between">
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
         <button
           pButton
           type="button"
@@ -34,70 +34,131 @@
             placeholder="Procurar... "
           />
         </span>
-    </div>
-  </ng-template>
+      </div>
+    </ng-template>
 
-  <ng-template pTemplate="header" let-columns>
-    <tr>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
         <th pSortableColumn="cliente">
           Cliente <p-sortIcon field="cliente"></p-sortIcon>
         </th>
         <th>Data/Hora do pagamento</th>
-        <th  pSortableColumn="nr_atendimento">
-            <p-sortIcon field="nr_atendimento"></p-sortIcon>Nº do atendimento</th>
+        <th pSortableColumn="nr_atendimento">
+          <p-sortIcon field="nr_atendimento"></p-sortIcon>Nº do atendimento
+        </th>
         <th>Valor da Movimentação</th>
         <th>Valor Pago</th>
         <th>Status</th>
+        <th>Ações</th>
       </tr>
-  </ng-template>
+    </ng-template>
 
-  <ng-template pTemplate="body" let-movimetacao let-columns="columns">
-    <tr>
+    <ng-template pTemplate="body" let-movimetacao let-columns="columns">
+      <tr>
         <td>
-            <ng-container *ngIf="requisicaoCompleta; else skeleton">
-              <span class="p-column-title">Nome</span>
-              {{ movimetacao.cliente | capitalCase }}
-            </ng-container>
+          <ng-container *ngIf="requisicaoCompleta; else skeleton">
+            <span class="p-column-title">Nome</span>
+            {{ movimetacao.cliente | capitalCase }}
+          </ng-container>
         </td>
         <td>
-            <ng-container *ngIf="requisicaoCompleta; else skeleton">
-              <span class="p-column-title">Data/Hora do pagamento</span>
-              {{ movimetacao.dt_pagamento }}
-            </ng-container>
+          <ng-container *ngIf="requisicaoCompleta; else skeleton">
+            <span class="p-column-title">Data/Hora do pagamento</span>
+            {{ movimetacao.dt_pagamento }}
+          </ng-container>
         </td>
         <td>
-            <ng-container *ngIf="requisicaoCompleta; else skeleton">
-              <span class="p-column-title">Nº do atendimento</span>
-              {{ movimetacao.nr_atendimento }}
-            </ng-container>
+          <ng-container *ngIf="requisicaoCompleta; else skeleton">
+            <span class="p-column-title">Nº do atendimento</span>
+            {{ movimetacao.nr_atendimento }}
+          </ng-container>
         </td>
         <td>
-            <ng-container *ngIf="requisicaoCompleta; else skeleton">
-              <span class="p-column-title">Valor da Movimentação</span>
-              {{ movimetacao.vlr_movimento | currency : "BRL" : "symbol" }}
-            </ng-container>
+          <ng-container *ngIf="requisicaoCompleta; else skeleton">
+            <span class="p-column-title">Valor da Movimentação</span>
+            {{ movimetacao.vlr_movimento | currency : "BRL" : "symbol" }}
+          </ng-container>
         </td>
         <td>
-            <ng-container *ngIf="requisicaoCompleta; else skeleton">
-              <span class="p-column-title">Valor Pago</span>
-              {{ movimetacao.vlr_pago | currency : "BRL" : "symbol"}}
-            </ng-container>
+          <ng-container *ngIf="requisicaoCompleta; else skeleton">
+            <span class="p-column-title">Valor Pago</span>
+            {{ movimetacao.vlr_pago | currency : "BRL" : "symbol" }}
+          </ng-container>
         </td>
         <td>
-            <ng-container *ngIf="requisicaoCompleta; else skeleton">
-              <span class="p-column-title">Status</span>
-              {{ movimetacao.status == "PG" ? "PAGO": "AINDA N FIZ VALIDAÇÃO" }}
-            </ng-container>
+          <ng-container *ngIf="requisicaoCompleta; else skeleton">
+            <span class="p-column-title">Status</span>
+            {{ movimetacao.status == "PG" ? "PAGO" : "AINDA N FIZ VALIDAÇÃO" }}
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="requisicaoCompleta; else skeleton">
+            <span class="p-column-title">Ações</span>
+            <p-button
+              icon="pi pi-info-circle"
+              (click)="getDetail(movimetacao)"
+              styleClass="p-button-rounded p-button-primary p-button-text"
+            ></p-button>
+          </ng-container>
         </td>
         <ng-template #skeleton>
-            <p-skeleton></p-skeleton>
-          </ng-template>
-    </tr>
-  </ng-template>
-</p-table>
+          <p-skeleton></p-skeleton>
+        </ng-template>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
 
 <div *ngIf="isLoading" class="loading-overlay">
-    <app-car-wash-loader></app-car-wash-loader>
-  </div>
-  
+  <app-car-wash-loader></app-car-wash-loader>
+</div>
+
+<!-- DIALOG -->
+<p-dialog
+  header="Detalhes da Transação"
+  [(visible)]="dialogTransacoes"
+  (onHide)="closeDialog()"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{ width: '50vw' }"
+>
+  <p-table [value]="dadosDetalhados" responsiveLayout="stack">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>Data/Hora da movimentação</th>
+        <th>Tipo</th>
+        <th>Tipo de Pagamento</th>
+        <th>Valor</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-transacoes let-columns="columns">
+      <tr>
+        <td>
+          <span class="p-column-title"
+            ><b><i>Data/Hora da movimentação</i></b></span
+          >
+          {{ transacoes.dh_movimentacao}}
+        </td>
+        <td>
+          <span class="p-column-title"
+            ><b><i>Tipo</i></b></span
+          >
+          {{ transacoes.tipo | uppercase}}
+        </td>
+        <td>
+          <span class="p-column-title"
+            ><b><i>Tipo de Pagamento</i></b></span
+          >
+          {{ transacoes.tipo_pagamento}}
+        </td>
+        <td>
+          <span class="p-column-title"
+            ><b><i>Valor</i></b></span
+          >
+          {{ transacoes.valor | currency : "BRL" : "symbol"}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-dialog>

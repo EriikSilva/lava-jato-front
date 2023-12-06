@@ -15,4 +15,9 @@ export class FinanceiroService {
   getListaMovimetacoes(){
     return this.http.get(`${this.apiUrl}/financeiro/listarMovimentacoes`)
   }
+
+  getListaTransacoes(){
+    return this.http.get(`${this.apiUrl}/financeiro/listarTransacoes`)
+  }
+
 }

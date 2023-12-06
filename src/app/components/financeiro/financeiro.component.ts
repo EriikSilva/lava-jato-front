@@ -13,8 +13,10 @@ export class FinanceiroComponent implements OnInit{
   @ViewChild('dt') dt: Table | undefined;
 
   movimentacoes: [] = [];
+  dadosDetalhados: [] = [];
   isLoading: boolean = false;
   requisicaoCompleta: boolean = false
+  dialogTransacoes: boolean = false
 
   ngOnInit(): void {
     this.listarMovimentacoes();
@@ -45,6 +47,22 @@ export class FinanceiroComponent implements OnInit{
     })
   }
 
+  async getDetail(movimentacao:any){
+    const { nr_atendimento } = movimentacao
+    await this.financeiroService.getListaTransacoes().
+    subscribe({
+      next:(res:any) => {
+        const { data } = res
+        const dadosFiltrados = data.filter((item:any) => item.nr_atendimento === nr_atendimento);
+        this.dadosDetalhados = dadosFiltrados;
+        this.dialogTransacoes = true;
+      }
+    })
+  }
+
+  closeDialog(){
+    this.dialogTransacoes = false
+  }
 
   applyFilterGlobal($event: any, stringVal: any) {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
