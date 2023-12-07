@@ -21,21 +21,6 @@
       >
       </p-dropdown>
     </div>
-    
-    <div class="field">
-      <label for="servicos">Serviços</label>
-      <span class="danger"> * </span>
-
-      <p-multiSelect 
-      [options]="servicos" 
-      formControlName="cd_servico_p"
-      defaultLabel="Selecione os Serviços" 
-      optionLabel="desc_vlr_servico" 
-      display="chip"
-      (onChange)="onMultiSelectChangeServicos($event)"
-      ></p-multiSelect>
-    </div>
-
 
     <div class="field">
       <label for="veiculo">Veiculo</label>
@@ -49,7 +34,21 @@
         (onChange)="onDropdownChangeCarro($event)"
       >
       </p-dropdown>
-      <span class="danger" *ngIf="noCarsValidation">Este cliente não possui carros disponiveis</span>
+      <span class="danger" *ngIf="noCarsValidation">Este cliente não possui carros disponíveis</span>
+    </div>
+
+    <div class="field">
+      <label for="servicos">Serviços</label>
+      <span class="danger"> * </span>
+
+      <p-multiSelect 
+      [options]="servicos" 
+      formControlName="cd_servico_p"
+      defaultLabel="Selecione os Serviços" 
+      optionLabel="desc_vlr_servico" 
+      display="chip"
+      (onChange)="onMultiSelectChangeServicos($event)"
+      ></p-multiSelect>
     </div>
 
 

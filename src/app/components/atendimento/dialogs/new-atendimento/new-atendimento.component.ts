@@ -44,7 +44,7 @@ export class NewAtendimentoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getClientes();
-    this.getServicos();
+    // this.getServicos();
   }
 
   newAtendimentoForm = new FormGroup({
@@ -146,12 +146,12 @@ export class NewAtendimentoComponent implements OnInit {
   }
 
   getServicos() {
-    this.servicosService.getServicos().subscribe((res: any) => {
+    this.servicosService.getServicosByCdVeiculo(this.cd_veiculo)
+    .subscribe((res: any) => {
       const { data } = res;
-
       const servicosConcatenados = data.map((servico: any) => ({
         ...servico,
-        desc_vlr_servico: `${servico.desc_servico} - R$ ${servico.vlr_servico.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`,
+        desc_vlr_servico: `${servico.descricao} - R$ ${servico.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`,
       }));  
       this.servicos = servicosConcatenados
     });
@@ -172,10 +172,10 @@ export class NewAtendimentoComponent implements OnInit {
     this.veiculoCliente = value;
     this.cd_cliente = value.cd_cliente;
     this.noCarsValidation = false
-    this.getCarroCliente(value.cd_cliente);
+    this.getVeiculoCliente(value.cd_cliente);
   }
 
-  getCarroCliente(cd_client: number) {
+  getVeiculoCliente(cd_client: number) {
     this.carrosService.getVeiculoCliente(cd_client).subscribe({
       next: (res: any) => {
         const { data } = res;
@@ -200,12 +200,13 @@ export class NewAtendimentoComponent implements OnInit {
     const { value } = cliente;
     this.placa = value.placa;
     this.cd_veiculo = value.cd_veiculo;
+    this.getServicos();
   }
 
   onMultiSelectChangeServicos(servico: any) {
     const cd_servicoValores = servico.value.map((item: any) => item.cd_servico);
     this.cd_servico_p = cd_servicoValores;
-    const somaVlrServico = servico.value.reduce((total:any, servico:any) => total + Number(servico.vlr_servico), 0);
+    const somaVlrServico = servico.value.reduce((total:any, servico:any) => total + Number(servico.valor), 0);
     this.precoServicoFinal = somaVlrServico
   }
 
