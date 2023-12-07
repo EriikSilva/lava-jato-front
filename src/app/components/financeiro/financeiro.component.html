@@ -64,7 +64,7 @@
         <td>
           <ng-container *ngIf="requisicaoCompleta; else skeleton">
             <span class="p-column-title">Data/Hora do pagamento</span>
-            {{ movimentacao.dt_pagamento }}
+            {{ movimentacao.dt_pagamento == null ? "SEM DATA DEFINIDA" : movimentacao.dt_pagamento}}
           </ng-container>
         </td>
         <td>
