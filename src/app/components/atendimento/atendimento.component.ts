@@ -80,28 +80,39 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   cancelarAtendimento(atendimento: AtendimentoDTO) {
     const { nr_atendimento } = atendimento;
     const usuario = localStorage.getItem('cd_usuario');
-    this.atendimentoService
-      .cancelarAtendimento(nr_atendimento, Number(usuario))
-      .subscribe({
-        next: (res: any) => {
-          const {message} = res
-          this.confirmationService.confirm({
-            message: 'Confirmar Cancelamento do Atendimento?',
-            header: 'Confirmação de cancelamento',
-            icon: 'pi pi-exclamation-triangle',
-            acceptLabel: 'Sim',
-            rejectLabel: 'Não',
-            accept: () => {
-                this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: message });
-                this.getAtendimentos();
-              },
-            });
-          },
-          error: (res: any) => {
-          const {message} = res.error
-            this.messageService.add({ severity: 'error', summary: 'Erro', detail: message });
-          },
-      });
+    this.confirmationService.confirm({
+      message: 'Confirmar Cancelamento do Atendimento?',
+      header: 'Confirmação de cancelamento',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        this.atendimentoService
+          .cancelarAtendimento(nr_atendimento, Number(usuario))
+          .subscribe({
+            next: (res: any) => {
+              const { message } = res;
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Sucesso',
+                detail: message,
+              });
+              this.getAtendimentos();
+            },
+            error: (res: any) => {
+              const { message } = res.error;
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Erro',
+                detail: message,
+              });
+            },
+          });
+      },
+      reject: () => {
+        return;
+      },
+    });
   }
 
   newAtendimento() {
