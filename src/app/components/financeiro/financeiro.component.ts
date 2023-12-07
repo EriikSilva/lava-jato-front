@@ -53,7 +53,7 @@ export class FinanceiroComponent implements OnInit{
     subscribe({
       next:(res:any) => {
         const { data } = res
-        console.log('data', data)
+        this.dadosDetalhados = data
         this.dialogTransacoes = true;
       }
     })
