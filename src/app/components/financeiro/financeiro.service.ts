@@ -16,8 +16,8 @@ export class FinanceiroService {
     return this.http.get(`${this.apiUrl}/financeiro/listarMovimentacoes`)
   }
 
-  getListaTransacoes(){
-    return this.http.get(`${this.apiUrl}/financeiro/listarTransacoes`)
+  getListaTransacoes(nr_atendimento:number, seq_financeiro:number){
+    return this.http.get(`${this.apiUrl}/financeiro/listarTransacoes?nr_atendimento=${nr_atendimento}&nr_seq_financeiro=${seq_financeiro}&tipo=`)
   }
 
 }

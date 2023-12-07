@@ -48,13 +48,12 @@ export class FinanceiroComponent implements OnInit{
   }
 
   async getDetail(movimentacao:any){
-    const { nr_atendimento } = movimentacao
-    await this.financeiroService.getListaTransacoes().
+    const { nr_atendimento, seq_financeiro } = movimentacao;
+    await this.financeiroService.getListaTransacoes(nr_atendimento, seq_financeiro).
     subscribe({
       next:(res:any) => {
         const { data } = res
-        const dadosFiltrados = data.filter((item:any) => item.nr_atendimento === nr_atendimento);
-        this.dadosDetalhados = dadosFiltrados;
+        console.log('data', data)
         this.dialogTransacoes = true;
       }
     })
