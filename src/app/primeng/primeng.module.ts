@@ -31,6 +31,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { MenubarModule } from 'primeng/menubar';
 @NgModule({
   declarations: [],
   exports: [
@@ -64,7 +65,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     ProgressSpinnerModule,
     VirtualScrollerModule,
     InputNumberModule,
-    RadioButtonModule
+    RadioButtonModule,
+    MenubarModule
   ]
 })
 export class PrimengModule { }
