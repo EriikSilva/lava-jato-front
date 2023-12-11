@@ -1,0 +1,4 @@
+<div class="body" [ngClass]="getBodyClass()">
+    <app-navbar  *ngIf="hasToken()"></app-navbar>
+    <router-outlet></router-outlet>
+</div>
