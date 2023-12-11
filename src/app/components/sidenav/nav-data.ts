@@ -9,12 +9,12 @@ export const navDataBar = [
     },
     {
         routerLink:'clientes',
-        icon: PrimeIcons.CAR,
+        icon: PrimeIcons.USERS,
         label:"CLIENTES"
     },
     {
         routerLink:'atendimento',
-        icon: PrimeIcons.USERS,
+        icon: PrimeIcons.CAR,
         label:"ATENDIMENTOS"
     },
     {
