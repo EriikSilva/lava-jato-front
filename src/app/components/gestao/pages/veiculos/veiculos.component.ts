@@ -4,6 +4,7 @@ import { VeiculosService } from './veiculos.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Table } from 'primeng/table';
 import { PostVeiculo, PutVeiculo } from '../../DTO/servicos.DTO';
+import { ServicoService } from '../servicos/servico.service';
 
 @Component({
   selector: 'app-veiculos',
@@ -20,21 +21,39 @@ export class VeiculosComponent implements OnInit{
   buttonLoading: boolean = false;
   saveButton: boolean = true;
   editButton: boolean = false;
-  cd_tipo_veiculo: number = 0
+  cd_tipo_veiculo: number = 0;
+  servicosVeiculos:any;
 
   constructor(
     private veiculoService:VeiculosService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private servicosService:ServicoService
     ){}
 
   ngOnInit(): void {
-    // this.getVeiculos();      
+    this.getVeiculos();   
+    this.getServicos();
   }
 
   newVeiculoForm = new FormGroup({
-    descricao: new FormControl("", [Validators.required, Validators.minLength(2)])
+    descricao: new FormControl("", [Validators.required, Validators.minLength(2)]),
+    cd_servico_p: new FormControl("", [Validators.required])
   })
+
+  getServicos(){
+    this.servicosService.getServicos()
+    .subscribe({
+      next:(res:any) => {
+        const { data } = res;
+        const servicosConcatenados = data.map((servico: any) => ({
+          ...servico,
+          desc_vlr_servico: `${servico.desc_servico} - R$ ${servico.vlr_servico.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`,
+        }));  
+        this.servicosVeiculos = servicosConcatenados
+      }
+    })
+  }
 
   getVeiculos(){
     if(this.veiculos.length > 1){
@@ -51,11 +70,16 @@ export class VeiculosComponent implements OnInit{
         this.veiculos = data
       }
     })
+
+    this.getServicos();
   }
 
   salvarVeiculo(){
     const formValue = this.newVeiculoForm.value;
-    
+
+    const cd_servico = Array(formValue.cd_servico_p)
+    const cdServicos = cd_servico.flat().map((item:any) => item.cd_servico);     
+
     const descricao = String(formValue.descricao);
 
     const body:PostVeiculo = {
@@ -65,13 +89,14 @@ export class VeiculosComponent implements OnInit{
     this.veiculoService.postVeiculos(body)
     .subscribe({
       next:(res:any) => {
-        const { message } = res
+        const { message, data } = res
         this.buttonLoading = false;
         this.messageService.add({
           severity: 'success',
           summary: 'Sucesso ao cadastrar',
           detail: message,
         });
+        this.adicionarSericosVeiculo(cdServicos,data)
         this.modo();
         this.getVeiculos();
       }, error:(res:any) => {
@@ -86,6 +111,20 @@ export class VeiculosComponent implements OnInit{
     })
 
   }
+
+
+  adicionarSericosVeiculo(cd_servicos:any, cd_veiculo:any){
+    console.log('cd_servicos', cd_servicos)
+    console.log('cd_veiculo', cd_veiculo)
+
+    this.veiculoService.postServicosVeiculos(cd_servicos,cd_veiculo)
+    .subscribe({
+      next:(res:any) => {
+        console.log('res', res)
+      }
+    })
+  }
+
   editarVeiculo(){
     const formValue = this.newVeiculoForm.value
 
@@ -163,6 +202,25 @@ export class VeiculosComponent implements OnInit{
         });
       },
     });
+  }
+
+
+  getServicosVinculados(veiculo:any){
+      const {cd_veiculo} = veiculo
+       this.veiculoService.getServicosListagemByVeiculoServico(cd_veiculo, null)
+       .subscribe({
+        next:(res:any) => {
+          console.log('res', res)
+        }
+       })
+  }
+
+  editVeiculoMultiSelect(){
+    // this.veiculoService.getServicosListagemByVeiculoServico()
+  }
+
+  onMultiSelectChangeServicosVeiculos(event:any){
+
   }
 
   modo() {

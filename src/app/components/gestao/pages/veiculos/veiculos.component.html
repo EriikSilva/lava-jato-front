@@ -25,6 +25,20 @@
         required
         autofocus
       />
+      <label for="descricao"
+      ><b>Serviços do veiculo </b><span class="ml-2"> * </span></label
+    >
+
+      <p-multiSelect 
+      [style]="{ width: '569px'}"
+      [options]="servicosVeiculos" 
+      formControlName="cd_servico_p"
+      defaultLabel="Selecione os Serviços do Veículo" 
+      optionLabel="desc_vlr_servico" 
+      display="chip"
+      (onChange)="onMultiSelectChangeServicosVeiculos($event)"
+      ></p-multiSelect>
+
 
       <p-button
       *ngIf="saveButton"
@@ -103,6 +117,13 @@
               styleClass="p-button-rounded p-button-primary p-button-text"
               (onClick)="deletarVeiculo($event, veiculo)"
             ></p-button>
+
+            
+            <p-button
+              icon="pi pi-info"
+              styleClass="p-button-rounded p-button-primary p-button-text"
+              (onClick)="getServicosVinculados(veiculo)"
+            ></p-button>
           </td>
         </tr>
       </ng-template>
@@ -119,3 +140,5 @@
   <!-- CONFIRM POPUP -->
   <p-confirmPopup></p-confirmPopup>
   
+
+

@@ -22,12 +22,24 @@ export class VeiculosService {
     return this.http.post<PostVeiculo>(`${this.apiUrl}/veiculo/tipo`, body)
   }
 
+  postServicosVeiculos(cd_servico:any, cd_tipo_veiculo:number){
+    const body = {
+      cd_servico,
+      cd_tipo_veiculo
+    }
+    return this.http.post(`${this.apiUrl}/servicos/veiculos`, body)
+  }
+
   putVeiculo(body:PutVeiculo):Observable<PutVeiculo>{
     return this.http.put<PutVeiculo>(`${this.apiUrl}/veiculo/tipo`, body)
   }
 
   deleteVeiculo(cd_tipo_veiculo:DeleteVeiculo):Observable<DeleteVeiculo>{
     return this.http.delete<DeleteVeiculo>(`${this.apiUrl}/veiculo/tipo/${cd_tipo_veiculo}`)
+  }
+
+  getServicosListagemByVeiculoServico(cd_veiculo:number, cd_servico:any){
+    return this.http.get(`${this.apiUrl}/veiculos/veiculosListagem?veiculo=${cd_veiculo}&servico=${cd_servico}`)
   }
 
 }
