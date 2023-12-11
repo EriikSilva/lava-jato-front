@@ -1,48 +1,3 @@
-<!-- <p-card header="Inicio" class="card flex justify-content-center card_inicio">
-    <div class="flex flex-wrap card-container blue-container">
-        <div class="flex align-items-center justify-content-center bg-blue-500 font-bold text-white m-2 border-round" style="min-width: 450px; min-height: 450px">
-        <img src="../../../assets/clientes_inicio.jpg" class="img_formatation"/>
-        </div>
-        <div class="flex align-items-center justify-content-center bg-blue-500 font-bold text-white m-2 border-round" style="min-width: 450px; min-height: 450px">2</div>
-        <div class="flex align-items-center justify-content-center bg-blue-500 font-bold text-white m-2 border-round" style="min-width: 450px; min-height: 450px">3</div>
-    </div>
-</p-card> -->
-<!-- 
-<div class="card-container overflow-hidden">
-  <div
-    class="flex flex-1 flex align-items-center justify-content-center"
-    [style]="{
-      'margin-top': '2em'
-    }"
-  >
-    <p-card
-      header="Clientes"
-      [style]="{
-        width: '23rem',
-        'margin-bottom': '2em',
-        'margin-right': '2em',
-        'margin-left': '1.9em'
-      }"
-    >
-      <ng-template pTemplate="header">
-        <img alt="Card" src="assets/clientes_inicio.jpg" />
-      </ng-template>
-    </p-card>
-    <p-card
-      header="Atendimentos"
-      [style]="{
-        width: '23rem',
-        'margin-bottom': '2em',
-        'margin-left': '2.2em'
-      }"
-    >
-      <ng-template pTemplate="header">
-        <img alt="Card" src="assets/atendimento_inicio.jpg" />
-      </ng-template>
-    </p-card>
-  </div>
-</div> -->
-
 <div class="card-container overflow-hidden">
   <div class="flex flex-wrap align-items-center justify-content-center" style="margin-top: 3em;">
     <div class="smaller-card">
@@ -64,72 +19,23 @@
         </ng-template>
       </p-card>
     </div>
-    <div class="smaller-card">
-      <p-card header="Administração de Serviços"
-      routerLink="/gestao">
-        <ng-template pTemplate="header">
-          <img alt="Card" src="assets/servicos_inicio.jpg" />
-        </ng-template>
     
-      </p-card>
-    </div>
-
     <div class="smaller-card">
       <p-card header="Financeiro"
       routerLink="/financeiro">
         <ng-template pTemplate="header">
           <img alt="Card" src="assets/financeiro.jpg" />
         </ng-template>
-    
+      </p-card>
+    </div>
+
+    <div class="smaller-card">
+      <p-card header="Administração de Serviços"
+      routerLink="/gestao">
+        <ng-template pTemplate="header">
+          <img alt="Card" src="assets/servicos_inicio.jpg" />
+        </ng-template>
       </p-card>
     </div>
   </div>
 </div>
-
-
-
-
-
-<!-- <div class="card-container overflow-hidden">
-    <div class="flex flex-wrap align-items-center justify-content-center" style="margin-top: 3em;">
-      <div class="p-card-container">
-        <p-card header="Clientes"  class="mr-2 mb-2 ml-1"
-        routerLink="/clientes"
-       >
-          <ng-template pTemplate="header">
-            <img alt="Card" src="assets/clientes_inicio.jpg" />
-          </ng-template>
-        </p-card>
-      </div>
-      <div class="p-card-container">
-        <p-card header="Atendimentos" class="ml-2 mb-2"
-        routerLink="/atendimento"
-        [style]="{
-            width: '23rem',
-            'margin-bottom': '2em',
-            'margin-left': '2.2em',
-            'cursor': 'pointer'
-          }">
-          <ng-template pTemplate="header">
-            <img alt="Card" src="assets/atendimento_inicio.jpg" />
-          </ng-template>
-        </p-card>
-      </div>
-      <div class="p-card-container">
-        <p-card header="Administração de Serviços" class="ml-2 mb-2"
-        routerLink="/gestao"
-        [style]="{
-            width: '23rem',
-            'margin-bottom': '2em',
-            'margin-left': '2.2em',
-            'cursor': 'pointer'
-          }">
-          <ng-template pTemplate="header">
-            <img alt="Card" src="assets/servicos_inicio.jpg" />
-          </ng-template>
-      
-        </p-card>
-      </div>
-    </div>
-  </div> -->
-  
