@@ -192,11 +192,11 @@ export class VeiculosComponent implements OnInit{
             this.modo();
           },
           error: (res: any) => {
-            const { error } = res.error
+            const { message } = res.error
             this.messageService.add({
               severity: 'error',
               summary: 'Error ao deletar',
-              detail: error,
+              detail: message,
             });
           },
         });
