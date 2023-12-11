@@ -16,10 +16,15 @@ export const navDataBar = [
         routerLink:'atendimento',
         icon: PrimeIcons.CAR,
         label:"ATENDIMENTOS"
-    },
+    },  
     {
         routerLink:'financeiro',
-        icon:PrimeIcons.BRIEFCASE,
+        icon:PrimeIcons.MONEY_BILL,
         label:"FINANCEIRO"
-    }
+    },
+    {
+        routerLink:'gestao',
+        icon: PrimeIcons.BRIEFCASE,
+        label:"ADMINISTRAÇÃO"
+    },
 ]
