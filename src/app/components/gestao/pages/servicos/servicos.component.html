@@ -103,7 +103,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-servico>
         <tr>
-          <td>{{ servico.desc_servico }}</td>
+          <td>{{ servico.desc_servico | uppercase }}</td>
           <td>{{ servico.vlr_servico | currency : "BRL" : "symbol" }}</td>
           <td>
             <p-button

@@ -92,8 +92,8 @@
         </ng-template>
         <ng-template pTemplate="body" let-servico>
           <tr>
-            <td>{{ servico.servico }}</td>
-            <td>{{ servico.status_servico == "A" ? "Aberto" :servico.atendimento == "C" ? "Cancelado " : "Fechado" }}</td>
+            <td>{{ servico.servico | uppercase}}</td>
+            <td>{{ servico.status_servico == "A" ? "ABERTO" :servico.atendimento == "C" ? "CANCELADO " : "FECHADO" }}</td>
             <td>{{ servico.valor | currency : "BRL" : "symbol" }}</td>
           </tr>
         </ng-template>

@@ -102,7 +102,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-tipos_pagamento>
         <tr>
-          <td>{{ tipos_pagamento.descricao }}</td>
+          <td>{{ tipos_pagamento.descricao | uppercase}}</td>
           <td>{{ tipos_pagamento.qtd_parcelas }} x</td>
           <td>
             <p-button

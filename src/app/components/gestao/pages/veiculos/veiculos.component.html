@@ -104,7 +104,7 @@
       <ng-template pTemplate="body" let-veiculo>
         <tr>
           <td>{{ veiculo.cd_tipo_veiculo }}</td>
-          <td>{{ veiculo.descricao }}</td>
+          <td>{{ veiculo.descricao | uppercase }}</td>
           <td>
             <p-button
               icon="pi pi-pencil"
