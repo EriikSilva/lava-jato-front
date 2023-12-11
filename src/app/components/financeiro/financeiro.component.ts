@@ -17,6 +17,7 @@ export class FinanceiroComponent implements OnInit{
   isLoading: boolean = false;
   requisicaoCompleta: boolean = false
   dialogTransacoes: boolean = false
+  showNoDataMessage:boolean = false
 
   ngOnInit(): void {
     this.listarMovimentacoes();
@@ -55,6 +56,8 @@ export class FinanceiroComponent implements OnInit{
         const { data } = res
         this.dadosDetalhados = data
         this.dialogTransacoes = true;
+        
+        this.dadosDetalhados.length > 0 ? this.showNoDataMessage = false : this.showNoDataMessage = true
       }
     })
   }
