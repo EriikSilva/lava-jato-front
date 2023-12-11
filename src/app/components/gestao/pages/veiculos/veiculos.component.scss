@@ -23,11 +23,13 @@
     height: 430px;
 }
 
-.formulario input, p-inputNumber, p-dropdown {
+.formulario input, p-inputNumber, p-dropdown, p-multiSelect {
     display: block; 
     width: 80%; 
     margin:1rem auto; 
 }
+
+
 
 .formulario label:not(:last-child) {
     display: flex;
