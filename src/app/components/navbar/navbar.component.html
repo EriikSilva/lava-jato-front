@@ -1,14 +1,14 @@
-<p-toolbar>
+<p-toolbar  class="custom-toolbar">
   <div class="p-toolbar-group-start">
-    <p-button
+    <!-- <p-button
       type="button"
       class="mr-2"
       styleClass="p-button-text"
       (click)="isVisible = true"
       icon="pi pi-align-justify "
-    ></p-button>
+    ></p-button> -->
     <a [routerLink]="['/inicio']">
-      <!-- LOGO AQUI -->
+
       <img src="/assets/logo3.png" class="img_formatation" />
     </a>
   </div>
@@ -16,7 +16,7 @@
     <h4>{{ nm_usuario | capitalCase }}</h4>
   </div>
   <div class="p-toolbar-group-end">
-    <!-- <img src="../../../assets/profile_icon3.png" class="img_formatation"> -->
+
     <span class="pi pi-moon mr-3 mt-2 modo_escuro"></span>
     <p-inputSwitch
       class="mt-2 mr-3 modo_escuro"
@@ -47,7 +47,6 @@
   </div>
 </p-toolbar>
 
-<!-- SIDEBAR -->
 <p-sidebar [(visible)]="isVisible" position="left">
   <h3>Menu Lateral</h3>
 
@@ -107,12 +106,4 @@
       </div>
       <br>
     Lava Jato © Copyright 2023 </ng-template>
-
-  <!-- <div class="card mt-3">
-            <div class="flex flex-column card-container green-container">
-                <div class="flex align-items-center justify-content-center font-bold text-white border-round m-2"><p-button label="Submit"></p-button></div>
-                <div class="flex align-items-center justify-content-center font-bold text-white border-round m-2"><p-button label="Submit"></p-button></div>
-                <div class="flex align-items-center justify-content-center font-bold text-white border-round m-2"><p-button label="Submit"></p-button></div>
-            </div>
-        </div> -->
 </p-sidebar>
