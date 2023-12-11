@@ -115,12 +115,12 @@ export class LoginComponent  implements OnInit, AfterViewInit{
         this.userFormRegister.reset();
       },
       error: (res: any) => {
-        const { error } = res.error
+        const { message } = res.error
         this.buttonLoading = false;
         this.messageService.add({
           severity: 'error',
           summary: 'Erro',
-          detail: error,
+          detail: message,
         });
       },
     });
