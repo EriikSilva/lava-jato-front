@@ -41,6 +41,8 @@ import { TiposPagamentoComponent } from './components/gestao/pages/tipos-pagamen
 import { VeiculosComponent } from './components/gestao/pages/veiculos/veiculos.component';
 import { PagamentoComponent } from './components/atendimento/dialogs/pagamento/pagamento.component';
 import { FinanceiroComponent } from './components/financeiro/financeiro.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { BodyComponent } from './components/body/body.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,9 @@ import { FinanceiroComponent } from './components/financeiro/financeiro.componen
     TiposPagamentoComponent,
     VeiculosComponent,
     PagamentoComponent,
-    FinanceiroComponent
+    FinanceiroComponent,
+    SidenavComponent,
+    BodyComponent
   ],
   imports: [
     BrowserAnimationsModule,
