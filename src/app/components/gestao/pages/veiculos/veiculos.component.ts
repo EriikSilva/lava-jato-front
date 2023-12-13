@@ -179,11 +179,25 @@ export class VeiculosComponent implements OnInit{
 
   editMode(veiculo: any) {
     const { cd_tipo_veiculo, descricao } = veiculo
+
     this.saveButton = false;
     this.editButton = true;
 
     this.newVeiculoForm.get('descricao')?.setValue(descricao);
+ 
     this.cd_tipo_veiculo = cd_tipo_veiculo
+
+
+    this.veiculoService.getServicosListagemByVeiculoServico(cd_tipo_veiculo)
+    .subscribe({
+      next:(res:any) => {
+        const { data } = res
+
+  
+
+        console.log('daa', data)
+      }
+    })
   }
 
   deletarVeiculo(event: Event, veiculo: any){
@@ -241,7 +255,7 @@ export class VeiculosComponent implements OnInit{
   }
 
   onMultiSelectChangeServicosVeiculos(event:any){
-
+    console.log(event)
   }
 
   modo() {
