@@ -1,4 +1,14 @@
-<div class="body" [ngClass]="getBodyClass()">
-    <app-navbar  *ngIf="hasToken()"></app-navbar>
-    <router-outlet></router-outlet>
+<div
+  *ngIf="hasToken() == !false; else elseBlock"
+  class="body"
+  [ngClass]="getBodyClass()"
+>
+  <app-navbar *ngIf="hasToken()"></app-navbar>
+  <router-outlet></router-outlet>
 </div>
+
+<ng-template #elseBlock>
+    <router-outlet></router-outlet>
+</ng-template>
+
+<!-- NOTA:FIZ PARA VALIDAÇÃO DE ERRO DE UI DA SIDEBAR -->
