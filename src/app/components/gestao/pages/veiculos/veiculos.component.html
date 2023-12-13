@@ -111,19 +111,16 @@
               styleClass="p-button-rounded p-button-primary p-button-text"
               (onClick)="editMode(veiculo)"
             ></p-button>
-
-            <p-button
-              icon="pi pi-trash"
-              styleClass="p-button-rounded p-button-primary p-button-text"
-              (onClick)="deletarVeiculo($event, veiculo)"
-            ></p-button>
-
-            
             <p-button
               icon="pi pi-info"
               styleClass="p-button-rounded p-button-primary p-button-text"
               (onClick)="getServicosVinculados(veiculo)"
             ></p-button>
+            <p-button
+              icon="pi pi-trash"
+              styleClass="p-button-rounded p-button-primary p-button-text"
+              (onClick)="deletarVeiculo($event, veiculo)"
+            ></p-button>            
           </td>
         </tr>
       </ng-template>
