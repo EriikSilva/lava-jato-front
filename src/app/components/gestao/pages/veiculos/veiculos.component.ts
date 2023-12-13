@@ -122,8 +122,8 @@ export class VeiculosComponent implements OnInit{
       next:(res:any) => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Sucesso ao cadastrar',
-          detail: "Sucesso ao editar veículo",
+          summary: 'Sucesso ao Editar',
+          detail: "Sucesso ao editar serviço do veículo",
         });
       }, error:(err:any) => {
         this.messageService.add({
