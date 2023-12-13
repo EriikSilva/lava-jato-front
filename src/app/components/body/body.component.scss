@@ -17,3 +17,23 @@
     width: calc(100% - 5rem);
     margin-left: 5rem;
 }
+
+
+@media (max-width:  576px) {
+
+    .body{
+        width: 100%;
+        margin-left: 0;
+    }
+
+    // .body-trimmed{
+    //     width: 0;
+    //     margin-left:0;
+    // }
+    
+    // .body-md-screen{
+    //     width: 0;
+    //     margin-left: 0;
+    // }
+
+}

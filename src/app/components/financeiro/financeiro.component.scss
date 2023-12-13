@@ -37,9 +37,18 @@
     }
 }
 
-@media (max-width: 513px) {
+@media (max-width: 530px) {
     .message{
         font-size: 20px;
         padding: 1rem;
     }
+
+}
+
+
+@media (max-width: 469px) {
+    .input_pesquisa{
+        width: 7.8rem;
+    }
+
 }

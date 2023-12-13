@@ -1,3 +1,7 @@
+.navbarSideBar{
+  display: none;
+}
+
 .logo-img{
     height: 100px;
     width: 200px;
@@ -13,9 +17,13 @@
   display: none;
 }
 
-@media (max-width: 514px) {
+@media (max-width:  576px) {
   .img_formatation{
     display: none;
+  }
+
+  .navbarSideBar{
+    display: block;
   }
 
   .modo_escuro{
