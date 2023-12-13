@@ -102,37 +102,44 @@
   </div>
   <ng-template pTemplate="footer">
     <div style="display: flex;">
-      <h4 *ngIf="desconto" class="valores_finais">
+      <h5 class="valores_finais">
+        VALOR PAGO: {{valorPago  | currency : "BRL" : "symbol"}} 
+      </h5>
+      <h5 *ngIf="valorPago > 0" class="valores_finais">
+        PAGAMENTO PENDENTE: R$ {{precoOriginal - valorPago   | currency : "BRL" : "symbol"}} 
+      </h5>
+      <h5 *ngIf="desconto" class="valores_finais">
         VALOR ORIGINAL:
         {{
           precoOriginal <= 0
             ? "R$ 0"
             : (precoOriginal | currency : "BRL" : "symbol")
         }}
-      </h4>
-      <h4 style="color: red" *ngIf="desconto" class="valores_finais">
+      </h5>
+      <h5 style="color: red" *ngIf="desconto" class="valores_finais">
         DESCONTO: -
         {{
           isMoney == true
             ? (desconto | currency : "BRL" : "symbol")
             : desconto + "%"
         }}
-      </h4>
-      <h4 class="valores_finais">
+      </h5>
+      <h5 class="valores_finais">
         TOTAL A PAGAR:{{
           precoFinal <= 0 ? "R$ 0" : (precoFinal | currency : "BRL" : "symbol")
         }}
-      </h4>
-      <h4 style="color: green"  *ngIf="valorDigitado" class="valores_finais">
-        Valor Pago:{{
+      </h5>
+      <h5 style="color: green"  *ngIf="valorDigitado" class="valores_finais">
+        TOTAL DO VALOR DIGITADO:{{
          valorDigitado | currency : "BRL" : "symbol"
         }}
-      </h4>
-      <h4 style="color: yellow;" *ngIf="troco" class="valores_finais">
+        </h5>
+        
+        <h5 style="color: yellow;" *ngIf="troco" class="valores_finais">
         TROCO:{{
          troco | currency : "BRL" : "symbol"
         }}
-      </h4>
+      </h5>
     </div>
 
     <button

@@ -37,6 +37,7 @@ export class PagamentoComponent implements OnInit {
   valorSomatoria:number = 0
   arraySelecionados:any
   servicosFinalizados:any
+  valorPago: number = 0;
 
 
   tipos_pregunta = [
@@ -161,8 +162,9 @@ export class PagamentoComponent implements OnInit {
   }
   
   getPagamentoByClient(servicos: any) {
-    const { nr_atendimento, valor_total } = servicos;
+    const { nr_atendimento, valor_total, valor_pago } = servicos;
 
+    this.valorPago = valor_pago
     this.precoFinal = valor_total;
     this.precoOriginal = valor_total;
     this.atendimentoService.getServicosEmAndamento(nr_atendimento)
@@ -194,6 +196,8 @@ export class PagamentoComponent implements OnInit {
     this.valorDigitado = somatoriaDoValorTotal
 
     if(temDinheiro){  
+    
+      //VARIOS INPUTS DEBITO, CREDITO e ETC
       if(this.arraySelecionados.length > 1){
        this.valorDigitado = somatoriaDoValorTotal
        const valorDinheiro = this.arraySelecionados.filter((res:any) => res.cd_pagamento == 2)
@@ -207,7 +211,6 @@ export class PagamentoComponent implements OnInit {
        }
    
        const validacao = totalSemDinhero + dinheiro
-   
        if(validacao > this.precoFinal && totalSemDinhero < this.precoFinal){
          const logicaTroco = (totalSemDinhero - this.precoFinal) + dinheiro
    
@@ -218,9 +221,16 @@ export class PagamentoComponent implements OnInit {
      
       }
 
+      //SOMENTE INPUT DE DINHEIRO
       if(this.arraySelecionados.length == 1){
         this.valorDigitado = novoValor
         this.troco = novoValor - this.precoFinal
+
+        if(this.valorPago > 0){
+          const a = this.precoOriginal - this.valorPago
+          const b = this.valorDigitado - a 
+          this.troco = b
+       }
       }
 
       if(this.troco < 0 ){
