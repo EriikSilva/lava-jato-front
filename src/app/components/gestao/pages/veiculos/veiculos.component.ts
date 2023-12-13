@@ -23,6 +23,9 @@ export class VeiculosComponent implements OnInit{
   editButton: boolean = false;
   cd_tipo_veiculo: number = 0;
   servicosVeiculos:any;
+  dialogVeihicleDetails:boolean = false
+  VeihicleDetails:[] = [];
+  veiculo = "";
 
   constructor(
     private veiculoService:VeiculosService,
@@ -114,13 +117,20 @@ export class VeiculosComponent implements OnInit{
 
 
   adicionarSericosVeiculo(cd_servicos:any, cd_veiculo:any){
-    console.log('cd_servicos', cd_servicos)
-    console.log('cd_veiculo', cd_veiculo)
-
     this.veiculoService.postServicosVeiculos(cd_servicos,cd_veiculo)
     .subscribe({
       next:(res:any) => {
-        console.log('res', res)
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso ao cadastrar',
+          detail: "Sucesso ao editar veículo",
+        });
+      }, error:(err:any) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro ao cadastrar',
+          detail: err,
+        });
       }
     })
   }
@@ -129,11 +139,16 @@ export class VeiculosComponent implements OnInit{
     const formValue = this.newVeiculoForm.value
 
     const descricao = String(formValue.descricao);
-
+    //FORM DA PRIMEIRA ROTA
     const body:PutVeiculo = {
       descricao,
       cd_tipo_veiculo:this.cd_tipo_veiculo
     }
+
+    //FORM DA SEGUNDA ROTA
+    const cd_servico = Array(formValue.cd_servico_p)
+    const cdServicos = cd_servico.flat().map((item:any) => item.cd_servico); 
+
     this.veiculoService.putVeiculo(body)
     .subscribe({
       next:(res:any) => {
@@ -144,6 +159,9 @@ export class VeiculosComponent implements OnInit{
           summary: 'Sucesso ao Editar',
           detail: message,
         });
+
+        this.adicionarSericosVeiculo(cdServicos,this.cd_tipo_veiculo)
+
         this.modo();
         this.getVeiculos();
       },error: (res: any) => {
@@ -161,7 +179,6 @@ export class VeiculosComponent implements OnInit{
 
   editMode(veiculo: any) {
     const { cd_tipo_veiculo, descricao } = veiculo
-    
     this.saveButton = false;
     this.editButton = true;
 
@@ -206,13 +223,17 @@ export class VeiculosComponent implements OnInit{
 
 
   getServicosVinculados(veiculo:any){
-      const {cd_veiculo} = veiculo
-       this.veiculoService.getServicosListagemByVeiculoServico(cd_veiculo, null)
-       .subscribe({
-        next:(res:any) => {
-          console.log('res', res)
-        }
-       })
+    this.dialogVeihicleDetails = true;
+    const { cd_tipo_veiculo, descricao } = veiculo
+    this.veiculo = descricao
+
+    this.veiculoService.getServicosListagemByVeiculoServico(cd_tipo_veiculo)
+    .subscribe({
+      next:(res:any) => {
+        const { data } = res
+        this.VeihicleDetails = data
+      }
+    })
   }
 
   editVeiculoMultiSelect(){

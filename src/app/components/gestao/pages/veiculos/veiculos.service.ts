@@ -29,7 +29,6 @@ export class VeiculosService {
     }
     return this.http.post(`${this.apiUrl}/servicos/veiculos`, body)
   }
-
   putVeiculo(body:PutVeiculo):Observable<PutVeiculo>{
     return this.http.put<PutVeiculo>(`${this.apiUrl}/veiculo/tipo`, body)
   }
@@ -38,8 +37,8 @@ export class VeiculosService {
     return this.http.delete<DeleteVeiculo>(`${this.apiUrl}/veiculo/tipo/${cd_tipo_veiculo}`)
   }
 
-  getServicosListagemByVeiculoServico(cd_veiculo:number, cd_servico:any){
-    return this.http.get(`${this.apiUrl}/veiculos/veiculosListagem?veiculo=${cd_veiculo}&servico=${cd_servico}`)
+  getServicosListagemByVeiculoServico(cd_veiculo:number){
+    return this.http.get(`${this.apiUrl}/servicos/veiculosListagem?veiculo=${cd_veiculo}`)
   }
 
 }
