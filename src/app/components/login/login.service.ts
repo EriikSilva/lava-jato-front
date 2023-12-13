@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/app/environments/environment.development';
 import { UserLoginDTO  } from './DTO/userDTO';
 import { HttpClient } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,11 @@ export class LoginService {
 
   private readonly apiUrl = environment.apiUrl
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private title:Title) { }
+
+  setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
 
   setCdUsuario(cd_usuario:any){
     this.cd_usuario = cd_usuario

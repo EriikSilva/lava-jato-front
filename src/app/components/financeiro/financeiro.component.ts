@@ -20,6 +20,7 @@ export class FinanceiroComponent implements OnInit{
   showNoDataMessage:boolean = false
 
   ngOnInit(): void {
+    this.financeiroService.setTitle("Financeiro - Lava Jato")
     this.listarMovimentacoes();
   }
     

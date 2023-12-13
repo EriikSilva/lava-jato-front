@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { environment } from 'src/app/environments/environment.development';
 
 @Injectable({
@@ -9,8 +10,13 @@ export class FinanceiroService {
   private readonly apiUrl = environment.apiUrl
 
   constructor(
-    private http:HttpClient
+    private http:HttpClient,
+    private title:Title
   ) { }
+
+  setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
 
   getListaMovimetacoes(){
     return this.http.get(`${this.apiUrl}/financeiro/listarMovimentacoes`)

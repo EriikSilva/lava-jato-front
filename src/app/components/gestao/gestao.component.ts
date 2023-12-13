@@ -1,18 +1,25 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TiposPagamentoComponent } from './pages/tipos-pagamento/tipos-pagamento.component';
 import { VeiculosComponent } from './pages/veiculos/veiculos.component';
 import { ServicosComponent } from './pages/servicos/servicos.component';
+import { GestaoService } from './gestao.service';
 
 @Component({
   selector: 'app-gestao',
   templateUrl: './gestao.component.html',
   styleUrls: ['./gestao.component.scss'],
 })
-export class GestaoComponent {
-  
+export class GestaoComponent implements OnInit{
+
+  constructor(private gestaoService:GestaoService){}
+
   @ViewChild('TiposPagamentoComponent') TiposPagamentoComponent:TiposPagamentoComponent | undefined;
   @ViewChild('ServicosComponent') ServicosComponent:ServicosComponent | undefined;
   @ViewChild('VeiculosComponent') VeiculosComponent:VeiculosComponent | undefined;
+
+  ngOnInit(): void {
+      this.gestaoService.setTitle("Gestão - Lava Jato")
+  }
 
   selectedTabIndex = 0; // Índice inicial
 

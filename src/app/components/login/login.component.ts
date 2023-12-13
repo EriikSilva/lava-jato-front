@@ -25,6 +25,7 @@ export class LoginComponent  implements OnInit, AfterViewInit{
   ) {}
 
   ngOnInit(): void {
+    this.loginService.setTitle("Login - Lava Jato")
     localStorage.removeItem("Authorization")
   }
 
