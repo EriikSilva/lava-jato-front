@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/app/environments/environment.development';
 import { ClientEditDTO, ClientRegisterDTO, ClienteDeleteDTO, ClienteGetDTO } from './DTO/clientesDTO';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,11 @@ export class ClientesService {
 
   private readonly apiUrl = environment.apiUrl
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private title:Title) { }
+
+   setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
 
   getClients():Observable<ClienteGetDTO>{
     return this.http.get<ClienteGetDTO>(`${this.apiUrl}/cliente`)

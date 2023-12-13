@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/app/environments/environment.development';
 import { AgendamentosDTO, AtendimentoDTO, FinalizarServicoDTO, ServicosFinalizadosDTO } from './DTO/atendimentoDTO';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,13 @@ export class AtendimentoService {
   private readonly apiUrl = environment.apiUrl
 
   constructor(
-    private http:HttpClient
+    private http:HttpClient,
+    private title:Title
   ) { }
+  
+  setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
   
   getAtendimentosAgendamentos():Observable<AtendimentoDTO>{
     return this.http.get<AtendimentoDTO>(`${this.apiUrl}/atendimentos/agendamento/`)

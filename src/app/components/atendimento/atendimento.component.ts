@@ -144,6 +144,7 @@ export class AtendimentoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.atendimentoService.setTitle("Atendimentos - Lava Jato")
     this.getClients();
     this.getAtendimentos();
   }

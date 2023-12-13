@@ -48,6 +48,8 @@ export class ClientesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.clientsService.setTitle("Clientes - Lava Jato")
+
     this.getClients();
   }
 
