@@ -133,12 +133,65 @@
   </div>
 </div>
 
+
+
+<p-dialog
+[(visible)]="dialogVeihicleDetails"
+[modal]="true"
+[draggable]="false"
+>
+
+<span class="title_card">
+  <h3>
+    <i class="pi pi-car" style="margin-right: 6px;"></i>
+    <b>Veículo: </b> {{veiculo | uppercase}}
+  </h3>
+</span>
+
+<p-table
+p-table [value]="VeihicleDetails" responsiveLayout="stack"
+>
+<ng-template pTemplate="header" let-columns>
+  <tr>
+    <th>Código do Serviço</th>
+    <th>Número da Sequência</th>
+    <th>Serviço</th>
+  </tr>
+</ng-template>
+<ng-template pTemplate="body" let-veiculo_detalhes let-columns="columns">
+<tr>
+  <td>
+    <span class="p-column-title"
+      ><b><i>Data/Hora da movimentação</i></b></span
+    >
+    {{ veiculo_detalhes.cd_servico}}
+  </td>
+  <td>
+    <span class="p-column-title"
+      ><b><i>Data/Hora da movimentação</i></b></span
+    >
+    {{ veiculo_detalhes.nr_sequencia}}
+  </td>
+  <td>
+    <span class="p-column-title"
+      ><b><i>Data/Hora da movimentação</i></b></span
+    >
+    <b> {{ veiculo_detalhes.servico | uppercase}}</b>
+  </td>
+</tr>
+</ng-template>
+</p-table>
+</p-dialog>
+
+
+
 <div>
     <p-toast></p-toast>
-  </div>
+</div>
   
-  <!-- CONFIRM POPUP -->
-  <p-confirmPopup></p-confirmPopup>
+<!-- CONFIRM POPUP -->
+<p-confirmPopup></p-confirmPopup>
+
   
 
 
