@@ -1,4 +1,4 @@
-# Lava Jato Frontend
+![image](https://github.com/EriikSilva/lava-jato-front/assets/61124602/dfd283f5-ca25-4809-b393-bd0ee5fa4c47)# Lava Jato Frontend
 
 # 💾 Instalação
 - Necessario Node e Angular
@@ -44,26 +44,30 @@ Projeto que tem como finalidade atender a administração de um lava jato
 (Imagens Provisórias)
 
 <h2>Login</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/79c94270-fe1b-4dd6-b1e5-50c7164f9723"/>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/2b1fce67-595c-4b52-a9b1-4ec8ede7f4b6"/>
 
 <h2>Início</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/120b04c1-7fd6-46e1-8f40-dec366e89215"/>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/2ebb5ec4-448a-4b4b-a8bf-db5e9dc4b1db"/>
 
 <h2>Clientes</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/4128e8ed-8abd-49a9-8729-5369d81cdf75" />
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/6dcf3db5-9d76-4789-829d-8b1a4eb8d80a" />
 
 <h2>Inserir Cliente</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/a1667d03-b658-435f-a32f-4761cbcc3f55" />
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/b2753fb2-4313-4f1b-a538-59cf9048e8aa" />
 
 <h2>Novo Veículo para cliente</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/c8b6bac3-7eb3-40fb-a6fc-361296b167df" />
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/4107024e-23e4-45ee-930f-4330af30f4b8" />
 
 <h2>Atendimento</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/f8d14a68-e6a5-488e-bdf5-aed24e880191"/>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/02f19bb5-a6a0-491d-9fd5-87bcf14bda7f"/>
 
 <h2>Pagamento do Atendimento</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/05a1ae18-2636-4158-a01f-e7ad38e12e8a"/>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/5c5cd384-02bc-4d8f-b77e-ba14ebb60c14"/>
 
 <h2>Controle de serviços e pagamentos</h2>
-<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/506a5517-e360-4281-8aa0-a8756ea6b871"/>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/0eb9e879-6bb6-4d24-9753-83180df5eea2"/>
+
+<h2>Financeiro</h2>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/e5af16f9-b9a9-40e2-bf15-8ce1703d1f16"/>
+
 
