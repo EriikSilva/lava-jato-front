@@ -8,10 +8,10 @@ import { Component, ElementRef, HostListener } from '@angular/core';
 export class CarWashLoaderComponent {
 
   gifOptions: string[] = [
-    'assets/loading2.gif',
-    'assets/loading3.gif',
-    'assets/loading4.gif',
-    'assets/loading5.gif',
+    'assets/project-img/loading2.gif',
+    'assets/project-img/loading3.gif',
+    'assets/project-img/loading4.gif',
+    'assets/project-img/loading5.gif',
   ];
 
   randomGif: string;
