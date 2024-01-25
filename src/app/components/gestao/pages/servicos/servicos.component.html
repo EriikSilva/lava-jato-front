@@ -109,11 +109,15 @@
             <p-button
               icon="pi pi-pencil"
               styleClass="p-button-rounded p-button-primary p-button-text"
+              pTooltip="Editar Serviço" 
+              tooltipPosition="bottom"
               (onClick)="editMode(servico)"
             ></p-button>
             <p-button
               icon="pi pi-trash"
               styleClass="p-button-rounded p-button-primary p-button-text"
+              pTooltip="Remover Serviço" 
+              tooltipPosition="bottom"
               (onClick)="deletarServico($event, servico)"
             ></p-button>
           </td>

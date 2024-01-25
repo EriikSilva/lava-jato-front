@@ -107,18 +107,24 @@
           <td>{{ veiculo.descricao | uppercase }}</td>
           <td>
             <p-button
+            icon="pi pi-info"
+            styleClass="p-button-rounded p-button-primary p-button-text"
+            pTooltip="Detalhes do Veículo" 
+            tooltipPosition="bottom"
+            (onClick)="getServicosVinculados(veiculo)"
+          ></p-button>
+            <p-button
               icon="pi pi-pencil"
               styleClass="p-button-rounded p-button-primary p-button-text"
+              pTooltip="Editar Veiculo" 
+              tooltipPosition="bottom"
               (onClick)="editMode(veiculo)"
-            ></p-button>
-            <p-button
-              icon="pi pi-info"
-              styleClass="p-button-rounded p-button-primary p-button-text"
-              (onClick)="getServicosVinculados(veiculo)"
             ></p-button>
             <p-button
               icon="pi pi-trash"
               styleClass="p-button-rounded p-button-primary p-button-text"
+              pTooltip="Remover Veículo" 
+              tooltipPosition="bottom"
               (onClick)="deletarVeiculo($event, veiculo)"
             ></p-button>            
           </td>

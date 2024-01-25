@@ -108,12 +108,16 @@
             <p-button
               icon="pi pi-pencil"
               styleClass="p-button-rounded p-button-primary p-button-text"
+              pTooltip="Editar tipo de pagamento" 
+              tooltipPosition="bottom"
               (onClick)="editMode(tipos_pagamento)"
             ></p-button>
 
             <p-button
               icon="pi pi-trash"
               styleClass="p-button-rounded p-button-primary p-button-text"
+              pTooltip="Remover tipo de pagamento" 
+              tooltipPosition="bottom"
               (onClick)="deletarTipoPagamento($event, tipos_pagamento)"
             ></p-button>
           </td>
