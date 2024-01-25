@@ -4,8 +4,8 @@
 }
 
 :root {
-  --var-background-viva-dark: #040c18;
-  --var-border-background-viva-dark: #070d16;
+  --var-background-viva-dark: #071426;
+  --var-border-background-viva-dark: #071426;
 }
 
 .loading-overlay {
@@ -26,4 +26,21 @@
     align-items: center;
     justify-content: center;
     margin: 0.8rem 0;
+}
+
+.card-table {
+  max-width: 85%;
+  background: var(--var-background-viva-dark);
+  border: 1px solid var(--var-border-background-viva-dark);
+  padding: 2.5rem;
+  // margin-bottom: 2rem;
+  margin: 2rem auto;
+
+  box-shadow: rgba(24, 20, 20, 0.2)  0px 7px 29px 0px;
+  border-radius: 40px 40px 40px 40px;
+
+  &:last-child {
+      margin-bottom: 0;
+  }
+
 }
