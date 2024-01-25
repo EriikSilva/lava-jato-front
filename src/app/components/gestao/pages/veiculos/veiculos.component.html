@@ -108,21 +108,21 @@
           <td>
             <p-button
             icon="pi pi-info"
-            styleClass="p-button-rounded p-button-primary p-button-text"
+           styleClass="p-button-rounded p-button-info p-button-text p-button-raised mr-2"
             pTooltip="Detalhes do Veículo" 
             tooltipPosition="bottom"
             (onClick)="getServicosVinculados(veiculo)"
           ></p-button>
             <p-button
               icon="pi pi-pencil"
-              styleClass="p-button-rounded p-button-primary p-button-text"
+             styleClass="p-button-rounded p-button-info p-button-text p-button-raised mr-2"
               pTooltip="Editar Veiculo" 
               tooltipPosition="bottom"
               (onClick)="editMode(veiculo)"
             ></p-button>
             <p-button
               icon="pi pi-trash"
-              styleClass="p-button-rounded p-button-primary p-button-text"
+             styleClass="p-button-rounded p-button-info p-button-text p-button-raised mr-2"
               pTooltip="Remover Veículo" 
               tooltipPosition="bottom"
               (onClick)="deletarVeiculo($event, veiculo)"
