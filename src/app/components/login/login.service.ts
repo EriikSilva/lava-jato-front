@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/app/environments/environment.development';
-import { UserLoginDTO  } from './DTO/userDTO';
+import { UserLoginDTO, UserRegisterDTO  } from './DTO/userDTO';
 import { HttpClient } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 
@@ -67,5 +67,7 @@ export class LoginService {
     return this.http.post<UserLoginDTO>(`${this.apiUrl}/login`, user)
   }
 
-
+  registerUser(user:UserRegisterDTO): Observable<UserRegisterDTO>{
+    return this.http.post<UserRegisterDTO>(`${this.apiUrl}/usuario`, user)
+  }
 }

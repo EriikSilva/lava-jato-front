@@ -11,13 +11,13 @@
 
     <div class="flex-grow-1 flex justify-content-center border-round">
       <div class="tab_formatation">
-        <p-tabView>
+        <p-tabView (onChange)="onTabChange($event)">
           <!-- LOGIN -->
           <p-tabPanel header="Fazer Login">
             <form [formGroup]="userFormLogin">
               <div class="flex align-items-center m-2">
                 <div class="card_setup">
-                  <!-- USERNAME -->
+                  <!-- EMAIL -->
                   <span class="p-float-label">
                     <input
                     [style]="{ width: '100%' }"
@@ -57,7 +57,7 @@
           </p-tabPanel>
           <!-- REGISTRAR USUÁRIO -->
           <p-tabPanel header="Registrar Funcionário">
-            <form [formGroup]="userFormRegister">
+            <form [formGroup]="userFormRegister" >
               <div class="flex align-items-center m-2">
               <div class="card_setup">
                 <span class="p-float-label">

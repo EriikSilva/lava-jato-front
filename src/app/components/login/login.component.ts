@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ElementRef} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserLoginDTO, UserRegisterDTO } from './DTO/userDTO';
-import { RegistroService } from './registro.service';
 import { Message } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { LoginService } from './login.service';
@@ -19,14 +18,14 @@ export class LoginComponent  implements OnInit, AfterViewInit{
 
   constructor(
     private router: Router,
-    private registroService: RegistroService,
     private loginService: LoginService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private elementRef: ElementRef
   ) {}
 
   ngOnInit(): void {
-    this.loginService.setTitle("Login - Lava Jato")
-    localStorage.removeItem("Authorization")
+    this.loginService.setTitle("Login - Lava Jato");
+    localStorage.removeItem("Authorization");
   }
 
   userFormRegister = new FormGroup({
@@ -104,7 +103,7 @@ export class LoginComponent  implements OnInit, AfterViewInit{
       senha,
     };
 
-    this.registroService.registerUserService(bodyRegistro).subscribe({
+    this.loginService.registerUser(bodyRegistro).subscribe({
       next: (res: any) => {
         const { message } = res
         this.messageService.add({
@@ -127,8 +126,23 @@ export class LoginComponent  implements OnInit, AfterViewInit{
     });
   }
 
+  onTabChange(event:any){
+    if(event.index == 1){
+      this.userFormRegister.reset();
+    }
+  }
+
+
+  setFocus(fieldName: string): void {
+    const inputElement = this.elementRef.nativeElement.querySelector(`[formcontrolname="${fieldName}"]`);
+    if (inputElement) {
+      inputElement.focus();
+    }
+  }
+
   ngAfterViewInit(): void {
-      this.buttonLoading = false
+      this.buttonLoading = false;
+      this.setFocus('email')
   }
 
 }
