@@ -5,26 +5,31 @@ export const navDataBar = [
     {
         routerLink:'inicio',
         icon: PrimeIcons.HOME,
-        label:"INÍCIO"
+        label:"INÍCIO",
+        tooltip:"Início"
     },
     {
         routerLink:'clientes',
         icon: PrimeIcons.USERS,
-        label:"CLIENTES"
+        label:"CLIENTES",
+        tooltip:"Clientes"
     },
     {
         routerLink:'atendimento',
         icon: PrimeIcons.CAR,
-        label:"ATENDIMENTOS"
+        label:"ATENDIMENTOS",
+        tooltip:"Atendimentos"
     },  
     {
         routerLink:'financeiro',
         icon:PrimeIcons.MONEY_BILL,
-        label:"FINANCEIRO"
+        label:"FINANCEIRO",
+        tooltip:"Financeiro"
     },
     {
         routerLink:'gestao',
         icon: PrimeIcons.BRIEFCASE,
-        label:"ADMINISTRAÇÃO"
+        label:"ADMINISTRAÇÃO",
+        tooltip:"Gestão"
     },
 ]
