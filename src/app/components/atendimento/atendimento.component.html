@@ -122,6 +122,8 @@
             <p-button
             icon="pi pi-eye"
             styleClass="p-button-rounded p-button-info p-button-text p-button-raised mr-2"
+            pTooltip="Visualizar Serviço" 
+            tooltipPosition="bottom"
             (onClick)="visualizarServicos(atendimento)"
             ></p-button>
 
@@ -129,6 +131,8 @@
             [disabled]="atendimento.status_pagamento == 'PG' || atendimento.status_atendimento == 'C' ? true : false"
             icon="pi pi-money-bill"
             styleClass="p-button-rounded p-button-info p-button-text p-button-raised mr-2"
+            pTooltip="Pagamento" 
+            tooltipPosition="bottom"
             (onClick)="chamarPopUp(atendimento)"
           ></p-button>
             
@@ -136,6 +140,8 @@
             [disabled]="atendimento.status_atendimento == 'C' ? true :  false"
             icon="pi pi-times"
             styleClass="p-button-rounded p-button-info p-button-text p-button-raised"
+            pTooltip="Cancelar Atendimento" 
+            tooltipPosition="bottom"
             (onClick)="cancelarAtendimento(atendimento)"
           ></p-button>
           </ng-container>

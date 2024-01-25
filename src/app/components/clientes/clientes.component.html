@@ -90,6 +90,8 @@
             <i class="pi pi-whatsapp icone_wpp" style="font-size: 1rem"></i>
             <span class="p-column-title">Telefone</span>
             <a
+              pTooltip="Enviar Mensagem" 
+              tooltipPosition="bottom"
               target="_blank"
               [href]="
                 'https://api.whatsapp.com/send?phone=' +
@@ -114,18 +116,24 @@
             <p-button
               icon="pi pi-car"
               (click)="carClientModal('center', client)"
+              pTooltip="Veículos" 
+              tooltipPosition="bottom"
               styleClass="p-button-rounded p-button-primary p-button-text"
             ></p-button>
 
             <p-button
               icon="pi pi-pencil"
               (click)="editClientModal(client)"
+              pTooltip="Editar Cliente" 
+              tooltipPosition="bottom"
               styleClass="p-button-rounded p-button-primary p-button-text"
             ></p-button>
 
             <p-button
               icon="pi pi-trash"
               (click)="confirmDelete($event, client)"
+              pTooltip="Remover Cliente" 
+              tooltipPosition="bottom"
               styleClass="p-button-rounded p-button-primary p-button-text"
             ></p-button>
           </ng-container>
