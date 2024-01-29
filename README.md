@@ -1,4 +1,4 @@
-![image](https://github.com/EriikSilva/lava-jato-front/assets/61124602/b07cb0ab-3a92-4edc-b721-58e3244070e5)# Lava Jato Frontend
+# Lava Jato Frontend
 
 # 💾 Instalação
 - Necessario Node e Angular
