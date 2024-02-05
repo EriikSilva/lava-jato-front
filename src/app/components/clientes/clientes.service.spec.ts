@@ -26,7 +26,9 @@ describe('ClientesService', () => {
       bairro:     'Bairro Teste',
       nr_casa:    '10',       
       telefone1:  '9999999999' ,      
-      telefone2:  '9999999999'       
+      telefone2:  '9999999999' ,
+      rua:"Rua Teste",
+      cd_usuario:1      
     }
     const spy = spyOn(http, 'post').and.callThrough()
     service.postClients(dummyClientPost);
@@ -44,6 +46,7 @@ describe('ClientesService', () => {
       telefone1:  '9999999999' ,      
       telefone2:  '9999999999',
       status:     "I",
+      rua:"Rua Teste",
       cd_cliente: 2
     }
     const spy = spyOn(http, 'put').and.callThrough()

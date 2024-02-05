@@ -35,7 +35,7 @@ export class SaveEditClientComponent implements OnDestroy{
     private maskUtils:     MaskUtils
     ){}
 
-    clientRegisterForm = new FormGroup({
+  clientRegisterForm = new FormGroup({
     nm_cliente:        new FormControl('', Validators.required,),
     cpf_cnpj:          new FormControl('', Validators.required),
     cep:               new FormControl('', [Validators.required, Validators.maxLength(8)]),
@@ -52,15 +52,15 @@ export class SaveEditClientComponent implements OnDestroy{
     const isValid   = this.validateAndShowMessage(formValue);
 
     if(isValid){
-      const nm_cliente        = formValue.nm_cliente || '';
-      const cpf_cnpj          = formValue.cpf_cnpj || '';
+      const nm_cliente        = String(formValue.nm_cliente);
+      const cpf_cnpj          = String(formValue.cpf_cnpj);
       const cpf_cnpjFormatado = removerCaracteresCPF_CNPJ(cpf_cnpj);
-      const cep               = formValue.cep || '';
-      const bairro            = formValue.bairro || '';
-      const nr_casa           = formValue.nr_casa || '';
-      const rua               = formValue.rua || '';
-      const telefone1         = formValue.telefone1 || "";
-      const telefone2         = formValue.telefone2 || "";
+      const cep               = String(formValue.cep);
+      const bairro            = String(formValue.bairro);
+      const nr_casa           = String(formValue.nr_casa);
+      const rua               = String(formValue.rua);
+      const telefone1         = String(formValue.telefone1);
+      const telefone2         = String(formValue.telefone2);
       const cd_usuario        = Number(localStorage.getItem("cd_usuario"))
 
       const telefone1Formatado = removeCaracteresTelefone(telefone1)
@@ -110,16 +110,16 @@ export class SaveEditClientComponent implements OnDestroy{
     const isValid   = this.validateAndShowMessage(formValue);
 
     if(isValid){
-      const nm_cliente        = formValue.nm_cliente || '';
-      const cpf_cnpj          = formValue.cpf_cnpj || '';
+      const nm_cliente        = String(formValue.nm_cliente) ;
+      const cpf_cnpj          = String(formValue.cpf_cnpj) ;
       const cpf_cnpjFormatado = removerCaracteresCPF_CNPJ(cpf_cnpj);
-      const cep               = formValue.cep || '';
-      const bairro            = formValue.bairro || '';
-      const nr_casa           = formValue.nr_casa || '';
-      const rua               = formValue.rua || '';
-      const status            = formValue.status || '';
-      const telefone1         = formValue.telefone1 || '';
-      const telefone2         = formValue.telefone2 || '';
+      const cep               = String(formValue.cep) ;
+      const bairro            = String(formValue.bairro) ;
+      const nr_casa           = String(formValue.nr_casa) ;
+      const rua               = String(formValue.rua) ;
+      const status            = Boolean(formValue.status) ;
+      const telefone1         = String(formValue.telefone1) ;
+      const telefone2         = String(formValue.telefone2) ;
 
       const telefone1Formatado = removeCaracteresTelefone(telefone1)
       const telefone2Formatado = removeCaracteresTelefone(telefone2)
