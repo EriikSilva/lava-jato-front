@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { ClientesService } from './clientes.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { environment } from 'src/app/environments/environment.development';
+import { environment } from 'environments/environment.prod';
 
 describe('ClientesService', () => {
   let service: ClientesService;

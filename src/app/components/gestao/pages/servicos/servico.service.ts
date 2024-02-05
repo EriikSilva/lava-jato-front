@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PostServico, PutServico } from '../../DTO/servicos.DTO';
-import { environment } from 'src/app/environments/environment.development';
+import { environment } from 'environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'

@@ -3,7 +3,7 @@
 yarn.lock
 
 /src/app/environments
-
+/environments
 .env
 # Compiled output
 /dist

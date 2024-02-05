@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/app/environments/environment.development';
+import { environment } from 'environments/environment.prod';
 import { DeleteTipoPagamento, PostTipoPagamento, PutTipoPagamento } from '../../DTO/servicos.DTO';
 
 @Injectable({

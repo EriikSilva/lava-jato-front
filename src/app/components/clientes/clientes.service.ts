@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/app/environments/environment.development';
+import { environment } from 'environments/environment.prod';
 import { ClientEditDTO, ClientRegisterDTO, ClienteDeleteDTO, ClienteGetDTO } from './DTO/clientesDTO';
 import { Title } from '@angular/platform-browser';
 

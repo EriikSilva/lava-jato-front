@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { LoginService } from './login.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { environment } from 'src/app/environments/environment.development';
+import { environment } from 'environments/environment.prod';
 import { UserLoginDTO } from './DTO/userDTO';
 
 describe('LoginService', () => {

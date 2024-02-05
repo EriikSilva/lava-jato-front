@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { CarrosService } from './carros.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/app/environments/environment.development';
+import { environment } from 'environments/environment.prod';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { deleteClientCarDTO, editClientCarDTO, getCarByClientDTO, postCarClientDTO } from './DTO/carrosDTO';
