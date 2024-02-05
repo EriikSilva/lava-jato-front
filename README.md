@@ -70,4 +70,12 @@ Projeto que tem como finalidade atender a administração de um lava jato
 <h2>Financeiro</h2>
 <img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/71fba415-4ee5-41f0-9688-c85a898505da"/>
 
+<h2>Sidebar</h2>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/ba9c6924-d28d-4692-9f3d-9d0c8c770a5d"/>
+
+<h2>Inicio Responsivo</h2>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/26df622e-b624-4ec6-8fd3-f11ad14b0942"/>
+
+<h2>Clientes Responsivo</h2>
+<img src="https://github.com/EriikSilva/lava-jato-front/assets/61124602/7b385c2a-4622-48cd-a87d-db078c5b9cba"/>
 
