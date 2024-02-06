@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/app/environments/environment.development';
+import { environment } from 'environments/environment.prod';
 import { UserLoginDTO, UserRegisterDTO  } from './DTO/userDTO';
 import { HttpClient } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
@@ -60,6 +60,18 @@ export class LoginService {
   
   removeToken(){
     return localStorage.removeItem('Authorization')
+  }
+
+  setImagePath(imgPath:string){
+    return localStorage.setItem('imagePath', imgPath)
+  }
+
+  getImagePath(){
+    return localStorage.getItem('imagePath')
+  }
+
+  removeImagePath(){
+    return localStorage.removeItem('imagePath')
   }
 
 
