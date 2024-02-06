@@ -124,7 +124,7 @@
             : desconto + "%"
         }}
       </h5>
-      <h5 class="valores_finais">
+      <h5 *ngIf="valorPago == 0" class="valores_finais" >
         TOTAL A PAGAR:{{
           precoFinal <= 0 ? "R$ 0" : (precoFinal | currency : "BRL" : "symbol")
         }}

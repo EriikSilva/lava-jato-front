@@ -241,8 +241,7 @@ export class PagamentoComponent implements OnInit {
 
   calcularPrecoComDesconto(event: Event) {
     const novoDesconto = Number(event);
-
-    if (!isNaN(novoDesconto)) {
+     if (!isNaN(novoDesconto)) {
       this.desconto = novoDesconto;
     }
 
@@ -253,9 +252,16 @@ export class PagamentoComponent implements OnInit {
     if (novoDesconto > this.precoFinal) {
       this.desabilitarBotao = true;
     }
+    
     this.precoFinal = this.precoOriginal - this.desconto;
 
-    this.trocoParaDesconto();
+    if(this.desconto > 0) {
+      this.troco =  this.valorDigitado - this.desconto;   
+    }
+
+    if(this.desconto === 0){
+      this.trocoParaDesconto();
+    }
   }
 
   calcularDescontoPercentual(event: Event) {
@@ -279,9 +285,8 @@ export class PagamentoComponent implements OnInit {
 
   trocoParaDesconto(){
     const temDinheiro = this.arraySelecionados.some((pagamento:any) => pagamento.cd_pagamento === 2);
-
     if(temDinheiro){  
-      if(this.arraySelecionados.length > 1){
+      if(this.arraySelecionados.length > 1 || this.arraySelecionados.some((res:any) => res.descricao == "Dinheiro")){
         const valorDinheiro = this.arraySelecionados.filter((res:any) => res.cd_pagamento == 2)
         const valoresSemDinheiro = this.arraySelecionados.filter((res:any) => res.cd_pagamento !==2);
         const dinheiro = Number(valorDinheiro[0].valor)
@@ -301,8 +306,7 @@ export class PagamentoComponent implements OnInit {
         }else{
          this.troco = 0
         }
-      
-       } 
+       }   
     }
 
   }
