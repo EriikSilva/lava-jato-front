@@ -1,11 +1,11 @@
-<div class="bg"> 
+<div class="bg">
     <div
       class="flex justify-content-center align-items-stretch"
       [style]="{ height: '100vh' }"
     >
       <p-card
       styleClass="p-card-shadow"
-       
+
         [style]="{
           width: '50rem',
           'margin-bottom': '1em',
@@ -13,7 +13,7 @@
           'margin-left': '2rem',
           'margin-top': '3em'
         }"
-      > 
+      >
       <h1
         style="display: inline;"
         class="flex justify-content-center align-items-stretch">
@@ -26,33 +26,33 @@
         Perfil</h1>
 
         <div>
-          <img class="img_profile" src="/assets/project-img/profile_icon3.png">
-        </div>   
+           <img class="img_profile" [src]="'data:image/png;base64,' + this.image64">
+        </div>
 
         <p-divider></p-divider>
-      
+
         <h3>Nome:
-           <p-skeleton 
-           *ngIf="isLoading" 
+           <p-skeleton
+           *ngIf="isLoading"
             width="80%"
             ></p-skeleton>
           {{ this.nm_usuario | titlecase }}</h3>
         <ng-template pTemplate="sub-header">
           <!-- <h3>Email:
-            <p-skeleton 
-            *ngIf="isLoading" 
+            <p-skeleton
+            *ngIf="isLoading"
             width="80%"
             ></p-skeleton>
             {{ this.email }}</h3> -->
             <!-- <p-divider></p-divider> -->
             <!-- <h3>Conta:
-              <p-skeleton 
-              *ngIf="isLoading" 
+              <p-skeleton
+              *ngIf="isLoading"
               width="80%"
               ></p-skeleton>
               {{ this.numero_conta }}</h3> -->
         </ng-template>
-    
+
         <p-divider></p-divider>
       </p-card>
     </div>

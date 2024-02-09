@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment.prod';
 // import { environment } from 'environments/environment.pr';
 
 @Injectable({
@@ -7,11 +8,11 @@ import { Injectable } from '@angular/core';
 })
 export class PerfilService {
 
-  // private readonly apiUrl = environment.apiUrl
+  private readonly apiUrl = environment.apiUrl
 
   constructor(private http:HttpClient) { }
 
-  uploadImage(body:any){
-    // return this.http.post(`${this.apiUrl}/upload/image`, body)
+  getImage(){
+    return this.http.get(`${this.apiUrl}/upload/image?param=testeLogo2`);
   }
 }
