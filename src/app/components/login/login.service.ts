@@ -62,18 +62,17 @@ export class LoginService {
     return localStorage.removeItem('Authorization')
   }
 
-  setImagePath(imgPath:string){
-    return localStorage.setItem('imagePath', imgPath)
+  getImg(){
+    return localStorage.getItem('image')
   }
 
-  getImagePath(){
-    return localStorage.getItem('imagePath')
+  removeImg(){
+    return localStorage.removeItem('image')
   }
 
-  removeImagePath(){
-    return localStorage.removeItem('imagePath')
+  setImg(imgPath:string){
+    return localStorage.setItem('image', imgPath)
   }
-
 
   userLogin(user:UserLoginDTO):Observable<UserLoginDTO>{
     return this.http.post<UserLoginDTO>(`${this.apiUrl}/login`, user)

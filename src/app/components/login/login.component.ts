@@ -15,6 +15,7 @@ import { LoginService } from './login.service';
 export class LoginComponent  implements OnInit, AfterViewInit{
   messages: Message[] = [];
   buttonLoading: boolean = false;
+  imgUser:any
 
   constructor(
     private router: Router,
@@ -39,6 +40,13 @@ export class LoginComponent  implements OnInit, AfterViewInit{
     senha: new FormControl(''),
   });
 
+  arrayBufferToBase64(buffer: number[]) {
+    const binary = buffer.reduce((data, byte) => {
+      return data + String.fromCharCode(byte);
+    }, '');
+    return btoa(binary);
+  }
+
   doLogin() {
     this.buttonLoading = true;
 
@@ -55,14 +63,24 @@ export class LoginComponent  implements OnInit, AfterViewInit{
     this.loginService.userLogin(bodyLogin)
     .subscribe({
       next: (res: any) => {
-        const { token, user, cd_usuario} = res;
+        const { token, user, cd_usuario, imagem } = res;
         this.buttonLoading = false
-        
+
+     
+
         this.loginService.setToken(token)
         this.loginService.setUser(user)
         this.loginService.setCdUsuario(cd_usuario)
         if(token)
         this.router.navigate(['/inicio']);
+
+        if(imagem.data){
+          this.imgUser = this.arrayBufferToBase64(imagem.data);
+        }else {
+          this.imgUser = ""
+        }
+        
+        this.loginService.setImg(this.imgUser)
       },
       error: (res: any) => {
         const senhaControl = this.userFormLogin.get('senha');

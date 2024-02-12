@@ -29,6 +29,9 @@
            <img class="img_profile" [src]="'data:image/png;base64,' + this.image64">
         </div>
 
+        <input type="file" (change)="inputFileChange($event)" />
+     
+
         <p-divider></p-divider>
 
         <h3>Nome:
