@@ -25,13 +25,18 @@
         ></button> -->
         Perfil</h1>
 
-        <div>
-           <img class="img_profile" [src]="'data:image/png;base64,' + this.image64">
+        <div class="photo-container" (click)="triggerInputClick()">
+          <img class="img_profile" [src]="image64">
+          <div class="overlay">
+            <i class="pi pi-camera"></i> 
+          </div>
         </div>
 
-        <input type="file" (change)="inputFileChange($event)" />
-     
 
+        <input style="display: none;" #fileInput type="file" accept="image/*" (change)="inputFileChange($event)" />
+
+     
+        <img *ngIf="selectedImage" [src]="selectedImage" class="preview-image">
         <p-divider></p-divider>
 
         <h3>Nome:

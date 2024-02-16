@@ -74,10 +74,10 @@ export class LoginComponent  implements OnInit, AfterViewInit{
         if(token)
         this.router.navigate(['/inicio']);
 
-        if(imagem.data){
-          this.imgUser = this.arrayBufferToBase64(imagem.data);
+        if(!imagem){
+          this.imgUser = "src/assets/project-img/profile_icon3.png"
         }else {
-          this.imgUser = ""
+          this.imgUser = this.arrayBufferToBase64(imagem.data);
         }
         
         this.loginService.setImg(this.imgUser)

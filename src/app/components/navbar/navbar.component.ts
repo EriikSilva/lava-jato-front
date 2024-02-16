@@ -31,7 +31,13 @@ export class NavbarComponent implements OnInit {
   }
 
   imgFront() {
-    this.image64 = localStorage.getItem('image');
+   const img = localStorage.getItem('image');
+       
+    if(img?.startsWith('src')){
+      this.image64 = 'assets/project-img/profile_icon3.png'
+    }else{
+      this.image64 = 'data:image/png;base64,' + img
+    }
   }
 
   changeTheme(state: boolean) {
