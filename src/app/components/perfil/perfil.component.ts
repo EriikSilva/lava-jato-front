@@ -3,14 +3,16 @@ import { PerfilService } from './perfil.service';
 import { query } from '@angular/animations';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { LoginService } from '../login/login.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.scss'],
+  providers: [MessageService]
 })
 export class PerfilComponent implements OnInit {
-  constructor(private service: PerfilService, private loginService:LoginService, private http:HttpClient) {}
+  constructor(private messageService: MessageService, private loginService:LoginService, private http:HttpClient) {}
   isLoading: boolean = false;
   nm_usuario: any;
   image64: any;
@@ -71,7 +73,6 @@ export class PerfilComponent implements OnInit {
       .subscribe({
         next:(res:any) => {
             const img = res.imgBase64.data
-          
      
           const imgBase64 = this.arrayBufferToBase64(img);
           this.image64 = imgBase64
@@ -80,7 +81,11 @@ export class PerfilComponent implements OnInit {
             window.location.reload()
           }, 1000)
         },error:(err) => {
-          console.log(err)
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro',
+            detail: err,
+          });
         }
       })
     }
