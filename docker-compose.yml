@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  angular-app:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Certifique-se de ter o Dockerfile na mesma pasta
+    container_name: angular-app
+    ports:
+      - "4200:4200"  # Mapeia a porta 4200 do contêiner para a 4200 da máquina host
+    volumes:
+      - .:/app  # Mantém os arquivos locais sincronizados com o contêiner
+      - /app/node_modules  # Evita problemas de permissões nos node_modules
+    command: npm start  # Comando que inicia o servidor de desenvolvimento Angular
+    restart: always
